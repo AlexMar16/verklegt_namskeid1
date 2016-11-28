@@ -5,9 +5,9 @@ Person::Person()
     _birthYear = 0;
     _deathYear = 0;
 }
-ifstream& operator >> (ifstream& in, Person rhs)
+ifstream& operator >> (ifstream& in, const Person& rhs)
 {
-    in >> rhs._name >> rhs._name1 >> rhs._name2 >> rhs._gender >> rhs._birthYear >> rhs._deathYear;
+    in << rhs._name << rhs._name1 >> rhs._name2 >> rhs._gender >> rhs._birthYear >> rhs._deathYear;
     return in;
 }
 
@@ -25,7 +25,7 @@ string Person::getGender() const
 {
     return _gender;
 }
-int Person::getBirthYear() const
+ int Person::getBirthYear() const
 {
     return _birthYear;
 }
@@ -33,7 +33,7 @@ int Person::getDeath() const
 {
     return _deathYear;
 }
-ofstream& operator << (ofstream& out, Person rhs)
+ofstream& operator << (ofstream& out, const Person& rhs)
 {
     out <<"Name: "<< rhs._name << " " << rhs._name1;
     if(rhs._name2 != "0")

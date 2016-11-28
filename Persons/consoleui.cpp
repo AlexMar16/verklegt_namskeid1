@@ -4,18 +4,15 @@
 
 using namespace std;
 
-consoleUI::consoleUI()
-{
+consoleUI::consoleUI(){}
 
-}
-
-void dlist()
+void consoleUI::dlist()
 {
     service temp;
     _printableVector = temp.get_list();
     for(size_t i = 0; i < _printableVector.size(); i++)
     {
-        cout << _printableVector[i] << endl;
+        //cout << _printableVector[i];
     }
 }
 
@@ -35,42 +32,41 @@ int continueprogram(string YorN)//if continue return 1, if exit returnes 2 and i
     }
 }
 
-bool displaylist(string command)// depending on input from user, do something
+bool consoleUI::displayList()// depending on input from user, do something
 {
-    service temp;
-    if(command == "list")
+    if(_command == "list")
     {
-        temp.dlist();
+        dlist();
         return false;
     }
-    else if(command == "add")
+    else if(_command == "add")
     {
         //Person person(string _name,char _gender int _birthYear, int _deathYear) todo
         return false;
     }
-    else if(command == "find")
+    else if(_command == "find")
     {
         string name;
         cout << "enter name to find:";
         cin >> name;
         return false;
     }
-    else if(command == "sorta")
+    else if(_command == "sorta")
     {
         cout << "soarta!" << endl;
         return false;
     }
-    else if(command == "sortb")
+    else if(_command == "sortb")
     {
         cout << "sortb!" << endl;
         return false;
     }
-    else if(command == "sortd")
+    else if(_command == "sortd")
     {
         cout << "sortd!" << endl;
         return false;
     }
-    else if(command == "sortg")
+    else if(_command == "sortg")
     {
         cout << "sortg!" << endl;
         return false;
@@ -84,7 +80,7 @@ bool displaylist(string command)// depending on input from user, do something
 
 void consoleUI::run()// run command, (the main function)
 {
-    string command;//user input
+    consoleUI turn;
     bool programloopbool = true;//main program loop boolean
     while(programloopbool)//while user wants to continue the program
     {
@@ -100,9 +96,9 @@ void consoleUI::run()// run command, (the main function)
         cout << "sortg -This command will list every single person in the system sorted by their gender" << endl;
         cout << "******************************************************************************" << endl;
         cout << "command: ";
-        cin >> command;
+        cin >> turn._command;
         cout << endl;
-        }while(displaylist(command));
+        }while(turn.displayList());
 
 
         string YorN;// yes or no to continue?
@@ -126,4 +122,14 @@ void consoleUI::run()// run command, (the main function)
 
     }
 
+}
+ostream& operator <<(ostream& out, const vector<Person>& rhs)
+{
+    for(size_t i = 0; i < rhs.size(); i++)
+    {
+        Person temp;
+        temp = rhs[i];
+        //out << temp;
+    }
+    return out;
 }

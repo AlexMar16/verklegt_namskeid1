@@ -9,12 +9,12 @@ class Person
 {
 public:
     Person();
-    friend ifstream& operator >> (ifstream& in, Person rhs);
+    friend ifstream& operator >> (ifstream& in, const Person& rhs);
     string get_name() const;
     string getGender() const;
     int getBirthYear() const;
     int getDeath() const;
-    friend ofstream& operator << (ofstream& out, Person rhs);
+    friend ofstream& operator << (ofstream& out, const Person& rhs);
 private:
     string _name;
     string _name1;
