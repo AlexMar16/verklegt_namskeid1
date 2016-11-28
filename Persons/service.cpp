@@ -47,7 +47,50 @@ vector<Person> service::get_list()
 
 }
 
-
+bool service::displayList()// depending on input from user, do something
+{
+    if(_command == "list")
+    {
+        dlist();
+        return false;
+    }
+    else if(_command == "add")
+    {
+        //Person person(string _name,char _gender int _birthYear, int _deathYear) todo
+        return false;
+    }
+    else if(_command == "find")
+    {
+        string name;
+        cout << "enter name to find:";
+        cin >> name;
+        return false;
+    }
+    else if(_command == "sorta")
+    {
+        cout << "soarta!" << endl;
+        return false;
+    }
+    else if(_command == "sortb")
+    {
+        cout << "sortb!" << endl;
+        return false;
+    }
+    else if(_command == "sortd")
+    {
+        cout << "sortd!" << endl;
+        return false;
+    }
+    else if(_command == "sortg")
+    {
+        cout << "sortg!" << endl;
+        return false;
+    }
+    else
+    {
+        cout << "Invalid input, please try again" << endl;
+        return true;
+    }
 
 
 
