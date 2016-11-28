@@ -4,12 +4,14 @@
 
 using namespace std;
 
+bool keepGoing(bool keepGoingb);
+
 consoleUI::consoleUI(){}
 
 
 void consoleUI::run()
 {
-    bool valid = true;
+    bool valid = true, keepGoingb = true;
     service turn;
     string command;
     do
@@ -32,13 +34,13 @@ void consoleUI::run()
         valid = turn.validList();
         if(valid)
         {
-            turn.displayList();
+            vector<Person> printOut = turn.displayList();
         }
-     }while(keepGoing(turn));
+     }while(keepGoing(keepGoingb));
 }
-bool keepGoing(service turn)
+bool keepGoing(bool keepGoingb)
 {
     cout << "If you would like to continue, please enter (y/n): ";
-    cin >> turn.setKeepGoing();
-    return turn.getKeepGoing();
+    cin >> keepGoingb;
+    return keepGoingb;
 }

@@ -10,15 +10,13 @@ public:
     void initalize_list();
     void swap(Person& a, Person& b);
     void setCommand(string command);
-    bool displayList();
+    void displayList();
     bool validList();
     vector<Person> sort_alphabetically();
     vector<Person> get_list();
     vector<Person> sort_BirthYear();
     vector<Person> sort_death();
     vector<Person> sort_gender();
-
-
 private:
     vector<Person> listV;
     string _command;
