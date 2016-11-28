@@ -1,11 +1,9 @@
 Hello world!
 Alex was here
-<<<<<<< HEAD
-Hrafn was here
-=======
-
+Kristjan was here 
 Sindri was here
+Hrafn was here
 
+gamansaman!
 
-
->>>>>>> 008a89e7d51760569e764a3b4c00849c10d2c419
+Besta kommentid
