@@ -1,8 +1,13 @@
-#include <QCoreApplication>
+#include <iostream>
+#include "consoleui.h"
+
+using namespace std;
 
 int main(int argc, char *argv[])
 {
-    QCoreApplication a(argc, argv);
+    consoleUI test;
+
+
 
     return a.exec();
 }
