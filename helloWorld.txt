@@ -3,7 +3,8 @@ Alex was here
 Kristjan was here 
 Sindri was here
 Hrafn was here
-
-gamansaman!
-
-Besta kommentid
+<<<<<<< HEAD
+Bjarki
+=======
+Eythor was here
+>>>>>>> 36e4ba0f8d9fbfdfbfc409b92fd9b82808a5a93e
