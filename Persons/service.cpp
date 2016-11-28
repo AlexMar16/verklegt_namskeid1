@@ -9,7 +9,7 @@ service::service()
 
 }
 
-void service::sort_alphabetically()
+vector<Person> service::sort_alphabetically()
 {
     bool again = true;
     while (again)
@@ -44,6 +44,42 @@ void service::swap(Person& a, Person& b)
 vector<Person> service::get_list()
 {
    return listV;
+}
+
+vector<Person> service::sort_BirthYear()
+{
+    bool again = true;
+    while (again)
+    {
+        string save = listV[0].getBirthYear  ;
+        again = false;
+        for (size_t i=0; i < listV.size()-1; i++)
+        {
+            again = false;
+            if (listV[i].getBirthYear() > listV[i+1].getBirthYear())
+            {
+                swap(listV[i], listV[i+1]);
+                again = true;
+            }
+        }
+    }
+}
+
+vector<Person> service::sort_death()
+{
+
+    for(size_t i= 0; i< listV; i++)
+    {
+        if(_deathYear>0)
+        {
+           if(listV[i].get_Death()> listV[i+1].get_death())
+           {
+              swap(listV[i], listV[i+1]);
+           }
+        }
+    }
+
+    return listV;
 
 }
 
@@ -91,6 +127,7 @@ bool service::displayList()// depending on input from user, do something
         cout << "Invalid input, please try again" << endl;
         return true;
     }
+
 
 
 
