@@ -238,19 +238,19 @@ Shafi Goldwasser 0
 female
 1958
 0
-Leslie Lamport
+Leslie Lamport 0
 male
 1941
 0
-Michael Stonebraker
+Michael Stonebraker 0
 male
 1943
 0
-Martin Hellman
+Martin Hellman 0
 male
 1945
 0
-Whitfield Diffie
+Whitfield Diffie 0
 male
 1944
 0

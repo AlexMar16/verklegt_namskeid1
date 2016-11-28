@@ -2,15 +2,15 @@
 male
 1922
 1990
-Maurice Wilkes				
+Maurice Wilkes 0
 male
 1913
 2010
-Richard Hamming
+Richard Hamming 0
 male
 1915
 1998
-Marvin Minsky
+Marvin Minsky 0
 male
 1927
 2016
@@ -18,7 +18,7 @@ James Hardy Wilkinson
 male
 1919
 1986
-John McCarthy
+John McCarthy 0
 male
 1927
 2011
@@ -34,7 +34,7 @@ Donald Ervin Knuth
 male
 1938
 0
-Allen Newell
+Allen Newell 0
 male
 1927
 1992
@@ -50,7 +50,7 @@ Dana Stewart Scott
 male
 1932
 0
-John Backus
+John Backus 0
 male
 1924
 2007
@@ -62,7 +62,7 @@ Kenneth Eugene Iverson
 male
 1920
 2004
-Tony Hoare
+Tony Hoare 0
 male
 1934
 0
@@ -74,15 +74,15 @@ Stephen Arthur Cook
 male
 1939
 0
-Ken Thompson
+Ken Thompson 0
 male
 1943
 0
-Dennis Ritchie
+Dennis Ritchie 0
 male
 1941
 2011
-Niklaus Wirth
+Niklaus Wirth 0
 male
 1934
 0
@@ -90,23 +90,23 @@ Richard MacAlistair Karp
 male
 1935
 0
-John Hopcroft
+John Hopcroft 0
 male
 1939
 0
-Robert Tarjan
+Robert Tarjan 0
 male
 1948
 0
-John Cocke
+John Cocke 0
 male
 1925
 2002
-Ivan Sutherland
+Ivan Sutherland 0
 male
 1938
 0
-William Kahan
+William Kahan 0
 male
 1933
 0
@@ -114,15 +114,15 @@ Fernando José Corbató
 male
 1926
 0
-Robin Milner
+Robin Milner 0
 male
 1934
 2010
-Butler Lampson
+Butler Lampson 0
 male
 1943
 0
-Juris Hartmanis
+Juris Hartmanis 0
 male
 1928
 0
@@ -134,71 +134,71 @@ Edward Feigenbaum
 male
 1936
 0
-Raj Reddy
+Raj Reddy 0
 male
 1937
 0
-Manuel Blum
+Manuel Blum 0
 male
 1938
 0
-Amir Pnueli
+Amir Pnueli 0
 male
 1941
 2009
-Douglas Engelbart
+Douglas Engelbart 0
 male
 1925
 2013
-Jim Gray
+Jim Gray 0
 male
 1944
 2012
-Fred Brooks
+Fred Brooks 0
 male
 1931
 0
-Andrew Yao
+Andrew Yao 0
 male
 1946
 0
-Ole-Johan Dahl
+Ole-Johan Dahl 0
 male
 1931
 2002
-Kristen Nygaard
+Kristen Nygaard 0
 male
 1926
 2002
-Ron Rivest
+Ron Rivest 0
 male
 1947
 0
-Adi Shamir
+Adi Shamir 0
 male
 1952
 0
-Leonard Adleman
+Leonard Adleman 0
 male
 1945
 0
-Alan Kay
+Alan Kay 0
 male
 1940
 0
-Vint Cerf
+Vint Cerf 0
 male
 1943
 0
-Bob Kahn
+Bob Kahn 0
 male
 1938
 0
-Peter Naur
+Peter Naur 0
 male
 1928
 2016
-Frances E. Allen
+Frances E. Allen 
 male
 1932
 0
@@ -210,11 +210,11 @@ Ernest Allen Emerson
 male
 1954
 0
-Joseph Sifakis
+Joseph Sifakis 0
 male
 1946
 0
-Barbara Liskov
+Barbara Liskov 0
 female
 1939
 0
@@ -222,19 +222,19 @@ Charles P. Thacker
 male
 1943
 0
-Leslie Valiant
+Leslie Valiant 0
 male
 1949
 0
-Judea Pearl
+Judea Pearl 0
 male
 1936
 0
-Silvio Micali
+Silvio Micali 0
 male
 1954
 0
-Shafi Goldwasser
+Shafi Goldwasser 0
 female
 1958
 0
