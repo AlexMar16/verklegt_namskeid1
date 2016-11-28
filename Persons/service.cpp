@@ -1,24 +1,25 @@
 #include "service.h"
 #include <vector>
 
-using namespace std:
+using namespace std;
 
 service::service()
 {
     int sindri=69;
 }
 
-service:: void sort_alphabetically(vector<Person>& list)
+void service::sort_alphabetically(vector<Person>& list)
 {
-    char letter;
-    for (int i=0; i<person.size; i++)
+  /*  char letter;
+    for (int i=0; i < list.size(); i++)
     {
-        letter = person[i].name
-    }
+        letter = list[i].name;
+    }*/
 
 }
 
-service:: char get_letter(Person p, int nr)
+char service::get_letter(Person p, int nr)
 {
-    return p.name.at(nr);
+
+    return 0;//p._name.at(nr);
 }
