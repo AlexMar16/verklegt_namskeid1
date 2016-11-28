@@ -8,55 +8,80 @@ consoleUI::consoleUI()
 {
 
 }
-/*
-void dlist(string stuff)
+
+void dlist(string stuff)//todo
 {
-    //notum kannski
+    cout << "Name   Gender  Birthyear   Death year" << endl;
+    cout << "Alan turing   male   1950     2000" << endl << endl;
 }
-*/
-void displaylist(string command)
+
+int continueprogram(string YorN)//if continue return 1, if exit returnes 2 and if wrong input return 3
+{
+    if(YorN == "Y" || YorN == "y")
+    {
+        return 1;
+    }
+    else if(YorN == "N" || YorN == "n")
+    {
+        return 2;
+    }
+    else
+    {
+        return 3;
+    }
+}
+
+bool displaylist(string command)// depending on input from user, do something
 {
     if(command == "list")
     {
-        cout << "List! " << endl;
+        dlist(command);
+        return false;
     }
     else if(command == "add")
     {
         cout << "ADd!" << endl;
+        return false;
     }
     else if(command == "find")
     {
         cout << "find!" << endl;
+        return false;
     }
     else if(command == "sorta")
     {
         cout << "soarta!" << endl;
+        return false;
     }
     else if(command == "sortb")
     {
         cout << "sortb!" << endl;
+        return false;
     }
     else if(command == "sortd")
     {
         cout << "sortd!" << endl;
+        return false;
     }
     else if(command == "sortg")
     {
         cout << "sortg!" << endl;
+        return false;
     }
     else
     {
         cout << "Invalid input, please try again" << endl;
+        return true;
     }
 }
 
-void consoleUI::run()
+void consoleUI::run()// run command, (the main function)
 {
-    string command;
-    bool going = true;
-
-    while(going)
+    string command;//user input
+    bool programloopbool = true;//main program loop boolean
+    while(programloopbool)//while user wants to continue the program
     {
+        do{
         cout << "******************************************************************************" << endl;
         cout << "Please enter one of the following commands:" << endl;
         cout << "list - This command will list every single person in the system" << endl;
@@ -69,11 +94,29 @@ void consoleUI::run()
         cout << "******************************************************************************" << endl;
         cout << "command: ";
         cin >> command;
-        displaylist(command);
+        cout << endl;
+        }while(displaylist(command));
 
 
+        string YorN;// yes or no to continue?
+        bool switchbool = true;
+        do{
+            cout << "Would you like to continue? (y/n)";
+            cin >> YorN;
 
-
+            switch (continueprogram(YorN)) {//returns 1 , 2 or 3 based on the input
+            case 1://y or Y
+                switchbool = false;
+                break;
+            case 2://n or N
+                programloopbool = false;
+                switchbool = false;
+                break;
+            case 3://wronginput
+                cout << "Wrong input" << endl;
+                break;
+            }
+        }while(switchbool);
 
     }
 
