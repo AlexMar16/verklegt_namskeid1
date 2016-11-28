@@ -33,7 +33,7 @@ int Person::getDeath() const
 {
     return _deathYear;
 }
-ofstream& operator << (ofstream& out, const Person& rhs)
+ofstream& operator << (ofstream& out, Person& rhs)
 {
     out <<"Name: "<< rhs._name << " " << rhs._name1;
     if(rhs._name2 != "0")
