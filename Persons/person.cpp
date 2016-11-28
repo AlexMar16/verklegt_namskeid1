@@ -11,3 +11,6 @@ ifstream& operator >> (ifstream& in, Person rhs)
     in >> rhs._name >> rhs._gender >> rhs._birthYear >> rhs._deathYear;
     return in;
 }
+
+string get_name()
+{return _name;}

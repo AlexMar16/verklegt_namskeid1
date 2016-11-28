@@ -10,6 +10,7 @@ class Person
 public:
     Person();
     friend ifstream& operator >> (ifstream& in, Person rhs);
+    string get_name();
 private:
     string _name;
     char _gender;
