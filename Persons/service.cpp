@@ -20,8 +20,8 @@ void service::sort_alphabetically(vector<Person>& list)
             again = false;
             if (list[i].get_name() > list[i+1].get_name())
             {
-                swap(list[i].get_name(), list[i+1].get_name());
-                    again = true;
+                swap(list[i], list[i+1]);
+                again = true;
             }
         }
     }
@@ -33,9 +33,9 @@ void service::initalize_list(vector<Person>& listV)
     listV = temp.getVector();
 }
 
-void service::swap(string& a, string& b)
+void service::swap(Person& a, Person& b)
 {
-    string temp = a;
+    Person temp = a;
     a = b;
     b = temp;
 }

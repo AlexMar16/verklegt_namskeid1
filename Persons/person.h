@@ -10,7 +10,7 @@ class Person
 public:
     Person();
     friend ifstream& operator >> (ifstream& in, Person rhs);
-    string get_name();
+    string get_name() const;
     friend ofstream& operator << (ofstream& out, Person rhs);
 private:
     string _name;

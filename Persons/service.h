@@ -9,7 +9,7 @@ public:
     service();
     void sort_alphabetically(vector<Person>& list);
     void initalize_list(vector<Person>&);
-    void swap(string& a, string& b);
+    void swap(Person& a, Person& b);
 
 private:
     vector<Person> listV;
