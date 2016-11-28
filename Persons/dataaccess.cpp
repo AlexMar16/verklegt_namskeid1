@@ -32,9 +32,12 @@ void dataAccess::addPerson()
     {
         for(size_t i = 0; i < _persons.size(); i++)
         {
-            newPerson << _persons[i]._name << _persons[i]._name1
-                      << _persons[i]._name2 << endl <<_persons[i]._gender
-                      << endl <<_persons[i]._birthYear
+            newPerson << _persons[i].get_name() << endl << _persons[i].getGender()
+                      << endl <<_persons[i].getBirthYear() << endl;
+            if(_persons[i].getDeath() != '0')
+            {
+                newPerson << _persons[i].getDeath() << endl;
+            }
         }
     }
 }

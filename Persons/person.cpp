@@ -11,8 +11,28 @@ ifstream& operator >> (ifstream& in, Person rhs)
     return in;
 }
 
-string Person::get_name()
-{return _name;}
+string Person::get_name() const
+{
+    string fullName;
+    fullName = _name + " " +  _name1;
+    if(_name2 != "0")
+    {
+        fullName += " " + _name2;
+    }
+    return fullName;
+}
+string Person::getGender() const
+{
+    return _gender;
+}
+int Person::getBirthYear() const
+{
+    return _birthYear;
+}
+int Person::getDeath() const
+{
+    return _deathYear;
+}
 ofstream& operator << (ofstream& out, Person rhs)
 {
     out <<"Name: "<< rhs._name << " " << rhs._name1;
@@ -29,4 +49,4 @@ ofstream& operator << (ofstream& out, Person rhs)
     }
     return out;
 }
->>>>>>> 4f61e59cd9b8b455590d34716794d1dc4203d1b6
+

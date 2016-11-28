@@ -9,34 +9,34 @@ service::service()
 
 }
 
-void service::sort_alphabetically(vector<Person>& list)
+void service::sort_alphabetically()
 {
     bool again = true;
     while (again)
     {
-        string save = list[0].get_name();
+        string save = listV[0].get_name();
         again = false;
-        for (unsigned int i=0; i < list.size()-1; i++)
+        for (unsigned int i=0; i < listV.size()-1; i++)
         {
             again = false;
-            if (list[i].get_name() > list[i+1].get_name())
+            if (listV[i].get_name() > listV[i+1].get_name())
             {
-                swap(save, list[i+1].get_name());
-                    again = true;
+                swap(listV[i], listV[i+1]);
+                again = true;
             }
         }
     }
 }
 
-void service::initalize_list(vector<Person>& listV)
+void service::initalize_list()
 {
     dataAccess temp;
     listV = temp.getVector();
 }
 
-void service::swap(string& a, string& b)
+void service::swap(Person& a, Person& b)
 {
-    string temp = a;
+    Person temp = a;
     a = b;
     b = temp;
 }
