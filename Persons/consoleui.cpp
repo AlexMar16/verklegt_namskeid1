@@ -1,7 +1,7 @@
 #include "consoleui.h"
 #include <iostream>
 
-using name
+using namespace std;
 
 
 consoleUI::consoleUI()
