@@ -62,6 +62,7 @@ vector<Person> service::sort_BirthYear()
                 again = true;
             }
         }
+        return listV;
     }
 }
 
@@ -77,9 +78,16 @@ vector<Person> service::sort_death()
               swap(listV[i], listV[i+1]);
            }
         }
+        return listV;
     }
 
-    return listV;
+
+
+}
+
+vector<Person> service::sort_gender()
+{
+    if()
 
 }
 
