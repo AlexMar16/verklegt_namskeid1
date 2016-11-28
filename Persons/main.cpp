@@ -3,11 +3,11 @@
 
 using namespace std;
 
-int main(int argc, char *argv[])
+int main()
 {
     consoleUI test;
 
+    test.run();
 
-
-    return a.exec();
+    return 0;
 }

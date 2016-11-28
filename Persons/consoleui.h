@@ -6,6 +6,7 @@ class consoleUI
 {
 public:
     consoleUI();
+    void run();
 };
 
 #endif // CONSOLEUI_H
