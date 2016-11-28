@@ -11,6 +11,7 @@ public:
     void initalize_list();
     void swap(Person& a, Person& b);
     vector<Person> get_list();
+    bool displayList();
     vector<Person> sort_BirthYear();
     vector<Person> sort_death();
     vector<Person> sort_gender();
@@ -18,6 +19,7 @@ public:
 
 private:
     vector<Person> listV;
+    string _command;
 };
 
 #endif // SERVICE_H
