@@ -22,3 +22,17 @@ void dataAccess::getPersons()
         }
     }
 }
+
+void dataAccess::addPerson()
+{
+    ofstream newPerson;
+    newPerson.open("info.txt");
+
+    if(newPerson)
+    {
+        for(size_t i = 0; i < _persons.size(); i++)
+        {
+            newPerson << s
+        }
+    }
+}
