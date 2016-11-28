@@ -25,7 +25,7 @@ void dataAccess::getPersons()
 
 void dataAccess::addPerson()
 {
-    ofstream newPerson;
+   /* ofstream newPerson;
     newPerson.open("info.txt");
 
     if(newPerson)
@@ -34,5 +34,5 @@ void dataAccess::addPerson()
         {
             newPerson << s
         }
-    }
+    }*/
 }

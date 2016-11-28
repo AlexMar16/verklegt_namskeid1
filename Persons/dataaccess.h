@@ -11,6 +11,7 @@ class dataAccess
 public:
     dataAccess();
     vector<Person> getVector();
+    void addPerson();
 private:
     vector<Person> _persons;
     void getPersons();
