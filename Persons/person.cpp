@@ -10,6 +10,10 @@ ifstream& operator >> (ifstream& in, Person rhs)
     in >> rhs._name >> rhs._name1 >> rhs._name2 >> rhs._gender >> rhs._birthYear >> rhs._deathYear;
     return in;
 }
+
+string Person::get_name() const
+{return _name;}
+
 ofstream& operator << (ofstream& out, Person rhs)
 {
     out <<"Name: "<< rhs._name << " " << rhs._name1;
@@ -26,3 +30,4 @@ ofstream& operator << (ofstream& out, Person rhs)
     }
     return out;
 }
+

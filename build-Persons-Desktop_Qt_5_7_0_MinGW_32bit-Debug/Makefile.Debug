@@ -122,7 +122,8 @@ compiler_clean:
 debug/main.o: ../Persons/main.cpp ../Persons/consoleui.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\main.o ..\Persons\main.cpp
 
-debug/consoleui.o: ../Persons/consoleui.cpp ../Persons/consoleui.h
+debug/consoleui.o: ../Persons/consoleui.cpp ../Persons/consoleui.h \
+		../Persons/person.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\consoleui.o ..\Persons\consoleui.cpp
 
 debug/service.o: ../Persons/service.cpp ../Persons/service.h \

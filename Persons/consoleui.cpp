@@ -1,8 +1,8 @@
 #include "consoleui.h"
+#include "person.h"
 #include <iostream>
 
 using namespace std;
-
 
 consoleUI::consoleUI()
 {
@@ -40,12 +40,14 @@ bool displaylist(string command)// depending on input from user, do something
     }
     else if(command == "add")
     {
-        cout << "ADd!" << endl;
+        //Person person(string _name,char _gender int _birthYear, int _deathYear) todo
         return false;
     }
     else if(command == "find")
     {
-        cout << "find!" << endl;
+        string name;
+        cout << "enter name to find:";
+        cin >> name;
         return false;
     }
     else if(command == "sorta")
@@ -103,7 +105,6 @@ void consoleUI::run()// run command, (the main function)
         do{
             cout << "Would you like to continue? (y/n)";
             cin >> YorN;
-
             switch (continueprogram(YorN)) {//returns 1 , 2 or 3 based on the input
             case 1://y or Y
                 switchbool = false;

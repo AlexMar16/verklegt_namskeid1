@@ -122,7 +122,8 @@ compiler_clean:
 release/main.o: ../Persons/main.cpp ../Persons/consoleui.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\main.o ..\Persons\main.cpp
 
-release/consoleui.o: ../Persons/consoleui.cpp ../Persons/consoleui.h
+release/consoleui.o: ../Persons/consoleui.cpp ../Persons/consoleui.h \
+		../Persons/person.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\consoleui.o ..\Persons\consoleui.cpp
 
 release/service.o: ../Persons/service.cpp ../Persons/service.h \
