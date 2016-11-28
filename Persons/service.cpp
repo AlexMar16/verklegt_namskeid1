@@ -102,7 +102,7 @@ vector<Person> service::sort_gender()
 
 }
 
-bool service::displayList()// depending on input from user, do something
+vector<Person> service::displayList()// depending on input from user, do something
 {
     if(_command == "list")
     {

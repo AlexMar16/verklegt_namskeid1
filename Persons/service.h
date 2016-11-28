@@ -10,7 +10,7 @@ public:
     void initalize_list();
     void swap(Person& a, Person& b);
     void setCommand(string command);
-    bool displayList();
+    vector<Person> displayList();
     bool validList();
     vector<Person> sort_alphabetically();
     vector<Person> get_list();
