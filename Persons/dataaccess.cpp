@@ -25,14 +25,16 @@ void dataAccess::getPersons()
 
 void dataAccess::addPerson()
 {
-   /* ofstream newPerson;
+    ofstream newPerson;
     newPerson.open("info.txt");
 
     if(newPerson)
     {
         for(size_t i = 0; i < _persons.size(); i++)
         {
-            newPerson << s
+            newPerson << _persons[i]._name << _persons[i]._name1
+                      << _persons[i]._name2 << endl <<_persons[i]._gender
+                      << endl <<_persons[i]._birthYear
         }
-    }*/
+    }
 }
