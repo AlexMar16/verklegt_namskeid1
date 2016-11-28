@@ -1,3 +1,7 @@
 Hello world!
 Alex was here
+<<<<<<< HEAD
 Sindri was here
+=======
+Second line
+>>>>>>> ff72b4f70109e55012860930eeaeee569f786183
