@@ -9,18 +9,34 @@ service::service()
 
 }
 
-void service::sort_alphabetically(vector<Person>& list)
+void service::sort_alphabetically()
 {
     bool again = true;
     while (again)
     {
         again = false;
-        for (unsigned int i=0; i<list.size()-1; i++)
+        for (unsigned int i=0; i<listV.size()-1; i++)
         {
-            again = false;
-            if (list[i].get_name() > list[i+1].get_name())
+            if (listV[i].get_name() > listV[i+1].get_name())
             {
-                swap(list[i], list[i+1]);
+                swap(listV[i], listV[i+1]);
+                again = true;
+            }
+        }
+    }
+}
+
+void service::sort_numerically()
+{
+    bool again = true;
+    while (again)
+    {
+        again = false;
+        for (unsigned int i=0; i<listV.size()-1; i++)
+        {
+            if (listV[i].get_name() > listV[i+1].get_name())
+            {
+                swap(listV[i], listV[i+1]);
                 again = true;
             }
         }
@@ -39,3 +55,5 @@ void service::swap(Person& a, Person& b)
     a = b;
     b = temp;
 }
+string Person::get_name() const
+{return _name;}

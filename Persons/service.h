@@ -7,9 +7,12 @@ class service
 {
 public:
     service();
-    void sort_alphabetically(vector<Person>& list);
+    void sort_alphabetically();
+    void sort_numerically();
     void initalize_list(vector<Person>&);
     void swap(Person& a, Person& b);
+
+    string get_name() const;
 
 private:
     vector<Person> listV;

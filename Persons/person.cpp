@@ -11,8 +11,8 @@ ifstream& operator >> (ifstream& in, Person rhs)
     return in;
 }
 
-string Person::get_name() const
-{return _name;}
+/*string Person::get_name() const
+{return _name;}*/
 
 ofstream& operator << (ofstream& out, Person rhs)
 {
@@ -30,4 +30,5 @@ ofstream& operator << (ofstream& out, Person rhs)
     }
     return out;
 }
+
 
