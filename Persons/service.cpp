@@ -5,7 +5,7 @@ using namespace std:
 
 service::service()
 {
-
+    int sindri=69;
 }
 
 service:: void sort_alphabetically(vector<Person>& list)
