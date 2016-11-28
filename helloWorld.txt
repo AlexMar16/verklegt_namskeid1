@@ -1,2 +1,10 @@
 Hello world!
 Alex was here
+<<<<<<< HEAD
+=======
+Kristjan was here 
+Sindri was here
+
+
+
+>>>>>>> 008a89e7d51760569e764a3b4c00849c10d2c419
