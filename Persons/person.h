@@ -10,9 +10,12 @@ class Person
 public:
     Person();
     friend ifstream& operator >> (ifstream& in, Person rhs);
+    friend ofstream& operator << (ofstream& out, Person rhs);
 private:
     string _name;
-    char _gender;
+    string _name1;
+    string _name2;
+    string _gender;
     int _birthYear;
     int _deathYear;
 };
