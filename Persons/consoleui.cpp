@@ -39,6 +39,6 @@ void consoleUI::run()
 bool keepGoing(service turn)
 {
     cout << "If you would like to continue, please enter (y/n): ";
-    cin >> turn._keepGoing;
-    return turn._keepGoing;
+    cin >> turn.setKeepGoing();
+    return turn.getKeepGoing();
 }
