@@ -7,10 +7,12 @@ class service
 {
 public:
     service();
-    void sort_alphabetically();
+    vector<Person> sort_alphabetically();
     void initalize_list();
     void swap(Person& a, Person& b);
     vector<Person> get_list();
+    vector<Person> sort_BirthYear();
+    vector<Person> sort_death();
 private:
     vector<Person> listV;
 };
