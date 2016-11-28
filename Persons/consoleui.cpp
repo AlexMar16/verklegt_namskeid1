@@ -6,14 +6,6 @@ using namespace std;
 
 consoleUI::consoleUI(){}
 
-void consoleUI::dlist()
-{
-    service temp;
-    _printableVector = temp.get_list();
-
-        cout << _printableVector;
-}
-
 void consoleUI::run()
 {
     service turn;
@@ -35,12 +27,4 @@ void consoleUI::run()
     turn.setCommand(command);
     cout << endl;
     }while(turn.displayList());
-}
-ostream& operator <<(ostream& out, const vector<Person>& rhs)
-{
-    for(size_t i = 0; i < rhs.size(); i++)
-    {
-        out << rhs[i];
-    }
-    return out;
 }

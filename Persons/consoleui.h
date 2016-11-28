@@ -12,8 +12,6 @@ class consoleUI
 public:
     consoleUI();
     void run();
-    void dlist();
-    bool displayList();
     friend ostream& operator <<(ostream& out, const vector<Person>& rhs);
 };
 
