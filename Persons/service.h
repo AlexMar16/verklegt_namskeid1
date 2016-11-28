@@ -15,6 +15,7 @@ public:
     vector<Person> sort_BirthYear();
     vector<Person> sort_death();
     vector<Person> sort_gender();
+    void setCommand(string command);
 
 
 private:

@@ -24,6 +24,8 @@ vector<Person> service::sort_alphabetically()
                 swap(listV[i], listV[i+1]);
                 again = true;
             }
+
+         return listV;
         }
     }
 }
@@ -62,25 +64,25 @@ vector<Person> service::sort_BirthYear()
                 again = true;
             }
         }
-        return listV;
     }
+    return listV;
 }
 
 vector<Person> service::sort_death()
 {
 
-    for(size_t i= 0; i< listV; i++)
+    for(size_t i= 0; i< listV.size(); i++)
     {
-        if(_deathYear>0)
+        if(listV[i].getDeath > 0)
         {
-           if(listV[i].get_Death()> listV[i+1].get_death())
+           if(listV[i].getDeath() > listV[i+1].getDeath())
            {
               swap(listV[i], listV[i+1]);
            }
         }
-        return listV;
-    }
 
+    }
+     return listV;
 
 
 }
@@ -95,8 +97,57 @@ bool service::displayList()// depending on input from user, do something
 {
     if(_command == "list")
     {
-        dlist();
         return false;
+
+    }
+    else if(_command == "add")
+    {
+        //Person person(string _name,char _gender int _birthYear, int _deathYear) todo
+        return false;
+
+    }
+    else if(_command == "find")
+    {
+        string name;
+        cout << "enter name to find:";
+        cin >> name;
+        return false;
+    }
+    else if(_command == "sorta")
+    {
+        cout << "soarta!" << endl;
+        return false;
+        sort_alphabetically();
+    }
+    else if(_command == "sortb")
+    {
+        cout << "sortb!" << endl;
+        return false;
+        sort_BirthYear();
+    }
+    else if(_command == "sortd")
+    {
+        cout << "sortd!" << endl;
+        return false;
+        sort_death();
+    }
+    else if(_command == "sortg")
+    {
+        cout << "sortg!" << endl;
+        return false;
+    }
+    else
+    {
+        cout << "Invalid input, please try again" <<endl;
+        return true;
+    }
+
+bool service::validList()// depending on input from user, do something
+{
+    if(_command == "list")
+    {
+        return false;
+
     }
     else if(_command == "add")
     {
@@ -135,6 +186,14 @@ bool service::displayList()// depending on input from user, do something
         cout << "Invalid input, please try again" << endl;
         return true;
     }
+
+}
+
+void service::setCommand(string c)
+{
+    _command = c;
+
+}
 
 
 
