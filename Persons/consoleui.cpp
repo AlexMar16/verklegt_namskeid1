@@ -35,6 +35,7 @@ void consoleUI::run()
         if(valid)
         {
             vector<Person> printOut = turn.displayList();
+            cout << printOut;
         }
      }while(keepGoing(keepGoingb));
 }
@@ -43,4 +44,12 @@ bool keepGoing(bool keepGoingb)
     cout << "If you would like to continue, please enter (y/n): ";
     cin >> keepGoingb;
     return keepGoingb;
+}
+ostream& operator <<(ostream& out, vector<Person>& rhs)
+{
+    for(size_t i = 0; i < rhs.size(); i++)
+    {
+        out << rhs[i];
+    }
+    return out;
 }

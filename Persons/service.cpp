@@ -106,7 +106,10 @@ vector<Person> service::sort_gender()
 
 }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> c30776dc8d58153b474c0a927566a0537b92b5e1
 vector<Person> service::displayList()// depending on input from user, do something
 {
     if(_command == "list")
