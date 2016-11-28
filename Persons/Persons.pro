@@ -3,7 +3,7 @@ QT -= gui
 
 CONFIG += c++11
 
-TARGET = VerklegtNamskeid1
+TARGET = Persons
 CONFIG += console
 CONFIG -= app_bundle
 
