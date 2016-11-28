@@ -10,7 +10,7 @@ public:
     void sort_alphabetically();
     void initalize_list();
     void swap(Person& a, Person& b);
-
+    vector<Person> get_list();
 private:
     vector<Person> listV;
 };

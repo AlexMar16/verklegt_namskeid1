@@ -41,7 +41,7 @@ void service::swap(Person& a, Person& b)
     b = temp;
 }
 
-void Person::get_list()
+vector<Person> service::get_list()
 {
    return listV;
 

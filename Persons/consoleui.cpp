@@ -9,10 +9,14 @@ consoleUI::consoleUI()
 
 }
 
-void dlist(string stuff)//todo
+void dlist()
 {
-    cout << "Name   Gender  Birthyear   Death year" << endl;
-    cout << "Alan turing   male   1950     2000" << endl << endl;
+    service temp;
+    _printableVector = temp.get_list();
+    for(size_t i = 0; i < _printableVector.size(); i++)
+    {
+        cout << _printableVector[i] << endl;
+    }
 }
 
 int continueprogram(string YorN)//if continue return 1, if exit returnes 2 and if wrong input return 3
@@ -33,9 +37,10 @@ int continueprogram(string YorN)//if continue return 1, if exit returnes 2 and i
 
 bool displaylist(string command)// depending on input from user, do something
 {
+    service temp;
     if(command == "list")
     {
-        dlist(command);
+        temp.dlist();
         return false;
     }
     else if(command == "add")
