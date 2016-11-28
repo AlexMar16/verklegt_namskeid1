@@ -13,8 +13,6 @@ public:
     consoleUI();
     void run();
     friend ostream& operator <<(ostream& out, const vector<Person>& rhs);
-private:
-    friend bool keepGoing(service turn);
 };
 
 #endif // CONSOLEUI_H
