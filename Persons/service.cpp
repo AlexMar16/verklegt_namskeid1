@@ -89,7 +89,16 @@ vector<Person> service::sort_death()
 
 vector<Person> service::sort_gender()
 {
-    if()
+
+
+    for(size_t i=0; i< listV.size(); i++)
+    {
+        if(listV[i].getGender== 'female')
+        {
+
+        }
+
+    }
 
 }
 
@@ -98,6 +107,7 @@ bool service::displayList()// depending on input from user, do something
     if(_command == "list")
     {
         return false;
+
 
     }
     else if(_command == "add")
