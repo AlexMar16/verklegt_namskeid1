@@ -34,7 +34,7 @@ void service::sort_numerically()
         again = false;
         for (unsigned int i=0; i<listV.size()-1; i++)
         {
-            if (listV[i].get_name() > listV[i+1].get_name())
+            if (listV[i].get_birth() > listV[i+1].get_birth())
             {
                 swap(listV[i], listV[i+1]);
                 again = true;
@@ -55,5 +55,4 @@ void service::swap(Person& a, Person& b)
     a = b;
     b = temp;
 }
-string Person::get_name() const
-{return _name;}
+

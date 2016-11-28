@@ -11,6 +11,7 @@ public:
     Person();
     friend ifstream& operator >> (ifstream& in, Person rhs);
     string get_name() const;
+    int get_birth() const;
     friend ofstream& operator << (ofstream& out, Person rhs);
 private:
     string _name;

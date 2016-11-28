@@ -31,4 +31,8 @@ ofstream& operator << (ofstream& out, Person rhs)
     return out;
 }
 
+string Person::get_name() const
+{return _name;}
 
+int Person::get_birth()const
+{return _birthYear;}

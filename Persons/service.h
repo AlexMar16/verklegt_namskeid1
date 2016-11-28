@@ -12,7 +12,7 @@ public:
     void initalize_list(vector<Person>&);
     void swap(Person& a, Person& b);
 
-    string get_name() const;
+
 
 private:
     vector<Person> listV;
