@@ -1,6 +1,4 @@
 #include "consoleui.h"
-#include "person.h"
-#include <iostream>
 
 using namespace std;
 
@@ -37,12 +35,12 @@ void consoleUI::run()
             vector<Person> printOut = turn.displayList();
             cout << printOut;
         }
+        cout << "If you would like to continue, please enter (y/n): ";
+        cin >> turn.setkeepGoing;
      }while(keepGoing(keepGoingb));
 }
 bool keepGoing(bool keepGoingb)
 {
-    cout << "If you would like to continue, please enter (y/n): ";
-    cin >> keepGoingb;
     return keepGoingb;
 }
 ostream& operator <<(ostream& out, vector<Person>& rhs)
