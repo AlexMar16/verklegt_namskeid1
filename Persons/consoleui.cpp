@@ -9,7 +9,7 @@ consoleUI::consoleUI(){}
 void consoleUI::run()
 {
     bool valid = true;
-    int keepGoingb = 0;
+    string keepGoingb;
     service turn;
     string command;
     do
@@ -35,8 +35,16 @@ void consoleUI::run()
             vector<Person> printOut = turn.displayList(command);
             cout << printOut;
         }
-        cout << "If you would like to continue, please enter (y/n): ";
-        cin >> keepGoingb;
-     }while(keepGoingb == 121 || keepGoingb == 89);
+        do {
+            cout << "If you would like to continue, please enter (y/n): ";
+            cin >> keepGoingb;
+            if(turn.validYorN(keepGoingb))
+            {
+                cout << "invalid input!" << endl;
+            }
+        }while(turn.validYorN(keepGoingb));
+
+
+     }while(turn.repeatprogram(keepGoingb));
 }
 
