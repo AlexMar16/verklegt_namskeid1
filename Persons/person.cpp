@@ -23,8 +23,27 @@ ifstream& operator >> (ifstream& in, Person& rhs)
     return in;
 }
 
+istream& operator >> (istream& in, Person& rhs)
+{
+    string first, second, third;
+    in >> first >> second >> third;
+    if(third != "male" && third != "female")
+    {
+        rhs._fullName = first + " " + second + " " + third;
+        in  >> rhs._gender >> rhs._birthYear >> rhs._deathYear;
+    }
+    else
+    {
+        rhs._fullName = first + " " + second;
+        rhs._gender = third;
+        in >> rhs._birthYear >> rhs._deathYear;
+    }
+    return in;
+}
+
 ostream& operator << (ostream& out, const Person& rhs)
 {
+    out << endl;
     out << "Name: " << rhs._fullName<< endl;
     out << "Gender: " << rhs._gender << endl;
     out << "Born: " << rhs._birthYear << endl;
@@ -37,7 +56,7 @@ ostream& operator << (ostream& out, const Person& rhs)
             {
               out << "Still alive!" << endl;
             }
-                return out;
+     return out;
 }
 
 ostream& operator << (ostream& out, vector<Person>& rhs)

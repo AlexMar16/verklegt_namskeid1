@@ -30,6 +30,13 @@ void consoleUI::run()
         turn.setCommand(command);
         cout << endl;
         valid = turn.validList();
+        if (command == "add")
+        {
+            cout << "Please Enter in the following order: ";
+            Person inputNew;
+            cin >> inputNew;
+            turn.addPerson(inputNew);
+        }
         if(valid)
         {
             vector<Person> printOut = turn.displayList(command);

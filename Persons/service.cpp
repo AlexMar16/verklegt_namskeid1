@@ -80,19 +80,19 @@ bool service::validList()// depending on input from user, do something
     else if(_command == "add")
     {
         //Person person(string _name,char _gender int _birthYear, int _deathYear) todo
-        return false;
+        return true;
     }
     else if(_command == "find")
     {
         string name;
         cout << "enter name to find:";
         cin >> name;
-        return false;
+        return true;
     }
     else if(_command == "sorta")
     {
         cout << "soarta!" << endl;
-        return false;
+        return true;
     }
     else if(_command == "sortb")
     {
@@ -157,6 +157,13 @@ vector<Person> service::sort_gender()
         }
     }
     return listV;
+}
+void service::addPerson(Person input)
+{
+    dataAccess addNew;
+    listV.push_back(input);
+    addNew.setVector(listV);
+    addNew.addPerson();
 }
 
 /*
