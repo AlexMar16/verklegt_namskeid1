@@ -10,6 +10,21 @@ ifstream& operator >> (ifstream& in, Person& rhs)
     in >> rhs._firstName >> rhs._secondName >> rhs._thirdName >> rhs._gender
        >> rhs._birthYear >> rhs._deathYear;
     return in;
+
+    /*    cout << "hallo" << endl;
+    string fullName;
+    ifstream theFile;
+    theFile.open("name.txt");
+    {
+        string name;
+        while (theFile >> name && name != "male" && name != "female")
+        {
+            fullName = fullName + name + " ";
+        }
+    }
+
+
+    cout << fullName;*/
 }
 
 ostream& operator << (ostream& out, const Person& rhs)

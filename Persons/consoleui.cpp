@@ -28,7 +28,6 @@ void consoleUI::run()
         cin >> command;
 
         turn.setCommand(command);
-        turn.displayList(command);
         cout << endl;
         valid = turn.validList();
         if(valid)
