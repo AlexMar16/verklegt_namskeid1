@@ -10,10 +10,7 @@
 >>>>>>> aba2a8b3fd31800005e0d9d5922ec88d0c2ed0b5
 using namespace std;
 
-service::service()
-{
-
-}
+service::service(){}
 
 vector<Person> service::sort_alphabetically()
 {
@@ -78,7 +75,7 @@ vector<Person> service::get_list()
 
 vector<Person> service::sort_BirthYear()
 {
-    bool again = true;
+   /* bool again = true;
     while (again)
     {
         string save = listV[0].getBirthYear;
@@ -91,13 +88,13 @@ vector<Person> service::sort_BirthYear()
                 again = true;
             }
         }
-    }
+    }*/
     return listV;
 }
 
 vector<Person> service::sort_death()
 {
-
+/*
     for(size_t i= 0; i< listV.size(); i++)
     {
         if(listV[i].getDeath > 0)
@@ -108,7 +105,7 @@ vector<Person> service::sort_death()
            }
         }
 
-    }
+    }*/
      return listV;
 
 
@@ -116,7 +113,7 @@ vector<Person> service::sort_death()
 
 vector<Person> service::sort_gender()
 {
-
+/*
     for(size_t i=0; i< listV.size(); i++)
     {
         if(listV[i].getgender > listV[i+1].getgender)
@@ -127,15 +124,16 @@ vector<Person> service::sort_gender()
 
 
     }
-
+*/
 }
 
 vector<Person> service::find_person(string& name)
 {
     string result;
+    return listV;
+}
 
-
-    for(size_t i=0; i< listV.size(); i++)
+   /* for(size_t i=0; i< listV.size(); i++)
     {
         if((str.find(listV[i]._name)&&(str.find(listV[i]._name2))
         {
@@ -144,13 +142,14 @@ vector<Person> service::find_person(string& name)
 
     }
 
-}
+}*/
 
 vector<Person> service::displayList()// depending on input from user, do something
 {
-    if(_command == "list")
+            return listV;
+    /*if(_command == "list")
     {
-        return false;
+        return listV;
 
 
     }
@@ -195,8 +194,8 @@ vector<Person> service::displayList()// depending on input from user, do somethi
     {
         cout << "Invalid input, please try again" <<endl;
         return true;
-    }
-
+    }*/
+}
 
 bool service::validList()// depending on input from user, do something
 {

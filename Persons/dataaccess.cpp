@@ -3,8 +3,9 @@
 
 dataAccess::dataAccess()
 {
-    getPersons();
-}
+
+};
+
 vector<Person> dataAccess::getVector()
 {
     return _persons;
