@@ -19,7 +19,7 @@ public:
     int getBirthYear() const;
     int getDeath() const;
     friend ostream& operator << (ostream& out, const Person& rhs);
-    friend fstream& operator >> (fstream& in, Person& rhs);
+    friend ifstream& operator >> (ifstream& in, Person& rhs);
     friend ostream& operator <<(ostream& out, vector<Person>& rhs);
 
 private:

@@ -5,14 +5,14 @@ Person::Person()
     _birthYear = 0;
     _deathYear = 0;
 }
-ifstream& operator >> (ifstream& in, const Person& rhs)
+ifstream& operator >> (ifstream& in, Person& rhs)
 {
     in >> rhs._firstName >> rhs._secondName >> rhs._thirdName >> rhs._gender
        >> rhs._birthYear >> rhs._deathYear;
     return in;
 }
 
-ostream& operator << (ostream& out, const Person& rhs);
+ostream& operator << (ostream& out, const Person& rhs)
 {
     out << "Name: " << rhs._firstName << " " << rhs._secondName << " ";
     if(rhs._thirdName != "0")

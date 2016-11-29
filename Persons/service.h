@@ -19,6 +19,7 @@ public:
     vector<Person> sort_death();
     vector<Person> sort_gender();
     vector<Person> find_person(const string& name);
+    vector<Person> sort_numerically();
 
 private:
     vector<Person> listV;
