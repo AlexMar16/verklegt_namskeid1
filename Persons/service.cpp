@@ -134,7 +134,7 @@ vector<Person> service::find_person(const string& name)
     }*/
 
 
-vector<Person> service::displayList()// depending on input from user, do something
+vector<Person> service::displayList(string command)// depending on input from user, do something
 {
     if(_command == "list")
     {

@@ -9,7 +9,7 @@ consoleUI::consoleUI(){}
 void consoleUI::run()
 {
     bool valid = true;
-    char keepGoingb = 0;
+    int keepGoingb = 0;
     service turn;
     string command;
     do
@@ -28,15 +28,16 @@ void consoleUI::run()
         cin >> command;
 
         turn.setCommand(command);
+        turn.displayList(command);
         cout << endl;
         valid = turn.validList();
         if(valid)
         {
-            vector<Person> printOut = turn.displayList();
+            vector<Person> printOut = turn.displayList(command);
             cout << printOut;
         }
         cout << "If you would like to continue, please enter (y/n): ";
         cin >> keepGoingb;
-     }while(keepGoingb == 'y');
+     }while(keepGoingb == 121 || keepGoingb == 89);
 }
 
