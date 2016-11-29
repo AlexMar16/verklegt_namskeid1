@@ -8,13 +8,9 @@ class service
 public:
     service();
 
-    void sort_alphabetically();
-    void sort_numerically();
     void initalize_list(vector<Person>&);
     void swap(Person& a, Person& b);
-
     void initalize_list();
-    void swap(Person& a, Person& b);
     void setCommand(string command);
     vector<Person> displayList();
     bool validList();

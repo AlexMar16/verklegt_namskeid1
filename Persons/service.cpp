@@ -73,7 +73,6 @@ vector<Person> service::sort_BirthYear()
         again = false;
         for (size_t i=0; i < listV.size()-1; i++)
         {
-            again = false;
             if (listV[i].getBirthYear() > listV[i+1].getBirthYear())
             {
                 swap(listV[i], listV[i+1]);
