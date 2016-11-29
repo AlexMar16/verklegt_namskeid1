@@ -105,17 +105,14 @@ vector<Person> service::sort_death()
 vector<Person> service::sort_gender()
 {
 
-
     for(size_t i=0; i< listV.size(); i++)
     {
-        if(listV[i].getGender== 'female')
+        if(listV[i].getgender > listV[i+1].getgender)
         {
-            return listV[i];
+           swap(listV[i], listV[i+1]);
+           return listV;
         }
-        else
-        {
-            return listV[i];
-        }
+
 
     }
 
@@ -164,6 +161,7 @@ vector<Person> service::displayList()// depending on input from user, do somethi
     {
         cout << "sortg!" << endl;
         return false;
+        sort_gender();
     }
     else
     {
