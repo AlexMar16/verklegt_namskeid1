@@ -41,16 +41,11 @@ vector<Person> service::displayList(string command)// depending on input from us
     }
     else if(_command == "find")
     {
-        string name;
-        cout << "enter name to find:";
-        cin >> name;
-        //return false;
+        return listV;
     }
     else if(_command == "sorta")
     {
-        cout << "soarta!" << endl;
-        //return false;
-        //sort_alphabetically();
+        return sort_alphabetically();
     }
     else if(_command == "sortb")
     {
@@ -83,9 +78,6 @@ bool service::validList()// depending on input from user, do something
     }
     else if(_command == "find")
     {
-        string name;
-        cout << "enter name to find:";
-        cin >> name;
         return true;
     }
     else if(_command == "sorta")
