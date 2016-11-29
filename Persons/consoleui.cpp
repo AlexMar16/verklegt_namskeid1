@@ -1,89 +1,19 @@
 #include "consoleui.h"
-#include "person.h"
-#include <iostream>
 
 using namespace std;
 
-consoleUI::consoleUI()
-{
+bool keepGoing(bool keepGoingb);
 
-}
+consoleUI::consoleUI(){}
 
-void dlist(string stuff)//todo
-{
-    cout << "Name   Gender  Birthyear   Death year" << endl;
-    cout << "Alan turing   male   1950     2000" << endl << endl;
-}
 
-int continueprogram(string YorN)//if continue return 1, if exit returnes 2 and if wrong input return 3
+void consoleUI::run()
 {
-    if(YorN == "Y" || YorN == "y")
+    bool valid = true, keepGoingb = true;
+    service turn;
+    string command;
+    do
     {
-        return 1;
-    }
-    else if(YorN == "N" || YorN == "n")
-    {
-        return 2;
-    }
-    else
-    {
-        return 3;
-    }
-}
-
-bool displaylist(string command)// depending on input from user, do something
-{
-    if(command == "list")
-    {
-        dlist(command);
-        return false;
-    }
-    else if(command == "add")
-    {
-        //Person person(string _name,char _gender int _birthYear, int _deathYear) todo
-        return false;
-    }
-    else if(command == "find")
-    {
-        string name;
-        cout << "enter name to find:";
-        cin >> name;
-        return false;
-    }
-    else if(command == "sorta")
-    {
-        cout << "soarta!" << endl;
-        return false;
-    }
-    else if(command == "sortb")
-    {
-        cout << "sortb!" << endl;
-        return false;
-    }
-    else if(command == "sortd")
-    {
-        cout << "sortd!" << endl;
-        return false;
-    }
-    else if(command == "sortg")
-    {
-        cout << "sortg!" << endl;
-        return false;
-    }
-    else
-    {
-        cout << "Invalid input, please try again" << endl;
-        return true;
-    }
-}
-
-void consoleUI::run()// run command, (the main function)
-{
-    string command;//user input
-    bool programloopbool = true;//main program loop boolean
-    while(programloopbool)//while user wants to continue the program
-    {
-        do{
         cout << "******************************************************************************" << endl;
         cout << "Please enter one of the following commands:" << endl;
         cout << "list - This command will list every single person in the system" << endl;
@@ -96,29 +26,28 @@ void consoleUI::run()// run command, (the main function)
         cout << "******************************************************************************" << endl;
         cout << "command: ";
         cin >> command;
+
+        turn.setCommand(command);
         cout << endl;
-        }while(displaylist(command));
-
-
-        string YorN;// yes or no to continue?
-        bool switchbool = true;
-        do{
-            cout << "Would you like to continue? (y/n)";
-            cin >> YorN;
-            switch (continueprogram(YorN)) {//returns 1 , 2 or 3 based on the input
-            case 1://y or Y
-                switchbool = false;
-                break;
-            case 2://n or N
-                programloopbool = false;
-                switchbool = false;
-                break;
-            case 3://wronginput
-                cout << "Wrong input" << endl;
-                break;
-            }
-        }while(switchbool);
-
+        valid = turn.validList();
+        if(valid)
+        {
+            vector<Person> printOut = turn.displayList();
+            cout << printOut;
+        }
+        cout << "If you would like to continue, please enter (y/n): ";
+        cin >> turn.setkeepGoing;
+     }while(keepGoing(keepGoingb));
+}
+bool keepGoing(bool keepGoingb)
+{
+    return keepGoingb;
+}
+ostream& operator << (ostream& out, vector<Person>& rhs)
+{
+    for(size_t i = 0; i < rhs.size(); i++)
+    {
+        out << rhs[i];
     }
-
+    return out;
 }

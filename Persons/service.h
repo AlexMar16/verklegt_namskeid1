@@ -7,12 +7,25 @@ class service
 {
 public:
     service();
-    void sort_alphabetically(vector<Person>& list);
     void initalize_list(vector<Person>&);
-    void swap(string& a, string& b);
+    void swap(Person& a, Person& b);
+    void initalize_list();
+    void setCommand(string command);    
+    bool validList();
+    vector<Person> displayList();
+    vector<Person> sort_alphabetically();
+    vector<Person> get_list();
+    vector<Person> sort_BirthYear();
+    vector<Person> sort_death();
+    vector<Person> sort_gender();
+    vector<Person> find_person();
+
 
 private:
     vector<Person> listV;
+    string _command;
+    bool _keepGoing;
+    bool _valid;
 };
 
 #endif // SERVICE_H
