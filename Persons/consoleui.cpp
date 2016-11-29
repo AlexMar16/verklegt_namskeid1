@@ -29,6 +29,9 @@ void consoleUI::run()
 
         turn.setCommand(command);
         cout << endl;
+
+
+
         valid = turn.validList();
         if (command == "add")
         {

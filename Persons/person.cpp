@@ -81,7 +81,7 @@ string Person::getGender() const
 {
     return _birthYear;
 }
-int Person::getDeath() const
+int Person::getDeath() const //Laga nafn kv Sindri
 {
     return _deathYear;
 }
