@@ -66,7 +66,6 @@ vector<Person> service::displayList(string command)// depending on input from us
     }
     else if(_command == "sortg")
     {
-        cout << "sortg!" << endl;
         return sort_gender();
     }
 }
@@ -154,6 +153,7 @@ vector<Person> service::sort_gender()
         if(listV[i].getGender() == "female")
         {
            swap(listV[i], listV[counter]);
+           counter++;
         }
     }
     return listV;
