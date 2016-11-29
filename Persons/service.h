@@ -18,11 +18,14 @@ public:
     vector<Person> sort_BirthYear();
     vector<Person> sort_death();
     vector<Person> sort_gender();
+    vector<Person> find_person();
+
 
 private:
     vector<Person> listV;
     string _command;
     bool _keepGoing;
+    bool _valid;
 };
 
 #endif // SERVICE_H

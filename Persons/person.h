@@ -15,13 +15,13 @@ public:
     int get_birth() const;
     int getBirthYear() const;
     int getDeath() const;
-    friend ofstream& operator << (ofstream& out, Person rhs);
-    friend ifstream& operator >> (ifstream& in, const Person& rhs);
+    friend ofstream& operator << (ofstream& out, const Person& rhs);
+    friend ifstream& operator >> (ifstream& in, Person& rhs);
 
 private:
-    string _name;
-    string _name1;
-    string _name2;
+    string _firstName;
+    string _surname;
+    string _lastName;
     string _gender;
     int _birthYear;
     int _deathYear;
