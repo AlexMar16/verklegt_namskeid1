@@ -6,7 +6,10 @@
 
 using namespace std;
 
-service::service(){}
+service::service(){
+    dataAccess temp;
+    listV = temp.getVector();
+}
 
 vector<Person> service::sort_alphabetically()
 {
