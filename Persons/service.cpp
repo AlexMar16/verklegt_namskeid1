@@ -1,7 +1,13 @@
 #include "service.h"
 #include <vector>
+<<<<<<< HEAD
+#include <iosfwd>
+#include <person.h>
+#include <iostream>
+=======
 #include <iostream>
 
+>>>>>>> aba2a8b3fd31800005e0d9d5922ec88d0c2ed0b5
 using namespace std;
 
 service::service(){}
@@ -17,7 +23,13 @@ vector<Person> service::sort_alphabetically()
         {
             if (listV[i].get_name() > listV[i+1].get_name())
             {
+<<<<<<< HEAD
+                //swap(list[i].get_name(), list[i+1].get_name());
+                cout << list[i].get_name();
+                cout << list[i+1].get_name();
+=======
                 swap(listV[i], listV[i+1]);
+>>>>>>> aba2a8b3fd31800005e0d9d5922ec88d0c2ed0b5
                 again = true;
             }
         }
