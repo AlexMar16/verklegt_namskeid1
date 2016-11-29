@@ -134,7 +134,7 @@ vector<Person> service::find_person(const string& name)
     }*/
 
 
-vector<Person> service::displayList()// depending on input from user, do something
+vector<Person> service::displayList(string command)// depending on input from user, do something
 {
     if(_command == "list")
     {
@@ -175,11 +175,6 @@ vector<Person> service::displayList()// depending on input from user, do somethi
         cout << "sortg!" << endl;
        // return false;
         sort_gender();
-    }
-    else
-    {
-        cout << "Invalid input, please try again" <<endl;
-        return listV;
     }
 }
 
@@ -227,6 +222,31 @@ bool service::validList()// depending on input from user, do something
         return true;
     }
 }
+
+bool service::repeatprogram(string YorN)
+{
+    if(YorN == "y" || YorN == "y")
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+bool service::validYorN(string YorN)
+{
+    if(YorN == "y" || YorN == "y" || YorN == "N" || YorN == "n")
+    {
+        return false;
+    }
+    else
+    {
+        return true;
+    }
+}
+
 
 void service::setCommand(string c)
 {

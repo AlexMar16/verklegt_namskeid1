@@ -12,6 +12,8 @@ public:
     void initalize_list();
     void setCommand(string command);    
     bool validList();
+    bool validYorN(string YorN);
+    bool repeatprogram(string YorN);
     vector<Person> displayList();
     vector<Person> sort_alphabetically();
     vector<Person> get_list();
@@ -20,6 +22,8 @@ public:
     vector<Person> sort_gender();
     vector<Person> find_person(const string& name);
     vector<Person> sort_numerically();
+    vector<Person> displayList(string command);
+
 
 private:
     vector<Person> listV;

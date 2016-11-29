@@ -46,9 +46,9 @@ ostream& operator << (ostream& out, vector<Person>& rhs)
 
 string Person::get_name() const
 {
-    string fullName;
+    string fullName;    
     fullName = _firstName + " " +  _secondName;
-    if(_thirdName != "0")
+    if(_thirdName != "male" && _thirdName != "female")
     {
         fullName += " " + _thirdName;
     }
