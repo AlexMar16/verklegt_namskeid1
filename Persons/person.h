@@ -16,7 +16,6 @@ public:
     string getGender() const;
     int getBirthYear() const;
     int getDeath() const;
-    friend ofstream& operator << (ofstream& out, Person& rhs);
 
 private:
     string _name;
