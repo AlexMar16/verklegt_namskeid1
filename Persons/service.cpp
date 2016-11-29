@@ -10,7 +10,7 @@ service::service(){
     dataAccess temp;
     listV = temp.getVector();
 }
-
+/*
 vector<Person> service::sort_alphabetically()
 {
     bool again = true;
@@ -30,7 +30,7 @@ vector<Person> service::sort_alphabetically()
     }
     return listV;
 }
-/*
+
 vector<Person> service::sort_numerically()
 {
     bool again = true;
@@ -54,24 +54,24 @@ void service::initalize_list()
     dataAccess temp;
     listV = temp.getVector();
 }
-
+/*
 void service::swap(Person& a, Person& b)
 {
     Person temp = a;
     a = b;
     b = temp;
 }
-
+*/
 vector<Person> service::get_list()
 {
    return listV;
 }
-
+/*
 vector<Person> service::sort_BirthYear()
 {
-   bool again = true;
-    while (again)
-    {
+        bool again = true;
+        while (again)
+        {
        // string save = listV[0].getBirthYear;
         again = false;
         for (size_t i=0; i < listV.size()-1; i++)
@@ -133,7 +133,7 @@ vector<Person> service::find_person(const string& name)
         }
     }*/
 
-
+*/
 vector<Person> service::displayList(string command)// depending on input from user, do something
 {
     if(_command == "list")
