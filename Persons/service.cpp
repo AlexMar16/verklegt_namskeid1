@@ -10,8 +10,6 @@ service::service(){
     dataAccess temp;
     listV = temp.getVector();
 }
-
-
 void service::initalize_list()
 {
     dataAccess temp;
@@ -29,8 +27,6 @@ vector<Person> service::get_list()
 {
    return listV;
 }
-
-
 
 vector<Person> service::displayList(string command)// depending on input from user, do something
 {
