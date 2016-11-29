@@ -20,8 +20,8 @@ public:
 
 private:
     string _firstName;
-    string _surname;
-    string _lastName;
+    string _secondName;
+    string _thirdName;
     string _gender;
     int _birthYear;
     int _deathYear;
