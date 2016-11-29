@@ -23,10 +23,7 @@ public:
     friend ostream& operator <<(ostream& out, vector<Person>& rhs);
 
 private:
-    string _fullname;
-    string _firstName;
-    string _secondName;
-    string _thirdName;
+    string _fullName;
     string _gender;
     int _birthYear;
     int _deathYear;
