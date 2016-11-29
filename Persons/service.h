@@ -22,9 +22,10 @@ public:
     vector<Person> sort_death();
     vector<Person> sort_gender();
     Person find_person(const string& name);
+    bool look_for_person(const string& name);
     vector<Person> sort_numerically();
     vector<Person> displayList(string command);
-    bool look_for_person(const string& name);
+
 
 
 private:

@@ -254,7 +254,7 @@ Person service::find_person(const string& name)
     return listV[p];
 }
 
-bool look_for_person(const string& name)
+bool service::look_for_person(const string& name)
 {
     for (size_t i=0; i<listV.size(); i++)
     {

@@ -40,6 +40,15 @@ void consoleUI::run()
             cin >> inputNew;
             turn.addPerson(inputNew);
         }
+        if (command == "find")
+        {
+            string toFind;
+            cin >> toFind;
+            if (turn.look_for_person(toFind))
+            {
+                turn.find_person(toFind);
+            }
+        }
         if(valid)
         {
             vector<Person> printOut = turn.displayList(command);
