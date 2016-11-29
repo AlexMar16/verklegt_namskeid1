@@ -2,8 +2,6 @@
 #define CONSOLEUI_H
 #include "person.h"
 #include "service.h"
-#include <iostream>
-#include <vector>
 
 using namespace std;
 

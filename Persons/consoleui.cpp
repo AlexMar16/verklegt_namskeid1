@@ -36,7 +36,7 @@ void consoleUI::run()
             cout << printOut;
         }
         cout << "If you would like to continue, please enter (y/n): ";
-        cin >> turn.setkeepGoing;
+        cin >> keepGoingb;
      }while(keepGoing(keepGoingb));
 }
 bool keepGoing(bool keepGoingb)
