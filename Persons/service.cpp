@@ -241,16 +241,29 @@ vector<Person> service::sort_death()
      return listV;
 }
 
-vector<Person> service::find_person(const string& name)
+Person service::find_person(const string& name)
 {
-    //for (int i=0; i<listV.size; i++)
+    int p;
+    for (size_t i=0; i<listV.size(); i++)
     {
-        //if (listV[i] == name)
+        if (listV[i].get_name() == name)
         {
-            int p=0;
+            p = i;
         }
     }
-    return listV;
+    return listV[p];
+}
+
+bool look_for_person(const string& name)
+{
+    for (size_t i=0; i<listV.size(); i++)
+    {
+        if (listV[i].get_name() == name)
+        {
+            return true;
+        }
+    }
+    return false;
 }
 
     for(size_t i=0; i< listV.size(); i++)
