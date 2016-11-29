@@ -8,7 +8,8 @@ consoleUI::consoleUI(){}
 
 void consoleUI::run()
 {
-    bool valid = true, keepGoingb = true;
+    bool valid = true;
+    char keepGoingb = 0;
     service turn;
     string command;
     do
@@ -35,7 +36,7 @@ void consoleUI::run()
             cout << printOut;
         }
         cout << "If you would like to continue, please enter (y/n): ";
-        cin>> keepGoingb;
-     }while(keepGoingb);
+        cin >> keepGoingb;
+     }while(keepGoingb == 'y');
 }
 
