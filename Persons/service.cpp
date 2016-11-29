@@ -1,13 +1,9 @@
 #include "service.h"
 #include <vector>
-<<<<<<< HEAD
 #include <iosfwd>
 #include <person.h>
 #include <iostream>
-=======
-#include <iostream>
 
->>>>>>> aba2a8b3fd31800005e0d9d5922ec88d0c2ed0b5
 using namespace std;
 
 service::service(){}
