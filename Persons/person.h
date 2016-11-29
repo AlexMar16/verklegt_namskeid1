@@ -8,14 +8,14 @@ using namespace std;
 class Person
 {
 public:
-    Person();
-    friend ifstream& operator >> (ifstream& in, const Person& rhs);
+    Person();    
     string get_name() const;
-    int get_birth() const;
-    friend ofstream& operator << (ofstream& out, Person rhs);
     string getGender() const;
+    int get_birth() const;
     int getBirthYear() const;
     int getDeath() const;
+    friend ofstream& operator << (ofstream& out, Person rhs);
+    friend ifstream& operator >> (ifstream& in, const Person& rhs);
 
 private:
     string _name;

@@ -105,10 +105,9 @@ vector<Person> service::sort_death()
 vector<Person> service::sort_gender()
 {
 
-
     for(size_t i=0; i< listV.size(); i++)
     {
-        if(listV[i].getGender== 'female')
+        if((listV[i].getGender== 'female')&&(_command=="sortg"))
         {
             return listV[i];
         }
