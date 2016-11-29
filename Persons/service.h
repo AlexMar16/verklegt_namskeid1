@@ -18,6 +18,8 @@ public:
     vector<Person> sort_BirthYear();
     vector<Person> sort_death();
     vector<Person> sort_gender();
+    vector<Person> find_person();
+
 
 private:
     vector<Person> listV;
