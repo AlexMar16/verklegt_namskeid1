@@ -11,6 +11,7 @@ public:
     void swap(Person& a, Person& b);
     void initalize_list();
     void setCommand(string command);    
+    void addPerson(Person input);
     bool validList();
     bool validYorN(string YorN);
     bool repeatprogram(string YorN);

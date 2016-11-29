@@ -24,7 +24,6 @@ void dataAccess::getPersons()
         }
     }
 }
-
 void dataAccess::addPerson()
 {
     ofstream newPerson;
@@ -42,4 +41,8 @@ void dataAccess::addPerson()
             }
         }
     }
+}
+void dataAccess::setVector(vector<Person> input)
+{
+    _persons = input;
 }

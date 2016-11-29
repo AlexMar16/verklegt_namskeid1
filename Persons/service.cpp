@@ -81,7 +81,7 @@ bool service::validList()// depending on input from user, do something
     else if(_command == "add")
     {
         //Person person(string _name,char _gender int _birthYear, int _deathYear) todo
-        return false;
+        return true;
     }
     else if(_command == "find")
     {
@@ -147,7 +147,13 @@ void service::setCommand(string c)
     _command = c;
 }
 
-
+void service::addPerson(Person input)
+{
+    dataAccess addNew;
+    listV.push_back(input);
+    addNew.setVector(listV);
+    addNew.addPerson();
+}
 
 /*
 vector<Person> service::sort_alphabetically()
