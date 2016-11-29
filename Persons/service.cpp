@@ -56,13 +56,13 @@ vector<Person> service::displayList(string command)// depending on input from us
     {
         cout << "sortb!" << endl;
         //return false;
-        //sort_BirthYear();
+        return sort_BirthYear();
     }
     else if(_command == "sortd")
     {
         cout << "sortd!" << endl;
         //return false;
-        //sort_death();
+        return sort_death();
     }
     else if(_command == "sortg")
     {
@@ -226,20 +226,6 @@ vector<Person> service::sort_BirthYear()
 }
 
 
-vector<Person> service::sort_death()
-{
-    for(size_t i= 0; i< listV.size(); i++)
-    {
-        //if(listV[i].getDeath > 0)
-        {
-           if(listV[i].getDeath() > listV[i+1].getDeath())
-           {
-              swap(listV[i], listV[i+1]);
-           }
-        }
-    }
-     return listV;
-}
 
 Person service::find_person(const string& name)
 {
@@ -271,7 +257,6 @@ vector<Person> service::sort_death()
     bool again = true;
     while (again)
     {
-        int save = listV[0].getDeath();
         again = false;
         for (unsigned int i=0; i<listV.size()-1; i++)
         {
