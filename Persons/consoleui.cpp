@@ -44,7 +44,7 @@ bool keepGoing(bool keepGoingb)
     cin >> keepGoingb;
     return keepGoingb;
 }
-ostream& operator <<(ostream& out, vector<Person>& rhs)
+ostream& operator<<(ostream& out, vector<Person>& rhs)
 {
     for(size_t i = 0; i < rhs.size(); i++)
     {
