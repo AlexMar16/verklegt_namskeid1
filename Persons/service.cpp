@@ -27,7 +27,7 @@ vector<Person> service::sort_alphabetically()
     }
     return listV;
 }
-
+/*
 vector<Person> service::sort_numerically()
 {
     bool again = true;
@@ -45,7 +45,7 @@ vector<Person> service::sort_numerically()
     }
     return listV;
 }
-
+*/
 void service::initalize_list()
 {
     dataAccess temp;
