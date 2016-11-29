@@ -2,7 +2,6 @@
 
 using namespace std;
 
-bool keepGoing(bool keepGoingb);
 
 consoleUI::consoleUI(){}
 
@@ -36,10 +35,7 @@ void consoleUI::run()
             cout << printOut;
         }
         cout << "If you would like to continue, please enter (y/n): ";
-     }while(true);
-}
-bool keepGoing(bool keepGoingb)
-{
-    return keepGoingb;
+        cin>> keepGoingb;
+     }while(keepGoingb);
 }
 
