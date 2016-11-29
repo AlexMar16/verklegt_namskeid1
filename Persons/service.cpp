@@ -187,7 +187,7 @@ bool service::validList()// depending on input from user, do something
 {
     if(_command == "list")
     {
-        return false;
+        return true;
     }
     else if(_command == "add")
     {
