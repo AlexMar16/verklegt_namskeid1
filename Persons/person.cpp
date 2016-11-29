@@ -8,20 +8,21 @@ Person::Person()
 }
 ifstream& operator >> (ifstream& in, const Person& rhs)
 {
-    in >> rhs._firstName >> rhs._secondName >> rhs._thirdName >> rhs._gender >> rhs._birthYear >> rhs._deathYear;
+    string cool;
+    in >> cool;
     return in;
 }
-ofstream& operator << (ofstream& out, const Person& rhs);
+ostream& operator << (ostream& out, const Person& rhs)
 {
     out << "Name: " << rhs._firstName << " " << rhs._secondName << " ";
-    if(_thirdName != 0)
+    if(rhs._thirdName != "0")
     {
         out << rhs._thirdName;
     }
     out << endl;
     out << "Gender: " << rhs._gender << endl;
     out << "Born: " << rhs._birthYear << endl;
-    if(_deathYear!= 0)
+    if(rhs._deathYear!= 0)
     {
         out << "Died: " << rhs._deathYear << endl;
     }
@@ -31,13 +32,13 @@ ofstream& operator << (ofstream& out, const Person& rhs);
     }
     return out;
 }
-string Person::get_name()
+string Person::get_name() const
 {
     string fullName;
-    fullName = _firstname + " " +  _surname;
-    if(_name2 != "0")
+    fullName = _firstName + " " +  _secondName;
+    if(_secondName != "0")
     {
-        fullName += " " + _lastName;
+        fullName += " " + _thirdName;
     }
     return fullName;
 }
