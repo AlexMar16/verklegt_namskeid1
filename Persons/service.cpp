@@ -266,12 +266,28 @@ bool look_for_person(const string& name)
     return false;
 }
 
-    for(size_t i=0; i< listV.size(); i++)
+vector<Person> service::sort_death()
+{
+    bool again = true;
+    while (again)
     {
-        if((str.find(listV[i]._name)&&(str.find(listV[i]._name2))
+        int save = listV[0].getDeath();
+        again = false;
+        for (unsigned int i=0; i<listV.size()-1; i++)
         {
-           return listV[i].name && listV[i].name2;
+            if (listV[i].getDeath() < listV[i+1].getDeath())
+            {
+                //swap(list[i].get_name(), list[i+1].get_name());
+                swap(listV[i], listV[i+1]);
+                again = true;
+            }
         }
     }
+    return listV;
+}
+
+
+
+
 
 
