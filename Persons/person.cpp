@@ -11,12 +11,11 @@ ifstream& operator >> (ifstream& in, const Person& rhs)
     return in;
 }
 
-<<<<<<< HEAD
 /*string Person::get_name() const
 {return _name;}*/
 
 ofstream& operator << (ofstream& out, Person rhs)
-=======
+
 string Person::get_name() const
 {
     string fullName;
@@ -40,7 +39,7 @@ int Person::getDeath() const
     return _deathYear;
 }
 ofstream& operator << (ofstream& out, Person& rhs)
->>>>>>> 9e6f16749b527d7465dde0f025a62925340afb08
+
 {
     out <<"Name: "<< rhs._name << " " << rhs._name1;
     if(rhs._name2 != "0")
@@ -57,8 +56,3 @@ ofstream& operator << (ofstream& out, Person& rhs)
     return out;
 }
 
-string Person::get_name() const
-{return _name;}
-
-int Person::get_birth()const
-{return _birthYear;}
