@@ -13,7 +13,7 @@ vector<Person> dataAccess::getVector()
 void dataAccess::getPersons()
 {
     ifstream personFile;
-    personFile.open("/Users/alexgunnarsson/verklegt_namskeid1/Persons/info.txt");
+    personFile.open("E:/forrit/Git/verklegt_namskeid1/info.txt");
 
     if(personFile)
     {
@@ -27,7 +27,7 @@ void dataAccess::getPersons()
 void dataAccess::addPerson()
 {
     ofstream newPerson;
-    newPerson.open("/Users/alexgunnarsson/verklegt_namskeid1/Persons/info.txt");
+    newPerson.open("E:/forrit/Git/verklegt_namskeid1/info.txt");
 
     if(newPerson)
     {
