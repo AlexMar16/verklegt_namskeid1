@@ -110,7 +110,7 @@ vector<Person> service::sort_gender()
     }
 }
 
-vector<Person> service::find_person(string& name const)
+vector<Person> service::find_person(const string& name)
 {
     for (int i=0; i<listV.size; i++)
     {
