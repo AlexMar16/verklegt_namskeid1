@@ -69,9 +69,9 @@ vector<Person> service::get_list()
 
 vector<Person> service::sort_BirthYear()
 {
-   bool again = true;
-    while (again)
-    {
+        bool again = true;
+        while (again)
+        {
        // string save = listV[0].getBirthYear;
         again = false;
         for (size_t i=0; i < listV.size()-1; i++)
