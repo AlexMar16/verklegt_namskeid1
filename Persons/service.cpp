@@ -161,6 +161,7 @@ vector<Person> service::displayList()// depending on input from user, do somethi
     {
         cout << "sortg!" << endl;
         return false;
+        sort_gender();
     }
     else
     {
