@@ -23,6 +23,7 @@ private:
     vector<Person> listV;
     string _command;
     bool _keepGoing;
+    bool _valid;
 };
 
 #endif // SERVICE_H
