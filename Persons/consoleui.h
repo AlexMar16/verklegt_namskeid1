@@ -12,7 +12,7 @@ class consoleUI
 public:
     consoleUI();
     void run();
-    friend ostream& operator <<(ostream& out, vector<Person>& rhs);
+
 };
 
 #endif // CONSOLEUI_H

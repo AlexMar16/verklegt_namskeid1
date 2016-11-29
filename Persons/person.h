@@ -2,6 +2,7 @@
 #define PERSON_H
 #include <string>
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
@@ -15,8 +16,9 @@ public:
     int get_birth() const;
     int getBirthYear() const;
     int getDeath() const;
-    friend ofstream& operator << (ofstream& out, const Person& rhs);
-    friend ifstream& operator >> (ifstream& in, Person& rhs);
+    friend ostream& operator << (ostream& out, const Person& rhs);
+    friend fstream& operator >> (fstream& in, Person& rhs);
+    friend ostream& operator <<(ostream& out, vector<Person>& rhs);
 
 private:
     string _firstName;

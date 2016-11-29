@@ -6,12 +6,12 @@ Person::Person()
     _birthYear = 0;
     _deathYear = 0;
 }
-ifstream& operator >> (ifstream& in, const Person& rhs)
+fstream& operator >> (fstream& in, const Person& rhs)
 {
     in >> rhs._firstName >> rhs._secondName >> rhs._thirdName >> rhs._gender >> rhs._birthYear >> rhs._deathYear;
     return in;
 }
-ofstream& operator << (ofstream& out, const Person& rhs);
+ostream& operator << (ostream& out, const Person& rhs);
 {
     out << "Name: " << rhs._firstName << " " << rhs._secondName << " ";
     if(_thirdName != 0)
@@ -31,6 +31,15 @@ ofstream& operator << (ofstream& out, const Person& rhs);
     }
     return out;
 }
+    ostream& operator << (ostream& out, vector<Person>& rhs)
+    {
+        for(size_t i = 0; i < rhs.size(); i++)
+        {
+            out << rhs[i];
+        }
+        return out;
+    }
+
 string Person::get_name()
 {
     string fullName;
