@@ -88,32 +88,32 @@ bool service::validList()// depending on input from user, do something
         string name;
         cout << "enter name to find:";
         cin >> name;
-        return false;
+        return true;
     }
     else if(_command == "sorta")
     {
         cout << "soarta!" << endl;
-        return false;
+        return true;
     }
     else if(_command == "sortb")
     {
         cout << "sortb!" << endl;
-        return false;
+        return true;
     }
     else if(_command == "sortd")
     {
         cout << "sortd!" << endl;
-        return false;
+        return true;
     }
     else if(_command == "sortg")
     {
         cout << "sortg!" << endl;
-        return false;
+        return true;
     }
     else
     {
         cout << "Invalid input, please try again" << endl;
-        return true;
+        return false;
     }
 }
 
