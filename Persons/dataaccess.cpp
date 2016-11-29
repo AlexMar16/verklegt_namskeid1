@@ -4,7 +4,7 @@
 dataAccess::dataAccess()
 {
 
-};
+}
 
 vector<Person> dataAccess::getVector()
 {

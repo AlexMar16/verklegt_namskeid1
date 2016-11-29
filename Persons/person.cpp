@@ -14,17 +14,6 @@ ifstream& operator >> (ifstream& in, const Person& rhs)
 }
 
 ostream& operator << (ostream& out, const Person& rhs);
-
-ostream& operator << (ostream& out, const Person& rhs)
-
-
-string Person::get_name()
-{
-    return _name;
-}
-
-
-ostream& operator << (ostream& out, const Person& rhs);
 {
     out << "Name: " << rhs._firstName << " " << rhs._secondName << " ";
     if(rhs._thirdName != "0")
@@ -60,7 +49,7 @@ string Person::get_name() const
 {
     string fullName;
     fullName = _firstName + " " +  _secondName;
-    if(_secondName != "0")
+    if(_thirdName != "0")
     {
         fullName += " " + _thirdName;
     }
