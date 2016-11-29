@@ -18,7 +18,12 @@ public:
     vector<Person> sort_BirthYear();
     vector<Person> sort_death();
     vector<Person> sort_gender();
+<<<<<<< HEAD
+    vector<Person> find_person(string name);
+
+=======
     vector<Person> find_person(string& name);
+>>>>>>> 9a2babdae8a5415ef08989ebcd19814165985332
 
 private:
     vector<Person> listV;
