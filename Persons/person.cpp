@@ -7,19 +7,25 @@ Person::Person()
 }
 ifstream& operator >> (ifstream& in, Person& rhs)
 {
-    in >> rhs._firstName >> rhs._secondName >> rhs._thirdName >> rhs._gender
-       >> rhs._birthYear >> rhs._deathYear;
+    string first, second, third;
+    in >> first >> second >> third;
+    if(third != "male" && third != "female")
+    {
+        rhs._fullName = first + " " + second + " " + third;
+        in  >> rhs._gender >> rhs._birthYear >> rhs._deathYear;
+    }
+    else
+    {
+        rhs._fullName = first + " " + second;
+        rhs._gender = third;
+        in >> rhs._birthYear >> rhs._deathYear;
+    }
     return in;
 }
 
 ostream& operator << (ostream& out, const Person& rhs)
 {
-    out << "Name: " << rhs._firstName << " " << rhs._secondName << " ";
-    if(rhs._thirdName != "0")
-    {
-        out << rhs._thirdName;
-    }
-    out << endl;
+    out << "Name: " << rhs._fullName<< endl;
     out << "Gender: " << rhs._gender << endl;
     out << "Born: " << rhs._birthYear << endl;
 
@@ -46,13 +52,7 @@ ostream& operator << (ostream& out, vector<Person>& rhs)
 
 string Person::get_name() const
 {
-    string fullName;    
-    fullName = _firstName + " " +  _secondName;
-    if(_thirdName != "male" && _thirdName != "female")
-    {
-        fullName += " " + _thirdName;
-    }
-    return fullName;
+    return _fullName;
 }
 string Person::getGender() const
 {
