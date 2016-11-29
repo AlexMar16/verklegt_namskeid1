@@ -169,6 +169,18 @@ vector<Person> service::displayList()// depending on input from user, do somethi
         return true;
     }
 
+vector<Person> service::find_person(string& name)
+{
+    for(size_t i=0; i< listV.size(); i++)
+    {
+        if(str.find(listV._name)
+                sjid
+
+    }
+
+
+}
+
 bool service::validList()// depending on input from user, do something
 {
     if(_command == "list")
@@ -187,6 +199,7 @@ bool service::validList()// depending on input from user, do something
         cout << "enter name to find:";
         cin >> name;
         return false;
+
     }
     else if(_command == "sorta")
     {
