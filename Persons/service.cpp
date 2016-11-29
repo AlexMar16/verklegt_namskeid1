@@ -94,11 +94,8 @@ vector<Person> service::sort_death()
               swap(listV[i], listV[i+1]);
            }
         }
-
     }
      return listV;
-
-
 }
 
 vector<Person> service::sort_gender()
@@ -110,26 +107,28 @@ vector<Person> service::sort_gender()
            swap(listV[i], listV[i+1]);
            return listV;
         }
-
-
     }
 }
 
-vector<Person> service::find_person(string& name)
+vector<Person> service::find_person(string& name const)
 {
-    string result;
+    for (int i=0; i<listV.size; i++)
+    {
+        if (listV[i] == name)
+        {
+            int p=0;
+        }
+    }
     return listV;
 }
 
-    for(size_t i=0; i< listV.size(); i++)
+    /*for(size_t i=0; i< listV.size(); i++)
     {
         if((str.find(listV[i]._name)&&(str.find(listV[i]._name2))
         {
            return listV[i].name && listV[i].name2;
         }
-
-    }
-
+    }*/
 }
 
 vector<Person> service::displayList()// depending on input from user, do something
@@ -137,14 +136,11 @@ vector<Person> service::displayList()// depending on input from user, do somethi
     if(_command == "list")
     {
         return listV;
-
-
     }
     else if(_command == "add")
     {
         //Person person(string _name,char _gender int _birthYear, int _deathYear) todo
         return false;
-
     }
     else if(_command == "find")
     {
@@ -189,7 +185,6 @@ bool service::validList()// depending on input from user, do something
     if(_command == "list")
     {
         return false;
-
     }
     else if(_command == "add")
     {
@@ -202,7 +197,6 @@ bool service::validList()// depending on input from user, do something
         cout << "enter name to find:";
         cin >> name;
         return false;
-
     }
     else if(_command == "sorta")
     {
@@ -229,12 +223,10 @@ bool service::validList()// depending on input from user, do something
         cout << "Invalid input, please try again" << endl;
         return true;
     }
-
 }
 
 void service::setCommand(string c)
 {
     _command = c;
-
 }
 
