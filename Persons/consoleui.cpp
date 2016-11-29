@@ -30,23 +30,17 @@ void consoleUI::run()
         turn.setCommand(command);
         cout << endl;
         valid = turn.validList();
-        vector<Person> rhs = turn.displayList();
         if(valid)
         {
-            for(size_t i = 0; i < rhs.size(); i++)
-            {
-                cout << rhs[i];
-            }
+            vector<Person> printOut = turn.displayList();
+            cout << printOut;
         }
         cout << "If you would like to continue, please enter (y/n): ";
-        cin >> keepGoingb;
-     }while(keepGoingb);
+        cin >> turn.setkeepGoing;
+     }while(keepGoing(keepGoingb));
 }
-ostream& operator << (ostream& out, vector<Person>& rhs)
+bool keepGoing(bool keepGoingb)
 {
-    for(size_t i = 0; i < rhs.size(); i++)
-    {
-        out << rhs[i];
-    }
-    return out;
+    return keepGoingb;
 }
+

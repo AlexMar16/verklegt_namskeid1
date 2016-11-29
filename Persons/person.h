@@ -3,21 +3,22 @@
 #include <string>
 #include <iostream>
 #include <vector>
-#include <fstream>
+
 using namespace std;
 
 
 class Person
 {
 public:
-    Person();    
+    Person();
     string get_name() const;
     string getGender() const;
     int get_birth() const;
     int getBirthYear() const;
     int getDeath() const;
     friend ostream& operator << (ostream& out, const Person& rhs);
-    friend ifstream& operator >> (ifstream& in, Person& rhs);
+    friend fstream& operator >> (fstream& in, Person& rhs);
+    friend ostream& operator <<(ostream& out, vector<Person>& rhs);
 
 private:
     string _firstName;
