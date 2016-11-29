@@ -67,8 +67,7 @@ vector<Person> service::displayList(string command)// depending on input from us
     else if(_command == "sortg")
     {
         cout << "sortg!" << endl;
-       // return false;
-        //sort_gender();
+        return sort_gender();
     }
 }
 
@@ -98,22 +97,22 @@ bool service::validList()// depending on input from user, do something
     else if(_command == "sortb")
     {
         cout << "sortb!" << endl;
-        return false;
+        return true;
     }
     else if(_command == "sortd")
     {
         cout << "sortd!" << endl;
-        return false;
+        return true;
     }
     else if(_command == "sortg")
     {
         cout << "sortg!" << endl;
-        return false;
+        return true;
     }
     else
     {
         cout << "Invalid input, please try again" << endl;
-        return true;
+        return false;
     }
 }
 
@@ -147,7 +146,18 @@ void service::setCommand(string c)
     _command = c;
 }
 
-
+vector<Person> service::sort_gender()
+{
+    int counter = 0;
+    for(size_t i=0; i< listV.size(); i++)
+    {
+        if(listV[i].getGender() == "female")
+        {
+           swap(listV[i], listV[counter]);
+        }
+    }
+    return listV;
+}
 
 /*
 vector<Person> service::sort_alphabetically()
