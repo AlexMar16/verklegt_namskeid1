@@ -176,6 +176,7 @@ vector<Person> service::sort_numerically()
     bool again = true;
     while (again)
     {
+        string save1 = listV[0].get_birthYear();
         again = false;
         for (unsigned int i=0; i<listV.size()-1; i++)
         {
