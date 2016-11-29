@@ -1,7 +1,8 @@
 #include "service.h"
 #include <vector>
 #include <iosfwd>
-
+#include <person.h>
+#include <iostream>
 using namespace std;
 
 service::service()
@@ -20,8 +21,10 @@ void service::sort_alphabetically(vector<Person>& list)
             again = false;
             if (list[i].get_name() > list[i+1].get_name())
             {
-                swap(list[i].get_name(), list[i+1].get_name());
-                    again = true;
+                //swap(list[i].get_name(), list[i+1].get_name());
+                cout << list[i].get_name();
+                cout << list[i+1].get_name();
+                again = true;
             }
         }
     }

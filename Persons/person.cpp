@@ -12,7 +12,9 @@ ifstream& operator >> (ifstream& in, Person rhs)
 }
 
 string Person::get_name()
-{return _name;}
+{
+    return _name;
+}
 ofstream& operator << (ofstream& out, Person rhs)
 {
     out <<"Name: "<< rhs._name << " " << rhs._name1;
@@ -29,4 +31,4 @@ ofstream& operator << (ofstream& out, Person rhs)
     }
     return out;
 }
->>>>>>> 4f61e59cd9b8b455590d34716794d1dc4203d1b6
+
