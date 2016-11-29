@@ -1,6 +1,5 @@
 #include "consoleui.h"
-#include "person.h"
-#include <iostream>
+
 
 using namespace std;
 
