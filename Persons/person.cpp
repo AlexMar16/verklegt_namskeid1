@@ -8,20 +8,38 @@ Person::Person()
 }
 fstream& operator >> (fstream& in, const Person& rhs)
 {
-    in >> rhs._firstName >> rhs._secondName >> rhs._thirdName >> rhs._gender >> rhs._birthYear >> rhs._deathYear;
+    string cool;
+    in >> cool;
     return in;
 }
+<<<<<<< HEAD
 ostream& operator << (ostream& out, const Person& rhs);
+=======
+<<<<<<< HEAD
+ostream& operator << (ostream& out, const Person& rhs)
+=======
+<<<<<<< HEAD
+
+string Person::get_name()
+{
+    return _name;
+}
+ofstream& operator << (ofstream& out, Person rhs)
+=======
+ofstream& operator << (ofstream& out, const Person& rhs);
+>>>>>>> aba2a8b3fd31800005e0d9d5922ec88d0c2ed0b5
+>>>>>>> f4a8f42a7c9f2e431ff3b80fbe698e6106ba6dcc
+>>>>>>> 9a2babdae8a5415ef08989ebcd19814165985332
 {
     out << "Name: " << rhs._firstName << " " << rhs._secondName << " ";
-    if(_thirdName != 0)
+    if(rhs._thirdName != "0")
     {
         out << rhs._thirdName;
     }
     out << endl;
     out << "Gender: " << rhs._gender << endl;
     out << "Born: " << rhs._birthYear << endl;
-    if(_deathYear!= 0)
+    if(rhs._deathYear!= 0)
     {
         out << "Died: " << rhs._deathYear << endl;
     }
@@ -31,6 +49,7 @@ ostream& operator << (ostream& out, const Person& rhs);
     }
     return out;
 }
+<<<<<<< HEAD
     ostream& operator << (ostream& out, vector<Person>& rhs)
     {
         for(size_t i = 0; i < rhs.size(); i++)
@@ -40,13 +59,22 @@ ostream& operator << (ostream& out, const Person& rhs);
         return out;
     }
 
+=======
+<<<<<<< HEAD
+string Person::get_name() const
+=======
+<<<<<<< HEAD
+
+=======
+>>>>>>> 9a2babdae8a5415ef08989ebcd19814165985332
 string Person::get_name()
+>>>>>>> f4a8f42a7c9f2e431ff3b80fbe698e6106ba6dcc
 {
     string fullName;
-    fullName = _firstname + " " +  _surname;
-    if(_name2 != "0")
+    fullName = _firstName + " " +  _secondName;
+    if(_secondName != "0")
     {
-        fullName += " " + _lastName;
+        fullName += " " + _thirdName;
     }
     return fullName;
 }
@@ -62,3 +90,4 @@ int Person::getDeath() const
 {
     return _deathYear;
 }
+>>>>>>> aba2a8b3fd31800005e0d9d5922ec88d0c2ed0b5

@@ -10,7 +10,7 @@ using namespace std;
 class Person
 {
 public:
-    Person();    
+    Person();
     string get_name() const;
     string getGender() const;
     int get_birth() const;
