@@ -176,11 +176,6 @@ vector<Person> service::displayList(string command)// depending on input from us
        // return false;
         sort_gender();
     }
-    else
-    {
-        cout << "Invalid input, please try again" <<endl;
-        return listV;
-    }
 }
 
 bool service::validList()// depending on input from user, do something
@@ -227,6 +222,31 @@ bool service::validList()// depending on input from user, do something
         return true;
     }
 }
+
+bool service::repeatprogram(string YorN)
+{
+    if(YorN == "y" || YorN == "y")
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+bool service::validYorN(string YorN)
+{
+    if(YorN == "y" || YorN == "y" || YorN == "N" || YorN == "n")
+    {
+        return false;
+    }
+    else
+    {
+        return true;
+    }
+}
+
 
 void service::setCommand(string c)
 {

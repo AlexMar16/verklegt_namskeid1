@@ -12,6 +12,8 @@ public:
     void initalize_list();
     void setCommand(string command);    
     bool validList();
+    bool validYorN(string YorN);
+    bool repeatprogram(string YorN);
     vector<Person> displayList();
     vector<Person> sort_alphabetically();
     vector<Person> get_list();
