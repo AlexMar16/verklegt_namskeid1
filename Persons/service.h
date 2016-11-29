@@ -7,13 +7,12 @@ class service
 {
 public:
     service();
-
     void initalize_list(vector<Person>&);
     void swap(Person& a, Person& b);
     void initalize_list();
-    void setCommand(string command);
-    vector<Person> displayList();
+    void setCommand(string command);    
     bool validList();
+    vector<Person> displayList();
     vector<Person> sort_alphabetically();
     vector<Person> get_list();
     vector<Person> sort_BirthYear();
