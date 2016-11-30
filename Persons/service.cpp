@@ -25,7 +25,7 @@ vector<Person> service::get_list()
    return listV;
 }
 
-void service::displayList(string input)// depending on input from user, do something
+void service::displayList()// depending on input from user, do something
 {
     if(_command == "a")
     {

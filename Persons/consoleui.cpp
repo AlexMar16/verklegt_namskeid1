@@ -34,7 +34,7 @@ void consoleUI::run()
 
 
         valid = validList(command);
-        turn.displayList(command);
+        turn.displayList();
         _printOut = turn.get_list();
         if(valid)
         {
