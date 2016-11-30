@@ -15,7 +15,8 @@ public:
     bool validList();
     bool validYorN(string YorN);
     bool repeatprogram(string YorN);
-    bool findcheck();
+    bool find_check();
+    bool find_add();
     bool already_in_database(string name);
     vector<Person> displayList();
     vector<Person> find_person(string name);

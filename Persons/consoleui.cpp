@@ -46,7 +46,7 @@ void consoleUI::run()
 
 
         valid = turn.validList();
-        if (command == "add")
+        if (false)
         {
             addCommand();
         }
