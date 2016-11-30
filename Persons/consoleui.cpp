@@ -64,10 +64,10 @@ void consoleUI::run()
                 cout << "Person not found " << endl;
             }
         }
+        _printOut = turn.displayList(command);
         if(valid)
         {
-            vector<Person> printOut = turn.displayList(command);
-            cout << printOut;
+            cout << _printOut;
         }
      }while(turn.getProgram());
 }
@@ -85,6 +85,7 @@ bool consoleUI::validList(string _command)// depending on input from user, do so
     }
     else if(_command == "sort")
     {
+        sortCommand();
         return true;
     }
     else if (_command == "quit")
@@ -97,3 +98,20 @@ bool consoleUI::validList(string _command)// depending on input from user, do so
     }
 
 }
+
+void consoleUI::sortCommand()
+{
+    cout << "a - Sort alphabetically. " << endl;
+    cout << "b - Sort by year of birth. " << endl;
+    cout << "d - Sort by year of death. " << endl;
+    cout << "g - Sort by gender. " << endl;
+    cout << "Select sorting method: ";
+
+    string input;
+    cin >> input;
+
+    _printOut = turn.displayList(input);
+}
+
+
+

@@ -14,8 +14,10 @@ public:
     void run();
     bool validList(string _command);
     void addCommand();
+    void sortCommand();
 private:
     service turn;
+    vector<Person> _printOut;
 
 };
 
