@@ -1,7 +1,3 @@
-﻿Alan Jay Perlis	
-male
-1922
-1990
 Maurice Wilkes 
 male
 1913
@@ -110,7 +106,7 @@ William Kahan
 male
 1933
 0
-Fernando José Corbató
+Fernando Jose Corbato
 male
 1926
 0

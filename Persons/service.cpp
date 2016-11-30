@@ -11,6 +11,7 @@ service::service(){
     listV = temp.getVector();
     listsearchedperson = temp.getVector();
     listsearchedperson.clear();
+    _program = true;
 }
 void service::swap(Person& a, Person& b)
 {
@@ -30,23 +31,16 @@ vector<Person> service::displayList(string command)// depending on input from us
     {
         return listV;
     }
-    else if(_command == "add")
-    {
-        //Person person(string _name,char _gender int _birthYear, int _deathYear) todo
-        //return false;
-    }
     else if(_command == "sorta")
     {
         return sort_alphabetically();
     }
     else if(_command == "sortb")
     {
-        //return false;
         return sort_BirthYear();
     }
     else if(_command == "sortd")
     {
-        //return false;
         return sort_death();
     }
     else if(_command == "sortg")
@@ -83,6 +77,16 @@ bool service::validList()// depending on input from user, do something
     {
         return true;
     }
+    else if (_command == "quit")
+    {
+        _program = false;
+        return false;
+    }
+    else
+    {
+        return false;
+    }
+
 }
 
 bool service::repeatprogram(string YorN)
@@ -250,9 +254,15 @@ vector<Person> service::sort_death()
     }
     return listV;
 }
+void service::setProgram(bool input)
+{
+    _program = input;
+}
 
-
-
+bool service::getProgram()
+{
+    return _program;
+}
 
 
 
