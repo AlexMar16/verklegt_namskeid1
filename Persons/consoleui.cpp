@@ -87,11 +87,12 @@ bool service::validList()// depending on input from user, do something
         //Person person(string _name,char _gender int _birthYear, int _deathYear) todo
         return true;
     }
-    else if(_command == "sorta")
+    else if(_command == "sort")
     {
-
         return true;
+        displayList();
     }
+    /*
     else if(_command == "sortb")
     {
         return true;
@@ -104,6 +105,7 @@ bool service::validList()// depending on input from user, do something
     {
         return true;
     }
+    */
     else if (_command == "quit")
     {
         _program = false;
@@ -115,3 +117,5 @@ bool service::validList()// depending on input from user, do something
     }
 
 }
+
+
