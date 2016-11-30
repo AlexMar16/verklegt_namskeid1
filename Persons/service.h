@@ -16,6 +16,7 @@ public:
     bool validYorN(string YorN);
     bool repeatprogram(string YorN);
     bool findcheck();
+    bool already_in_database(string name);
     vector<Person> displayList();
     vector<Person> find_person(string name);
     vector<Person> sort_alphabetically();

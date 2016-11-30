@@ -134,10 +134,13 @@ vector<Person> service::sort_gender()
 }
 void service::addPerson(Person input)
 {
-    dataAccess addNew;
-    listV.push_back(input);
-    addNew.setVector(listV);
-    addNew.addPerson();
+    if(!already_in_database(input.get_name()))
+    {
+        dataAccess addNew;
+        listV.push_back(input);
+        addNew.setVector(listV);
+        addNew.addPerson();
+    }
 }
 
 
@@ -189,7 +192,7 @@ vector<Person> service::sort_BirthYear()
         again = false;
         for (size_t i=0; i < listV.size()-1; i++)
         {
-            if (listV[i].getBirthYear() > listV[i+1].getBirthYear())
+            if (listV[i].getBirthYear() > listV[i+1].getBirthYear())            //sama fall og fyrir ofan!!!
             {
                 swap(listV[i], listV[i+1]);
                 again = true;
@@ -197,6 +200,18 @@ vector<Person> service::sort_BirthYear()
         }
     }
     return listV;
+}
+
+bool service::already_in_database(string name)
+{
+    for (size_t i=0; i<listV.size(); i++)
+    {
+        if (listV[i].get_name() == name)
+        {
+            return true;
+        }
+    }
+    return false;
 }
 
 vector<Person> service::find_person(string name)
