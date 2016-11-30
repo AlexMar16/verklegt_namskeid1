@@ -13,6 +13,7 @@ vector<Person> dataAccess::getVector()
 }
 vector<Question> dataAccess::getquestionVector()
 {
+    //cout << "dataaccess get qestion vector " << endl;
     return _questions;
 }
 void dataAccess::getPersons()
@@ -35,13 +36,16 @@ void dataAccess::getQuestions()
 {
     ifstream questionFile;
 
+    //cout << "dataaccess getquestions() " << endl;
     questionFile.open("C:/Users/Rabo/HR/onn1/Verklegt Namskeid/verklegt_namskeid1/build-Persons-Desktop_Qt_5_7_0_MinGW_32bit-Debug/study.txt");
 
     if(questionFile)
     {
+        //cout << "dataaccess if question file " << endl;
         Question temp;
         while(questionFile >> temp)
         {
+            //cout << "dataaccess while questionfle >> temp " << endl;
             _questions.push_back(temp);
         }
     }

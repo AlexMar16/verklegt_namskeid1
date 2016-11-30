@@ -25,6 +25,12 @@ vector<Person> service::get_list()
    return listV;
 }
 
+vector<Question> service::get_listquestions()
+{
+    cout << "Service get_listqueestions " << endl;
+   return listquestions;
+}
+
 void service::displayList()// depending on input from user, do something
 {
     if(_command == "a")

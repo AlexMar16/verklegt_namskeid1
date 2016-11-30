@@ -32,6 +32,8 @@ void consoleUI::run()
         turn.setCommand(command);
         cout << endl;
 
+        //_printQuestion = turn.get_listquestions();
+        //cout << _printQuestion[1];
 
         valid = validList(command);
         turn.displayList();
