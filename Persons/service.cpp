@@ -173,32 +173,6 @@ bool service::look_for_person(string name)
     return foundname;
 }
 
-
-bool service::find_check()
-{
-    if(_command == "find")
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
-}
-
-bool service::add_check()
-{
-    if(_command == "add")
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
-}
-
-
 vector<Person> service::sort_death()
 {
     bool again = true;
