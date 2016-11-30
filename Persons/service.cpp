@@ -68,7 +68,7 @@ void service::setCommand(string c)
     _command = c;
 }
 
-vector<Person> service::sort_gender()
+vector<Person> service::sort_gender()//sorts the females in the list to the top
 {
     int counter = 0;
     for(size_t i=0; i< listV.size(); i++)
@@ -81,7 +81,7 @@ vector<Person> service::sort_gender()
     }
     return listV;
 }
-void service::addPerson(Person input)
+void service::addPerson(Person input)//makes the user capable to add people as long as they're not already on the list
 {
     if(!already_in_database(input.get_name()))
     {
@@ -93,7 +93,7 @@ void service::addPerson(Person input)
 }
 
 
-vector<Person> service::sort_alphabetically()
+vector<Person> service::sort_alphabetically()//insertion sort
 {
     bool again = true;
     while (again)
