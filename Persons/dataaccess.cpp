@@ -25,6 +25,23 @@ void dataAccess::getPersons()
         }
     }
 }
+
+void dataAccess::getQuestions()
+{
+    ifstream questionFile;
+
+    questionFile.open("C:/Users/Rabo/HR/onn1/Verklegt Namskeid/verklegt_namskeid1/build-Persons-Desktop_Qt_5_7_0_MinGW_32bit-Debug/study.txt");
+
+    if(questionFile)
+    {
+        Question temp;
+        while(questionFile >> temp)
+        {
+            _questions.push_back(temp);
+        }
+    }
+}
+
 void dataAccess::addPerson()
 {
     ofstream newPerson;

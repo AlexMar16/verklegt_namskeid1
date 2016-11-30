@@ -35,8 +35,8 @@ void consoleUI::run()
         cout << "add   - This command allows you to add a person to the list." << endl;
         cout << "find  - This command allows you to find a certain person in the list." << endl;
         cout << "sort  - This command will allow you to sort the scientists." << endl;
-        cout << "quiz  - This command lets you take a quiz about the computer scientists" << endl;
-        cout << "quit  - This command will quit the program" << endl;
+        cout << "quiz  - This command lets you take a quiz about the computer scientists." << endl;
+        cout << "quit  - This command will quit the program." << endl;
         cout << "**********************************************************************************" << endl;
         cout << "command: ";
         cin >> command;
