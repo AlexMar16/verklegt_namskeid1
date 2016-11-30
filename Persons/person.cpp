@@ -75,21 +75,13 @@ ostream& operator << (ostream& out, vector<Person>& rhs)
      out << endl;
      return out;
 }
-
-
-string Person::get_name() const
-{
-    return _fullName;
-}
-string Person::getGender() const
-{
-    return _gender;
-}
- int Person::getBirthYear() const
-{
-    return _birthYear;
-}
-int Person::getDeath() const //Laga nafn kv Sindri
-{
-    return _deathYear;
-}
+//Get functions
+string Person::getName() const {return _fullName;}
+string Person::getGender() const {return _gender;}
+int Person::getBirthYear() const {return _birthYear;}
+int Person::getDeathYear() const {return _deathYear;}
+//Set functions
+void Person::setName(const string input) {_fullName += input + " ";}
+void Person::setGender(const string input){_gender = input;}
+void Person::setBirthYear(const int input){_birthYear = input;}
+void Person::setDeathYear(const int input){_deathYear = input;}

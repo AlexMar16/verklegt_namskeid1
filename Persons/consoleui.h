@@ -13,16 +13,16 @@ class consoleUI
 public:
     consoleUI();
     void run();
-    bool validList(string _command);
+    void validList(string _command);
     void addCommand();
     void sortCommand();
     void findCommand();
     void quizCommand();
 private:
-    service turn;
+    service _turn;
     vector<Person> _printOut;
     vector<Question> _printQuestion;
-
+    bool _valid;
 };
 
 #endif // CONSOLEUI_H

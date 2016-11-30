@@ -8,9 +8,9 @@ using namespace std;
 
 service::service(){
     dataAccess temp;
-    listV = temp.getVector();
-    listsearchedperson = temp.getVector();
-    listsearchedperson.clear();
+    _listV = temp.getVector();
+    _listSearchedPerson = temp.getVector();
+    _listSearchedPerson.clear();
     _program = true;
 }
 void service::swap(Person& a, Person& b)
@@ -20,45 +20,41 @@ void service::swap(Person& a, Person& b)
     b = temp;
 }
 
-vector<Person> service::get_list()
+vector<Person> service::getList()
 {
-   return listV;
+   return _listV;
 }
 
-vector<Question> service::get_listquestions()
+vector<Question> service::getListQuestions()
 {
-    return listquestions;
+    return _listQuestions;
 }
 
 void service::displayList()// depending on input from user, do something
 {
     if(_command == "a")
     {
-        listV = sort_alphabetically();
+        _listV = sortAlphabetically();
     }
     else if(_command == "l")
     {
-        listV = sort_alphabeticallyLast();
+        _listV = sortAlphabeticallyLast();
     }
     else if(_command == "b")
     {
-        listV = sort_BirthYear();
+        _listV = sortBirthYear();
     }
     else if(_command == "d")
     {
-        listV = sort_death();
+        _listV = sortDeath();
     }
     else if(_command == "g")
     {
-        listV = sort_gender();
+        _listV = sortGender();
     }
     else if(_command == "quit")
     {
         _program=false;
-    }
-    else
-    {
-        listV = listV;
     }
 }
 
@@ -67,51 +63,50 @@ void service::setCommand(string c)
     _command = c;
 }
 
-vector<Person> service::sort_gender()//sorts the females in the list to the top
+vector<Person> service::sortGender()//sorts the females in the list to the top
 {
     int counter = 0;
-    for(size_t i=0; i< listV.size(); i++)
+    for(size_t i=0; i< _listV.size(); i++)
     {
-        if(listV[i].getGender() == "female")
+        if(_listV[i].getGender() == "female")
         {
-           swap(listV[i], listV[counter]);
+           swap(_listV[i], _listV[counter]);
            counter++;
         }
     }
-    return listV;
+    return _listV;
 }
 void service::addPerson(Person input)//makes the user capable to add people as long as they're not already on the list
 {
-    if(!already_in_database(input.get_name()))
+    if(!alreadyInDatabase(input.getName()))
     {
         dataAccess addNew;
-        listV.push_back(input);
-        addNew.setVector(listV);
+        _listV.push_back(input);
+        addNew.setVector(_listV);
         addNew.addPerson();
     }
 }
 
 
-vector<Person> service::sort_alphabetically()//insertion sort
+vector<Person> service::sortAlphabetically()//insertion sort
 {
     bool again = true;
     while (again)
     {        
         again = false;
-        for (unsigned int i=0; i<listV.size()-1; i++)
+        for (unsigned int i=0; i< _listV.size()-1; i++)
         {
-            if (listV[i].get_name() > listV[i+1].get_name())
+            if (_listV[i].getName() > _listV[i+1].getName())
             {
-                //swap(list[i].get_name(), list[i+1].get_name());
-                swap(listV[i], listV[i+1]);
+                swap(_listV[i], _listV[i+1]);
                 again = true;
             }
         }
     }
-    return listV;
+    return _listV;
 }
 
-vector<Person> service::sort_alphabeticallyLast()
+vector<Person> service::sortAlphabeticallyLast()
 {
     string nafn1;
     string nafn2;
@@ -119,22 +114,22 @@ vector<Person> service::sort_alphabeticallyLast()
     while (again)
     {
         again = false;
-        for (unsigned int i=0; i<listV.size()-1; i++)
+        for (unsigned int i=0; i< _listV.size()-1; i++)
         {
-            nafn1=listV[i].get_name();
-            nafn2=listV[i+1].get_name();
+            nafn1= _listV[i].getName();
+            nafn2= _listV[i+1].getName();
 
-            if (get_last_name(nafn1) > get_last_name(nafn2))   //bera saman last name
+            if (getLastName(nafn1) > getLastName(nafn2))   //bera saman last name
             {
-                swap(listV[i], listV[i+1]);
+                swap( _listV[i], _listV[i+1]);
                 again = true;
             }
         }
     }
-    return listV;
+    return _listV;
 }
 
-string service::get_last_name(const string& nafn)
+string service::getLastName(const string& nafn)
 {
 
     int Li=0;
@@ -153,30 +148,29 @@ string service::get_last_name(const string& nafn)
     return LastName;
 }
 
-vector<Person> service::sort_BirthYear()
+vector<Person> service::sortBirthYear()
 {
         bool again = true;
         while (again)
         {
-       // string save = listV[0].getBirthYear;
         again = false;
-        for (size_t i=0; i < listV.size()-1; i++)
+        for (size_t i=0; i < _listV.size()-1; i++)
         {
-            if (listV[i].getBirthYear() > listV[i+1].getBirthYear())            //sama fall og fyrir ofan!!!
+            if ( _listV[i].getBirthYear() > _listV[i+1].getBirthYear())            //sama fall og fyrir ofan!!!
             {
-                swap(listV[i], listV[i+1]);
+                swap(_listV[i], _listV[i+1]);
                 again = true;
             }
         }
     }
-    return listV;
+    return _listV;
 }
 
-bool service::already_in_database(string name)
+bool service::alreadyInDatabase(string name)
 {
-    for (size_t i=0; i<listV.size(); i++)
+    for (size_t i=0; i< _listV.size(); i++)
     {
-        if (listV[i].get_name() == name)
+        if (_listV[i].getName() == name)
         {
             return true;
         }
@@ -184,24 +178,25 @@ bool service::already_in_database(string name)
     return false;
 }
 
-vector<Person> service::find_person(string name)
+vector<Person> service::findPerson(string name)
 {
-    for (size_t i=0; i<listV.size(); i++)
+    _listSearchedPerson.clear();
+    for (size_t i=0; i< _listV.size(); i++)
     {
-        if (listV[i].get_name().find(name) != string::npos)
+        if (_listV[i].getName().find(name) != string::npos)
         {
-            listsearchedperson.push_back(listV[i]);
+            _listSearchedPerson.push_back(_listV[i]);
         }
     }
-    return listsearchedperson;
+    return _listSearchedPerson;
 }
 
-bool service::look_for_person(string name)
+bool service::lookForPerson(string name)
 {
     bool foundname = false;
-    for (size_t i=0; i<listV.size(); i++)
+    for (size_t i=0; i< _listV.size(); i++)
     {
-        if (listV[i].get_name().find(name) != string::npos)
+        if (_listV[i].getName().find(name) != string::npos)
         {
             foundname = true;
         }
@@ -209,23 +204,22 @@ bool service::look_for_person(string name)
     return foundname;
 }
 
-vector<Person> service::sort_death()
+vector<Person> service::sortDeath()
 {
     bool again = true;
     while (again)
     {
         again = false;
-        for (unsigned int i=0; i<listV.size()-1; i++)
+        for (unsigned int i=0; i< _listV.size()-1; i++)
         {
-            if (listV[i].getDeath() < listV[i+1].getDeath())
+            if (_listV[i].getDeathYear() < _listV[i+1].getDeathYear())
             {
-                //swap(list[i].get_name(), list[i+1].get_name());
-                swap(listV[i], listV[i+1]);
+                swap(_listV[i], _listV[i+1]);
                 again = true;
             }
         }
     }
-    return listV;
+    return _listV;
 }
 void service::setProgram(bool input)
 {

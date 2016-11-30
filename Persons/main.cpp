@@ -1,13 +1,12 @@
-#include <iostream>
 #include "consoleui.h"
 
 using namespace std;
 
 int main()
 {
-    consoleUI test;
+    consoleUI program;
 
-    test.run();
+    program.run();
 
     return 0;
 }

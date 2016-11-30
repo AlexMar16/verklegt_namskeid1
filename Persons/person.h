@@ -13,11 +13,14 @@ class Person
 {
 public:
     Person();
-    string get_name() const;
+    string getName() const;
     string getGender() const;
-    int get_birth() const;
     int getBirthYear() const;
-    int getDeath() const;
+    int getDeathYear() const;
+    void setName(const string input);
+    void setGender(const string input);
+    void setBirthYear(const int input);
+    void setDeathYear(const int input);
     friend ostream& operator << (ostream& out, const Person& rhs);
     friend ifstream& operator >> (ifstream& in, Person& rhs);
     friend istream& operator >> (istream& in, Person& rhs);
