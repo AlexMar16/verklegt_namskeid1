@@ -12,7 +12,7 @@ class consoleUI
 public:
     consoleUI();
     void run();
-    bool validList();
+    bool validList(string _command);
     void addCommand();
 private:
     service turn;

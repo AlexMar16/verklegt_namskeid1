@@ -45,15 +45,8 @@ void consoleUI::run()
 
 
 
-        valid = turn.validList();
-<<<<<<< HEAD
-        if (turn.add_check())
-=======
-        if (false)
->>>>>>> 72e04277d5736e57ffe1bdc1358b538677ee7f65
-        {
-            addCommand();
-        }
+        valid = validList(command);
+
         if (false)
         {
             string toFind;
@@ -77,7 +70,7 @@ void consoleUI::run()
      }while(turn.getProgram());
 }
 
-bool service::validList()// depending on input from user, do something
+bool consoleUI::validList(string _command)// depending on input from user, do something
 {
     if(_command == "list")
     {
@@ -85,29 +78,15 @@ bool service::validList()// depending on input from user, do something
     }
     else if(_command == "add")
     {
-        //Person person(string _name,char _gender int _birthYear, int _deathYear) todo
+        addCommand();
         return true;
     }
-    else if(_command == "sorta")
-    {
-
-        return true;
-    }
-    else if(_command == "sortb")
-    {
-        return true;
-    }
-    else if(_command == "sortd")
-    {
-        return true;
-    }
-    else if(_command == "sortg")
+    else if(_command == "sort")
     {
         return true;
     }
     else if (_command == "quit")
     {
-        _program = false;
         return false;
     }
     else

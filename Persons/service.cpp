@@ -155,33 +155,6 @@ bool service::look_for_person(string name)
     return foundname;
 }
 
-<<<<<<< HEAD
-bool service::find_check()
-{
-    if(_command == "find")
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
-}
-
-bool service::add_check()
-{
-    if(_command == "add")
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
-}
-
-=======
->>>>>>> 72e04277d5736e57ffe1bdc1358b538677ee7f65
 vector<Person> service::sort_death()
 {
     bool again = true;
