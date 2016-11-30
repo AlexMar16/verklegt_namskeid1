@@ -28,17 +28,18 @@ void consoleUI::run()
     string command;
     do
     {
-        cout << "******************************************************************************" << endl;
+        cout << "**********************************************************************************" << endl;
         cout << "Please enter one of the following commands:" << endl;
-        cout << "list - This command will list every single person in the system" << endl;
-        cout << "add -This command allows you to add a person to the list" << endl;
-        cout << "find -This command allows you to find a certain person in the list" << endl;
-        cout << "sorta -This command will list every single person in the system sorted alhpabaticly" << endl;
-        cout << "sortb -This command will list every single person in the system sorted by date of birth" << endl;
-        cout << "sortd -This command will list every single person in the system sorted by date of death" << endl;
-        cout << "sortg -This command will list every single person in the system sorted by their gender" << endl;
-        cout << "quit - This command will quit this program" << endl;
-        cout << "******************************************************************************" << endl;
+        cout << endl;
+        cout << "list  - This command will list every person in the system." << endl;
+        cout << "add   - This command allows you to add a person to the list." << endl;
+        cout << "find  - This command allows you to find a certain person in the list." << endl;
+        cout << "sorta - This command will list every person in the system sorted alphabetically." << endl;
+        cout << "sortb - This command will list every person in the system sorted by date of birth." << endl;
+        cout << "sortd - This command will list every person in the system sorted by date of death." << endl;
+        cout << "sortg - This command will list every person in the system sorted by gender." << endl;
+        cout << "quit  - This command will quit the program" << endl;
+        cout << "**********************************************************************************" << endl;
         cout << "command: ";
         cin >> command;
 
