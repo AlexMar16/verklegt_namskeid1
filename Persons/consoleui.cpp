@@ -48,22 +48,6 @@ void consoleUI::run()
 
 
         valid = validList(command);
-
-        if (false)
-        {
-            string toFind;
-            cout << "Name to find: ";
-            cin >> toFind;
-            vector<Person> printOut = turn.find_person(toFind);
-            if (turn.look_for_person(toFind))
-            {
-                cout << printOut;
-            }
-            else
-            {
-                cout << "Person not found " << endl;
-            }
-        }
         turn.displayList(command);
         _printOut = turn.get_list();
         if(valid)
@@ -90,6 +74,11 @@ bool consoleUI::validList(string _command)// depending on input from user, do so
         sortCommand();
         return true;
     }
+    else if (_command == "find")
+    {
+        findCommand();
+        return false;
+    }
     else if (_command == "quit")
     {
         return false;
@@ -115,4 +104,18 @@ void consoleUI::sortCommand()
     turn.setCommand(input);
 }
 
-
+void consoleUI::findCommand()
+{
+    string toFind;
+    cout << "Name to find: ";
+    cin >> toFind;
+    _printOut = turn.find_person(toFind);
+    if (turn.look_for_person(toFind))
+    {
+        cout << _printOut;
+    }
+    else
+    {
+        cout << "Person not found " << endl;
+    }
+}

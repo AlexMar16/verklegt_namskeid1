@@ -16,6 +16,7 @@ public:
     bool validList(string _command);
     void addCommand();
     void sortCommand();
+    void findCommand();
 private:
     service turn;
     vector<Person> _printOut;
