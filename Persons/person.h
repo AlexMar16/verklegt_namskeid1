@@ -21,7 +21,8 @@ public:
     friend ostream& operator << (ostream& out, const Person& rhs);
     friend ifstream& operator >> (ifstream& in, Person& rhs);
     friend istream& operator >> (istream& in, Person& rhs);
-    friend ostream& operator <<(ostream& out, vector<Person>& rhs);
+    friend ostream& operator << (ostream& out, vector<Person>& rhs);
+    friend ostream& operator << (ostream& out, const Person& rhs);
 
 private:
     string _fullName;

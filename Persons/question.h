@@ -9,6 +9,7 @@ class Question
 public:
     Question();
     friend ifstream& operator >> (ifstream& in, Question& rhs);
+    friend ostream& operator << (ostream& out, const Question& rhs);
 private:
     string _question;
     string _answer;

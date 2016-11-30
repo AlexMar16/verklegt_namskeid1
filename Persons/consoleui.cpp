@@ -7,19 +7,7 @@ consoleUI::consoleUI(){
 }
 
 
-void consoleUI::addCommand()
-{
-  Person input;
-  cout << "Please enter the following information about the new computer scientist " << endl;
-  cout << "in the following order." << endl;
-  cout << "Be aware you cannot put letters that are not in the English alphabet." << endl;
-  cout << "Name (Minimum two names, Maximum three)" << endl;
-  cout << "Gender (male/female) in lowercase." << endl;
-  cout << "Birthyear (YYYY)" << endl;
-  cout << "Died (0 if still alive)" << endl;
-  cin >> input;
-  turn.addPerson(input);
-}
+
 
 void consoleUI::run()
 {
@@ -45,10 +33,8 @@ void consoleUI::run()
         cout << endl;
 
 
-
-
         valid = validList(command);
-        turn.displayList(command);
+        turn.displayList();
         _printOut = turn.get_list();
         if(valid)
         {
@@ -90,6 +76,13 @@ bool consoleUI::validList(string _command)// depending on input from user, do so
 
 }
 
+void consoleUI::quizCommand()
+{
+    //_printQuestion =
+    //cout <<
+    cout << "lol";
+}
+
 void consoleUI::sortCommand()
 {
     cout << "a - Sort alphabetically. " << endl;
@@ -102,6 +95,20 @@ void consoleUI::sortCommand()
     cin >> input;
 
     turn.setCommand(input);
+}
+
+void consoleUI::addCommand()
+{
+  Person input;
+  cout << "Please enter the following information about the new computer scientist " << endl;
+  cout << "in the following order." << endl;
+  cout << "Be aware you cannot put letters that are not in the English alphabet." << endl;
+  cout << "Name (Minimum two names, Maximum three)" << endl;
+  cout << "Gender (male/female) in lowercase." << endl;
+  cout << "Birthyear (YYYY)" << endl;
+  cout << "Died (0 if still alive)" << endl;
+  cin >> input;
+  turn.addPerson(input);
 }
 
 void consoleUI::findCommand()
