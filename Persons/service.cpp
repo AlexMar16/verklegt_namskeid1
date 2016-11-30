@@ -27,7 +27,6 @@ vector<Person> service::get_list()
 
 vector<Question> service::get_listquestions()
 {
-    cout << "Service get_listqueestions " << endl;
     return listquestions;
 }
 

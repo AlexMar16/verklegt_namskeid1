@@ -11,17 +11,10 @@ vector<Person> dataAccess::getVector()
 {
     return _persons;
 }
-vector<Question> dataAccess::getquestionVector()
-{
-    //cout << "dataaccess get qestion vector " << endl;
-    return _questions;
-}
 void dataAccess::getPersons()
 {
     ifstream personFile;
-
-    personFile.open("E:/forrit/Git/verklegt_namskeid1/info.txt");
-
+    personFile.open("C:/Users/Sindri/verklegt_namskeid1/verklegt_namskeid1/info.txt");
     if(personFile)
     {
         Person temp;
@@ -35,17 +28,12 @@ void dataAccess::getPersons()
 void dataAccess::getQuestions()
 {
     ifstream questionFile;
-
-    //cout << "dataaccess getquestions() " << endl;
-    questionFile.open("E:/forrit/Git/verklegt_namskeid1/info.txt");
-
+    questionFile.open("C:/Users/Sindri/verklegt_namskeid1/verklegt_namskeid1/study.txt");
     if(questionFile)
     {
-        //cout << "dataaccess if question file " << endl;
         Question temp;
-        while(questionFile >> temp)
+        while(questionFile >> temp && !questionFile.eof()) //Var ad lesa inn eitt auka tomt gildi svo eg baetti vid eof. kv sindri
         {
-            //cout << "dataaccess while questionfle >> temp " << endl;
             _questions.push_back(temp);
         }
     }
@@ -55,7 +43,7 @@ void dataAccess::addPerson()
 {
     ofstream newPerson;
 
-    newPerson.open("C:/Users/Rabo/HR/onn1/Verklegt Namskeid/verklegt_namskeid1/build-Persons-Desktop_Qt_5_7_0_MinGW_32bit-Debug/info.txt");
+    newPerson.open("C:/Users/info3.txt");
 
     if(newPerson)
     {
@@ -73,8 +61,4 @@ void dataAccess::addPerson()
 void dataAccess::setVector(vector<Person> input)
 {
     _persons = input;
-}
-void dataAccess::setquestionVector(vector<Question> input)
-{
-    _questions = input;
 }

@@ -6,9 +6,6 @@ using namespace std;
 consoleUI::consoleUI(){
 }
 
-
-
-
 void consoleUI::run()
 {
     bool valid = true;
@@ -67,7 +64,9 @@ bool consoleUI::validList(string _command)// depending on input from user, do so
     }
     else if(_command == "quiz")
     {
+        cout << "pre quiz command";
         quizCommand();
+        cout << "post quiz command";
         return true;
     }
     else if (_command == "quit")
@@ -84,7 +83,9 @@ bool consoleUI::validList(string _command)// depending on input from user, do so
 void consoleUI::quizCommand()
 {
     _printQuestion = turn.get_listquestions();
-    cout << _printQuestion[0];
+    cout << "pre print Q";
+    cout << _printQuestion[1];
+    cout << "post print Q";
 }
 
 void consoleUI::sortCommand()
@@ -93,6 +94,7 @@ void consoleUI::sortCommand()
     cout << "b - Sort by year of birth. " << endl;
     cout << "d - Sort by year of death. " << endl;
     cout << "g - Sort by gender. " << endl;
+    cout << "l - Sort by last name" << endl;
     cout << "Select sorting method: ";
 
     string input;
