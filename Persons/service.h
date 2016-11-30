@@ -3,6 +3,10 @@
 #include "dataaccess.h"
 #include "person.h"
 
+//#include <string>
+
+//using namespace std;
+
 class service
 {
 public:
@@ -30,6 +34,8 @@ public:
     void displayList();
     void setProgram(bool input);
     bool getProgram();
+    string get_last_name(const string& nafn);
+    vector<Person> sort_alphabeticallyLast();
 
 
 private:

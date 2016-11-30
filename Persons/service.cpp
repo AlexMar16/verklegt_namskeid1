@@ -37,6 +37,10 @@ void service::displayList()// depending on input from user, do something
     {
         listV = sort_alphabetically();
     }
+    else if(_command == "l")
+    {
+        listV = sort_alphabeticallyLast();
+    }
     else if(_command == "b")
     {
         listV = sort_BirthYear();
@@ -93,8 +97,7 @@ vector<Person> service::sort_alphabetically()
 {
     bool again = true;
     while (again)
-    {
-        string save = listV[0].get_name();
+    {        
         again = false;
         for (unsigned int i=0; i<listV.size()-1; i++)
         {
@@ -107,6 +110,48 @@ vector<Person> service::sort_alphabetically()
         }
     }
     return listV;
+}
+
+vector<Person> service::sort_alphabeticallyLast()
+{
+    string nafn1;
+    string nafn2;
+    bool again = true;
+    while (again)
+    {
+        again = false;
+        for (unsigned int i=0; i<listV.size()-1; i++)
+        {
+            nafn1=listV[i].get_name();
+            nafn2=listV[i+1].get_name();
+
+            if (get_last_name(nafn1) > get_last_name(nafn2))   //bera saman last name
+            {
+                swap(listV[i], listV[i+1]);
+                again = true;
+            }
+        }
+    }
+    return listV;
+}
+
+string service::get_last_name(const string& nafn)
+{
+
+    int Li=0;
+    string LastName;
+    for (size_t i=0; i<nafn.size(); i++)
+    {
+        if (nafn[i]==' ')
+        {
+            Li=i+1;
+        }
+    }
+    for (size_t i=Li; i<nafn.size(); i++)
+    {
+        LastName += nafn[i];
+    }
+    return LastName;
 }
 
 vector<Person> service::sort_BirthYear()
