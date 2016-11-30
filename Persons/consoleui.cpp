@@ -49,7 +49,7 @@ void consoleUI::run()
 
 
         valid = turn.validList();
-        if (turn.find_add())
+        if (turn.add_check())
         {
             addCommand();
         }

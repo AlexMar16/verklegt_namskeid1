@@ -249,7 +249,7 @@ bool service::find_check()
     }
 }
 
-bool service::find_add()
+bool service::add_check()
 {
     if(_command == "add")
     {
