@@ -31,21 +31,26 @@ vector<Person> service::displayList(string command)// depending on input from us
     {
         return listV;
     }
-    else if(_command == "sorta")
+    else if(_command == "a")
     {
         return sort_alphabetically();
     }
-    else if(_command == "sortb")
+    else if(_command == "b")
     {
         return sort_BirthYear();
     }
-    else if(_command == "sortd")
+    else if(_command == "d")
     {
         return sort_death();
     }
-    else if(_command == "sortg")
+    else if(_command == "g")
     {
         return sort_gender();
+    }
+    else if(_command == "quit")
+    {
+        _program=false;
+        return listV;
     }
 }
 
