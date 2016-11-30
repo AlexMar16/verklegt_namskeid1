@@ -32,8 +32,6 @@ void consoleUI::run()
         turn.setCommand(command);
         cout << endl;
 
-        //_printQuestion = turn.get_listquestions();
-        //cout << _printQuestion[1];
 
         valid = validList(command);
         turn.displayList();
@@ -67,6 +65,11 @@ bool consoleUI::validList(string _command)// depending on input from user, do so
         findCommand();
         return false;
     }
+    else if(_command == "quiz")
+    {
+        quizCommand();
+        return true;
+    }
     else if (_command == "quit")
     {
         return false;
@@ -80,9 +83,8 @@ bool consoleUI::validList(string _command)// depending on input from user, do so
 
 void consoleUI::quizCommand()
 {
-    //_printQuestion =
-    //cout <<
-    cout << "lol";
+    _printQuestion = turn.get_listquestions();
+    cout << _printQuestion[0];
 }
 
 void consoleUI::sortCommand()
