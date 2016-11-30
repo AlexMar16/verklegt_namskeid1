@@ -4,17 +4,22 @@
 dataAccess::dataAccess()
 {
     getPersons();
+    getQuestions();
 }
 
 vector<Person> dataAccess::getVector()
 {
     return _persons;
 }
+vector<Question> dataAccess::getquestionVector()
+{
+    return _questions;
+}
 void dataAccess::getPersons()
 {
     ifstream personFile;
 
-    personFile.open("/Users/alexgunnarsson/verklegt_namskeid1/info.txt");
+    personFile.open("C:/Users/Rabo/HR/onn1/Verklegt Namskeid/verklegt_namskeid1/build-Persons-Desktop_Qt_5_7_0_MinGW_32bit-Debug/info.txt");
 
     if(personFile)
     {
@@ -46,7 +51,7 @@ void dataAccess::addPerson()
 {
     ofstream newPerson;
 
-    newPerson.open("/Users/alexgunnarsson/verklegt_namskeid1/info.txt");
+    newPerson.open("C:/Users/Rabo/HR/onn1/Verklegt Namskeid/verklegt_namskeid1/build-Persons-Desktop_Qt_5_7_0_MinGW_32bit-Debug/info.txt");
 
     if(newPerson)
     {
@@ -64,4 +69,8 @@ void dataAccess::addPerson()
 void dataAccess::setVector(vector<Person> input)
 {
     _persons = input;
+}
+void dataAccess::setquestionVector(vector<Question> input)
+{
+    _questions = input;
 }

@@ -11,8 +11,11 @@ class dataAccess
 public:
     dataAccess();
     vector<Person> getVector();
+    vector<Question> getquestionVector();
     void setVector();
+    void setquestionVector(vector<Question> input);
     void addPerson();
+
     void setVector(vector<Person> input);
 private:
     vector<Person> _persons;

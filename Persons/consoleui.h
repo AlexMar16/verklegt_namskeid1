@@ -17,9 +17,11 @@ public:
     void addCommand();
     void sortCommand();
     void findCommand();
+    void quizCommand();
 private:
     service turn;
     vector<Person> _printOut;
+    vector<Question> _printQuestion;
 
 };
 

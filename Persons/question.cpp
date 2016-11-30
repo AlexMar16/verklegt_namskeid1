@@ -20,3 +20,10 @@ ifstream& operator >> (ifstream& in, Question& rhs)
         }
         return in;
 }
+
+ostream& operator << (ostream& out, const Question& rhs)
+{
+    out << rhs._question;
+
+    return out;
+}
