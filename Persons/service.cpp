@@ -62,7 +62,6 @@ bool service::validList()// depending on input from user, do something
     }
     else if(_command == "sorta")
     {
-
         return true;
     }
     else if(_command == "sortb")
@@ -86,7 +85,6 @@ bool service::validList()// depending on input from user, do something
     {
         return false;
     }
-
 }
 
 bool service::repeatprogram(string YorN)
@@ -239,9 +237,21 @@ bool service::look_for_person(string name)
     return foundname;
 }
 
-bool service::findcheck()
+bool service::find_check()
 {
     if(_command == "find")
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+bool service::find_add()
+{
+    if(_command == "add")
     {
         return true;
     }

@@ -49,11 +49,11 @@ void consoleUI::run()
 
 
         valid = turn.validList();
-        if (command == "add")
+        if (turn.find_add())
         {
             addCommand();
         }
-        if (turn.findcheck())
+        if (turn.find_check())
         {
             string toFind;
             cout << "Name to find: ";
