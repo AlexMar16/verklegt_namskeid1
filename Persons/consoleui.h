@@ -4,6 +4,7 @@
 #include "service.h"
 #include <iostream>
 #include <vector>
+#include "question.h"
 
 using namespace std;
 
