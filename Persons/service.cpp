@@ -49,71 +49,6 @@ vector<Person> service::displayList(string command)// depending on input from us
     }
 }
 
-bool service::validList()// depending on input from user, do something
-{
-    if(_command == "list")
-    {
-        return true; //dont change list
-    }
-    else if(_command == "add")
-    {
-        //Person person(string _name,char _gender int _birthYear, int _deathYear) todo
-        return true;
-    }
-    else if(_command == "sorta")
-    {
-
-        return true;
-    }
-    else if(_command == "sortb")
-    {
-        return true;
-    }
-    else if(_command == "sortd")
-    {
-        return true;
-    }
-    else if(_command == "sortg")
-    {
-        return true;
-    }
-    else if (_command == "quit")
-    {
-        _program = false;
-        return false;
-    }
-    else
-    {
-        return false;
-    }
-
-}
-
-bool service::repeatprogram(string YorN)
-{
-    if(YorN == "y" || YorN == "y")
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
-}
-
-bool service::validYorN(string YorN)
-{
-    if(YorN == "y" || YorN == "y" || YorN == "N" || YorN == "n")
-    {
-        return false;
-    }
-    else
-    {
-        return true;
-    }
-}
-
-
 void service::setCommand(string c)
 {
     _command = c;
@@ -156,25 +91,6 @@ vector<Person> service::sort_alphabetically()
             if (listV[i].get_name() > listV[i+1].get_name())
             {
                 //swap(list[i].get_name(), list[i+1].get_name());
-                swap(listV[i], listV[i+1]);
-                again = true;
-            }
-        }
-    }
-    return listV;
-}
-
-
-vector<Person> service::sort_numerically()
-{
-    bool again = true;
-    while (again)
-    {
-        again = false;
-        for (size_t i=0; i<listV.size()-1; i++)
-        {
-            if (listV[i].getBirthYear() > listV[i+1].getBirthYear())
-            {
                 swap(listV[i], listV[i+1]);
                 again = true;
             }
@@ -237,18 +153,6 @@ bool service::look_for_person(string name)
         }
     }
     return foundname;
-}
-
-bool service::findcheck()
-{
-    if(_command == "find")
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
 }
 
 vector<Person> service::sort_death()

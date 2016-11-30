@@ -34,10 +34,7 @@ void consoleUI::run()
         cout << "list  - This command will list every person in the system." << endl;
         cout << "add   - This command allows you to add a person to the list." << endl;
         cout << "find  - This command allows you to find a certain person in the list." << endl;
-        cout << "sorta - This command will list every person in the system sorted alphabetically." << endl;
-        cout << "sortb - This command will list every person in the system sorted by date of birth." << endl;
-        cout << "sortd - This command will list every person in the system sorted by date of death." << endl;
-        cout << "sortg - This command will list every person in the system sorted by gender." << endl;
+        cout << "sort  - This command will allow you to sort the scientists." << endl;
         cout << "quit  - This command will quit the program" << endl;
         cout << "**********************************************************************************" << endl;
         cout << "command: ";
@@ -53,7 +50,7 @@ void consoleUI::run()
         {
             addCommand();
         }
-        if (turn.findcheck())
+        if (false)
         {
             string toFind;
             cout << "Name to find: ";
@@ -76,3 +73,42 @@ void consoleUI::run()
      }while(turn.getProgram());
 }
 
+bool service::validList()// depending on input from user, do something
+{
+    if(_command == "list")
+    {
+        return true; //dont change list
+    }
+    else if(_command == "add")
+    {
+        //Person person(string _name,char _gender int _birthYear, int _deathYear) todo
+        return true;
+    }
+    else if(_command == "sorta")
+    {
+
+        return true;
+    }
+    else if(_command == "sortb")
+    {
+        return true;
+    }
+    else if(_command == "sortd")
+    {
+        return true;
+    }
+    else if(_command == "sortg")
+    {
+        return true;
+    }
+    else if (_command == "quit")
+    {
+        _program = false;
+        return false;
+    }
+    else
+    {
+        return false;
+    }
+
+}
