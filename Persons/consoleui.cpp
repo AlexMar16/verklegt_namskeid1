@@ -46,11 +46,11 @@ void consoleUI::run()
 
 
         valid = turn.validList();
-<<<<<<< HEAD
-        if (turn.add_check())
-=======
+
+        //if (turn.add_check())
+
         if (false)
->>>>>>> 72e04277d5736e57ffe1bdc1358b538677ee7f65
+
         {
             addCommand();
         }
