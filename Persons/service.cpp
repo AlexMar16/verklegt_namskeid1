@@ -27,13 +27,17 @@ vector<Person> service::get_list()
 
 vector<Person> service::displayList(string command)// depending on input from user, do something
 {
+    cout << "**********************************************************************************" << endl;
+    cout << "Please enter one of the following commands:" << endl;
+    cout << endl;
     cout<<"list - This command will list every person in the system. "<<endl;
     cout<<"a    - This command will sort the list alphabetically."<<endl;
     cout<<"b    - This command will sort the list by birthyear."<<endl;
     cout<<"d    - This command will sort the list by birthyear."<<endl;
     cout<<"g    - This command will sort the list by gender."<<endl;
-    cout<<"quit - This command will stop the program."<<endl;
-    cout<< "command:";
+    cout<<"quit  - This command will quit the program."<<endl;
+    cout << "**********************************************************************************" << endl;
+    cout << "command: ";
     cin>>_command;
 
     if(_command == "list")
