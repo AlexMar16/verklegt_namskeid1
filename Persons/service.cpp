@@ -27,6 +27,15 @@ vector<Person> service::get_list()
 
 vector<Person> service::displayList(string command)// depending on input from user, do something
 {
+    cout<<"list - This command will list every person in the system. "<<endl;
+    cout<<"a    - This command will sort the list alphabetically."<<endl;
+    cout<<"b    - This command will sort the list by birthyear."<<endl;
+    cout<<"d    - This command will sort the list by birthyear."<<endl;
+    cout<<"g    - This command will sort the list by gender."<<endl;
+    cout<<"quit - This command will stop the program."<<endl;
+    cout<< "command:";
+    cin>>_command;
+
     if(_command == "list")
     {
         return listV;
@@ -163,32 +172,6 @@ bool service::look_for_person(string name)
     }
     return foundname;
 }
-
-
-bool service::find_check()
-{
-    if(_command == "find")
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
-}
-
-bool service::add_check()
-{
-    if(_command == "add")
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
-}
-
 
 vector<Person> service::sort_death()
 {

@@ -46,13 +46,9 @@ void consoleUI::run()
 
 
 
-        valid = turn.validList();
-        //if (turn.add_check())
 
-        if (false)
-        {
-            addCommand();
-        }
+        valid = validList(command);
+
         if (false)
         {
             string toFind;
@@ -68,15 +64,15 @@ void consoleUI::run()
                 cout << "Person not found " << endl;
             }
         }
+        _printOut = turn.displayList(command);
         if(valid)
         {
-            vector<Person> printOut = turn.displayList(command);
-            cout << printOut;
+            cout << _printOut;
         }
      }while(turn.getProgram());
 }
 
-bool service::validList()// depending on input from user, do something
+bool consoleUI::validList(string _command)// depending on input from user, do something
 {
     if(_command == "list")
     {
@@ -84,29 +80,35 @@ bool service::validList()// depending on input from user, do something
     }
     else if(_command == "add")
     {
+
         //Person person(string _name,char _gender int _birthYear, int _deathYear) todo
         return true;
     }
-    else if(_command == "sorta")
+    else if(_command == "sort")
     {
-
         return true;
+        turn.displayList();
     }
+    /*
     else if(_command == "sortb")
     {
         return true;
     }
     else if(_command == "sortd")
     {
+
+        addCommand();
+
         return true;
     }
-    else if(_command == "sortg")
+    else if(_command == "sort")
     {
+        sortCommand();
         return true;
     }
+    */
     else if (_command == "quit")
     {
-        _program = false;
         return false;
     }
     else
@@ -115,3 +117,19 @@ bool service::validList()// depending on input from user, do something
     }
 
 }
+
+void consoleUI::sortCommand()
+{
+    cout << "a - Sort alphabetically. " << endl;
+    cout << "b - Sort by year of birth. " << endl;
+    cout << "d - Sort by year of death. " << endl;
+    cout << "g - Sort by gender. " << endl;
+    cout << "Select sorting method: ";
+
+    string input;
+    cin >> input;
+
+    _printOut = turn.displayList(input);
+}
+
+
