@@ -13,7 +13,7 @@ vector<Person> dataAccess::getVector()
 void dataAccess::getPersons()
 {
     ifstream personFile;
-    personFile.open("C:/Users/Rabo/HR/onn1/Verklegt Namskeid/verklegt_namskeid1/build-Persons-Desktop_Qt_5_7_0_MinGW_32bit-Debug/info.txt");
+    personFile.open("/Users/alexgunnarsson/verklegt_namskeid1/Persons/info.txt");
 
     if(personFile)
     {
@@ -27,7 +27,7 @@ void dataAccess::getPersons()
 void dataAccess::addPerson()
 {
     ofstream newPerson;
-    newPerson.open("E:/forrit/Git/verklegt_namskeid1/info.txt");
+    newPerson.open("/Users/alexgunnarsson/verklegt_namskeid1/Persons/info.txt");
 
     if(newPerson)
     {
