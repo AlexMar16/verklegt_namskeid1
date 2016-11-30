@@ -50,6 +50,10 @@ void consoleUI::run()
             {
                 cout << printOut;
             }
+            else
+            {
+                cout << "Person not found " << endl;
+            }
         }
         if(valid)
         {
