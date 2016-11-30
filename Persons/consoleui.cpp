@@ -57,7 +57,7 @@ bool consoleUI::validList(string _command)// depending on input from user, do so
         addCommand();
         return true;
     }
-    else if(_command == "sort")
+    else if(_command == "sort")// gives you additional options to choose how you would like the list sorted
     {
         sortCommand();
         return true;
@@ -96,7 +96,7 @@ void consoleUI::sortCommand()
     string input;
     cin >> input;
 
-    turn.setCommand(input);
+    turn.setCommand(input);// located in service.cpp
 }
 
 void consoleUI::addCommand()
