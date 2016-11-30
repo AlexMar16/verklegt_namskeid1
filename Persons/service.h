@@ -26,7 +26,7 @@ public:
     vector<Person> sort_gender();
     bool look_for_person(string name);
     vector<Person> sort_numerically();
-    void displayList(string input);
+    void displayList();
     void setProgram(bool input);
     bool getProgram();
 
