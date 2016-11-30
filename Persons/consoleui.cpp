@@ -64,7 +64,8 @@ void consoleUI::run()
                 cout << "Person not found " << endl;
             }
         }
-        _printOut = turn.displayList(command);
+        turn.displayList(command);
+        _printOut = turn.get_list();
         if(valid)
         {
             cout << _printOut;
@@ -81,24 +82,7 @@ bool consoleUI::validList(string _command)// depending on input from user, do so
     else if(_command == "add")
     {
 
-        //Person person(string _name,char _gender int _birthYear, int _deathYear) todo
-        return true;
-    }
-    else if(_command == "sort")
-    {
-        return true;
-        turn.displayList();
-    }
-    /*
-    else if(_command == "sortb")
-    {
-        return true;
-    }
-    else if(_command == "sortd")
-    {
-
         addCommand();
-
         return true;
     }
     else if(_command == "sort")
@@ -106,7 +90,6 @@ bool consoleUI::validList(string _command)// depending on input from user, do so
         sortCommand();
         return true;
     }
-    */
     else if (_command == "quit")
     {
         return false;
@@ -129,7 +112,7 @@ void consoleUI::sortCommand()
     string input;
     cin >> input;
 
-    _printOut = turn.displayList(input);
+    turn.setCommand(input);
 }
 
 

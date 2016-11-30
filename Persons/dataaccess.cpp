@@ -14,7 +14,7 @@ void dataAccess::getPersons()
 {
     ifstream personFile;
 
-    personFile.open("C:/Users/info3.txt");
+    personFile.open("/Users/alexgunnarsson/verklegt_namskeid1/info.txt");
 
     if(personFile)
     {
@@ -46,7 +46,7 @@ void dataAccess::addPerson()
 {
     ofstream newPerson;
 
-    newPerson.open("C:/Users/info3.txt");
+    newPerson.open("/Users/alexgunnarsson/verklegt_namskeid1/info.txt");
 
     if(newPerson)
     {

@@ -25,38 +25,31 @@ vector<Person> service::get_list()
    return listV;
 }
 
-vector<Person> service::displayList(string command)// depending on input from user, do something
+void service::displayList(string input)// depending on input from user, do something
 {
-    cin>>_command;
-
-    if(_command == "list")
+    if(_command == "a")
     {
-        return listV;
-    }
-    else if(_command == "a")
-    {
-        return sort_alphabetically();
+        listV = sort_alphabetically();
     }
     else if(_command == "b")
     {
-        return sort_BirthYear();
+        listV = sort_BirthYear();
     }
     else if(_command == "d")
     {
-        return sort_death();
+        listV = sort_death();
     }
     else if(_command == "g")
     {
-        return sort_gender();
+        listV = sort_gender();
     }
     else if(_command == "quit")
     {
         _program=false;
-        return listV;
     }
     else
     {
-        return listV;
+        listV = listV;
     }
 }
 

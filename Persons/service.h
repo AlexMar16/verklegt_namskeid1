@@ -18,7 +18,6 @@ public:
     bool find_check();
     bool add_check();
     bool already_in_database(string name);
-    vector<Person> displayList();
     vector<Person> find_person(string name);
     vector<Person> sort_alphabetically();
     vector<Person> get_list();
@@ -27,7 +26,7 @@ public:
     vector<Person> sort_gender();
     bool look_for_person(string name);
     vector<Person> sort_numerically();
-    vector<Person> displayList(string command);
+    void displayList(string input);
     void setProgram(bool input);
     bool getProgram();
 
