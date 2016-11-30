@@ -14,7 +14,7 @@ void dataAccess::getPersons()
 {
     ifstream personFile;
 
-    personFile.open("/Users/alexgunnarsson/verklegt_namskeid1/info.txt");
+    personFile.open("C:/Users/info3.txt");
 
     if(personFile)
     {
@@ -30,7 +30,7 @@ void dataAccess::getQuestions()
 {
     ifstream questionFile;
 
-    questionFile.open("C:/Users/Rabo/HR/onn1/Verklegt Namskeid/verklegt_namskeid1/build-Persons-Desktop_Qt_5_7_0_MinGW_32bit-Debug/study.txt");
+    questionFile.open("C:/Users/study.txt");
 
     if(questionFile)
     {
@@ -46,7 +46,7 @@ void dataAccess::addPerson()
 {
     ofstream newPerson;
 
-    newPerson.open("/Users/alexgunnarsson/verklegt_namskeid1/info.txt");
+    newPerson.open("C:/Users/info3.txt");
 
     if(newPerson)
     {
