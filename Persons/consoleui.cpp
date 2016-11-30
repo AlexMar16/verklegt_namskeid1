@@ -84,7 +84,7 @@ void consoleUI::quizCommand()
 {
     _printQuestion = turn.get_listquestions();
     cout << "pre print Q";
-    cout << _printQuestion[1];
+    cout << _printQuestion[0];
     cout << "post print Q";
 }
 
