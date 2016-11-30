@@ -16,13 +16,13 @@ public:
     bool validYorN(string YorN);
     bool repeatprogram(string YorN);
     vector<Person> displayList();
+    vector<Person> find_person(string name);
     vector<Person> sort_alphabetically();
     vector<Person> get_list();
     vector<Person> sort_BirthYear();
     vector<Person> sort_death();
     vector<Person> sort_gender();
-    Person find_person(const string& name);
-    bool look_for_person(const string& name);
+    bool look_for_person(string name);
     vector<Person> sort_numerically();
     vector<Person> displayList(string command);
 
@@ -30,6 +30,7 @@ public:
 
 private:
     vector<Person> listV;
+    vector<Person> listsearchedperson;
     string _command;
     bool _keepGoing;
     bool _valid;

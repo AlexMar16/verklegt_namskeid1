@@ -43,11 +43,12 @@ void consoleUI::run()
         if (command == "find")
         {
             string toFind;
-            cout << "name to find";
+            cout << "Name to find: ";
             cin >> toFind;
+            vector<Person> printOut = turn.find_person(toFind);
             if (turn.look_for_person(toFind))
             {
-                cout << turn.find_person(toFind).get_name();
+                cout << printOut;
             }
         }
         if(valid)

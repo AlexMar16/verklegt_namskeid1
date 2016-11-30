@@ -9,13 +9,9 @@ using namespace std;
 service::service(){
     dataAccess temp;
     listV = temp.getVector();
+    listsearchedperson = temp.getVector();
+    listsearchedperson.clear();
 }
-void service::initalize_list()
-{
-    dataAccess temp;
-    listV = temp.getVector();
-}
-
 void service::swap(Person& a, Person& b)
 {
     Person temp = a;
@@ -39,23 +35,17 @@ vector<Person> service::displayList(string command)// depending on input from us
         //Person person(string _name,char _gender int _birthYear, int _deathYear) todo
         //return false;
     }
-    else if(_command == "find")
-    {
-        return listV;
-    }
     else if(_command == "sorta")
     {
         return sort_alphabetically();
     }
     else if(_command == "sortb")
     {
-        cout << "sortb!" << endl;
         //return false;
         return sort_BirthYear();
     }
     else if(_command == "sortd")
     {
-        cout << "sortd!" << endl;
         //return false;
         return sort_death();
     }
@@ -76,10 +66,6 @@ bool service::validList()// depending on input from user, do something
         //Person person(string _name,char _gender int _birthYear, int _deathYear) todo
         return true;
     }
-    else if(_command == "find")
-    {
-        return true;
-    }
     else if(_command == "sorta")
     {
 
@@ -87,23 +73,15 @@ bool service::validList()// depending on input from user, do something
     }
     else if(_command == "sortb")
     {
-        cout << "sortb!" << endl;
         return true;
     }
     else if(_command == "sortd")
     {
-        cout << "sortd!" << endl;
         return true;
     }
     else if(_command == "sortg")
     {
-        cout << "sortg!" << endl;
         return true;
-    }
-    else
-    {
-        cout << "Invalid input, please try again" << endl;
-        return false;
     }
 }
 
@@ -217,31 +195,29 @@ vector<Person> service::sort_BirthYear()
     return listV;
 }
 
-
-
-Person service::find_person(const string& name)
+vector<Person> service::find_person(string name)
 {
-    int p;
     for (size_t i=0; i<listV.size(); i++)
     {
-        if (listV[i].get_name() == name)
+        if (listV[i].get_name().find(name) != string::npos)
         {
-            p = i;
+            listsearchedperson.push_back(listV[i]);
         }
     }
-    return listV[p];
+    return listsearchedperson;
 }
 
-bool service::look_for_person(const string& name)
+bool service::look_for_person(string name)
 {
+    bool foundname = false;
     for (size_t i=0; i<listV.size(); i++)
     {
-        if (listV[i].get_name() == name)
+        if (listV[i].get_name().find(name) != string::npos)
         {
-            return true;
+            foundname = true;
         }
     }
-    return false;
+    return foundname;
 }
 
 vector<Person> service::sort_death()
