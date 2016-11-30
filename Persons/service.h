@@ -16,6 +16,7 @@ public:
     bool validYorN(string YorN);
     bool repeatprogram(string YorN);
     bool findcheck();
+    bool already_in_database(string name);
     vector<Person> displayList();
     vector<Person> find_person(string name);
     vector<Person> sort_alphabetically();
@@ -26,7 +27,8 @@ public:
     bool look_for_person(string name);
     vector<Person> sort_numerically();
     vector<Person> displayList(string command);
-
+    void setProgram(bool input);
+    bool getProgram();
 
 
 private:
@@ -35,6 +37,7 @@ private:
     string _command;
     bool _keepGoing;
     bool _valid;
+    bool _program;
 };
 
 #endif // SERVICE_H

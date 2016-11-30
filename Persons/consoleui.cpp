@@ -3,27 +3,43 @@
 using namespace std;
 
 
-consoleUI::consoleUI(){}
+consoleUI::consoleUI(){
+}
 
+
+void consoleUI::addCommand()
+{
+  Person input;
+  cout << "Please enter the following information about the new scientist " << endl;
+  cout << "in the following order." << endl;
+  cout << "Be aware you cannot put letters that are not in the English alphabet." << endl;
+  cout << "Name (Minimum two names, Maximum three)" << endl;
+  cout << "Gender (male/female) in lowercase." << endl;
+  cout << "Birthyear (YYYY)" << endl;
+  cout << "Died (0 if still alive)" << endl;
+  cin >> input;
+  turn.addPerson(input);
+}
 
 void consoleUI::run()
 {
     bool valid = true;
     string keepGoingb;
-    service turn;
     string command;
     do
     {
-        cout << "******************************************************************************" << endl;
+        cout << "**********************************************************************************" << endl;
         cout << "Please enter one of the following commands:" << endl;
-        cout << "list - This command will list every single person in the system" << endl;
-        cout << "add -This command allows you to add a person to the list" << endl;
-        cout << "find -This command allows you to find a certain person in the list" << endl;
-        cout << "sorta -This command will list every single person in the system sorted alhpabaticly" << endl;
-        cout << "sortb -This command will list every single person in the system sorted by date of birth" << endl;
-        cout << "sortd -This command will list every single person in the system sorted by date of death" << endl;
-        cout << "sortg -This command will list every single person in the system sorted by their gender" << endl;
-        cout << "******************************************************************************" << endl;
+        cout << endl;
+        cout << "list  - This command will list every person in the system." << endl;
+        cout << "add   - This command allows you to add a person to the list." << endl;
+        cout << "find  - This command allows you to find a certain person in the list." << endl;
+        cout << "sorta - This command will list every person in the system sorted alphabetically." << endl;
+        cout << "sortb - This command will list every person in the system sorted by date of birth." << endl;
+        cout << "sortd - This command will list every person in the system sorted by date of death." << endl;
+        cout << "sortg - This command will list every person in the system sorted by gender." << endl;
+        cout << "quit  - This command will quit the program" << endl;
+        cout << "**********************************************************************************" << endl;
         cout << "command: ";
         cin >> command;
 
@@ -35,10 +51,7 @@ void consoleUI::run()
         valid = turn.validList();
         if (command == "add")
         {
-            cout << "Please Enter in the following order: ";
-            Person inputNew;
-            cin >> inputNew;
-            turn.addPerson(inputNew);
+            addCommand();
         }
         if (turn.findcheck())
         {
@@ -60,16 +73,6 @@ void consoleUI::run()
             vector<Person> printOut = turn.displayList(command);
             cout << printOut;
         }
-        do {
-            cout << "If you would like to continue, please enter (y/n): ";
-            cin >> keepGoingb;
-            if(turn.validYorN(keepGoingb))
-            {
-                cout << "invalid input!" << endl;
-            }
-        }while(turn.validYorN(keepGoingb));
-
-
-     }while(turn.repeatprogram(keepGoingb));
+     }while(turn.getProgram());
 }
 

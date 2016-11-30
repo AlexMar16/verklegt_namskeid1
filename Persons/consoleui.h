@@ -12,14 +12,14 @@ class consoleUI
 public:
     consoleUI();
     void run();
+    bool validList();
+    void addCommand();
+private:
+    service turn;
 
 };
 
 #endif // CONSOLEUI_H
-
-
-
-
 
 
 
