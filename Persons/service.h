@@ -15,6 +15,7 @@ public:
     bool validList();
     bool validYorN(string YorN);
     bool repeatprogram(string YorN);
+    bool findcheck();
     vector<Person> displayList();
     vector<Person> find_person(string name);
     vector<Person> sort_alphabetically();

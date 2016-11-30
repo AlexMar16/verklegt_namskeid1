@@ -40,7 +40,7 @@ void consoleUI::run()
             cin >> inputNew;
             turn.addPerson(inputNew);
         }
-        if (command == "find")
+        if (turn.findcheck())
         {
             string toFind;
             cout << "Name to find: ";

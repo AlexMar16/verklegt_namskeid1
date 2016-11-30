@@ -220,6 +220,18 @@ bool service::look_for_person(string name)
     return foundname;
 }
 
+bool service::findcheck()
+{
+    if(_command == "find")
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
 vector<Person> service::sort_death()
 {
     bool again = true;
