@@ -125,10 +125,10 @@ void consoleUI::sortCommand()
     cout << "l - Sort by last name" << endl;
     cout << "Select sorting method: ";
     string input;
-    cin >> input;
+    getline(cin, input);
 
     _turn.setCommand(input);// located in service.cpp
-    cin.ignore();
+    //cin.ignore();
 }
 
 void consoleUI::addCommand()
