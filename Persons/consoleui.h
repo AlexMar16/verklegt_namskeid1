@@ -20,6 +20,7 @@ public:
     void quizCommand();
     void statusCommand();
     bool specialCommand(const string& command);
+    bool extraspecialCommand(const string& choice);
 private:
     service _turn;
     vector<Person> _printOut;
