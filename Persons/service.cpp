@@ -1,6 +1,6 @@
 #include "service.h"
 #include <person.h>
-#include <algorithm>
+
 
 using namespace std;
 
@@ -57,7 +57,7 @@ vector<int> service::properties()
     int deathQuant=0;
     int MgenderQuant=0;
     int FgenderQuant=0;
-    int alive=0;
+
     vector<int> StatusVec;
 
 
@@ -90,7 +90,7 @@ vector<int> service::properties()
     _statusVec.push_back(deathQuant);
     _statusVec.push_back(FgenderQuant);
     _statusVec.push_back(MgenderQuant);
-    _statusVec.push_back(alive);
+
 
     return _statusVec;
 }
@@ -241,7 +241,7 @@ vector<Person> service::findPerson(string name)
     _listSearchedPerson.clear();
     for (size_t i=0; i< _listV.size(); i++)
     {
-        if (tolower(_listV[i].getName()).find(tolower(name)) != string::npos)
+        if (_listV[i].getName().find(name) != string::npos)
         {
             _listSearchedPerson.push_back(_listV[i]);
         }
@@ -375,16 +375,11 @@ bool service::getProgram()
 
 bool service::specialCommand(const string& command)
 {
-    if (command == "find" || command == "quit" || command == "quiz" || command == "remove" || command == "status")
+    if (command == "find" || command == "quit" || command == "quiz" || command == "remove")
         return true;
     else
         return false;
 }
 
-string service::tolower(string tolowerstring)
-{
-    string data = tolowerstring;
-    std::transform(data.begin(), data.end(), data.begin(), ::tolower);
-    return data;
-}
+
 
