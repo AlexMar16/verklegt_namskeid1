@@ -305,7 +305,7 @@ bool consoleUI::specialCommand(const string& command)
     }
 }
 
-bool Service::extraspecialCommand(const string& choice)
+bool service::extraspecialCommand(const string& choice)
 {
 
 
