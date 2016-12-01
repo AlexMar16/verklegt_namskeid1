@@ -51,6 +51,41 @@ void service::sortList()// depending on input from user, do something
     }
 }
 
+vector<int> service::properties()
+{
+    int nameQuant=0;
+    int deathQuant=0;
+    int MgenderQuant=0;
+    int FgenderQuant=0;
+    vector<int> StatusVec;
+
+
+    for(size_t i=0; i< _listV.size(); i++)
+    {
+        nameQuant++;
+
+       if(_listV[i].getDeathYear() != 0)
+       {
+            deathQuant++;
+       }
+            else if(_listV[i].getGender()=="female")
+            {
+                FgenderQuant++;
+            }
+                else if(_listV[i].getGender()=="male")
+                {
+                    MgenderQuant++;
+                }
+    }
+
+    _statusVec.push_back(nameQuant);
+    _statusVec.push_back(deathQuant);
+    _statusVec.push_back(FgenderQuant);
+    _statusVec.push_back(MgenderQuant);
+
+    return _statusVec;
+}
+
 void service::setCommand(string c)
 {
     _command = c;
@@ -331,7 +366,7 @@ bool service::getProgram()
 
 bool service::specialCommand(const string& command)
 {
-    if (command == "find" || command == "quit" || command == "quiz" || command == "remove")
+    if (command == "find" || command == "quit" || command == "quiz" || command == "remove" || command == "status")
         return true;
     else
         return false;
