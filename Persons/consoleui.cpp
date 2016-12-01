@@ -87,7 +87,7 @@ void consoleUI::quizCommand()
     Person question = _turn.generateQuestion();
     //cout << "We are asking about " << question.getName() << endl;
     cout << _turn.genderCheck(question) <<" was born in " << question.getBirthYear()
-         << " and " << _turn.aliveCheck(question) << endl;
+         << " and " << _turn.aliveCheck(question) << ", enter (a/b/c/d)" << endl;
 
     string a, b, c, d;
     _turn.generateOptions(question, a, b, c, d);
