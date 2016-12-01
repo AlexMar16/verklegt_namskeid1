@@ -85,7 +85,6 @@ void service::removePerson(Person input)//makes the user capable to remove peopl
 {
     if(alreadyInDatabase(input.getName()))
     {
-        cout << "alreadyindadabaye()";
         dataAccess addNew;
         removefromdatabase(input.getName());
         addNew.setVector(_listV);
@@ -102,6 +101,7 @@ void service::removefromdatabase(string name)
         }
     }
 }
+
 
 vector<Person> service::sortAlphabetically()//insertion sort
 {
@@ -146,7 +146,6 @@ vector<Person> service::sortAlphabeticallyLast()
 
 string service::getLastName(const string& nafn)
 {
-
     int Li=0;
     string LastName;
     for (size_t i=0; i<nafn.size(); i++)
@@ -211,7 +210,7 @@ bool service::lookForPerson(string name)
     bool foundname = false;
     for (size_t i=0; i< _listV.size(); i++)
     {
-        if (_listV[i].getName().find(name) != string::npos)  //AlreadyInDatabase og lookForPerson gera það sama
+        if (_listV[i].getName().find(name) != string::npos)
         {
             foundname = true;
         }
@@ -243,7 +242,6 @@ Person service::findPersonExactly(string name)
     {
         if (_listV[i].getName() == name)
         {
-            //cout << "name found";
             Personfoundexactly = _listV[i];
         }
     }
@@ -310,10 +308,33 @@ string service::aliveCheck(const Person& p)
     else
         return "and is still alive";
 }
+int service::YorN(string YorNinput)
+{
+    if(YorNinput == "y" || YorNinput == "Y")
+    {
+        return 1;
+    }
+    if(YorNinput == "n" || YorNinput == "N")
+    {
+        return 2;
+    }
+    else
+    {
+        return 3;
+    }
+}
 
 bool service::getProgram()
 {
     return _program;
+}
+
+bool service::specialCommand(const string& command)
+{
+    if (command == "find" || command == "quit" || command == "quiz" || command == "remove")
+        return true;
+    else
+        return false;
 }
 
 

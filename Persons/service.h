@@ -13,6 +13,10 @@ public:
     void removefromdatabase(string name);
     void removePerson(Person input);
     bool alreadyInDatabase(string name);
+
+    bool specialCommand(const string& command);
+
+    int YorN(string YorNinput);
     Person findPersonExactly(string name);
     vector<Person> findPerson(string name);
     vector<Person> sortAlphabetically();
@@ -37,12 +41,10 @@ public:
 private:
     vector<Person> _listV;
     vector<Person> _listSearchedPerson;
-    //vector<Question> _listQuestions;
     string _command;
     bool _keepGoing;
     bool _valid;
     bool _program;
-    int randomNumberGenerator();
 };
 
 #endif // SERVICE_H

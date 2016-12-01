@@ -34,7 +34,7 @@ void consoleUI::run()
         {
             cout << _printOut;
         }
-        else if (command != "find" && command != "quit" && command != "quiz" && command != "remove") // Gera fall sem checkar a tessu
+        else if (!_turn.specialCommand(command)) // Gera fall sem checkar a tessu
         {
             cout << "Invalid command!" << endl << endl;
         }
@@ -202,27 +202,26 @@ void consoleUI::addCommand()
 
 void consoleUI::removeCommand()
 {
-    string name;
-    string fullname;
+    string fullName;
     Person input;
     int nameCounter = 0;
-    cout << "Please enter the full name of the computer scientist you want to remove " << endl;
-    while(nameCounter != 3) //Bæta við virkni, geta haft 2 nöfn.
+    cout << "Enter the full name of the scientist to remove from the database: ";
+    cin.ignore();
+    getline(cin, fullName);
+
+
+
+
+    input = _turn.findPersonExactly(fullName);
+    if (input.getName() == "")
     {
-      cin >> name;
-      if (nameCounter != 2)
-      {
-          fullname += name + " ";
-      }
-      else
-      {
-          fullname += name;
-      }
-
-      nameCounter++;
+        cout << endl << "Person not found!" << endl;
     }
-
-    input = _turn.findPersonExactly(fullname);
+    else
+    {
+        cout << endl << fullName << " removed" << endl;
+    }
+    input = _turn.findPersonExactly(fullName);
 
     _turn.removePerson(input);
 
@@ -235,7 +234,8 @@ void consoleUI::findCommand()
 {
     string toFind;
     cout << "Name to find: ";
-    cin >> toFind;
+    cin.ignore();
+    getline(cin, toFind);
     _printOut = _turn.findPerson(toFind);
     if (_turn.lookForPerson(toFind))
     {
