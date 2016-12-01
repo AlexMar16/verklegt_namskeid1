@@ -23,7 +23,7 @@ void consoleUI::run()
         cout << "quit  - This command will quit the program." << endl << endl;
         cout << setw(ASTERISK_WIDTH)<< setfill(ASTERISK) <<  "*" << endl;
         cout << "command: ";
-        cin >> command;
+        getline(cin, command);
         cout << endl;
 
         _turn.setCommand(command);//setur command i service.cpp
