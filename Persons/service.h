@@ -31,8 +31,9 @@ public:
     void setProgram(bool input);
     bool getProgram();
     string getLastName(const string& nafn);
-    string tolower(string data);
     vector<Person> sortAlphabeticallyLast();
+    string tolower(string tolowerstring);
+
 
     Person generateQuestion();
     void generateOptions(const Person& correct, string& a, string& b, string& c, string& d);
