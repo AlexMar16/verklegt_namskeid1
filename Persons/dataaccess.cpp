@@ -30,11 +30,7 @@ void dataAccess::getPersons()
 void dataAccess::changeFile()
 {
     ofstream newPerson;
-
-
     newPerson.open(FILENAME);
-
-
     if(newPerson)
     {
         for(size_t i = 0; i < _persons.size(); i++)
@@ -47,7 +43,6 @@ void dataAccess::changeFile()
             }
         }
     }
-
     newPerson.close();
 }
 
