@@ -3,7 +3,6 @@
 dataAccess::dataAccess()
 {
     getPersons();
-    //getQuestions();
 }
 
 vector<Person> dataAccess::getVector()
@@ -23,21 +22,6 @@ void dataAccess::getPersons()
         }
     }
 }
-
-/*void dataAccess::getQuestions()
-{
-    ifstream questionFile;
-    questionFile.open(
-"study.txt");
-    if(questionFile)
-    {
-        Question temp;
-        while(questionFile >> temp && !questionFile.eof()) //Var ad lesa inn eitt auka tomt gildi svo eg baetti vid eof. kv sindri
-        {
-            _questions.push_back(temp);
-        }
-    }
-}*/
 
 void dataAccess::addPerson()
 {

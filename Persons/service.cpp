@@ -23,11 +23,6 @@ vector<Person> service::getList()
    return _listV;
 }
 
-/*vector<Question> service::getListQuestions()
-{
-    return _listQuestions;
-}*/
-
 void service::displayList()// depending on input from user, do something
 {
     if(_command == "a")
@@ -153,7 +148,7 @@ vector<Person> service::sortBirthYear()
         again = false;
         for (size_t i=0; i < _listV.size()-1; i++)
         {
-            if ( _listV[i].getBirthYear() > _listV[i+1].getBirthYear())            //sama fall og fyrir ofan!!!
+            if ( _listV[i].getBirthYear() > _listV[i+1].getBirthYear())
             {
                 swap(_listV[i], _listV[i+1]);
                 again = true;
@@ -227,7 +222,6 @@ Person service::generateQuestion()
 
 void service::generateOptions(const Person& correct, string& a, string& b, string& c, string& d)
 {
-    //srand(time(NULL));
     a = _listV[rand()%_listV.size()].getName(); //generating random answers
     b = _listV[rand()%_listV.size()].getName();
     c = _listV[rand()%_listV.size()].getName();

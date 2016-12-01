@@ -3,10 +3,6 @@
 #include "dataaccess.h"
 #include "person.h"
 
-//#include <string>
-
-//using namespace std;
-
 class service
 {
 public:
@@ -21,7 +17,6 @@ public:
     vector<Person> sortBirthYear();
     vector<Person> sortDeath();
     vector<Person> sortGender();
-    //vector<Question> getListQuestions();
     bool lookForPerson(string name);
     vector<Person> sortNumerically();
     void displayList();
