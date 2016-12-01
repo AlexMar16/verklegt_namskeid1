@@ -12,7 +12,7 @@ void consoleUI::run()
     string command;
     do
     {
-        cout << setw(ASTERISK_WIDTH)<< setfill(ASTERISK) <<  "*" << endl << endl;
+        cout << setw(ASTERISK_WIDTH)<< setfill(ASTERISK) <<  "*" << endl;
         cout << "Please enter one of the following commands:" << endl << endl;
         cout << "list   - This command will list every person in the system." << endl;
         cout << "sort   - This command will allow you to sort the scientists." << endl;
