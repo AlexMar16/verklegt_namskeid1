@@ -240,7 +240,7 @@ bool service::lookForPerson(string name)//checkar hvort eh partur af nafni sé t
     bool foundname = false;
     for (size_t i=0; i< _listV.size(); i++)
     {
-        if (_listV[i].getName().find(name) != string::npos)
+        if (tolower(_listV[i].getName()).find(tolower(name)) != string::npos)
         {
             foundname = true;
         }
