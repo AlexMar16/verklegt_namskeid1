@@ -163,27 +163,50 @@ void consoleUI::addCommand()
 
 void consoleUI::removeCommand()
 {
-    string name;
+    string first_name;
+    string middle_name = "";
+    string last_name;
     string fullname;
+    string istheremiddlename;
     Person input;
     int nameCounter = 0;
-    cout << "Please enter the full name of the computer scientist you want to remove " << endl;
-    while(nameCounter != 3) //Bæta við virkni, geta haft 2 nöfn.
+    cout << "Lastname: ";
+    cin >> last_name;
+    cout << "Firstname: ";
+    cin >> first_name;
+    cout <<"Does the person have a middle name?(y/n)";
+    do
     {
-      cin >> name;
-      if (nameCounter != 2)
-      {
-          fullname += name + " ";
-      }
-      else
-      {
-          fullname += name;
-      }
+          cin >> istheremiddlename;
+          switch (_turn.YorN(istheremiddlename)) {
+          case 1:
+              cout << "Middlename: ";
+              cin >> middle_name;
+              fullname = first_name + " " + middle_name + " " + last_name;
+              break;
+          case 2:
+              fullname = first_name + " " + last_name;
+              break;
+          case 3:
+              cout << "Please enter y or n" << endl;
+              break;
+          default:
+              break;
+          }
+    }while(_turn.YorN(istheremiddlename) > 2);
 
-      nameCounter++;
-    }
+
+
 
     input = _turn.findPersonexactly(fullname);
+    if (input.getName() == "")
+    {
+        cout << endl << "Person not found!" << endl;
+    }
+    else
+    {
+        cout << endl << fullname << " removed" << endl;
+    }
 
     _turn.removePerson(input);
 
@@ -201,6 +224,7 @@ void consoleUI::findCommand()
     if (_turn.lookForPerson(toFind))
     {
         cout << _printOut;
+
     }
     else
     {
