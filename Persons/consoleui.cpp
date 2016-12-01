@@ -130,7 +130,7 @@ void consoleUI::sortCommand()
 void consoleUI::addCommand()
 {
   string name, gender, deathYear;
-  int birthYear = 0, nameCounter = 0;
+  int birthYear = 0;
   Person input;
 
   cout << "Please enter the following information about the new computer scientist " << endl;
@@ -198,7 +198,6 @@ void consoleUI::removeCommand()
 {
     string fullName;
     Person input;
-    int nameCounter = 0;
     cout << "Enter the full name of the scientist to remove from the database: ";
     cin.ignore();
     getline(cin, fullName);
@@ -237,7 +236,7 @@ void consoleUI::findCommand()
     }
     else
     {
-        cout << "Person not found " << endl;
+        cout << "Person not found " << endl << endl;
     }
 }
 
