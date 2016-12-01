@@ -26,7 +26,7 @@ public:
     vector<Person> sortGender();
     vector<Person> sortNumerically();
     bool lookForPerson(string name);
-    void displayList();
+    void sortList();
     void setProgram(bool input);
     bool getProgram();
     string getLastName(const string& nafn);

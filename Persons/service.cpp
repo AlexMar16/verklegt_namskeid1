@@ -23,7 +23,7 @@ vector<Person> service::getList()
    return _listV;
 }
 
-void service::displayList()// depending on input from user, do something
+void service::sortList()// depending on input from user, do something
 {
     if(_command == "a")
     {
