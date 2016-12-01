@@ -39,6 +39,82 @@ bool service::lookForPerson(const string &name)//checkar hvort eh partur af nafn
 
 bool service::getProgram() const {return _program;}
 
+Person service::findPersonExactly(const string& name)
+{
+    Person Personfoundexactly;
+    for (size_t i=0; i< _listV.size(); i++)
+    {
+        if (_listV[i].getName() == name)
+        {
+            Personfoundexactly = _listV[i];
+        }
+    }
+    return Personfoundexactly;
+}
+
+Person service::generateQuestion()
+{
+    srand(time(0));
+    return _listV[rand()%_listV.size()];
+}
+
+string service::getLastName(const string& nafn) const//nær í seinasta orðið í setningu eða seinast nafnið í nafna tilvikum
+{
+    int Li=0;
+    string LastName;
+    for (size_t i=0; i<nafn.size(); i++)
+    {
+        if (nafn[i]==' ')
+        {
+            Li=i+1;
+        }
+    }
+    for (size_t i=Li; i<nafn.size(); i++)
+    {
+        LastName += nafn[i];
+    }
+    return LastName;
+}
+
+string service::assignSelection(string& answer, const string& a, const string& b, const string& c, const string& d)
+{
+    if (answer == "a")
+        answer = a;
+    else if (answer == "b")
+        answer = b;
+    else if (answer == "c")
+        answer = c;
+    else if (answer == "d")
+        answer = d;
+    else
+        answer = "0";
+
+    return answer;
+}
+
+string service::genderCheck(const Person& p)
+{
+    if (p.getGender() == "male")
+        return "He";
+    else
+        return "She";
+}
+
+string service::aliveCheck(const Person& p)
+{
+    if (p.getDeathYear() != 0)
+        return "and died in " + to_string(p.getDeathYear()); //converting int to string to return it as one
+    else
+        return "and is still alive";
+}
+
+string service::toLower(const string& toLowerString)//to lower
+{
+    string data = toLowerString;
+    std::transform(data.begin(), data.end(), data.begin(), ::tolower);
+    return data;
+}
+
 vector<int> service::properties()// The "status" command activates this function
 {
     int nameQuant=0;
@@ -217,7 +293,7 @@ void service::sortList()// depending on input from user, do something
     }
     else if(_command == "quit")
     {
-        _program=false;
+        _program = false;
     }
 
 }
@@ -281,81 +357,5 @@ void service::generateOptions(const Person& correct, string& a, string& b, strin
 void service::setProgram(const bool& input)
 {
     _program = input;
-}
-
-Person service::findPersonExactly(const string& name)
-{
-    Person Personfoundexactly;
-    for (size_t i=0; i< _listV.size(); i++)
-    {
-        if (_listV[i].getName() == name)
-        {
-            Personfoundexactly = _listV[i];
-        }
-    }
-    return Personfoundexactly;
-}
-
-Person service::generateQuestion()
-{
-    srand(time(0));
-    return _listV[rand()%_listV.size()];
-}
-
-string service::getLastName(const string& nafn) const//nær í seinasta orðið í setningu eða seinast nafnið í nafna tilvikum
-{
-    int Li=0;
-    string LastName;
-    for (size_t i=0; i<nafn.size(); i++)
-    {
-        if (nafn[i]==' ')
-        {
-            Li=i+1;
-        }
-    }
-    for (size_t i=Li; i<nafn.size(); i++)
-    {
-        LastName += nafn[i];
-    }
-    return LastName;
-}
-
-string service::assignSelection(string& answer, const string& a, const string& b, const string& c, const string& d)
-{
-    if (answer == "a")
-        answer = a;
-    else if (answer == "b")
-        answer = b;
-    else if (answer == "c")
-        answer = c;
-    else if (answer == "d")
-        answer = d;
-    else
-        answer = "0";
-
-    return answer;
-}
-
-string service::genderCheck(const Person& p)
-{
-    if (p.getGender() == "male")
-        return "He";
-    else
-        return "She";
-}
-
-string service::aliveCheck(const Person& p)
-{
-    if (p.getDeathYear() != 0)
-        return "and died in " + to_string(p.getDeathYear()); //converting int to string to return it as one
-    else
-        return "and is still alive";
-}
-
-string service::toLower(const string& toLowerString)//to lower
-{
-    string data = toLowerString;
-    std::transform(data.begin(), data.end(), data.begin(), ::tolower);
-    return data;
 }
 

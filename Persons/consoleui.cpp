@@ -39,19 +39,14 @@ void consoleUI::run()
         cout << setw(ASTERISK_WIDTH) << setfill(ASTERISK) << ASTERISK << endl;
         cout << "command: ";
 
-        getline(cin, command);                                 //sets the private variable _command in the service class.
-
-        _turn.setCommand(command);//setur command i service.cpp
-        printList(command);//checkar hvort input command fra user se legit og setur _valid true eda false
-        _printOut = _turn.getList();
-        if(_print)
-
-        cout << endl;
-
+        getline(cin, command);                                      // Sets the private variable _command in the service class.
+        _turn.setCommand(command);
         printList(command);                                         // Checks if there is a need for a printout of the list.
+        _printOut = _turn.getList();
+
         if(_print)
         {
-            _printOut = _turn.getList();                            //getList() gets the list that's supposed to be printed out.
+            _printOut = _turn.getList();                            // getList() gets the list that's supposed to be printed out.
             cout << _printOut;
         }
         else if (!specialCommand(command))
@@ -138,7 +133,7 @@ void consoleUI::printList(const string &_command)                   // Print if 
         findCommand();
         _print = false;
     }
-    else if(_command == "sort")                                     // gives you additional options to choose how you would like the list sorted
+    else if(_command == "sort")                                     // Gives you additional options to choose how you would like the list sorted
     {
         sortCommand();
         _print = true;
@@ -201,12 +196,12 @@ void consoleUI::sortCommand()
     cout << "b - Sort by year of birth. " << endl;
     cout << "d - Sort by year of death. " << endl;
     cout << "g - Sort by gender. "        << endl;
-    cout << "l - Sort by last name"       << endl;
+    cout << "l - Sort by last name."       << endl;
 
     string choice;
     bool forward = false;
 
-    while(forward == false)
+    while(!forward)
     {
         cout << "Select sorting method: ";
         getline(cin, choice);
@@ -216,6 +211,7 @@ void consoleUI::sortCommand()
             _turn.setCommand(choice);
             _turn.sortList();
             forward = true;
+            break;
         }
         else
         {
@@ -223,8 +219,6 @@ void consoleUI::sortCommand()
             cout << "Invalid input!" << endl;
         }
     }
-    _turn.setCommand(choice);// located in service.cpp
-    _turn.sortList();
 }
 
 void consoleUI::addCommand()
