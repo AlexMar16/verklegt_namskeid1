@@ -152,7 +152,6 @@ void consoleUI::sortCommand()
             cout<<"Invalid input!"<<endl;
         }
     }
-    getline(cin, input);
     _turn.setCommand(input);// located in service.cpp
     _turn.sortList();
 }
