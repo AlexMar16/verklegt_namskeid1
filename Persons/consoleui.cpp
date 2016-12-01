@@ -227,10 +227,6 @@ void consoleUI::removeCommand()
     input = _turn.findPersonExactly(fullName);
 
     _turn.removePerson(input);
-
-    //input.setDeathYear(deathYear);
-
-    //_turn.addPerson(input);
 }
 
 void consoleUI::findCommand()
@@ -239,7 +235,7 @@ void consoleUI::findCommand()
     cout << "Name to find: ";
 
     getline(cin, toFind);
-    //cin.ignore();
+    cout << endl;
     _printOut = _turn.findPerson(toFind);
     if (_turn.lookForPerson(toFind))
     {
