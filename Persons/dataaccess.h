@@ -13,7 +13,6 @@ public:
     void setVector();
     void addPerson();
     void removePerson();
-
     void setVector(vector<Person> input);
 private:
     vector<Person> _persons;

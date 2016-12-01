@@ -19,7 +19,7 @@ void consoleUI::run()
         cout << "find  - This command allows you to find a certain person in the list." << endl;
         cout << "quiz  - This command lets you take a quiz about the computer scientists." << endl;
         cout << "add   - This command allows you to add a person to the list." << endl;
-        cout << "remove- This command allows you to find a certain person in the list." << endl;
+        cout << "remove- This command allows you to remove a certain person from the list." << endl;
         cout << "status- This command displays info about the list "<<endl;
         cout << "quit  - This command will quit the program." << endl << endl;
         cout << setw(ASTERISK_WIDTH)<< setfill(ASTERISK) <<  "*" << endl;
