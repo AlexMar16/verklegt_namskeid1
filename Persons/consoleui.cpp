@@ -7,21 +7,31 @@ consoleUI::consoleUI(){}
 
 void consoleUI::run()
 {
-    const int ASTERISK_WIDTH = 75;
+    const int ASTERISK_WIDTH = 80;
     const char ASTERISK = '*';
     string command;
     do
     {
         cout << setw(ASTERISK_WIDTH)<< setfill(ASTERISK) <<  "*" << endl;
-        cout << "Please enter one of the following commands:" << endl << endl;
-        cout << "list   - This command will list every person in the system." << endl;
-        cout << "sort   - This command will allow you to sort the scientists." << endl;
-        cout << "find   - This command allows you to find a certain person in the list." << endl;
-        cout << "quiz   - This command lets you take a quiz about the computer scientists." << endl;
-        cout << "add    - This command allows you to add a person to the list." << endl;
-        cout << "remove - This command allows you to remove a certain person from the list." << endl;
-        cout << "status - This command displays info about the list "<<endl;
-        cout << "quit   - This command will quit the program." << endl << endl;
+        cout << left << setw(ASTERISK_WIDTH) << setfill(' ') << "| Please enter one of the following commands:"
+             << right << "|" << endl;
+        cout << left << setw(ASTERISK_WIDTH) << setfill(' ') <<"|" << right << "|"<< endl;
+        cout << left << setw(ASTERISK_WIDTH) << setfill(' ')<< "| list   - This command will list every person in the system."
+             << right << "|" << endl;
+        cout << left << setw(ASTERISK_WIDTH) << setfill(' ')<< "| sort   - This command will allow you to sort the scientists."
+             << right << "|" << endl;
+        cout << left << setw(ASTERISK_WIDTH) << setfill(' ')<< "| find   - This command allows you to find a certain person in the list."
+             << right << "|" << endl;
+        cout << left << setw(ASTERISK_WIDTH) << setfill(' ')<< "| quiz   - This command lets you take a quiz about the computer scientists."
+             << right << "|" << endl;
+        cout << left << setw(ASTERISK_WIDTH) << setfill(' ')<< "| add    - This command allows you to add a person to the list."
+             << right << "|" << endl;
+        cout << left << setw(ASTERISK_WIDTH) << setfill(' ')<< "| remove - This command allows you to remove a certain person from the list."
+             << right << "|" << endl;
+        cout << left << setw(ASTERISK_WIDTH) << setfill(' ')<< "| status - This command displays info about the list "
+             << right << "|" << endl;
+        cout << left << setw(ASTERISK_WIDTH) << setfill(' ') << "| quit   - This command will quit the program."
+             << right << "|" << endl;
         cout << setw(ASTERISK_WIDTH)<< setfill(ASTERISK) <<  "*" << endl;
         cout << "command: ";
         getline(cin, command);
