@@ -137,27 +137,20 @@ void consoleUI::addCommand()
   cout << "in the following order." << endl;
   cout << "Be aware you cannot put letters that are not in the English alphabet." << endl;
 
-  cout << "Name (Minimum two names, Maximum three): ";
-  while(nameCounter != 3) //Bæta við virkni, geta haft 2 nöfn.
-  {
-    cin >> name;
-    input.setName(name);
-    nameCounter++;
-  }
+  cout << "Name: ";
+  getline(cin, name);
 
   while(true)
   {
-      cout << "Gender (male/female/other) in lowercase: ";
+      cout << "Gender (male/female) in lowercase: ";
       cin >> gender;
-      if (gender == "male" || gender == "female" || gender == "other")
+      if (gender == "male" || gender == "female")
       {
           break;
       }
       else
       {
           cout << "Invalid input!" << endl;
-          cin.clear();
-          cin.ignore();
       }
   };
   input.setGender(gender);
@@ -173,8 +166,6 @@ void consoleUI::addCommand()
       else
       {
           cout << "Invalid input!" << endl;
-          cin.clear();
-          cin.ignore();
       };
   }
   input.setBirthYear(birthYear);
@@ -182,21 +173,9 @@ void consoleUI::addCommand()
   int deathCheck = 0;
   while(true)
   {
-      cout << "Died (0 if still alive): ";
+      cout << "Died (input any other character if still alive): ";
       cin >> deathYear;
       deathCheck = atoi(deathYear.c_str());
-      //deathCheck = stoi (deathYear,&sz);
-
-     /* if(deathYear == "0")
-      {
-          deathYear == "0000";
-      }
-
-      if (deathYear.length() == 4)
-      {
-          char str[]="1776ad";
-          char inArray[] = deathYear;
-      }*/
       if ((deathCheck > 1800 && deathCheck < 2100) || deathCheck == 0)
       {
           break;
@@ -210,6 +189,7 @@ void consoleUI::addCommand()
   input.setDeathYear(deathCheck);
 
   _turn.addPerson(input);
+  cin.ignore();
 }
 
 
@@ -267,8 +247,8 @@ void consoleUI::statusCommand()//prints out number of people that fit to each ca
 
    cout<< "Total names in list       : "<< _printStatus[0] << endl;
    cout<< "Number of deceased        : "<< _printStatus[1] << endl;
-   cout<< "Total females on the list : "<< _printStatus[2] <<endl;
-   cout<< "Total Males on the list   : "<< _printStatus[3] <<endl << endl;
+   cout<< "Total females on the list : "<< _printStatus[2] << endl;
+   cout<< "Total Males on the list   : "<< _printStatus[3] << endl << endl;
 
 }
 
