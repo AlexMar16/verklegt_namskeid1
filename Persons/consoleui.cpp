@@ -29,7 +29,7 @@ void consoleUI::run()
 
         _turn.setCommand(command);//setur command i service.cpp
         validList(command);//checkar hvort input command fra user se legit og setur _valid true eda false
-        _turn.sortList();
+        //_turn.sortList();
         _printOut = _turn.getList();
         if(_valid)
         {
@@ -81,7 +81,6 @@ void consoleUI::validList(string _command)// depending on input from user, do so
     {
         _valid= false;
         statusCommand();
-
     }
     else
     {
@@ -126,8 +125,8 @@ void consoleUI::sortCommand()
     cout << "Select sorting method: ";
     string input;
     getline(cin, input);
-
     _turn.setCommand(input);// located in service.cpp
+    _turn.sortList();
     //cin.ignore();
 }
 
