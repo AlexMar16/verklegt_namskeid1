@@ -9,6 +9,7 @@ vector<Person> dataAccess::getVector()
 {
     return _persons;
 }
+
 void dataAccess::getPersons()
 {
     ifstream personFile;
@@ -24,8 +25,6 @@ void dataAccess::getPersons()
     }
     personFile.close();
 }
-
-
 
 void dataAccess::addPerson()
 {
