@@ -183,7 +183,7 @@ void consoleUI::removeCommand()
       nameCounter++;
     }
 
-    input = _turn.findPersonexactly(fullname);
+    input = _turn.findPersonExactly(fullname);
 
     _turn.removePerson(input);
 

@@ -13,21 +13,20 @@ public:
     void removefromdatabase(string name);
     void removePerson(Person input);
     bool alreadyInDatabase(string name);
-    Person findPersonexactly(string name);
+    Person findPersonExactly(string name);
     vector<Person> findPerson(string name);
     vector<Person> sortAlphabetically();
     vector<Person> getList();
     vector<Person> sortBirthYear();
     vector<Person> sortDeath();
     vector<Person> sortGender();
-    bool lookForPerson(string name);
     vector<Person> sortNumerically();
+    bool lookForPerson(string name);
     void displayList();
     void setProgram(bool input);
     bool getProgram();
     string getLastName(const string& nafn);
     vector<Person> sortAlphabeticallyLast();
-
 
     Person generateQuestion();
     void generateOptions(const Person& correct, string& a, string& b, string& c, string& d);

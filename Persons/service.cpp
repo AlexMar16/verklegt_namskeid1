@@ -236,14 +236,14 @@ vector<Person> service::sortDeath()
     }
     return _listV;
 }
-Person service::findPersonexactly(string name)
+Person service::findPersonExactly(string name)
 {
     Person Personfoundexactly;
     for (size_t i=0; i< _listV.size(); i++)
     {
         if (_listV[i].getName() == name)
         {
-            cout << "name found";
+            //cout << "name found";
             Personfoundexactly = _listV[i];
         }
     }
