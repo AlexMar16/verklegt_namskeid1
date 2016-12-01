@@ -14,6 +14,7 @@ public:
     void run();
     void validList(string _command);
     void addCommand();
+    void removeCommand();
     void sortCommand();
     void findCommand();
     void quizCommand();

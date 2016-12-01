@@ -12,6 +12,7 @@ public:
     vector<Person> getVector();
     void setVector();
     void addPerson();
+    void removePerson();
 
     void setVector(vector<Person> input);
 private:

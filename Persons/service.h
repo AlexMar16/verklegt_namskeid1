@@ -10,7 +10,10 @@ public:
     void swap(Person& a, Person& b);
     void setCommand(string command);    
     void addPerson(Person input);
+    void removefromdatabase(string name);
+    void removePerson(Person input);
     bool alreadyInDatabase(string name);
+    Person findPersonexactly(string name);
     vector<Person> findPerson(string name);
     vector<Person> sortAlphabetically();
     vector<Person> getList();

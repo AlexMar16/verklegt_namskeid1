@@ -16,6 +16,7 @@ void consoleUI::run()
         cout << "Please enter one of the following commands:" << endl << endl;
         cout << "list  - This command will list every person in the system." << endl;
         cout << "add   - This command allows you to add a person to the list." << endl;
+        cout << "remove- This command allows you to find a certain person in the list." << endl;
         cout << "find  - This command allows you to find a certain person in the list." << endl;
         cout << "sort  - This command will allow you to sort the scientists." << endl;
         cout << "quiz  - This command lets you take a quiz about the computer scientists." << endl;
@@ -33,7 +34,7 @@ void consoleUI::run()
         {
             cout << _printOut;
         }
-        else if (command != "find" && command != "quit" && command != "quiz") // Gera fall sem checkar a tessu
+        else if (command != "find" && command != "quit" && command != "quiz" && command != "remove") // Gera fall sem checkar a tessu
         {
             cout << "Invalid command!" << endl << endl;
         }
@@ -50,6 +51,11 @@ void consoleUI::validList(string _command)// depending on input from user, do so
     {
         addCommand();
         _valid = true;
+    }
+    else if(_command == "remove")
+    {
+        removeCommand();
+        _valid = false;
     }
     else if (_command == "find")
     {
@@ -111,7 +117,6 @@ void consoleUI::sortCommand()
     cout << "g - Sort by gender. " << endl;
     cout << "l - Sort by last name" << endl;
     cout << "Select sorting method: ";
-
     string input;
     cin >> input;
     if(input != "a" && input != "b" && input != "d" && input != "g" && input != "l")
@@ -153,6 +158,38 @@ void consoleUI::addCommand()
   input.setDeathYear(deathYear);
 
   _turn.addPerson(input);
+}
+
+
+void consoleUI::removeCommand()
+{
+    string name;
+    string fullname;
+    Person input;
+    int nameCounter = 0;
+    cout << "Please enter the full name of the computer scientist you want to remove " << endl;
+    while(nameCounter != 3) //Bæta við virkni, geta haft 2 nöfn.
+    {
+      cin >> name;
+      if (nameCounter != 2)
+      {
+          fullname += name + " ";
+      }
+      else
+      {
+          fullname += name;
+      }
+
+      nameCounter++;
+    }
+
+    input = _turn.findPersonexactly(fullname);
+
+    _turn.removePerson(input);
+
+    //input.setDeathYear(deathYear);
+
+    //_turn.addPerson(input);
 }
 
 void consoleUI::findCommand()

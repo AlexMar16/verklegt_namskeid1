@@ -69,6 +69,7 @@ vector<Person> service::sortGender()//sorts the females in the list to the top
     }
     return _listV;
 }
+
 void service::addPerson(Person input)//makes the user capable to add people as long as they're not already on the list
 {
     if(!alreadyInDatabase(input.getName()))
@@ -77,6 +78,28 @@ void service::addPerson(Person input)//makes the user capable to add people as l
         _listV.push_back(input);
         addNew.setVector(_listV);
         addNew.addPerson();
+    }
+}
+
+void service::removePerson(Person input)//makes the user capable to remove people
+{
+    if(alreadyInDatabase(input.getName()))
+    {
+        cout << "alreadyindadabaye()";
+        dataAccess addNew;
+        removefromdatabase(input.getName());
+        addNew.setVector(_listV);
+        addNew.addPerson();
+    }
+}
+void service::removefromdatabase(string name)
+{
+    for (size_t i=0; i< _listV.size(); i++)
+    {
+        if (_listV[i].getName() == name)
+        {
+            _listV.erase(_listV.begin()+i);
+        }
     }
 }
 
@@ -212,6 +235,19 @@ vector<Person> service::sortDeath()
         }
     }
     return _listV;
+}
+Person service::findPersonexactly(string name)
+{
+    Person Personfoundexactly;
+    for (size_t i=0; i< _listV.size(); i++)
+    {
+        if (_listV[i].getName() == name)
+        {
+            cout << "name found";
+            Personfoundexactly = _listV[i];
+        }
+    }
+    return Personfoundexactly;
 }
 
 Person service::generateQuestion()
