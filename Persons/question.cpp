@@ -7,17 +7,14 @@ Question::Question()
 
 ifstream& operator >> (ifstream& in, Question& rhs)
 {
-    string name;
-    string about;
     string temp;
-    //cout << "overload >>";
     int counter = 0;
-        while(in >> temp /*&& temp != "~"*/)
+        while(temp != "~")
         {
             if(temp == "~")
             {
-                rhs._answer.clear();
-                break;
+                //rhs._answer.clear();
+                //break;
             }
             else
             {
@@ -28,13 +25,12 @@ ifstream& operator >> (ifstream& in, Question& rhs)
             }
         }
 
-        rhs._answer.clear();
-        while(in >> temp /*&& temp != "~"*/)
+        while(temp != "~")
         {
             if(temp == "~")
             {
-                rhs._question.clear();
-                break;
+                //rhs._question.clear();
+                //break;
             }
             else
             {
@@ -50,7 +46,7 @@ ifstream& operator >> (ifstream& in, Question& rhs)
 ostream& operator << (ostream& out, const Question& rhs)
 {
     out << "LOLOL";
-    out << "question: " << rhs._question << "asdasd";
+    out << "question: " << rhs._question << rhs._answer<< "asdasd";
     return out;
 }
 
