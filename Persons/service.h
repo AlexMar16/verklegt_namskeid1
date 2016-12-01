@@ -45,7 +45,7 @@ private:
     vector<Person> _listV;
     vector<Person> _listSearchedPerson;
     vector<int> _statusVec;
-    string _command;
+    string _command;  //athuga
     bool _keepGoing;
     bool _valid;
     bool _program;
