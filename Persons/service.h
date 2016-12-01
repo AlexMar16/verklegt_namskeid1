@@ -27,6 +27,7 @@ public:
     vector<Person> sortNumerically();
     bool lookForPerson(string name);
     void sortList();
+    vector<int>properties();
     void setProgram(bool input);
     bool getProgram();
     string getLastName(const string& nafn);
@@ -41,6 +42,7 @@ public:
 private:
     vector<Person> _listV;
     vector<Person> _listSearchedPerson;
+    vector<int> _statusVec;
     string _command;
     bool _keepGoing;
     bool _valid;

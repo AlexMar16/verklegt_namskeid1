@@ -18,9 +18,11 @@ public:
     void sortCommand();
     void findCommand();
     void quizCommand();
+    void statusCommand();
 private:
     service _turn;
     vector<Person> _printOut;
+    vector<int> _printStatus;
     bool _valid;
 };
 

@@ -76,6 +76,11 @@ void consoleUI::validList(string _command)// depending on input from user, do so
     {
         _valid = false;
     }
+    else if (_command == "status")
+    {
+            _valid = false;
+            statusCommand();
+    }
     else
     {
         _valid = false;
@@ -244,4 +249,14 @@ void consoleUI::findCommand()
     {
         cout << "Person not found " << endl;
     }
+}
+
+void consoleUI::statusCommand()
+{
+    _printStatus = _turn.properties();
+
+   cout<< "Total names in list       : "<< _printStatus[0] << endl;
+   cout<< "Number of deceased        : "<<_printStatus[1] << endl;
+   cout<< "Total females on the list : "<< _printStatus[2]<<endl;
+   cout<< "Total Males on the list   : "<< _printStatus[3]<<endl;
 }
