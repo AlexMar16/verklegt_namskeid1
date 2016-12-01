@@ -94,7 +94,7 @@ void consoleUI::quizCommand()
     Person question = _turn.generateQuestion();
     //cout << "We are asking about " << question.getName() << endl;
     cout << _turn.genderCheck(question) <<" was born in " << question.getBirthYear()
-         << " and " << _turn.aliveCheck(question) << endl;
+         << " and " << _turn.aliveCheck(question) << ", enter (a/b/c/d)" << endl;
 
     string a, b, c, d;
     _turn.generateOptions(question, a, b, c, d);
@@ -143,8 +143,8 @@ void consoleUI::addCommand()
   cout << "Be aware you cannot put letters that are not in the English alphabet." << endl;
 
   cout << "Name: ";
-  cin.ignore();
   getline(cin, name);
+  input.setName(name);
 
   while(true)
   {
@@ -235,8 +235,9 @@ void consoleUI::findCommand()
 {
     string toFind;
     cout << "Name to find: ";
-    cin.ignore();
+
     getline(cin, toFind);
+    //cin.ignore();
     _printOut = _turn.findPerson(toFind);
     if (_turn.lookForPerson(toFind))
     {
