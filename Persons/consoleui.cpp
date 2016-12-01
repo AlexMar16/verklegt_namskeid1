@@ -39,13 +39,13 @@ void consoleUI::run()
 
         _turn.setCommand(command);//setur command i service.cpp
         validList(command);//checkar hvort input command fra user se legit og setur _valid true eda false
-        _turn.sortList();
+
         _printOut = _turn.getList();
         if(_valid)
         {
             cout << _printOut;
         }
-        else if (!_turn.specialCommand(command)) // Gera fall sem checkar a tessu
+        else if (!_turn.specialCommand(command))
         {
             cout << "Invalid command!" << endl << endl;
         }
@@ -102,7 +102,6 @@ void consoleUI::validList(string _command)// depending on input from user, do so
 void consoleUI::quizCommand()
 {
     Person question = _turn.generateQuestion();
-    //cout << "We are asking about " << question.getName() << endl;
     cout << _turn.genderCheck(question) <<" was born in " << question.getBirthYear()
          << " and " << _turn.aliveCheck(question) << ", enter (a/b/c/d)" << endl;
 
@@ -134,18 +133,35 @@ void consoleUI::sortCommand()
     cout << "d - Sort by year of death. " << endl;
     cout << "g - Sort by gender. " << endl;
     cout << "l - Sort by last name" << endl;
-    cout << "Select sorting method: ";
+
     string input;
-    cin >> input;
+    bool forward = false;
+
+    while(forward == false)
+    {
+        cout << "Select sorting method: ";
+        getline(cin, input);
+
+        if(input =="a" || input=="b" || input=="d" || input=="g" || input=="l")
+        {
+            _turn.setCommand(input);// located in service.cpp
+            _turn.sortList();
+            forward=true;
+        }
+        else
+        {
+            forward=false;
+            cout<<"Invalid input!"<<endl;
+        }
+    }
+    getline(cin, input);
 
     _turn.setCommand(input);// located in service.cpp
-    cin.ignore();
 }
 
 void consoleUI::addCommand()
 {
   string name, gender, deathYear, birthYear;
-  int nameCounter = 0;
   Person input;
 
   cout << "Please enter the following information about the new computer scientist " << endl;
@@ -213,20 +229,12 @@ void consoleUI::addCommand()
   cin.ignore();
 }
 
-
-
 void consoleUI::removeCommand()
 {
     string fullName;
     Person input;
-    int nameCounter = 0;
     cout << "Enter the full name of the scientist to remove from the database: ";
-
     getline(cin, fullName);
-
-
-
-
     input = _turn.findPersonExactly(fullName);
     if (input.getName() == "")
     {
@@ -239,10 +247,6 @@ void consoleUI::removeCommand()
     input = _turn.findPersonExactly(fullName);
 
     _turn.removePerson(input);
-
-    //input.setDeathYear(deathYear);
-
-    //_turn.addPerson(input);
 }
 
 void consoleUI::findCommand()
@@ -251,7 +255,7 @@ void consoleUI::findCommand()
     cout << "Name to find: ";
 
     getline(cin, toFind);
-    //cin.ignore();
+    cout << endl;
     _printOut = _turn.findPerson(toFind);
     if (_turn.lookForPerson(toFind))
     {
@@ -259,7 +263,7 @@ void consoleUI::findCommand()
     }
     else
     {
-        cout << "Person not found " << endl;
+        cout << "Person not found " << endl << endl;
     }
 }
 
@@ -271,6 +275,5 @@ void consoleUI::statusCommand()//prints out number of people that fit to each ca
    cout<< "Number of deceased        : "<< _printStatus[1] << endl;
    cout<< "Total females on the list : "<< _printStatus[2] << endl;
    cout<< "Total Males on the list   : "<< _printStatus[3] << endl << endl;
-
 }
 
