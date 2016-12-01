@@ -1,5 +1,7 @@
 #include "dataaccess.h"
 
+const string FILENAME = "info.txt";
+
 dataAccess::dataAccess()
 {
     getPersons();
@@ -13,7 +15,7 @@ void dataAccess::getPersons()
 {
     ifstream personFile;
 
-    personFile.open("info.txt");
+    personFile.open(FILENAME);
 
     if(personFile)
     {
@@ -32,7 +34,7 @@ void dataAccess::addPerson()
 {
     ofstream newPerson;
 
-    newPerson.open("info.txt");
+    newPerson.open(FILENAME);
 
 
     if(newPerson)
@@ -55,7 +57,7 @@ void dataAccess::removePerson()
 {
     ofstream removePerson;
 
-    removePerson.open("info.txt");
+    removePerson.open(FILENAME);
 
     if(removePerson)
     {
