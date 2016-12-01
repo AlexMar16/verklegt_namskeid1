@@ -13,7 +13,10 @@ public:
     void removefromdatabase(string name);
     void removePerson(Person input);
     bool alreadyInDatabase(string name);
+
     bool specialCommand(const string& command);
+
+    int YorN(string YorNinput);
     Person findPersonExactly(string name);
     vector<Person> findPerson(string name);
     vector<Person> sortAlphabetically();

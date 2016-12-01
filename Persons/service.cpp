@@ -85,7 +85,6 @@ void service::removePerson(Person input)//makes the user capable to remove peopl
 {
     if(alreadyInDatabase(input.getName()))
     {
-        cout << "alreadyindadabaye()";
         dataAccess addNew;
         removefromdatabase(input.getName());
         addNew.setVector(_listV);
@@ -243,7 +242,6 @@ Person service::findPersonExactly(string name)
     {
         if (_listV[i].getName() == name)
         {
-            //cout << "name found";
             Personfoundexactly = _listV[i];
         }
     }
@@ -309,6 +307,21 @@ string service::aliveCheck(const Person& p)
         return "and died in " + to_string(p.getDeathYear()); //converting int to string to return it as one
     else
         return "and is still alive";
+}
+int service::YorN(string YorNinput)
+{
+    if(YorNinput == "y" || YorNinput == "Y")
+    {
+        return 1;
+    }
+    if(YorNinput == "n" || YorNinput == "N")
+    {
+        return 2;
+    }
+    else
+    {
+        return 3;
+    }
 }
 
 bool service::getProgram()
