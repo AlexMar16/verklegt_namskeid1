@@ -24,6 +24,7 @@ void consoleUI::run()
         cout << "quit  - This command will quit the program." << endl << endl;
         cout << setw(ASTERISK_WIDTH)<< setfill(ASTERISK) <<  "*" << endl;
         cout << "command: ";
+        cin.ignore();
         getline(cin, command);
         cout << endl;
 
@@ -212,12 +213,11 @@ void consoleUI::removeCommand()
     Person input;
     cout << "Enter the full name of the scientist to remove from the database: ";
     cin.ignore();
-    getline(cin, fullName);
+    getline(cin, fullName);//tekur inn all nafnið
 
 
 
-
-    input = _turn.findPersonExactly(fullName);
+    input = _turn.findPersonExactly(fullName);//checkar hvort hann se til i database
     if (input.getName() == "")
     {
         cout << endl << "Person not found!" << endl;
@@ -226,9 +226,9 @@ void consoleUI::removeCommand()
     {
         cout << endl << fullName << " removed" << endl;
     }
-    input = _turn.findPersonExactly(fullName);
+    input = _turn.findPersonExactly(fullName);//finnur personuna sem ad a ad remova
 
-    _turn.removePerson(input);
+    _turn.removePerson(input);// removar personuna med þvi að yfir skrifa listann með eins bara án eins
 
     //input.setDeathYear(deathYear);
 
@@ -241,10 +241,10 @@ void consoleUI::findCommand()
     cout << "Name to find: ";
     cin.ignore();
     getline(cin, toFind);
-    _printOut = _turn.findPerson(toFind);
+    _printOut = _turn.findPerson(toFind);//checkar hvort personan se til
     if (_turn.lookForPerson(toFind))
     {
-        cout << _printOut;
+        cout << _printOut;//prentar personur sem ad eru med strenginn i nafni sinu
     }
     else
     {
