@@ -248,8 +248,8 @@ void consoleUI::statusCommand()//prints out number of people that fit to each ca
     _printStatus = _turn.properties();
 
    cout<< "Total names in list       : "<< _printStatus[0] << endl;
-   cout<< "Number of deceased        : "<<_printStatus[1] << endl;
-   cout<< "Total females on the list : "<< _printStatus[2]<<endl;
-   cout<< "Total Males on the list   : "<< _printStatus[3]<<endl;
+   cout<< "Number of deceased        : "<< _printStatus[1] << endl;
+   cout<< "Total females on the list : "<< _printStatus[2] <<endl;
+   cout<< "Total Males on the list   : "<< _printStatus[3] <<endl << endl;
 
 }
