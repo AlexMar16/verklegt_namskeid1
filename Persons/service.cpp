@@ -11,47 +11,33 @@ service::service(){
     _listSearchedPerson.clear();
     _program = true;
 }
-void service::swap(Person& a, Person& b)
+
+bool service::alreadyInDatabase(const string& name)//checkar hvort nafnið sé til í databasinum
 {
-    Person temp = a;
-    a = b;
-    b = temp;
+    for (size_t i=0; i< _listV.size(); i++)
+    {
+        if (_listV[i].getName() == name)
+        {
+            return true;
+        }
+    }
+    return false;
 }
 
-vector<Person> service::getList()
+bool service::lookForPerson(const string &name)//checkar hvort eh partur af nafni sé til í listanum
 {
-    return _listV;
+    bool foundname = false;
+    for (size_t i=0; i< _listV.size(); i++)
+    {
+        if (toLower(_listV[i].getName()).find(toLower(name)) != string::npos)
+        {
+            foundname = true;
+        }
+    }
+    return foundname;
 }
 
-void service::sortList()// depending on input from user, do something
-{
-
-    if(_command == "a")
-    {
-        _listV = sortAlphabetically();
-    }
-    else if(_command == "l")
-    {
-        _listV = sortAlphabeticallyLastName();
-    }
-    else if(_command == "b")
-    {
-        _listV = sortBirthYear();
-    }
-    else if(_command == "d")
-    {
-        _listV = sortDeath();
-    }
-    else if(_command == "g")
-    {
-        _listV = sortGender();
-    }
-    else if(_command == "quit")
-    {
-        _program=false;
-    }
-
-}
+bool service::getProgram() const {return _program;}
 
 vector<int> service::properties()// The "status" command activates this function
 {
@@ -93,10 +79,7 @@ vector<int> service::properties()// The "status" command activates this function
     return _statusVec;// returns the vector to consoleui.cpp
 }
 
-void service::setCommand(const string &c)//set the input command from user in a variable
-{
-    _command = c;
-}
+vector<Person> service::getList() const {return _listV;}
 
 vector<Person> service::sortGender()//sorts the females in the list to the top
 {
@@ -110,39 +93,6 @@ vector<Person> service::sortGender()//sorts the females in the list to the top
         }
     }
     return _listV;
-}
-
-void service::addPerson(const Person &input)//makes the user capable to add people as long as they're not already on the list
-{
-    if(!alreadyInDatabase(input.getName()))
-    {
-        dataAccess addNew;
-        _listV.push_back(input);
-        addNew.setVector(_listV);
-        addNew.changeFile();
-    }
-}
-
-void service::removePerson(const Person &input)//makes the user capable to remove people
-{
-    if(alreadyInDatabase(input.getName()))//check if its in the list
-    {
-        dataAccess addNew;
-        removeFromDatabase(input.getName());
-        addNew.setVector(_listV);
-        addNew.changeFile();
-    }
-}
-
-void service::removeFromDatabase(const string &name)//takes the list, removes an elemnt then rewrites the info.txt with the list without what was removed
-{
-    for (size_t i=0; i< _listV.size(); i++)
-    {
-        if (_listV[i].getName() == name)
-        {
-            _listV.erase(_listV.begin()+i);
-        }
-    }
 }
 
 vector<Person> service::sortAlphabetically()//insertion sort
@@ -186,24 +136,6 @@ vector<Person> service::sortAlphabeticallyLastName()
     return _listV;
 }
 
-string service::getLastName(const string& nafn) const//nær í seinasta orðið í setningu eða seinast nafnið í nafna tilvikum
-{
-    int Li=0;
-    string LastName;
-    for (size_t i=0; i<nafn.size(); i++)
-    {
-        if (nafn[i]==' ')
-        {
-            Li=i+1;
-        }
-    }
-    for (size_t i=Li; i<nafn.size(); i++)
-    {
-        LastName += nafn[i];
-    }
-    return LastName;
-}
-
 vector<Person> service::sortBirthYear()
 {
     bool again = true;
@@ -220,31 +152,6 @@ vector<Person> service::sortBirthYear()
         }
     }
     return _listV;
-}
-
-bool service::alreadyInDatabase(const string& name)//checkar hvort nafnið sé til í databasinum
-{
-    for (size_t i=0; i< _listV.size(); i++)
-    {
-        if (_listV[i].getName() == name)
-        {
-            return true;
-        }
-    }
-    return false;
-}
-
-bool service::lookForPerson(const string &name)//checkar hvort eh partur af nafni sé til í listanum
-{
-    bool foundname = false;
-    for (size_t i=0; i< _listV.size(); i++)
-    {
-        if (toLower(_listV[i].getName()).find(toLower(name)) != string::npos)
-        {
-            foundname = true;
-        }
-    }
-    return foundname;
 }
 
 vector<Person> service::findPerson(const string &name)//finnur personunar og addar þeim í vector
@@ -278,23 +185,79 @@ vector<Person> service::sortDeath()
     return _listV;
 }
 
-Person service::findPersonExactly(const string& name)
+void service::swap(Person& a, Person& b)
 {
-    Person Personfoundexactly;
+    Person temp = a;
+    a = b;
+    b = temp;
+}
+
+void service::sortList()// depending on input from user, do something
+{
+
+    if(_command == "a")
+    {
+        _listV = sortAlphabetically();
+    }
+    else if(_command == "l")
+    {
+        _listV = sortAlphabeticallyLastName();
+    }
+    else if(_command == "b")
+    {
+        _listV = sortBirthYear();
+    }
+    else if(_command == "d")
+    {
+        _listV = sortDeath();
+    }
+    else if(_command == "g")
+    {
+        _listV = sortGender();
+    }
+    else if(_command == "quit")
+    {
+        _program=false;
+    }
+
+}
+
+void service::setCommand(const string &c)//set the input command from user in a variable
+{
+    _command = c;
+}
+
+void service::addPerson(const Person &input)//makes the user capable to add people as long as they're not already on the list
+{
+    if(!alreadyInDatabase(input.getName()))
+    {
+        dataAccess addNew;
+        _listV.push_back(input);
+        addNew.setVector(_listV);
+        addNew.changeFile();
+    }
+}
+
+void service::removePerson(const Person &input)//makes the user capable to remove people
+{
+    if(alreadyInDatabase(input.getName()))//check if its in the list
+    {
+        dataAccess addNew;
+        removeFromDatabase(input.getName());
+        addNew.setVector(_listV);
+        addNew.changeFile();
+    }
+}
+
+void service::removeFromDatabase(const string &name)//takes the list, removes an elemnt then rewrites the info.txt with the list without what was removed
+{
     for (size_t i=0; i< _listV.size(); i++)
     {
         if (_listV[i].getName() == name)
         {
-            Personfoundexactly = _listV[i];
+            _listV.erase(_listV.begin()+i);
         }
     }
-    return Personfoundexactly;
-}
-
-Person service::generateQuestion()
-{
-    srand(time(0));
-    return _listV[rand()%_listV.size()];
 }
 
 void service::generateOptions(const Person& correct, string& a, string& b, string& c, string& d)
@@ -318,6 +281,43 @@ void service::generateOptions(const Person& correct, string& a, string& b, strin
 void service::setProgram(const bool& input)
 {
     _program = input;
+}
+
+Person service::findPersonExactly(const string& name)
+{
+    Person Personfoundexactly;
+    for (size_t i=0; i< _listV.size(); i++)
+    {
+        if (_listV[i].getName() == name)
+        {
+            Personfoundexactly = _listV[i];
+        }
+    }
+    return Personfoundexactly;
+}
+
+Person service::generateQuestion()
+{
+    srand(time(0));
+    return _listV[rand()%_listV.size()];
+}
+
+string service::getLastName(const string& nafn) const//nær í seinasta orðið í setningu eða seinast nafnið í nafna tilvikum
+{
+    int Li=0;
+    string LastName;
+    for (size_t i=0; i<nafn.size(); i++)
+    {
+        if (nafn[i]==' ')
+        {
+            Li=i+1;
+        }
+    }
+    for (size_t i=Li; i<nafn.size(); i++)
+    {
+        LastName += nafn[i];
+    }
+    return LastName;
 }
 
 string service::assignSelection(string& answer, const string& a, const string& b, const string& c, const string& d)
@@ -350,11 +350,6 @@ string service::aliveCheck(const Person& p)
         return "and died in " + to_string(p.getDeathYear()); //converting int to string to return it as one
     else
         return "and is still alive";
-}
-
-bool service::getProgram() const
-{
-    return _program;
 }
 
 string service::toLower(const string& toLowerString)//to lower

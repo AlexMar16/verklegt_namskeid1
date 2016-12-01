@@ -13,7 +13,7 @@ public:
     Person generateQuestion();
     vector<int> properties();
     vector<Person> findPerson(const string& name);
-    vector<Person> getList();
+    vector<Person> getList() const;
     void setCommand(const string& command);
     void addPerson(const Person& input);
     void removePerson(const Person& input);
