@@ -30,6 +30,7 @@ public:
     void setProgram(bool input);
     bool getProgram();
     string getLastName(const string& nafn);
+    string tolower(string data);
     vector<Person> sortAlphabeticallyLast();
 
     Person generateQuestion();

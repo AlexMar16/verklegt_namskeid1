@@ -1,6 +1,6 @@
 #include "service.h"
 #include <person.h>
-
+#include <algorithm>
 
 using namespace std;
 
@@ -197,7 +197,7 @@ vector<Person> service::findPerson(string name)
     _listSearchedPerson.clear();
     for (size_t i=0; i< _listV.size(); i++)
     {
-        if (_listV[i].getName().find(name) != string::npos)
+        if (tolower(_listV[i].getName()).find(tolower(name)) != string::npos)
         {
             _listSearchedPerson.push_back(_listV[i]);
         }
@@ -337,5 +337,10 @@ bool service::specialCommand(const string& command)
         return false;
 }
 
-
+string service::tolower(string tolowerstring)
+{
+    string data = tolowerstring;
+    std::transform(data.begin(), data.end(), data.begin(), ::tolower);
+    return data;
+}
 
