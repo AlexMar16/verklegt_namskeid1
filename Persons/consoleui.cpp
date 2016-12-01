@@ -198,9 +198,8 @@ void consoleUI::sortCommand()
     cout << "l - Sort by last name."       << endl;
 
     string choice;
-    bool forward = false;
 
-    while(!forward)
+    while(true)
     {
         cout << "Select sorting method: ";
         getline(cin, choice);
@@ -208,12 +207,10 @@ void consoleUI::sortCommand()
         if(sortSpecialCommand(choice))
         {
             _turn.sortList(choice);
-            forward = true;
             break;
         }
         else
         {
-            forward = false;
             cout << "Invalid input!" << endl;
         }
     }
