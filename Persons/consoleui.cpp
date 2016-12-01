@@ -145,16 +145,55 @@ void consoleUI::addCommand()
     nameCounter++;
   }
 
-  cout << "Gender (male/female) in lowercase: ";
-  cin >> gender;
+  while(true)
+  {
+      cout << "Gender (male/female/other) in lowercase: ";
+      cin >> gender;
+      if (gender == "male" || gender == "female" || gender == "other")
+      {
+          break;
+      }
+      else
+      {
+          cout << "Invalid input!" << endl;
+          cin.clear();
+          cin.ignore();
+      }
+  };
   input.setGender(gender);
 
-  cout << "Birth year (YYYY): ";
-  cin >> birthYear;
+  while(true)
+  {
+      cout << "Birth year (YYYY): ";
+      cin >> birthYear;
+      if (birthYear > 1750 && birthYear < 2000)
+      {
+          break;
+      }
+      else
+      {
+          cout << "Invalid input!" << endl;
+          cin.clear();
+          cin.ignore();
+      };
+  }
   input.setBirthYear(birthYear);
 
-  cout << "Died (0 if still alive): ";
-  cin >> deathYear;
+  while(true)
+  {
+      cout << "Died (0 if still alive): ";
+      cin >> deathYear;
+      if ((deathYear > 1800 && deathYear < 2100) || deathYear == 0)
+      {
+          break;
+      }
+      else
+      {
+          cout << "Invalid input!" << endl;
+          cin.clear();
+          cin.ignore();
+      };
+  }
   input.setDeathYear(deathYear);
 
   _turn.addPerson(input);
