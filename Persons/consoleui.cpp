@@ -24,7 +24,6 @@ void consoleUI::run()
         cout << "quit  - This command will quit the program." << endl << endl;
         cout << setw(ASTERISK_WIDTH)<< setfill(ASTERISK) <<  "*" << endl;
         cout << "command: ";
-        cin.ignore();
         getline(cin, command);
         cout << endl;
 
@@ -68,7 +67,7 @@ void consoleUI::validList(string _command)// depending on input from user, do so
     {
         _valid = true;
         sortCommand();
-    }    
+    }
     else if(_command == "quiz")
     {
         quizCommand();
@@ -114,6 +113,7 @@ void consoleUI::quizCommand()//quiz commandid
         cout << endl << "Correct!!!" << endl << endl;
     else
         cout << endl << "Wrong!" << endl << endl;
+    cin.ignore();
 }
 
 void consoleUI::sortCommand()
@@ -126,31 +126,24 @@ void consoleUI::sortCommand()
     cout << "Select sorting method: ";
     string input;
     cin >> input;
-    if(input != "a" && input != "b" && input != "d" && input != "g" && input != "l")
-    {
-        _valid = false;
-    }
 
     _turn.setCommand(input);// located in service.cpp
+    cin.ignore();
 }
 
 void consoleUI::addCommand()
 {
   string name, gender;
-  int birthYear = 0, deathYear = 0, nameCounter = 0;
+  int birthYear = 0, deathYear = 0;
   Person input;
 
   cout << "Please enter the following information about the new computer scientist " << endl;
   cout << "in the following order." << endl;
   cout << "Be aware you cannot put letters that are not in the English alphabet." << endl;
 
-  cout << "Name (Minimum two names, Maximum three): ";
-  while(nameCounter != 3) //Bæta við virkni, geta haft 2 nöfn.
-  {
-    cin >> name;
-    input.setName(name);
-    nameCounter++;
-  }
+  cout << "Name: ";
+  getline(cin, name);
+  input.setName(name);
 
   while(true)
   {
@@ -163,8 +156,6 @@ void consoleUI::addCommand()
       else
       {
           cout << "Invalid input!" << endl;
-          cin.clear();
-          cin.ignore();
       }
   };
   input.setGender(gender);
@@ -180,8 +171,6 @@ void consoleUI::addCommand()
       else
       {
           cout << "Invalid input!" << endl;
-          cin.clear();
-          cin.ignore();
       };
   }
   input.setBirthYear(birthYear);
@@ -197,13 +186,14 @@ void consoleUI::addCommand()
       else
       {
           cout << "Invalid input!" << endl;
-          cin.clear();
-          cin.ignore();
+
+
       };
   }
   input.setDeathYear(deathYear);
 
   _turn.addPerson(input);
+  cin.ignore();
 }
 
 
@@ -213,11 +203,12 @@ void consoleUI::removeCommand()
     Person input;
     cout << "Enter the full name of the scientist to remove from the database: ";
     cin.ignore();
-    getline(cin, fullName);//tekur inn all nafnið
+    getline(cin, fullName);
 
 
 
-    input = _turn.findPersonExactly(fullName);//checkar hvort hann se til i database
+
+    input = _turn.findPersonExactly(fullName);
     if (input.getName() == "")
     {
         cout << endl << "Person not found!" << endl;
@@ -226,9 +217,9 @@ void consoleUI::removeCommand()
     {
         cout << endl << fullName << " removed" << endl;
     }
-    input = _turn.findPersonExactly(fullName);//finnur personuna sem ad a ad remova
+    input = _turn.findPersonExactly(fullName);
 
-    _turn.removePerson(input);// removar personuna med þvi að yfir skrifa listann með eins bara án eins
+    _turn.removePerson(input);
 
     //input.setDeathYear(deathYear);
 
@@ -241,10 +232,10 @@ void consoleUI::findCommand()
     cout << "Name to find: ";
     cin.ignore();
     getline(cin, toFind);
-    _printOut = _turn.findPerson(toFind);//checkar hvort personan se til
+    _printOut = _turn.findPerson(toFind);
     if (_turn.lookForPerson(toFind))
     {
-        cout << _printOut;//prentar personur sem ad eru med strenginn i nafni sinu
+        cout << _printOut;
     }
     else
     {
@@ -252,7 +243,7 @@ void consoleUI::findCommand()
     }
 }
 
-void consoleUI::statusCommand()
+void consoleUI::statusCommand()//prints out number of people that fit to each category
 {
     _printStatus = _turn.properties();
 
@@ -260,4 +251,5 @@ void consoleUI::statusCommand()
    cout<< "Number of deceased        : "<<_printStatus[1] << endl;
    cout<< "Total females on the list : "<< _printStatus[2]<<endl;
    cout<< "Total Males on the list   : "<< _printStatus[3]<<endl;
+
 }

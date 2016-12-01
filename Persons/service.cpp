@@ -51,39 +51,48 @@ void service::sortList()// depending on input from user, do something
     }
 }
 
-vector<int> service::properties()
+vector<int> service::properties()// The "status" command activates this function
 {
     int nameQuant=0;
     int deathQuant=0;
     int MgenderQuant=0;
     int FgenderQuant=0;
+
     vector<int> StatusVec;
 
 
-    for(size_t i=0; i< _listV.size(); i++)
+    for(size_t i=0; i< _listV.size(); i++)//goes through everything in the vector
     {
         nameQuant++;
 
-       if(_listV[i].getDeathYear() != 0)
-       {
-            deathQuant++;
-       }
-            else if(_listV[i].getGender()=="female")
-            {
-                FgenderQuant++;
-            }
-                else if(_listV[i].getGender()=="male")
-                {
-                    MgenderQuant++;
-                }
+        if(_listV[i].getDeathYear() != 0)
+        {
+         deathQuant++;
+        }
     }
+    for(size_t k= 0; k<_listV.size(); k++)
+    {
+        if(_listV[k].getGender()=="female")
+        {
+        FgenderQuant++;
+        }
+    }
+    for(size_t z = 0; z < _listV.size(); z++)
+    {
+        if(_listV[z].getGender()=="male")
+        {
+        MgenderQuant++;
+        }
+    }
+
 
     _statusVec.push_back(nameQuant);
     _statusVec.push_back(deathQuant);
     _statusVec.push_back(FgenderQuant);
     _statusVec.push_back(MgenderQuant);
 
-    return _statusVec;
+
+    return _statusVec;// returns the vector to consoleui.cpp
 }
 
 void service::setCommand(string c)//set the input command from user in a variable
@@ -367,7 +376,7 @@ bool service::getProgram()
 
 bool service::specialCommand(const string& command)
 {
-    if (command == "find" || command == "quit" || command == "quiz" || command == "remove" || command == "status")
+    if (command == "find" || command == "quit" || command == "quiz" || command == "remove")
         return true;
     else
         return false;
@@ -379,4 +388,3 @@ string service::tolower(string tolowerstring)//to lower
     std::transform(data.begin(), data.end(), data.begin(), ::tolower);
     return data;
 }
-
