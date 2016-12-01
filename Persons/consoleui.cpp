@@ -92,7 +92,6 @@ void consoleUI::validList(string _command)// depending on input from user, do so
 void consoleUI::quizCommand()
 {
     Person question = _turn.generateQuestion();
-    //cout << "We are asking about " << question.getName() << endl;
     cout << _turn.genderCheck(question) <<" was born in " << question.getBirthYear()
          << " and " << _turn.aliveCheck(question) << ", enter (a/b/c/d)" << endl;
 
@@ -202,19 +201,12 @@ void consoleUI::addCommand()
   cin.ignore();
 }
 
-
-
 void consoleUI::removeCommand()
 {
     string fullName;
     Person input;
     cout << "Enter the full name of the scientist to remove from the database: ";
-
     getline(cin, fullName);
-
-
-
-
     input = _turn.findPersonExactly(fullName);
     if (input.getName() == "")
     {
@@ -255,6 +247,5 @@ void consoleUI::statusCommand()//prints out number of people that fit to each ca
    cout<< "Number of deceased        : "<< _printStatus[1] << endl;
    cout<< "Total females on the list : "<< _printStatus[2] << endl;
    cout<< "Total Males on the list   : "<< _printStatus[3] << endl << endl;
-
 }
 
