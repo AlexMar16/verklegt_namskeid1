@@ -243,7 +243,7 @@ void consoleUI::findCommand()
     }
 }
 
-void consoleUI::statusCommand()
+void consoleUI::statusCommand()//prints out number of people that fit to each category
 {
     _printStatus = _turn.properties();
 

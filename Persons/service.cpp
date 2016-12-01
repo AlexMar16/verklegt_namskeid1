@@ -51,7 +51,7 @@ void service::sortList()// depending on input from user, do something
     }
 }
 
-vector<int> service::properties()
+vector<int> service::properties()// The "status" command activates this function
 {
     int nameQuant=0;
     int deathQuant=0;
@@ -61,7 +61,7 @@ vector<int> service::properties()
     vector<int> StatusVec;
 
 
-    for(size_t i=0; i< _listV.size(); i++)
+    for(size_t i=0; i< _listV.size(); i++)//goes through everything in the vector
     {
         nameQuant++;
 
@@ -92,7 +92,7 @@ vector<int> service::properties()
     _statusVec.push_back(MgenderQuant);
 
 
-    return _statusVec;
+    return _statusVec;// returns the vector to consoleui.cpp
 }
 
 void service::setCommand(string c)
