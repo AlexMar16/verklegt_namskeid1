@@ -29,13 +29,13 @@ void consoleUI::run()
 
         _turn.setCommand(command);//setur command i service.cpp
         validList(command);//checkar hvort input command fra user se legit og setur _valid true eda false
-        _turn.sortList();
+
         _printOut = _turn.getList();
         if(_valid)
         {
             cout << _printOut;
         }
-        else if (!_turn.specialCommand(command)) // Gera fall sem checkar a tessu
+        else if (!_turn.specialCommand(command))
         {
             cout << "Invalid command!" << endl << endl;
         }
@@ -124,12 +124,27 @@ void consoleUI::sortCommand()
     cout << "d - Sort by year of death. " << endl;
     cout << "g - Sort by gender. " << endl;
     cout << "l - Sort by last name" << endl;
-    cout << "Select sorting method: ";
-    string input;
-    cin >> input;
 
-    _turn.setCommand(input);// located in service.cpp
-    cin.ignore();
+    string input;
+    bool forward = false;
+
+    while(forward == false)
+    {
+        cout << "Select sorting method: ";
+        getline(cin, input);
+
+        if(input =="a" || input=="b" || input=="d" || input=="g" || input=="l")
+        {
+            _turn.setCommand(input);// located in service.cpp
+            _turn.sortList();
+            forward=true;
+        }
+        else
+        {
+            forward=false;
+            cout<<"Invalid input!"<<endl;
+        }
+    }
 }
 
 void consoleUI::addCommand()

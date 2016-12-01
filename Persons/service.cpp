@@ -25,6 +25,7 @@ vector<Person> service::getList()
 
 void service::sortList()// depending on input from user, do something
 {
+
     if(_command == "a")
     {
         _listV = sortAlphabetically();
@@ -49,6 +50,7 @@ void service::sortList()// depending on input from user, do something
     {
         _program=false;
     }
+
 }
 
 vector<int> service::properties()// The "status" command activates this function
