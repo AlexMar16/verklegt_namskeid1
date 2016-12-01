@@ -208,7 +208,7 @@ void consoleUI::removeCommand()
     Person input;
     int nameCounter = 0;
     cout << "Enter the full name of the scientist to remove from the database: ";
-    cin.ignore();
+
     getline(cin, fullName);
 
 
