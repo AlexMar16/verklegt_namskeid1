@@ -251,4 +251,5 @@ void consoleUI::statusCommand()
    cout<< "Number of deceased        : "<<_printStatus[1] << endl;
    cout<< "Total females on the list : "<< _printStatus[2]<<endl;
    cout<< "Total Males on the list   : "<< _printStatus[3]<<endl;
+
 }

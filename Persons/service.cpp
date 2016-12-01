@@ -57,6 +57,7 @@ vector<int> service::properties()
     int deathQuant=0;
     int MgenderQuant=0;
     int FgenderQuant=0;
+
     vector<int> StatusVec;
 
 
@@ -64,24 +65,32 @@ vector<int> service::properties()
     {
         nameQuant++;
 
-       if(_listV[i].getDeathYear() != 0)
-       {
-            deathQuant++;
-       }
-            else if(_listV[i].getGender()=="female")
-            {
-                FgenderQuant++;
-            }
-                else if(_listV[i].getGender()=="male")
-                {
-                    MgenderQuant++;
-                }
+        if(_listV[i].getDeathYear() != 0)
+        {
+         deathQuant++;
+        }
     }
+    for(size_t k= 0; k<_listV.size(); k++)
+    {
+        if(_listV[k].getGender()=="female")
+        {
+        FgenderQuant++;
+        }
+    }
+    for(size_t z = 0; z < _listV.size(); z++)
+    {
+        if(_listV[z].getGender()=="male")
+        {
+        MgenderQuant++;
+        }
+    }
+
 
     _statusVec.push_back(nameQuant);
     _statusVec.push_back(deathQuant);
     _statusVec.push_back(FgenderQuant);
     _statusVec.push_back(MgenderQuant);
+
 
     return _statusVec;
 }
@@ -366,7 +375,7 @@ bool service::getProgram()
 
 bool service::specialCommand(const string& command)
 {
-    if (command == "find" || command == "quit" || command == "quiz" || command == "remove" || command == "status")
+    if (command == "find" || command == "quit" || command == "quiz" || command == "remove")
         return true;
     else
         return false;
