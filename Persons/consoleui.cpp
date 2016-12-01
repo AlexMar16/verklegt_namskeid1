@@ -24,6 +24,7 @@ void consoleUI::run()
         cout << "quit  - This command will quit the program." << endl << endl;
         cout << setw(ASTERISK_WIDTH)<< setfill(ASTERISK) <<  "*" << endl;
         cout << "command: ";
+        cin.ignore();
         getline(cin, command);
         cout << endl;
 

@@ -366,7 +366,7 @@ bool service::getProgram()
 
 bool service::specialCommand(const string& command)
 {
-    if (command == "find" || command == "quit" || command == "quiz" || command == "remove")
+    if (command == "find" || command == "quit" || command == "quiz" || command == "remove" || command == "status")
         return true;
     else
         return false;
