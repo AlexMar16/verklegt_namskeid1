@@ -45,7 +45,7 @@ void consoleUI::run()
         {
             cout << _printOut;
         }
-        else if (!_turn.specialCommand(command))
+        else if (!specialCommand(command))
         {
             cout << "Invalid command!" << endl << endl;
         }
@@ -86,6 +86,7 @@ void consoleUI::validList(string _command)// depending on input from user, do so
     else if (_command == "quit")
     {
         _valid = false;
+        _turn.setProgram(_valid);
     }
     else if(_command =="status")
     {
@@ -134,21 +135,21 @@ void consoleUI::sortCommand()
     cout << "g - Sort by gender. " << endl;
     cout << "l - Sort by last name" << endl;
 
-    string input;
+    string choice;
     bool forward = false;
 
     while(forward == false)
     {
         cout << "Select sorting method: ";
-        getline(cin, input);
+        getline(cin, choice);
 
-        if(input =="a" || input=="b" || input=="d" || input=="g" || input=="l")
+        if(extraspecialCommand(choice))
         {
-            _turn.setCommand(input);// located in service.cpp
+            _turn.setCommand(choice);// located in service.cpp
             _turn.sortList();
             forward=true;
         }
-        else if(!)
+        else if(!extraspecialCommand(choice))
         {
             forward=false;
             cout<<"Invalid input!"<<endl;
@@ -156,7 +157,7 @@ void consoleUI::sortCommand()
     }
 
 
-    _turn.setCommand(input);// located in service.cpp
+    _turn.setCommand(choice);// located in service.cpp
 }
 
 void consoleUI::addCommand()
@@ -305,10 +306,8 @@ bool consoleUI::specialCommand(const string& command)
     }
 }
 
-bool service::extraspecialCommand(const string& choice)
+bool consoleUI::extraspecialCommand(const string& choice)
 {
-
-
     if(choice=="a")
     {
         return true;
