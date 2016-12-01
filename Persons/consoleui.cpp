@@ -24,7 +24,7 @@ void consoleUI::run()
         cout << "quit  - This command will quit the program." << endl << endl;
         cout << setw(ASTERISK_WIDTH)<< setfill(ASTERISK) <<  "*" << endl;
         cout << "command: ";
-        cin >> command;
+        getline(cin, command);
         cout << endl;
 
         _turn.setCommand(command);//setur command i service.cpp
@@ -114,6 +114,7 @@ void consoleUI::quizCommand()
         cout << endl << "Correct!!!" << endl << endl;
     else
         cout << endl << "Wrong!" << endl << endl;
+    cin.ignore();
 }
 
 void consoleUI::sortCommand()
@@ -126,12 +127,9 @@ void consoleUI::sortCommand()
     cout << "Select sorting method: ";
     string input;
     cin >> input;
-    if(input != "a" && input != "b" && input != "d" && input != "g" && input != "l")
-    {
-        _valid = false;
-    }
 
     _turn.setCommand(input);// located in service.cpp
+    cin.ignore();
 }
 
 void consoleUI::addCommand()
@@ -145,6 +143,7 @@ void consoleUI::addCommand()
   cout << "Be aware you cannot put letters that are not in the English alphabet." << endl;
 
   cout << "Name: ";
+  cin.ignore();
   getline(cin, name);
 
   while(true)
@@ -194,6 +193,8 @@ void consoleUI::addCommand()
       };
   }
   input.setDeathYear(deathCheck);
+
+  cout << endl;
 
   _turn.addPerson(input);
   cin.ignore();
