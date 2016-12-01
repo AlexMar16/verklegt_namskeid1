@@ -102,6 +102,7 @@ void service::removefromdatabase(string name)
     }
 }
 
+
 vector<Person> service::sortAlphabetically()//insertion sort
 {
     bool again = true;
@@ -145,7 +146,6 @@ vector<Person> service::sortAlphabeticallyLast()
 
 string service::getLastName(const string& nafn)
 {
-
     int Li=0;
     string LastName;
     for (size_t i=0; i<nafn.size(); i++)

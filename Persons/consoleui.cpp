@@ -145,16 +145,55 @@ void consoleUI::addCommand()
     nameCounter++;
   }
 
-  cout << "Gender (male/female) in lowercase: ";
-  cin >> gender;
+  while(true)
+  {
+      cout << "Gender (male/female/other) in lowercase: ";
+      cin >> gender;
+      if (gender == "male" || gender == "female" || gender == "other")
+      {
+          break;
+      }
+      else
+      {
+          cout << "Invalid input!" << endl;
+          cin.clear();
+          cin.ignore();
+      }
+  };
   input.setGender(gender);
 
-  cout << "Birth year (YYYY): ";
-  cin >> birthYear;
+  while(true)
+  {
+      cout << "Birth year (YYYY): ";
+      cin >> birthYear;
+      if (birthYear > 1750 && birthYear < 2000)
+      {
+          break;
+      }
+      else
+      {
+          cout << "Invalid input!" << endl;
+          cin.clear();
+          cin.ignore();
+      };
+  }
   input.setBirthYear(birthYear);
 
-  cout << "Died (0 if still alive): ";
-  cin >> deathYear;
+  while(true)
+  {
+      cout << "Died (0 if still alive): ";
+      cin >> deathYear;
+      if ((deathYear > 1800 && deathYear < 2100) || deathYear == 0)
+      {
+          break;
+      }
+      else
+      {
+          cout << "Invalid input!" << endl;
+          cin.clear();
+          cin.ignore();
+      };
+  }
   input.setDeathYear(deathYear);
 
   _turn.addPerson(input);
@@ -163,51 +202,26 @@ void consoleUI::addCommand()
 
 void consoleUI::removeCommand()
 {
-    string first_name;
-    string middle_name = "";
-    string last_name;
-    string fullname;
-    string istheremiddlename;
+    string fullName;
     Person input;
     int nameCounter = 0;
-    cout << "Lastname: ";
-    cin >> last_name;
-    cout << "Firstname: ";
-    cin >> first_name;
-    cout <<"Does the person have a middle name?(y/n)";
-    do
-    {
-          cin >> istheremiddlename;
-          switch (_turn.YorN(istheremiddlename)) {
-          case 1:
-              cout << "Middlename: ";
-              cin >> middle_name;
-              fullname = first_name + " " + middle_name + " " + last_name;
-              break;
-          case 2:
-              fullname = first_name + " " + last_name;
-              break;
-          case 3:
-              cout << "Please enter y or n" << endl;
-              break;
-          default:
-              break;
-          }
-    }while(_turn.YorN(istheremiddlename) > 2);
+    cout << "Enter the full name of the scientist to remove from the database: ";
+    cin.ignore();
+    getline(cin, fullName);
 
 
 
 
-    input = _turn.findPersonExactly(fullname);
+    input = _turn.findPersonExactly(fullName);
     if (input.getName() == "")
     {
         cout << endl << "Person not found!" << endl;
     }
     else
     {
-        cout << endl << fullname << " removed" << endl;
+        cout << endl << fullName << " removed" << endl;
     }
-    input = _turn.findPersonExactly(fullname);
+    input = _turn.findPersonExactly(fullName);
 
     _turn.removePerson(input);
 
@@ -220,12 +234,12 @@ void consoleUI::findCommand()
 {
     string toFind;
     cout << "Name to find: ";
-    cin >> toFind;
+    cin.ignore();
+    getline(cin, toFind);
     _printOut = _turn.findPerson(toFind);
     if (_turn.lookForPerson(toFind))
     {
         cout << _printOut;
-
     }
     else
     {

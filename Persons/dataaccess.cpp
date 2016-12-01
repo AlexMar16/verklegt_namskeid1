@@ -12,7 +12,9 @@ vector<Person> dataAccess::getVector()
 void dataAccess::getPersons()
 {
     ifstream personFile;
+
     personFile.open("info.txt");
+
     if(personFile)
     {
         Person temp;
@@ -31,6 +33,7 @@ void dataAccess::addPerson()
     ofstream newPerson;
 
     newPerson.open("info.txt");
+
 
     if(newPerson)
     {
