@@ -20,6 +20,7 @@ void consoleUI::run()
         cout << "quiz  - This command lets you take a quiz about the computer scientists." << endl;
         cout << "add   - This command allows you to add a person to the list." << endl;
         cout << "remove- This command allows you to find a certain person in the list." << endl;
+        cout << "status- This command displays info about the list "<<endl;
         cout << "quit  - This command will quit the program." << endl << endl;
         cout << setw(ASTERISK_WIDTH)<< setfill(ASTERISK) <<  "*" << endl;
         cout << "command: ";
@@ -75,6 +76,12 @@ void consoleUI::validList(string _command)// depending on input from user, do so
     else if (_command == "quit")
     {
         _valid = false;
+    }
+    else if(_command =="status")
+    {
+        _valid= false;
+        statusCommand();
+
     }
     else
     {
