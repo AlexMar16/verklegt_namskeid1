@@ -12,18 +12,21 @@ class consoleUI
 public:
     consoleUI();
     void run();
-    void validList(string _command);
+
+private:
+    vector<int> _printStatus;
+    vector<Person> _printOut;
+    bool _print;
+    bool specialCommand(const string& command);
+    bool sortSpecialCommand(const string& choice);
+    void printList(const string& _command);
     void addCommand();
     void removeCommand();
     void sortCommand();
     void findCommand();
     void quizCommand();
     void statusCommand();
-private:
     service _turn;
-    vector<Person> _printOut;
-    vector<int> _printStatus;
-    bool _valid;
 };
 
 #endif // CONSOLEUI_H

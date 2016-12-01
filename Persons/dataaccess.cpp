@@ -15,9 +15,7 @@ vector<Person> dataAccess::getVector()
 void dataAccess::getPersons()
 {
     ifstream personFile;
-
     personFile.open(FILENAME);
-
     if(personFile)
     {
         Person temp;
@@ -29,7 +27,7 @@ void dataAccess::getPersons()
     personFile.close();
 }
 
-void dataAccess::addPerson()
+void dataAccess::changeFile()
 {
     ofstream newPerson;
 
@@ -51,28 +49,6 @@ void dataAccess::addPerson()
     }
 
     newPerson.close();
-}
-
-void dataAccess::removePerson()
-{
-    ofstream removePerson;
-
-    removePerson.open(FILENAME);
-
-    if(removePerson)
-    {
-        for(size_t i = 0; i < _persons.size(); i++)
-        {
-            removePerson << _persons[i].getName() << endl << _persons[i].getGender()
-                      << endl <<_persons[i].getBirthYear() << endl;
-            if(_persons[i].getDeathYear() != '0')
-            {
-                removePerson << _persons[i].getDeathYear() << endl;
-            }
-        }
-    }
-
-    removePerson.close();
 }
 
 void dataAccess::setVector(vector<Person> input)

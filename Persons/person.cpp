@@ -27,11 +27,11 @@ ostream& operator << (ostream& out, const Person& rhs)
 
     if(rhs._deathYear!= 0)
     {
-      out << rhs._deathYear << endl;
+        out << rhs._deathYear << endl;
     }
     else
     {
-       out << setw(20) << setfill(SPACE) << "Still alive!" << endl;
+        out << setw(20) << setfill(SPACE) << "Still alive!" << endl;
     }
     return out;
 }
@@ -45,7 +45,7 @@ ostream& operator << (ostream& out, vector<Person>& rhs)
     out << left << setw(20) << setfill(SPACE) <<"Died" << endl;
     for(size_t i = 0; i < rhs.size(); i++)
     {
-       out << rhs[i];
+        out << rhs[i];
     }
     out << endl;
     return out;
