@@ -33,7 +33,7 @@ void consoleUI::run()
         {
             cout << _printOut;
         }
-        else if (command != "find" && command != "quit")
+        else if (command != "find" && command != "quit" && command != "quiz")
         {
             cout << "Invalid command!" << endl << endl;
         }
@@ -64,10 +64,8 @@ void consoleUI::validList(string _command)// depending on input from user, do so
     }
     else if(_command == "quiz")
     {
-        cout << "pre quiz command";
         quizCommand();
-        cout << "post quiz command";
-        _valid = true;
+        _valid = false;
     }
     else if (_command == "quit")
     {
@@ -77,15 +75,33 @@ void consoleUI::validList(string _command)// depending on input from user, do so
     {
         _valid = false;
     }
-
 }
 
 void consoleUI::quizCommand()
 {
-    _printQuestion = _turn.getListQuestions();
-    cout << "pre print Q";
-    cout << _printQuestion[0];
-    cout << "post print Q";
+    Person question = _turn.generateQuestion();
+    //cout << "We are asking about " << question.getName() << endl;
+    cout << _turn.genderCheck(question) <<" was born in " << question.getBirthYear()
+         << " and " << _turn.aliveCheck(question) << endl;
+
+    string a, b, c, d;
+    _turn.generateOptions(question, a, b, c, d);
+
+    cout << "a)\t" << a << endl;
+    cout << "b)\t" << b << endl;
+    cout << "c)\t" << c << endl;
+    cout << "d)\t" << d << endl;
+
+    string answerString;
+    cout << "My answer: ";
+    cin >> answerString;
+
+    _turn.assignSelection(answerString, a, b, c, d);
+
+    if (answerString == question.getName())
+        cout << endl << "Correct!!!" << endl << endl;
+    else
+        cout << endl << "Wrong!" << endl << endl;
 }
 
 void consoleUI::sortCommand()

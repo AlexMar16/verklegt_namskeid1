@@ -1,5 +1,9 @@
-#include "question.h"
+#include "quiz.h"
 
+/*Quiz::Quiz()
+{
+
+}
 Question::Question()
 {
 
@@ -38,10 +42,9 @@ ifstream& operator >> (ifstream& in, Question& rhs)
 
 ostream& operator << (ostream& out, const Question& rhs)
 {
-    out << "LOLOL";
-    out << "question: " << rhs._question << "asdasd";
+    out << rhs._question << "asdasd";
     return out;
-}
+}*/
 
 
 

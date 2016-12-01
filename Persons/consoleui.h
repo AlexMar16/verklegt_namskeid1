@@ -4,7 +4,7 @@
 #include "service.h"
 #include <iostream>
 #include <vector>
-#include "question.h"
+#include "quiz.h"
 
 using namespace std;
 
@@ -21,7 +21,7 @@ public:
 private:
     service _turn;
     vector<Person> _printOut;
-    vector<Question> _printQuestion;
+    //vector<Question> _printQuestion;
     bool _valid;
 };
 

@@ -14,11 +14,11 @@ SOURCES += main.cpp \
     service.cpp \
     dataaccess.cpp \
     person.cpp \
-    question.cpp
+    quiz.cpp
 
 HEADERS += \
     consoleui.h \
     service.h \
     dataaccess.h \
     person.h \
-    question.h
+    quiz.h

@@ -1,8 +1,6 @@
 #include "service.h"
-#include <vector>
-#include <iosfwd>
 #include <person.h>
-#include <iostream>
+
 
 using namespace std;
 
@@ -25,10 +23,10 @@ vector<Person> service::getList()
    return _listV;
 }
 
-vector<Question> service::getListQuestions()
+/*vector<Question> service::getListQuestions()
 {
     return _listQuestions;
-}
+}*/
 
 void service::displayList()// depending on input from user, do something
 {
@@ -86,7 +84,6 @@ void service::addPerson(Person input)//makes the user capable to add people as l
         addNew.addPerson();
     }
 }
-
 
 vector<Person> service::sortAlphabetically()//insertion sort
 {
@@ -221,9 +218,67 @@ vector<Person> service::sortDeath()
     }
     return _listV;
 }
+
+Person service::generateQuestion()
+{
+    srand(time(0));
+    return _listV[rand()%_listV.size()];
+}
+
+void service::generateOptions(const Person& correct, string& a, string& b, string& c, string& d)
+{
+    //srand(time(NULL));
+    a = _listV[rand()%_listV.size()].getName(); //generating random answers
+    b = _listV[rand()%_listV.size()].getName();
+    c = _listV[rand()%_listV.size()].getName();
+    d = _listV[rand()%_listV.size()].getName();
+
+    int random = rand() % 4;
+    if(random == 0)
+        a = correct.getName();      //assigning the correct answer to one of the answers
+    else if(random == 1)
+        b = correct.getName();
+    else if(random == 2)
+        c = correct.getName();
+    else
+        d = correct.getName();
+}
+
 void service::setProgram(bool input)
 {
     _program = input;
+}
+
+string service::assignSelection(string& answer, const string& a, const string& b, const string& c, const string& d)
+{
+    if (answer == "a")
+        answer = a;
+    else if (answer == "b")
+        answer = b;
+    else if (answer == "c")
+        answer = c;
+    else if (answer == "d")
+        answer = d;
+    else
+        answer = "0";
+
+    return answer;
+}
+
+string service::genderCheck(const Person& p)
+{
+    if (p.getGender() == "male")
+        return "He";
+    else
+        return "She";
+}
+
+string service::aliveCheck(const Person& p)
+{
+    if (p.getDeathYear() != 0)
+        return "and died in " + to_string(p.getDeathYear()); //converting int to string to return it as one
+    else
+        return "and is still alive";
 }
 
 bool service::getProgram()

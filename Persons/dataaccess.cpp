@@ -3,7 +3,7 @@
 dataAccess::dataAccess()
 {
     getPersons();
-    getQuestions();
+    //getQuestions();
 }
 
 vector<Person> dataAccess::getVector()
@@ -13,7 +13,7 @@ vector<Person> dataAccess::getVector()
 void dataAccess::getPersons()
 {
     ifstream personFile;
-    personFile.open("info.txt");
+    personFile.open("C:/Users/Sindri/verklegt_namskeid1/verklegt_namskeid1/Persons/info.txt");
     if(personFile)
     {
         Person temp;
@@ -24,10 +24,11 @@ void dataAccess::getPersons()
     }
 }
 
-void dataAccess::getQuestions()
+/*void dataAccess::getQuestions()
 {
     ifstream questionFile;
-    questionFile.open("study.txt");
+    questionFile.open(
+"study.txt");
     if(questionFile)
     {
         Question temp;
@@ -36,7 +37,7 @@ void dataAccess::getQuestions()
             _questions.push_back(temp);
         }
     }
-}
+}*/
 
 void dataAccess::addPerson()
 {

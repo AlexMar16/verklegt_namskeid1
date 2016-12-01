@@ -21,7 +21,7 @@ public:
     vector<Person> sortBirthYear();
     vector<Person> sortDeath();
     vector<Person> sortGender();
-    vector<Question> getListQuestions();
+    //vector<Question> getListQuestions();
     bool lookForPerson(string name);
     vector<Person> sortNumerically();
     void displayList();
@@ -31,14 +31,21 @@ public:
     vector<Person> sortAlphabeticallyLast();
 
 
+    Person generateQuestion();
+    void generateOptions(const Person& correct, string& a, string& b, string& c, string& d);
+    string assignSelection(string& answer, const string& a, const string& b, const string& c, const string& d);
+    string genderCheck(const Person& p);
+    string aliveCheck(const Person& p);
+
 private:
     vector<Person> _listV;
     vector<Person> _listSearchedPerson;
-    vector<Question> _listQuestions;
+    //vector<Question> _listQuestions;
     string _command;
     bool _keepGoing;
     bool _valid;
     bool _program;
+    int randomNumberGenerator();
 };
 
 #endif // SERVICE_H
