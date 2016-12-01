@@ -210,7 +210,7 @@ bool service::lookForPerson(string name)
     bool foundname = false;
     for (size_t i=0; i< _listV.size(); i++)
     {
-        if (_listV[i].getName().find(name) != string::npos)  //AlreadyInDatabase og lookForPerson gera það sama
+        if (_listV[i].getName().find(name) != string::npos)
         {
             foundname = true;
         }
@@ -327,6 +327,14 @@ int service::YorN(string YorNinput)
 bool service::getProgram()
 {
     return _program;
+}
+
+bool service::specialCommand(const string& command)
+{
+    if (command == "find" || command == "quit" || command == "quiz" || command == "remove")
+        return true;
+    else
+        return false;
 }
 
 
