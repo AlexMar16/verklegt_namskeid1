@@ -14,10 +14,9 @@ public:
     vector<int> properties();
     vector<Person> findPerson(const string& name);
     vector<Person> getList() const;
-    void setCommand(const string& command);
     void addPerson(const Person& input);
     void removePerson(const Person& input);
-    void sortList();
+    void sortList(const string& command);
     void setProgram(const bool& input);
     void generateOptions(const Person& correct, string& a, string& b, string& c, string& d);
     string getLastName(const string& nafn) const;
@@ -42,7 +41,6 @@ private:
     vector<Person> sortAlphabeticallyLastName();
     void removeFromDatabase(const string& name);
     void swap(Person& a, Person& b);
-    string _command;  //athuga
 };
 
 #endif // SERVICE_H

@@ -268,39 +268,34 @@ void service::swap(Person& a, Person& b)
     b = temp;
 }
 
-void service::sortList()// depending on input from user, do something
+void service::sortList(const string& command)// depending on input from user, do something
 {
 
-    if(_command == "a")
+    if(command == "a")
     {
         _listV = sortAlphabetically();
     }
-    else if(_command == "l")
+    else if(command == "l")
     {
         _listV = sortAlphabeticallyLastName();
     }
-    else if(_command == "b")
+    else if(command == "b")
     {
         _listV = sortBirthYear();
     }
-    else if(_command == "d")
+    else if(command == "d")
     {
         _listV = sortDeath();
     }
-    else if(_command == "g")
+    else if(command == "g")
     {
         _listV = sortGender();
     }
-    else if(_command == "quit")
+    else if(command == "quit")
     {
         _program = false;
     }
 
-}
-
-void service::setCommand(const string &c)//set the input command from user in a variable
-{
-    _command = c;
 }
 
 void service::addPerson(const Person &input)//makes the user capable to add people as long as they're not already on the list

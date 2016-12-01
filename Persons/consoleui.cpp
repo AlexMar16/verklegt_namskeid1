@@ -40,7 +40,6 @@ void consoleUI::run()
         cout << "command: ";
 
         getline(cin, command);                                      // Sets the private variable _command in the service class.
-        _turn.setCommand(command);
         printList(command);                                         // Checks if there is a need for a printout of the list.
         _printOut = _turn.getList();
 
@@ -120,38 +119,38 @@ void consoleUI::printList(const string &_command)                   // Print if 
     }
     else if(_command == "add")
     {
-        addCommand();
         _print = true;
+        addCommand();
     }
     else if(_command == "remove")
     {
-        removeCommand();
         _print = false;
+        removeCommand();
     }
     else if (_command == "find")
     {
-        findCommand();
         _print = false;
+        findCommand();
     }
     else if(_command == "sort")                                     // Gives you additional options to choose how you would like the list sorted
     {
-        sortCommand();
         _print = true;
+        sortCommand();
     }
     else if(_command == "quiz")
     {
-        quizCommand();
         _print = false;
+        quizCommand();
     }
     else if (_command == "quit")
     {
-        _turn.setProgram(_print);
         _print = false;
+        _turn.setProgram(_print);
     }
     else if(_command =="status")
     {
-        statusCommand();
         _print = false;
+        statusCommand();
     }
     else
     {
@@ -208,8 +207,7 @@ void consoleUI::sortCommand()
 
         if(sortSpecialCommand(choice))
         {
-            _turn.setCommand(choice);
-            _turn.sortList();
+            _turn.sortList(choice);
             forward = true;
             break;
         }
