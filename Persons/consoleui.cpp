@@ -125,10 +125,7 @@ void consoleUI::sortCommand()
     cout << "Select sorting method: ";
     string input;
     cin >> input;
-    if(input != "a" && input != "b" && input != "d" && input != "g" && input != "l")
-    {
-        _valid = false;
-    }
+    cin.ignore();
 
     _turn.setCommand(input);// located in service.cpp
 }
