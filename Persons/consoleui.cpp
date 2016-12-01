@@ -143,8 +143,8 @@ void consoleUI::addCommand()
   cout << "Be aware you cannot put letters that are not in the English alphabet." << endl;
 
   cout << "Name: ";
-  cin.ignore();
   getline(cin, name);
+  input.setName(name);
 
   while(true)
   {
