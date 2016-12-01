@@ -7,48 +7,42 @@ class service
 {
 public:
     service();
-    void swap(Person& a, Person& b);
-    void setCommand(string command);    
-    void addPerson(Person input);
-    void removefromdatabase(string name);
-    void removePerson(Person input);
-    bool alreadyInDatabase(string name);
-
-    bool specialCommand(const string& command);
-
-    int YorN(string YorNinput);
-    Person findPersonExactly(string name);
-    vector<Person> findPerson(string name);
-    vector<Person> sortAlphabetically();
-    vector<Person> getList();
-    vector<Person> sortBirthYear();
-    vector<Person> sortDeath();
-    vector<Person> sortGender();
-    vector<Person> sortNumerically();
-    bool lookForPerson(string name);
-    void sortList();
-    vector<int>properties();
-    void setProgram(bool input);
-    bool getProgram();
-    string getLastName(const string& nafn);
-    vector<Person> sortAlphabeticallyLast();
-    string tolower(string tolowerstring);
-
-
+    bool lookForPerson(const string& name);
+    bool getProgram() const;
+    Person findPersonExactly(const string& name);
     Person generateQuestion();
+    vector<int> properties();
+    vector<Person> findPerson(const string& name);
+    vector<Person> getList();
+    void setCommand(const string& command);
+    void addPerson(const Person& input);
+    void removePerson(const Person& input);
+    void sortList();
+    void setProgram(const bool& input);
     void generateOptions(const Person& correct, string& a, string& b, string& c, string& d);
+    string getLastName(const string& nafn) const;
+    string toLower(const string &tolowerstring);
     string assignSelection(string& answer, const string& a, const string& b, const string& c, const string& d);
     string genderCheck(const Person& p);
     string aliveCheck(const Person& p);
 
 private:
-    vector<Person> _listV;
-    vector<Person> _listSearchedPerson;
-    vector<int> _statusVec;
-    string _command;  //athuga
     bool _keepGoing;
     bool _valid;
     bool _program;
+    bool alreadyInDatabase(const string &name);
+    vector<int> _statusVec;
+    vector<Person> _listV;
+    vector<Person> _listSearchedPerson;
+    vector<Person> sortAlphabetically();
+    vector<Person> sortBirthYear();
+    vector<Person> sortDeath();
+    vector<Person> sortGender();
+    vector<Person> sortNumerically();
+    vector<Person> sortAlphabeticallyLastName();
+    void removeFromDatabase(const string& name);
+    void swap(Person& a, Person& b);
+    string _command;  //athuga
 };
 
 #endif // SERVICE_H

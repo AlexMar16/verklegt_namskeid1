@@ -20,7 +20,7 @@ void service::swap(Person& a, Person& b)
 
 vector<Person> service::getList()
 {
-   return _listV;
+    return _listV;
 }
 
 void service::sortList()// depending on input from user, do something
@@ -32,7 +32,7 @@ void service::sortList()// depending on input from user, do something
     }
     else if(_command == "l")
     {
-        _listV = sortAlphabeticallyLast();
+        _listV = sortAlphabeticallyLastName();
     }
     else if(_command == "b")
     {
@@ -59,9 +59,7 @@ vector<int> service::properties()// The "status" command activates this function
     int deathQuant=0;
     int MgenderQuant=0;
     int FgenderQuant=0;
-
     vector<int> StatusVec;
-
 
     for(size_t i=0; i< _listV.size(); i++)//goes through everything in the vector
     {
@@ -69,35 +67,33 @@ vector<int> service::properties()// The "status" command activates this function
 
         if(_listV[i].getDeathYear() != 0)
         {
-         deathQuant++;
+            deathQuant++;
         }
     }
     for(size_t k= 0; k<_listV.size(); k++)
     {
         if(_listV[k].getGender()=="female")
         {
-        FgenderQuant++;
+            FgenderQuant++;
         }
     }
     for(size_t z = 0; z < _listV.size(); z++)
     {
         if(_listV[z].getGender()=="male")
         {
-        MgenderQuant++;
+            MgenderQuant++;
         }
     }
-
 
     _statusVec.push_back(nameQuant);
     _statusVec.push_back(deathQuant);
     _statusVec.push_back(FgenderQuant);
     _statusVec.push_back(MgenderQuant);
 
-
     return _statusVec;// returns the vector to consoleui.cpp
 }
 
-void service::setCommand(string c)//set the input command from user in a variable
+void service::setCommand(const string &c)//set the input command from user in a variable
 {
     _command = c;
 }
@@ -109,14 +105,14 @@ vector<Person> service::sortGender()//sorts the females in the list to the top
     {
         if(_listV[i].getGender() == "female")//if female push it to the top of the list
         {
-           swap(_listV[i], _listV[counter]);
-           counter++;
+            swap(_listV[i], _listV[counter]);
+            counter++;
         }
     }
     return _listV;
 }
 
-void service::addPerson(Person input)//makes the user capable to add people as long as they're not already on the list
+void service::addPerson(const Person &input)//makes the user capable to add people as long as they're not already on the list
 {
     if(!alreadyInDatabase(input.getName()))
     {
@@ -127,17 +123,17 @@ void service::addPerson(Person input)//makes the user capable to add people as l
     }
 }
 
-void service::removePerson(Person input)//makes the user capable to remove people
+void service::removePerson(const Person &input)//makes the user capable to remove people
 {
     if(alreadyInDatabase(input.getName()))//check if its in the list
     {
         dataAccess addNew;
-        removefromdatabase(input.getName());
+        removeFromDatabase(input.getName());
         addNew.setVector(_listV);
         addNew.addPerson();
     }
 }
-void service::removefromdatabase(string name)//takes the list, removes an elemnt then rewrites the info.txt with the list without what was removed
+void service::removeFromDatabase(const string &name)//takes the list, removes an elemnt then rewrites the info.txt with the list without what was removed
 {
     for (size_t i=0; i< _listV.size(); i++)
     {
@@ -153,7 +149,7 @@ vector<Person> service::sortAlphabetically()//insertion sort
 {
     bool again = true;
     while (again)
-    {        
+    {
         again = false;
         for (unsigned int i=0; i< _listV.size()-1; i++)
         {
@@ -167,20 +163,20 @@ vector<Person> service::sortAlphabetically()//insertion sort
     return _listV;
 }
 
-vector<Person> service::sortAlphabeticallyLast()
+vector<Person> service::sortAlphabeticallyLastName()
 {
-    string nafn1;
-    string nafn2;
+    string name1;
+    string name2;
     bool again = true;
     while (again)
     {
         again = false;
         for (unsigned int i=0; i< _listV.size()-1; i++)
         {
-            nafn1= _listV[i].getName();
-            nafn2= _listV[i+1].getName();
+            name1= _listV[i].getName();
+            name2= _listV[i+1].getName();
 
-            if (getLastName(nafn1) > getLastName(nafn2))   //bera saman last name
+            if (getLastName(name1) > getLastName(name2))   //bera saman last name
             {
                 swap( _listV[i], _listV[i+1]);
                 again = true;
@@ -190,7 +186,7 @@ vector<Person> service::sortAlphabeticallyLast()
     return _listV;
 }
 
-string service::getLastName(const string& nafn)//nær í seinasta orðið í setningu eða seinast nafnið í nafna tilvikum
+string service::getLastName(const string& nafn) const//nær í seinasta orðið í setningu eða seinast nafnið í nafna tilvikum
 {
     int Li=0;
     string LastName;
@@ -210,9 +206,9 @@ string service::getLastName(const string& nafn)//nær í seinasta orðið í set
 
 vector<Person> service::sortBirthYear()
 {
-        bool again = true;
-        while (again)
-        {
+    bool again = true;
+    while (again)
+    {
         again = false;
         for (size_t i=0; i < _listV.size()-1; i++)
         {
@@ -226,7 +222,7 @@ vector<Person> service::sortBirthYear()
     return _listV;
 }
 
-bool service::alreadyInDatabase(string name)//checkar hvort nafnið sé til í databasinum
+bool service::alreadyInDatabase(const string& name)//checkar hvort nafnið sé til í databasinum
 {
     for (size_t i=0; i< _listV.size(); i++)
     {
@@ -237,12 +233,12 @@ bool service::alreadyInDatabase(string name)//checkar hvort nafnið sé til í d
     }
     return false;
 }
-bool service::lookForPerson(string name)//checkar hvort eh partur af nafni sé til í listanum
+bool service::lookForPerson(const string &name)//checkar hvort eh partur af nafni sé til í listanum
 {
     bool foundname = false;
     for (size_t i=0; i< _listV.size(); i++)
     {
-        if (tolower(_listV[i].getName()).find(tolower(name)) != string::npos)
+        if (toLower(_listV[i].getName()).find(toLower(name)) != string::npos)
         {
             foundname = true;
         }
@@ -250,12 +246,12 @@ bool service::lookForPerson(string name)//checkar hvort eh partur af nafni sé t
     return foundname;
 }
 
-vector<Person> service::findPerson(string name)//finnur personunar og addar þeim í vector
+vector<Person> service::findPerson(const string &name)//finnur personunar og addar þeim í vector
 {
     _listSearchedPerson.clear();
     for (size_t i=0; i< _listV.size(); i++)
     {
-        if (tolower(_listV[i].getName()).find(tolower(name)) != string::npos)//setur bæði í lower þannig að aLeN finnur Alen
+        if (toLower(_listV[i].getName()).find(toLower(name)) != string::npos)//setur bæði í lower þannig að aLeN finnur Alen
         {
             _listSearchedPerson.push_back(_listV[i]);//setur persons í lista sem að hafa input notenda í nafninu
         }
@@ -282,7 +278,7 @@ vector<Person> service::sortDeath()
     }
     return _listV;
 }
-Person service::findPersonExactly(string name)
+Person service::findPersonExactly(const string& name)
 {
     Person Personfoundexactly;
     for (size_t i=0; i< _listV.size(); i++)
@@ -319,7 +315,7 @@ void service::generateOptions(const Person& correct, string& a, string& b, strin
         d = correct.getName();
 }
 
-void service::setProgram(bool input)
+void service::setProgram(const bool& input)
 {
     _program = input;
 }
@@ -355,32 +351,17 @@ string service::aliveCheck(const Person& p)
     else
         return "and is still alive";
 }
-int service::YorN(string YorNinput)
-{
-    if(YorNinput == "y" || YorNinput == "Y")
-    {
-        return 1;
-    }
-    if(YorNinput == "n" || YorNinput == "N")
-    {
-        return 2;
-    }
-    else
-    {
-        return 3;
-    }
-}
 
-bool service::getProgram()
+bool service::getProgram() const
 {
     return _program;
 }
 
 
 
-string service::tolower(string tolowerstring)//to lower
+string service::toLower(const string& toLowerString)//to lower
 {
-    string data = tolowerstring;
+    string data = toLowerString;
     std::transform(data.begin(), data.end(), data.begin(), ::tolower);
     return data;
 }
