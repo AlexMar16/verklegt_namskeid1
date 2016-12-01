@@ -213,6 +213,7 @@ void consoleUI::sortCommand()
 
         if(sortSpecialCommand(choice))
         {
+            cout << "RUNNNING IF STATEMENT" << endl;
             _turn.setCommand(choice);
             _turn.sortList();
             forward = true;
@@ -223,8 +224,6 @@ void consoleUI::sortCommand()
             cout << "Invalid input!" << endl;
         }
     }
-    _turn.setCommand(choice);// located in service.cpp
-    _turn.sortList();
 }
 
 void consoleUI::addCommand()
