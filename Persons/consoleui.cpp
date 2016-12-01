@@ -34,7 +34,7 @@ void consoleUI::run()
         {
             cout << _printOut;
         }
-        else if (command != "find" && command != "quit" && command != "quiz" && command != "remove") // Gera fall sem checkar a tessu
+        else if (!_turn.specialCommand(command)) // Gera fall sem checkar a tessu
         {
             cout << "Invalid command!" << endl << endl;
         }
