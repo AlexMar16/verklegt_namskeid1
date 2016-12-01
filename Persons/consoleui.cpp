@@ -39,8 +39,12 @@ void consoleUI::run()
         cout << setw(ASTERISK_WIDTH) << setfill(ASTERISK) << ASTERISK << endl;
         cout << "command: ";
 
-        getline(cin, command);
-        _turn.setCommand(command);                                   //sets the private variable _command in the service class.
+        getline(cin, command);                                 //sets the private variable _command in the service class.
+
+        _turn.setCommand(command);//setur command i service.cpp
+        printList(command);//checkar hvort input command fra user se legit og setur _valid true eda false
+        _printOut = _turn.getList();
+        if(_print)
 
         cout << endl;
 
@@ -152,7 +156,7 @@ void consoleUI::printList(const string &_command)                   // Print if 
     else if(_command =="status")
     {
         statusCommand();
-        _print= false;
+        _print = false;
     }
     else
     {
@@ -219,7 +223,8 @@ void consoleUI::sortCommand()
             cout << "Invalid input!" << endl;
         }
     }
-    _turn.setCommand(choice);
+    _turn.setCommand(choice);// located in service.cpp
+    _turn.sortList();
 }
 
 void consoleUI::addCommand()
