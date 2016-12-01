@@ -236,9 +236,7 @@ void consoleUI::findCommand()
 {
     string toFind;
     cout << "Name to find: ";
-
     getline(cin, toFind);
-    //cin.ignore();
     _printOut = _turn.findPerson(toFind);
     if (_turn.lookForPerson(toFind))
     {
