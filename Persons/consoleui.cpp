@@ -7,10 +7,10 @@ consoleUI::consoleUI(){}
 
 void consoleUI::run()
 {
-    const int ASTERISK_WIDTH = 75;
+    const int ASTERISK_WIDTH = 75;//stuff til að gera töfluna smooth
     const char ASTERISK = '*';
     string command;
-    do
+    do//main menu output
     {
         cout << setw(ASTERISK_WIDTH)<< setfill(ASTERISK) <<  "*" << endl << endl;
         cout << "Please enter one of the following commands:" << endl << endl;
@@ -23,16 +23,16 @@ void consoleUI::run()
         cout << "quit  - This command will quit the program." << endl << endl;
         cout << setw(ASTERISK_WIDTH)<< setfill(ASTERISK) <<  "*" << endl;
         cout << "command: ";
-        cin >> command;
+        getline(cin, command);
         cout << endl;
 
         _turn.setCommand(command);//setur command i service.cpp
         validList(command);//checkar hvort input command fra user se legit og setur _valid true eda false
-        _turn.displayList();//
-        _printOut = _turn.getList();
-        if(_valid)
+        _turn.sortList();//sortar listana
+        _printOut = _turn.getList();// nær í listann úr service
+        if(_valid)//ef verið er að sorta eda sina bara listann
         {
-            cout << _printOut;
+            cout << _printOut;//prentar tofluna
         }
         else if (!_turn.specialCommand(command)) // Gera fall sem checkar a tessu
         {
@@ -82,7 +82,7 @@ void consoleUI::validList(string _command)// depending on input from user, do so
     }
 }
 
-void consoleUI::quizCommand()
+void consoleUI::quizCommand()//quiz commandid
 {
     Person question = _turn.generateQuestion();
     //cout << "We are asking about " << question.getName() << endl;
@@ -204,7 +204,6 @@ void consoleUI::removeCommand()
 {
     string fullName;
     Person input;
-    int nameCounter = 0;
     cout << "Enter the full name of the scientist to remove from the database: ";
     cin.ignore();
     getline(cin, fullName);
