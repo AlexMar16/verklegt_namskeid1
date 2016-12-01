@@ -210,7 +210,7 @@ bool service::lookForPerson(string name)
     bool foundname = false;
     for (size_t i=0; i< _listV.size(); i++)
     {
-        if (_listV[i].getName().find(name) != string::npos)
+        if (_listV[i].getName().find(name) != string::npos)  //AlreadyInDatabase og lookForPerson gera það sama
         {
             foundname = true;
         }
@@ -235,7 +235,7 @@ vector<Person> service::sortDeath()
     }
     return _listV;
 }
-Person service::findPersonexactly(string name)
+Person service::findPersonExactly(string name)
 {
     Person Personfoundexactly;
     for (size_t i=0; i< _listV.size(); i++)

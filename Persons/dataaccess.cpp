@@ -29,7 +29,7 @@ void dataAccess::addPerson()
 {
     ofstream newPerson;
 
-    newPerson.open("info.txt");
+    newPerson.open("C:/Users/Rabo/HR/onn1/Verklegt Namskeid/verklegt_namskeid1/build-Persons-Desktop_Qt_5_7_0_MinGW_32bit-Debug/info.txt");
 
     if(newPerson)
     {
@@ -49,7 +49,7 @@ void dataAccess::removePerson()
 {
     ofstream newPerson;
 
-    newPerson.open("info.txt");
+    newPerson.open("C:/Users/Rabo/HR/onn1/Verklegt Namskeid/verklegt_namskeid1/build-Persons-Desktop_Qt_5_7_0_MinGW_32bit-Debug/info.txt");
 
     if(newPerson)
     {

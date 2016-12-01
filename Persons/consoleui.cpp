@@ -15,11 +15,11 @@ void consoleUI::run()
         cout << setw(ASTERISK_WIDTH)<< setfill(ASTERISK) <<  "*" << endl << endl;
         cout << "Please enter one of the following commands:" << endl << endl;
         cout << "list  - This command will list every person in the system." << endl;
+        cout << "sort  - This command will allow you to sort the scientists." << endl;
+        cout << "find  - This command allows you to find a certain person in the list." << endl;
+        cout << "quiz  - This command lets you take a quiz about the computer scientists." << endl;
         cout << "add   - This command allows you to add a person to the list." << endl;
         cout << "remove- This command allows you to find a certain person in the list." << endl;
-        cout << "find  - This command allows you to find a certain person in the list." << endl;
-        cout << "sort  - This command will allow you to sort the scientists." << endl;
-        cout << "quiz  - This command lets you take a quiz about the computer scientists." << endl;
         cout << "quit  - This command will quit the program." << endl << endl;
         cout << setw(ASTERISK_WIDTH)<< setfill(ASTERISK) <<  "*" << endl;
         cout << "command: ";
@@ -198,7 +198,7 @@ void consoleUI::removeCommand()
 
 
 
-    input = _turn.findPersonexactly(fullname);
+    input = _turn.findPersonExactly(fullname);
     if (input.getName() == "")
     {
         cout << endl << "Person not found!" << endl;
@@ -207,6 +207,7 @@ void consoleUI::removeCommand()
     {
         cout << endl << fullname << " removed" << endl;
     }
+    input = _turn.findPersonExactly(fullname);
 
     _turn.removePerson(input);
 
