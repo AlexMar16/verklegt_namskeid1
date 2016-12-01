@@ -12,7 +12,7 @@ vector<Person> dataAccess::getVector()
 void dataAccess::getPersons()
 {
     ifstream personFile;
-    personFile.open("C:/Users/Rabo/HR/onn1/Verklegt Namskeid/verklegt_namskeid1/build-Persons-Desktop_Qt_5_7_0_MinGW_32bit-Debug/info.txt");
+    personFile.open("info.txt");
     if(personFile)
     {
         Person temp;
@@ -21,6 +21,7 @@ void dataAccess::getPersons()
             _persons.push_back(temp);
         }
     }
+    personFile.close();
 }
 
 
@@ -29,7 +30,7 @@ void dataAccess::addPerson()
 {
     ofstream newPerson;
 
-    newPerson.open("C:/Users/Rabo/HR/onn1/Verklegt Namskeid/verklegt_namskeid1/build-Persons-Desktop_Qt_5_7_0_MinGW_32bit-Debug/info.txt");
+    newPerson.open("info.txt");
 
     if(newPerson)
     {
@@ -43,26 +44,30 @@ void dataAccess::addPerson()
             }
         }
     }
+
+    newPerson.close();
 }
 
 void dataAccess::removePerson()
 {
-    ofstream newPerson;
+    ofstream removePerson;
 
-    newPerson.open("C:/Users/Rabo/HR/onn1/Verklegt Namskeid/verklegt_namskeid1/build-Persons-Desktop_Qt_5_7_0_MinGW_32bit-Debug/info.txt");
+    removePerson.open("info.txt");
 
-    if(newPerson)
+    if(removePerson)
     {
         for(size_t i = 0; i < _persons.size(); i++)
         {
-            newPerson << _persons[i].getName() << endl << _persons[i].getGender()
+            removePerson << _persons[i].getName() << endl << _persons[i].getGender()
                       << endl <<_persons[i].getBirthYear() << endl;
             if(_persons[i].getDeathYear() != '0')
             {
-                newPerson << _persons[i].getDeathYear() << endl;
+                removePerson << _persons[i].getDeathYear() << endl;
             }
         }
     }
+
+    removePerson.close();
 }
 
 void dataAccess::setVector(vector<Person> input)
