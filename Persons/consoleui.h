@@ -19,6 +19,7 @@ public:
     void findCommand();
     void quizCommand();
     void statusCommand();
+    bool specialCommand(const string& command);
 private:
     service _turn;
     vector<Person> _printOut;

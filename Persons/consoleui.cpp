@@ -148,13 +148,13 @@ void consoleUI::sortCommand()
             _turn.sortList();
             forward=true;
         }
-        else
+        else if(!)
         {
             forward=false;
             cout<<"Invalid input!"<<endl;
         }
     }
-    getline(cin, input);
+
 
     _turn.setCommand(input);// located in service.cpp
 }
@@ -276,4 +276,63 @@ void consoleUI::statusCommand()//prints out number of people that fit to each ca
    cout<< "Total females on the list : "<< _printStatus[2] << endl;
    cout<< "Total Males on the list   : "<< _printStatus[3] << endl << endl;
 }
+
+bool consoleUI::specialCommand(const string& command)
+{
+    if (command == "find")
+    {
+        return true;
+    }
+    else if(command == "quit")
+    {
+        return true;
+    }
+    else if(command == "quiz")
+    {
+        return true;
+    }
+    else if(command == "remove")
+    {
+        return true;
+    }
+    else if(command == "status")
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+bool Service::extraspecialCommand(const string& choice)
+{
+
+
+    if(choice=="a")
+    {
+        return true;
+    }
+    else if(choice=="b")
+    {
+        return true;
+    }
+    else if(choice=="d")
+    {
+        return true;
+    }
+    else if(choice=="g")
+    {
+        return true;
+    }
+    else if(choice=="l")
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
 

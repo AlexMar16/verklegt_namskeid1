@@ -376,33 +376,7 @@ bool service::getProgram()
     return _program;
 }
 
-bool service::specialCommand(const string& command)
-{
-    if (command == "find")
-    {
-        return true;
-    }
-    else if(command == "quit")
-    {
-        return true;
-    }
-    else if(command == "quiz")
-    {
-        return true;
-    }
-    else if(command == "remove")
-    {
-        return true;
-    }
-    else if(command == "status")
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
-}
+
 
 string service::tolower(string tolowerstring)//to lower
 {
