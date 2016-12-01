@@ -119,7 +119,7 @@ void service::addPerson(const Person &input)//makes the user capable to add peop
         dataAccess addNew;
         _listV.push_back(input);
         addNew.setVector(_listV);
-        addNew.addPerson();
+        addNew.changeFile();
     }
 }
 
@@ -130,9 +130,10 @@ void service::removePerson(const Person &input)//makes the user capable to remov
         dataAccess addNew;
         removeFromDatabase(input.getName());
         addNew.setVector(_listV);
-        addNew.addPerson();
+        addNew.changeFile();
     }
 }
+
 void service::removeFromDatabase(const string &name)//takes the list, removes an elemnt then rewrites the info.txt with the list without what was removed
 {
     for (size_t i=0; i< _listV.size(); i++)
@@ -143,7 +144,6 @@ void service::removeFromDatabase(const string &name)//takes the list, removes an
         }
     }
 }
-
 
 vector<Person> service::sortAlphabetically()//insertion sort
 {
@@ -233,6 +233,7 @@ bool service::alreadyInDatabase(const string& name)//checkar hvort nafnið sé t
     }
     return false;
 }
+
 bool service::lookForPerson(const string &name)//checkar hvort eh partur af nafni sé til í listanum
 {
     bool foundname = false;
@@ -259,8 +260,6 @@ vector<Person> service::findPerson(const string &name)//finnur personunar og add
     return _listSearchedPerson;
 }
 
-
-
 vector<Person> service::sortDeath()
 {
     bool again = true;
@@ -278,6 +277,7 @@ vector<Person> service::sortDeath()
     }
     return _listV;
 }
+
 Person service::findPersonExactly(const string& name)
 {
     Person Personfoundexactly;
@@ -356,8 +356,6 @@ bool service::getProgram() const
 {
     return _program;
 }
-
-
 
 string service::toLower(const string& toLowerString)//to lower
 {
