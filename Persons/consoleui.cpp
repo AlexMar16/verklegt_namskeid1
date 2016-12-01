@@ -3,88 +3,104 @@
 using namespace std;
 
 
-consoleUI::consoleUI(){
-}
-
-
-
+consoleUI::consoleUI(){}
 
 void consoleUI::run()
 {
-    bool valid = true;
-    string keepGoingb;
+    const int ASTERISK_WIDTH = 75;
+    const char ASTERISK = '*';
     string command;
     do
     {
-        cout << "**********************************************************************************" << endl;
-        cout << "Please enter one of the following commands:" << endl;
-        cout << endl;
+        cout << setw(ASTERISK_WIDTH)<< setfill(ASTERISK) <<  "*" << endl << endl;
+        cout << "Please enter one of the following commands:" << endl << endl;
         cout << "list  - This command will list every person in the system." << endl;
         cout << "add   - This command allows you to add a person to the list." << endl;
         cout << "find  - This command allows you to find a certain person in the list." << endl;
         cout << "sort  - This command will allow you to sort the scientists." << endl;
         cout << "quiz  - This command lets you take a quiz about the computer scientists." << endl;
-        cout << "quit  - This command will quit the program." << endl;
-        cout << "**********************************************************************************" << endl;
+        cout << "quit  - This command will quit the program." << endl << endl;
+        cout << setw(ASTERISK_WIDTH)<< setfill(ASTERISK) <<  "*" << endl;
         cout << "command: ";
         cin >> command;
-
-        turn.setCommand(command);
         cout << endl;
 
-
-        valid = validList(command);
-        turn.displayList();
-        _printOut = turn.get_list();
-        if(valid)
+        _turn.setCommand(command);//setur command i service.cpp
+        validList(command);//checkar hvort input command fra user se legit og setur _valid true eda false
+        _turn.displayList();//
+        _printOut = _turn.getList();
+        if(_valid)
         {
             cout << _printOut;
         }
-     }while(turn.getProgram());
+        else if (command != "find" && command != "quit" && command != "quiz") // Gera fall sem checkar a tessu
+        {
+            cout << "Invalid command!" << endl << endl;
+        }
+     }while(_turn.getProgram());
 }
 
-bool consoleUI::validList(string _command)// depending on input from user, do something
+void consoleUI::validList(string _command)// depending on input from user, do something
 {
     if(_command == "list")
     {
-        return true; //dont change list
+        _valid = true; //dont change list
     }
     else if(_command == "add")
     {
-
         addCommand();
-        return true;
-    }
-    else if(_command == "sort")// gives you additional options to choose how you would like the list sorted
-    {
-        sortCommand();
-        return true;
+        _valid = true;
     }
     else if (_command == "find")
     {
         findCommand();
-        return false;
+        _valid = false;
     }
+    else if(_command == "sort")// gives you additional options to choose how you would like the list sorted
+    {
+        _valid = true;
+        sortCommand();
+    }    
     else if(_command == "quiz")
     {
         quizCommand();
-        return true;
+        _valid = false;
     }
     else if (_command == "quit")
     {
-        return false;
+        _valid = false;
     }
     else
     {
-        return false;
+        _valid = false;
     }
-
 }
 
 void consoleUI::quizCommand()
 {
-    _printQuestion = turn.get_listquestions();
-    cout << _printQuestion[0];
+    Person question = _turn.generateQuestion();
+    //cout << "We are asking about " << question.getName() << endl;
+    cout << _turn.genderCheck(question) <<" was born in " << question.getBirthYear()
+         << " and " << _turn.aliveCheck(question) << endl;
+
+    string a, b, c, d;
+    _turn.generateOptions(question, a, b, c, d);
+
+    cout << "a)\t" << a << endl;
+    cout << "b)\t" << b << endl;
+    cout << "c)\t" << c << endl;
+    cout << "d)\t" << d << endl;
+
+    string answerString;
+    cout << "My answer: ";
+    cin >> answerString;
+
+    _turn.assignSelection(answerString, a, b, c, d);
+
+    if (answerString == question.getName())
+        cout << endl << "Correct!!!" << endl << endl;
+    else
+        cout << endl << "Wrong!" << endl << endl;
 }
 
 void consoleUI::sortCommand()
@@ -93,26 +109,50 @@ void consoleUI::sortCommand()
     cout << "b - Sort by year of birth. " << endl;
     cout << "d - Sort by year of death. " << endl;
     cout << "g - Sort by gender. " << endl;
+    cout << "l - Sort by last name" << endl;
     cout << "Select sorting method: ";
 
     string input;
     cin >> input;
+    if(input != "a" && input != "b" && input != "d" && input != "g" && input != "l")
+    {
+        _valid = false;
+    }
 
-    turn.setCommand(input);// located in service.cpp
+    _turn.setCommand(input);// located in service.cpp
 }
 
 void consoleUI::addCommand()
 {
+  string name, gender;
+  int birthYear = 0, deathYear = 0, nameCounter = 0;
   Person input;
+
   cout << "Please enter the following information about the new computer scientist " << endl;
   cout << "in the following order." << endl;
   cout << "Be aware you cannot put letters that are not in the English alphabet." << endl;
-  cout << "Name (Minimum two names, Maximum three)" << endl;
-  cout << "Gender (male/female) in lowercase." << endl;
-  cout << "Birthyear (YYYY)" << endl;
-  cout << "Died (0 if still alive)" << endl;
-  cin >> input;
-  turn.addPerson(input);
+
+  cout << "Name (Minimum two names, Maximum three): ";
+  while(nameCounter != 3) //Bæta við virkni, geta haft 2 nöfn.
+  {
+    cin >> name;
+    input.setName(name);
+    nameCounter++;
+  }
+
+  cout << "Gender (male/female) in lowercase: ";
+  cin >> gender;
+  input.setGender(gender);
+
+  cout << "Birth year (YYYY): ";
+  cin >> birthYear;
+  input.setBirthYear(birthYear);
+
+  cout << "Died (0 if still alive): ";
+  cin >> deathYear;
+  input.setDeathYear(deathYear);
+
+  _turn.addPerson(input);
 }
 
 void consoleUI::findCommand()
@@ -120,8 +160,8 @@ void consoleUI::findCommand()
     string toFind;
     cout << "Name to find: ";
     cin >> toFind;
-    _printOut = turn.find_person(toFind);
-    if (turn.look_for_person(toFind))
+    _printOut = _turn.findPerson(toFind);
+    if (_turn.lookForPerson(toFind))
     {
         cout << _printOut;
     }

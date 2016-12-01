@@ -3,49 +3,44 @@
 #include "dataaccess.h"
 #include "person.h"
 
-//#include <string>
-
-//using namespace std;
-
 class service
 {
 public:
     service();
-    void initalize_list(vector<Person>&);
     void swap(Person& a, Person& b);
-    void initalize_list();
     void setCommand(string command);    
     void addPerson(Person input);
-    bool validList();
-    bool validYorN(string YorN);
-    bool repeatprogram(string YorN);
-    bool find_check();
-    bool add_check();
-    bool already_in_database(string name);
-    vector<Person> find_person(string name);
-    vector<Person> sort_alphabetically();
-    vector<Person> get_list();
-    vector<Person> sort_BirthYear();
-    vector<Person> sort_death();
-    vector<Person> sort_gender();
-    vector<Question> get_listquestions();
-    bool look_for_person(string name);
-    vector<Person> sort_numerically();
+    bool alreadyInDatabase(string name);
+    vector<Person> findPerson(string name);
+    vector<Person> sortAlphabetically();
+    vector<Person> getList();
+    vector<Person> sortBirthYear();
+    vector<Person> sortDeath();
+    vector<Person> sortGender();
+    bool lookForPerson(string name);
+    vector<Person> sortNumerically();
     void displayList();
     void setProgram(bool input);
     bool getProgram();
-    string get_last_name(const string& nafn);
-    vector<Person> sort_alphabeticallyLast();
+    string getLastName(const string& nafn);
+    vector<Person> sortAlphabeticallyLast();
 
+
+    Person generateQuestion();
+    void generateOptions(const Person& correct, string& a, string& b, string& c, string& d);
+    string assignSelection(string& answer, const string& a, const string& b, const string& c, const string& d);
+    string genderCheck(const Person& p);
+    string aliveCheck(const Person& p);
 
 private:
-    vector<Person> listV;
-    vector<Person> listsearchedperson;
-    vector<Question> listquestions;
+    vector<Person> _listV;
+    vector<Person> _listSearchedPerson;
+    //vector<Question> _listQuestions;
     string _command;
     bool _keepGoing;
     bool _valid;
     bool _program;
+    int randomNumberGenerator();
 };
 
 #endif // SERVICE_H

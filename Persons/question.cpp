@@ -9,12 +9,12 @@ ifstream& operator >> (ifstream& in, Question& rhs)
 {
     string temp;
     int counter = 0;
-        while(temp != "~")
+        while(in >> temp /*&& temp != "~"*/)
         {
             if(temp == "~")
             {
                 //rhs._answer.clear();
-                //break;
+                break;
             }
             else
             {
@@ -25,12 +25,12 @@ ifstream& operator >> (ifstream& in, Question& rhs)
             }
         }
 
-        while(temp != "~")
+        while(in >> temp /*&& temp != "~"*/)
         {
             if(temp == "~")
             {
-                //rhs._question.clear();
-                //break;
+                rhs._question.clear();
+                break;
             }
             else
             {

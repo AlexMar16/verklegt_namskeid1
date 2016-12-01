@@ -13,12 +13,10 @@ SOURCES += main.cpp \
     consoleui.cpp \
     service.cpp \
     dataaccess.cpp \
-    person.cpp \
-    question.cpp
+    person.cpp
 
 HEADERS += \
     consoleui.h \
     service.h \
     dataaccess.h \
-    person.h \
-    question.h
+    person.h
