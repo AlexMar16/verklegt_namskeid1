@@ -7,10 +7,10 @@ consoleUI::consoleUI(){}
 
 void consoleUI::run()
 {
-    const int ASTERISK_WIDTH = 75;//stuff til að gera töfluna smooth
+    const int ASTERISK_WIDTH = 75;
     const char ASTERISK = '*';
     string command;
-    do//main menu output
+    do
     {
         cout << setw(ASTERISK_WIDTH)<< setfill(ASTERISK) <<  "*" << endl << endl;
         cout << "Please enter one of the following commands:" << endl << endl;
@@ -20,20 +20,19 @@ void consoleUI::run()
         cout << "quiz  - This command lets you take a quiz about the computer scientists." << endl;
         cout << "add   - This command allows you to add a person to the list." << endl;
         cout << "remove- This command allows you to find a certain person in the list." << endl;
-        cout << "status- This command displays info about the list. "<<endl;
         cout << "quit  - This command will quit the program." << endl << endl;
         cout << setw(ASTERISK_WIDTH)<< setfill(ASTERISK) <<  "*" << endl;
         cout << "command: ";
-        getline(cin, command);
+        cin >> command;
         cout << endl;
 
         _turn.setCommand(command);//setur command i service.cpp
         validList(command);//checkar hvort input command fra user se legit og setur _valid true eda false
-        _turn.sortList();//sortar listana
-        _printOut = _turn.getList();// nær í listann úr service
-        if(_valid)//ef verið er að sorta eda sina bara listann
+        _turn.sortList();
+        _printOut = _turn.getList();
+        if(_valid)
         {
-            cout << _printOut;//prentar tofluna
+            cout << _printOut;
         }
         else if (!_turn.specialCommand(command)) // Gera fall sem checkar a tessu
         {
@@ -77,18 +76,13 @@ void consoleUI::validList(string _command)// depending on input from user, do so
     {
         _valid = false;
     }
-    else if (_command == "status")
-    {
-            _valid = false;
-            statusCommand();
-    }
     else
     {
         _valid = false;
     }
 }
 
-void consoleUI::quizCommand()//quiz commandid
+void consoleUI::quizCommand()
 {
     Person question = _turn.generateQuestion();
     //cout << "We are asking about " << question.getName() << endl;
@@ -113,7 +107,6 @@ void consoleUI::quizCommand()//quiz commandid
         cout << endl << "Correct!!!" << endl << endl;
     else
         cout << endl << "Wrong!" << endl << endl;
-    cin.ignore();
 }
 
 void consoleUI::sortCommand()
@@ -126,24 +119,31 @@ void consoleUI::sortCommand()
     cout << "Select sorting method: ";
     string input;
     cin >> input;
+    if(input != "a" && input != "b" && input != "d" && input != "g" && input != "l")
+    {
+        _valid = false;
+    }
 
     _turn.setCommand(input);// located in service.cpp
-    cin.ignore();
 }
 
 void consoleUI::addCommand()
 {
-  string name, gender;
-  int birthYear = 0, deathYear = 0;
+  string name, gender, deathYear;
+  int birthYear = 0, nameCounter = 0;
   Person input;
 
   cout << "Please enter the following information about the new computer scientist " << endl;
   cout << "in the following order." << endl;
   cout << "Be aware you cannot put letters that are not in the English alphabet." << endl;
 
-  cout << "Name: ";
-  getline(cin, name);
-  input.setName(name);
+  cout << "Name (Minimum two names, Maximum three): ";
+  while(nameCounter != 3) //Bæta við virkni, geta haft 2 nöfn.
+  {
+    cin >> name;
+    input.setName(name);
+    nameCounter++;
+  }
 
   while(true)
   {
@@ -156,6 +156,8 @@ void consoleUI::addCommand()
       else
       {
           cout << "Invalid input!" << endl;
+          cin.clear();
+          cin.ignore();
       }
   };
   input.setGender(gender);
@@ -171,36 +173,52 @@ void consoleUI::addCommand()
       else
       {
           cout << "Invalid input!" << endl;
+          cin.clear();
+          cin.ignore();
       };
   }
   input.setBirthYear(birthYear);
 
+  int deathCheck = 0;
   while(true)
   {
       cout << "Died (0 if still alive): ";
       cin >> deathYear;
-      if ((deathYear > 1800 && deathYear < 2100) || deathYear == 0)
+      deathCheck = atoi(deathYear.c_str());
+      //deathCheck = stoi (deathYear,&sz);
+
+     /* if(deathYear == "0")
+      {
+          deathYear == "0000";
+      }
+
+      if (deathYear.length() == 4)
+      {
+          char str[]="1776ad";
+          char inArray[] = deathYear;
+      }*/
+      if ((deathCheck > 1800 && deathCheck < 2100) || deathCheck == 0)
       {
           break;
       }
       else
       {
           cout << "Invalid input!" << endl;
-
-
+          cin.clear();
       };
   }
-  input.setDeathYear(deathYear);
+  input.setDeathYear(deathCheck);
 
   _turn.addPerson(input);
-  cin.ignore();
 }
+
 
 
 void consoleUI::removeCommand()
 {
     string fullName;
     Person input;
+    int nameCounter = 0;
     cout << "Enter the full name of the scientist to remove from the database: ";
     cin.ignore();
     getline(cin, fullName);
@@ -241,15 +259,4 @@ void consoleUI::findCommand()
     {
         cout << "Person not found " << endl;
     }
-}
-
-void consoleUI::statusCommand()//prints out number of people that fit to each category
-{
-    _printStatus = _turn.properties();
-
-   cout<< "Total names in list       : "<< _printStatus[0] << endl;
-   cout<< "Number of deceased        : "<<_printStatus[1] << endl;
-   cout<< "Total females on the list : "<< _printStatus[2]<<endl;
-   cout<< "Total Males on the list   : "<< _printStatus[3]<<endl;
-
 }
