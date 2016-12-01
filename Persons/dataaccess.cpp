@@ -13,7 +13,7 @@ void dataAccess::getPersons()
 {
     ifstream personFile;
 
-    personFile.open("info.txt");
+    personFile.open("C:/Users/info.txt");
 
     if(personFile)
     {
@@ -32,7 +32,7 @@ void dataAccess::addPerson()
 {
     ofstream newPerson;
 
-    newPerson.open("info.txt");
+    newPerson.open("C:/Users/info.txt");
 
 
     if(newPerson)

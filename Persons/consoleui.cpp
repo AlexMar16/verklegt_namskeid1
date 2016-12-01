@@ -134,8 +134,7 @@ void consoleUI::sortCommand()
 
 void consoleUI::addCommand()
 {
-  string name, gender, deathYear;
-  int birthYear = 0;
+  string name, gender, deathYear, birthYear;
   Person input;
 
   cout << "Please enter the following information about the new computer scientist " << endl;
@@ -161,20 +160,23 @@ void consoleUI::addCommand()
   };
   input.setGender(gender);
 
+  int birthCheck = 0;
   while(true)
   {
       cout << "Birth year (YYYY): ";
       cin >> birthYear;
-      if (birthYear > 1750 && birthYear < 2000)
+      birthCheck = atoi(birthYear.c_str());
+      if (birthCheck > 1750 && birthCheck < 2000)
       {
           break;
       }
       else
       {
           cout << "Invalid input!" << endl;
+          cin.clear();
       };
   }
-  input.setBirthYear(birthYear);
+  input.setBirthYear(birthCheck);
 
   int deathCheck = 0;
   while(true)
