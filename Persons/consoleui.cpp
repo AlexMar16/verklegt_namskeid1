@@ -7,8 +7,9 @@ const string REMOVE = "remove";
 const string FIND = "find";
 const string QUIZ = "quiz";
 const string STATUS = "status";
+const string EMPTY = "";
 
-consoleUI::consoleUI(){}
+consoleUI::consoleUI() {_print = true;}
 
 void consoleUI::run()
 {
@@ -20,7 +21,7 @@ void consoleUI::run()
     cout << initial << endl;
     do
     {
-        cout << setw(ASTERISK_WIDTH) << setfill(ASTERISK) <<  ASTERISK << endl;
+        cout << setw(ASTERISK_WIDTH) << setfill(ASTERISK) <<  ASTERISK << endl;     // Command box begins.
         cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| Please enter one of the following commands:"
              << right << BARRIER << endl;
         cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << BARRIER << right << BARRIER<< endl;
@@ -40,14 +41,14 @@ void consoleUI::run()
              << right << BARRIER << endl;
         cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| quit   - This command will quit the program. "
              << right << BARRIER << endl;
-        cout << setw(ASTERISK_WIDTH) << setfill(ASTERISK) << ASTERISK << endl;
+        cout << setw(ASTERISK_WIDTH) << setfill(ASTERISK) << ASTERISK << endl;      // Command box ends.
         cout << "command: ";
 
-        getline(cin, command);                                      // Sets the private variable _command in the service class.
+        getline(cin, command);          // Sets the private variable _command in the service class.
         _printOut = _turn.getList();
         if(_turn.fileFound() || QUIT == command)
         {
-            printList(command);                                         // Checks if there is a need for a printout of the list.
+            printList(command);         // Checks if there is a need for a printout of the list.
         }
         else
         {
@@ -56,12 +57,12 @@ void consoleUI::run()
 
         if(_print && _turn.fileFound())
         {
-            _printOut = _turn.getList();                            // getList() gets the list that's supposed to be printed out.
+            _printOut = _turn.getList();        // getList() gets the list that's supposed to be printed out.
             cout << _printOut;
         }
         else if (!specialCommand(command) && _turn.fileFound())
         {
-             cout << "Invalid command!" << endl << endl;
+            cout << "Invalid command!" << endl << endl;
         }
     } while(_turn.getProgram());
 }
@@ -122,42 +123,42 @@ bool consoleUI::sortSpecialCommand(const string& choice)
     }
 }
 
-void consoleUI::printList(const string &_command)                   // Print if appropriate.
+void consoleUI::printList(const string &_command)       // Print if appropriate.
 {
     const string SORT = "sort";
     const string ADD = "add";
     const string LIST = "list";
 
-    if(_command == LIST)
+    if(_command == LIST)            // Print the original list.
     {
-        _print = true;                                              // Print the original list.
+        _print = true;
     }
-    else if(_command == ADD)                                        // Tells the user to enter information (names, gender, birth year, death year) about the new scientist.
+    else if(_command == ADD)        // Tells the user to enter information (names, gender, birth year, death year) about the new scientist.
     {
         _print = true;
         addCommand();
     }
-    else if(_command == REMOVE)                                     // Tells the user to enter the full name of the scientist to be removed from the list.
+    else if(_command == REMOVE)     // Tells the user to enter the full name of the scientist to be removed from the list.
     {
         _print = false;
         removeCommand();
     }
-    else if (_command == FIND)                                      // Tells the user to enter the name of the scientist to be located in the list.
+    else if (_command == FIND)      // Tells the user to enter the name of the scientist to be located in the list.
     {
         _print = false;
         findCommand();
     }
-    else if(_command == SORT)                                       // Gives you additional options to choose how you would like the list sorted
+    else if(_command == SORT)       // Gives you additional options to choose how you would like the list sorted
     {
         _print = true;
         sortCommand();
     }
-    else if(_command == QUIZ)                                       // Presents the user with a quiz relating to the birth and death year of a scientist.
+    else if(_command == QUIZ)       // Presents the user with a quiz relating to the birth and death year of a scientist.
     {
         _print = false;
         quizCommand();
     }
-    else if (_command == QUIT)                                      // Quits the program.
+    else if (_command == QUIT)      // Quits the program.
     {
         _print = false;
         _turn.setProgram(_print);
@@ -247,7 +248,7 @@ void consoleUI::addCommand()
     {
         cout << "Name: ";
         getline(cin, name);
-        if(name == "")
+        if(name == EMPTY)
         {
             cout << "No input!" << endl;
         }
@@ -277,7 +278,7 @@ void consoleUI::addCommand()
     {
         cout << "Birth year (YYYY): ";
         cin >> birthYear;
-        birthCheck = atoi(birthYear.c_str());
+        birthCheck = atoi(birthYear.c_str());       // Removes alphanumeric values from the input.
         if (birthCheck > MINIMUM_BIRTH_YEAR && birthCheck < MAXIMUM_BIRTH_YEAR)
         {
             break;
@@ -293,7 +294,7 @@ void consoleUI::addCommand()
     {
         cout << "Died (input any other character if still alive): ";
         cin >> deathYear;
-        deathCheck = atoi(deathYear.c_str());
+        deathCheck = atoi(deathYear.c_str());       // Removes alphanumeric values from the input.
         if ((deathCheck > MINIMUM_DEATH_YEAR && deathCheck < MAXIMUM_DEATH_YEAR) || deathCheck == 0)
         {
             break;
@@ -315,7 +316,6 @@ void consoleUI::removeCommand()
 {
     string fullName;
     Person input;
-    const string EMPTY = "";
     cout << "Enter the full name of the scientist to remove from the database: ";
     getline(cin, fullName);
     input = _turn.findPersonExactly(fullName);
@@ -347,24 +347,27 @@ void consoleUI::findCommand()
     }
     else
     {
-    _printOut = _turn.findPerson(toFind);
-    if (_turn.lookForPerson(toFind))
-    {
-        cout << _printOut;
-    }
-    else
-    {
-        cout << "Person not found " << endl << endl;
-    }
+        _printOut = _turn.findPerson(toFind);
+        if (_turn.lookForPerson(toFind))
+        {
+            cout << _printOut;
+        }
+        else
+        {
+            cout << "Person not found " << endl << endl;
+        }
     }
 }
 
 void consoleUI::statusCommand()
 {
     _printStatus = _turn.properties();
-
-    cout << "Total names in list       : " << _printStatus[0] << endl;
-    cout << "Number of deceased        : " << _printStatus[1] << endl;
-    cout << "Total females on the list : " << _printStatus[2] << endl;
-    cout << "Total Males on the list   : " << _printStatus[3] << endl << endl;
+    const int NAMES = 0;
+    const int DIED = 1;
+    const int FEMALES = 2;
+    const int MALES = 3;
+    cout << "Total names in list       : " << _printStatus[NAMES] << endl;
+    cout << "Number of deceased        : " << _printStatus[DIED] << endl;
+    cout << "Total females on the list : " << _printStatus[FEMALES] << endl;
+    cout << "Total Males on the list   : " << _printStatus[MALES] << endl << endl;
 }

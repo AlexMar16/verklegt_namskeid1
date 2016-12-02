@@ -9,6 +9,7 @@ public:
     service();
     bool lookForPerson(const string& name);
     bool getProgram() const;
+    bool fileFound() const;
     Person findPersonExactly(const string& name);
     Person generateQuestion();
     vector<int> properties();
@@ -24,7 +25,6 @@ public:
     string assignSelection(string& answer, const string& a, const string& b, const string& c, const string& d);
     string genderCheck(const Person& p);
     string aliveCheck(const Person& p);
-    bool fileFound();
 
 private:
     bool _keepGoing;

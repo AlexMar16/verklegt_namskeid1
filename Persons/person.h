@@ -11,7 +11,9 @@
 
 using namespace std;
 
+// Constants in more than one file.
 const char SPACE = ' ';
+const int ALIVE = 0;
 const string MALE = "male";
 const string FEMALE = "female";
 const string A = "a";
@@ -20,7 +22,6 @@ const string D = "d";
 const string G = "g";
 const string L = "l";
 const string QUIT = "quit";
-const int ALIVE = 0;
 
 class Person
 {

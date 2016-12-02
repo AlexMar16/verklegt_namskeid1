@@ -1,12 +1,11 @@
 #include "dataaccess.h"
 
-const string FILENAME = "backup.txt";
+const string FILENAME = "info.txt";
 
 dataAccess::dataAccess()
 {
     _fileFound = false;
     getPersons();
-
 }
 
 bool dataAccess::getFileFound() const {return _fileFound;}

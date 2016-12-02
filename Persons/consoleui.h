@@ -26,7 +26,7 @@ private:
     void findCommand();
     void quizCommand();
     void statusCommand();
-    service _turn;
+    service _turn;                                      //The instance we use to communicate with the service layer.
 };
 
 #endif // CONSOLEUI_H

@@ -1,5 +1,10 @@
 
-leiðbeiningar við ræsingu forrits.
+Directions on startup.
+
+- Open Perons.pro with Qt (Persons.pro located in Persons folder).
+
+- Go to Project, on the left of the window, and change the building directory to
+  
 
 - opna persons.pro með qt (er staðsett í persons möppu)
 

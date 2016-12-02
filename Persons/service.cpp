@@ -4,7 +4,7 @@
 using namespace std;
 
 service::service(){
-    dataAccess temp;
+    dataAccess temp;        // The instance we use to communicate with dataAccess.
     _listV = temp.getVector();
     _listSearchedPerson = temp.getVector();
     _listSearchedPerson.clear();
@@ -12,7 +12,7 @@ service::service(){
     _fileFound = temp.getFileFound();
 }
 
-bool service::alreadyInDatabase(const string& name)//checks if the name exists in the database
+bool service::alreadyInDatabase(const string& name)         // Checks if the name exists in the database
 {
     for (size_t i = 0; i < _listV.size(); i++)
     {
@@ -24,11 +24,11 @@ bool service::alreadyInDatabase(const string& name)//checks if the name exists i
     return false;
 }
 
-bool service::lookForPerson(const string& name)//checks if any part of the name is on the list
+bool service::lookForPerson(const string& name)         // Checks if any part of the name is on the list
 {
     for (size_t i = 0; i < _listV.size(); i++)
     {
-        if (toLower(_listV[i].getName()).find(toLower(name)) != string::npos)
+        if (toLower(_listV[i].getName()).find(toLower(name)) != string::npos)       // Enables us to search in lower case letters.
         {
             return true;
         }
@@ -54,10 +54,10 @@ Person service::findPersonExactly(const string& name)
 Person service::generateQuestion()
 {
     srand(time(0));
-    return _listV[rand() % _listV.size()];
+    return _listV[rand() % _listV.size()]; // Randomizing questions.
 }
 
-string service::getLastName(const string& name) const// gets the last word in the sentence
+string service::getLastName(const string& name) const
 {
     int spaceCounter = 0;
     string LastName;
@@ -118,12 +118,12 @@ string service::genderCheck(const Person& p)
 string service::aliveCheck(const Person& p)
 {
     if (p.getDeathYear() != ALIVE)
-        return "died in " + to_string(p.getDeathYear()); //converting int to string to return it as one
+        return "died in " + to_string(p.getDeathYear());     // Converting the integer to a string to return a sentence.
     else
         return "is still alive";
 }
 
-string service::toLower(const string& toLowerString)//to lower
+string service::toLower(const string& toLowerString)    // Makes everything lowercase
 {
     string data = toLowerString;
     transform(data.begin(), data.end(), data.begin(), ::tolower);
@@ -172,12 +172,12 @@ vector<int> service::properties()
 
 vector<Person> service::getList() const {return _listV;}
 
-vector<Person> service::sortGender()//sorts the females in the list to the top
+vector<Person> service::sortGender()        // Sorts the list by gender, beginning with women.
 {
     int counter = 0;
     for(size_t i = 0; i < _listV.size(); i++)
     {
-        if(_listV[i].getGender() == FEMALE)//if female, push it to the top of the list
+        if(_listV[i].getGender() == FEMALE)
         {
             swap(_listV[i], _listV[counter]);
             counter++;
@@ -186,7 +186,7 @@ vector<Person> service::sortGender()//sorts the females in the list to the top
     return _listV;
 }
 
-vector<Person> service::sortAlphabetically()//insertion sort
+vector<Person> service::sortAlphabetically()
 {
     bool again = true;
     while (again)
@@ -245,14 +245,14 @@ vector<Person> service::sortBirthYear()
     return _listV;
 }
 
-vector<Person> service::findPerson(const string &name)//finds people and adds them to the vector
+vector<Person> service::findPerson(const string &name)      // Finds people and adds them to the vector
 {
     _listSearchedPerson.clear();
     for (size_t i = 0; i < _listV.size(); i++)
     {
-        if (toLower(_listV[i].getName()).find(toLower(name)) != string::npos)//puts both instances to lowercase
+        if (toLower(_listV[i].getName()).find(toLower(name)) != string::npos)       // Puts both instances to lowercase
         {
-            _listSearchedPerson.push_back(_listV[i]);//puts people inn the list who apply to the input
+            _listSearchedPerson.push_back(_listV[i]);       // Puts people in the list who apply to the input
         }
     }
     return _listSearchedPerson;
@@ -264,9 +264,9 @@ vector<Person> service::sortDeath()
     while (again)
     {
         again = false;
-        for (size_t i = 0; i < _listV.size()-1; i++)
+        for (size_t i = 0; i < _listV.size() - 1; i++)
         {
-            if (_listV[i].getDeathYear() < _listV[i+1].getDeathYear())
+            if (_listV[i].getDeathYear() > _listV[i+1].getDeathYear())
             {
                 swap(_listV[i], _listV[i+1]);
                 again = true;
@@ -282,12 +282,9 @@ void service::swap(Person& a, Person& b)
     a = b;
     b = temp;
 }
-bool service::fileFound()
-{
-    return _fileFound;
-}
+bool service::fileFound()const {return _fileFound;}
 
-void service::sortList(const string& command)// depending on input from user, do something
+void service::sortList(const string& command)       // Sort the list according to the input.
 {
 
     if(command == A)
@@ -318,7 +315,7 @@ void service::sortList(const string& command)// depending on input from user, do
 }
 
 
-void service::addPerson(const Person &input)//makes the user capable to add people as long as they're not already on the list
+void service::addPerson(const Person &input)        // Makes the user capable to add people to the list, as long as they're not already on the list
 {
     if(!alreadyInDatabase(input.getName()))
     {
@@ -329,9 +326,9 @@ void service::addPerson(const Person &input)//makes the user capable to add peop
     }
 }
 
-void service::removePerson(const Person &input)//makes the user capable to remove people
+void service::removePerson(const Person &input)         // Makes the user capable to remove people
 {
-    if(alreadyInDatabase(input.getName()))//check if its in the list
+    if(alreadyInDatabase(input.getName()))      // Checks if the name is already in the database.
     {
         dataAccess addNew;
         removeFromDatabase(input.getName());
@@ -340,7 +337,7 @@ void service::removePerson(const Person &input)//makes the user capable to remov
     }
 }
 
-void service::removeFromDatabase(const string &name)//takes the list, removes an elemnt then rewrites the info.txt with the list without what was removed
+void service::removeFromDatabase(const string &name)        // Takes the list, removes an elemnt then rewrites the info.txt with the list without what was removed
 {
     for (size_t i = 0; i < _listV.size(); i++)
     {
@@ -357,20 +354,28 @@ void service::generateOptions(const Person& correct, string& a, string& b, strin
     const int CASE_1 = 1;
     const int CASE_2 = 2;
 
-    a = _listV[rand() % _listV.size()].getName(); //generating random answers
+    a = _listV[rand() % _listV.size()].getName();       // Generating random answers
     b = _listV[rand() % _listV.size()].getName();
     c = _listV[rand() % _listV.size()].getName();
     d = _listV[rand() % _listV.size()].getName();
 
     int random = rand() % 4;
     if(random == CASE_0)
-        a = correct.getName();      //assigning the correct answer to one of the answers
+    {
+        a = correct.getName();      // Assigning the correct answer to one of the answers
+    }
     else if(random == CASE_1)
+    {
         b = correct.getName();
+    }
     else if(random == CASE_2)
+    {
         c = correct.getName();
+    }
     else
+    {
         d = correct.getName();
+    }
 }
 
 
