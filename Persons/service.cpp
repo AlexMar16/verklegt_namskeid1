@@ -9,6 +9,7 @@ service::service(){
     _listSearchedPerson = temp.getVector();
     _listSearchedPerson.clear();
     _program = true;
+    _filefound = temp.getfilefound();
 }
 
 bool service::alreadyInDatabase(const string& name)//checkar hvort nafnið sé til í databasinum
@@ -281,6 +282,10 @@ void service::swap(Person& a, Person& b)
     a = b;
     b = temp;
 }
+bool service::filefound()
+{
+    return _filefound;
+}
 
 void service::sortList(const string& command)// depending on input from user, do something
 {
@@ -311,6 +316,7 @@ void service::sortList(const string& command)// depending on input from user, do
     }
 
 }
+
 
 void service::addPerson(const Person &input)//makes the user capable to add people as long as they're not already on the list
 {
@@ -366,6 +372,7 @@ void service::generateOptions(const Person& correct, string& a, string& b, strin
     else
         d = correct.getName();
 }
+
 
 void service::setProgram(const bool& input) {_program = input;}
 

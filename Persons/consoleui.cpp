@@ -49,8 +49,17 @@ void consoleUI::run()
 
         if(_print)
         {
+            if(!_turn.filefound())
+            {
+                cout << endl << "File not found! " << endl << endl;
+            }
+            else
+            {
+
+            }
             _printOut = _turn.getList();                            // getList() gets the list that's supposed to be printed out.
             cout << _printOut;
+
         }
         else if (!specialCommand(command))
         {
@@ -318,16 +327,12 @@ void consoleUI::removeCommand()
 void consoleUI::findCommand()
 {
     string toFind;
-<<<<<<< HEAD
-    cout << "Name to find: ";
-    getline(cin, toFind);
-=======
+
     cout << "Search name: ";
 
     getline(cin, toFind);
     cout << endl;
 
->>>>>>> 9579cace24ba63b52d85e13358cf1d87ef174392
     _printOut = _turn.findPerson(toFind);
     if (_turn.lookForPerson(toFind))
     {
