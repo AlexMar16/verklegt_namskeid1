@@ -3,13 +3,17 @@
 using namespace std;
 
 
+const string REMOVE = "remove";
+const string FIND = "find";
+const string QUIZ = "quiz";
+const string STATUS = "status";
+
 consoleUI::consoleUI(){}
 
 void consoleUI::run()
 {
     const int ASTERISK_WIDTH = 80;
     const char ASTERISK = '*';
-    const char SPACE = ' ';
     const char BARRIER = '|';
     string command, initial = "| This is a database for famous computer scientists! |";
     cout << setw(initial.size()) << setfill(ASTERISK) << ASTERISK << endl;
@@ -57,23 +61,23 @@ void consoleUI::run()
 
 bool consoleUI::specialCommand(const string& command)
 {
-    if (command == "find")
+    if (command == FIND)
     {
         return true;
     }
-    else if(command == "quit")
+    else if(command == QUIT)
     {
         return true;
     }
-    else if(command == "quiz")
+    else if(command == QUIZ)
     {
         return true;
     }
-    else if(command == "remove")
+    else if(command == REMOVE)
     {
         return true;
     }
-    else if(command == "status")
+    else if(command == STATUS)
     {
         return true;
     }
@@ -85,23 +89,23 @@ bool consoleUI::specialCommand(const string& command)
 
 bool consoleUI::sortSpecialCommand(const string& choice)
 {
-    if(choice == "a")
+    if(choice == A)
     {
         return true;
     }
-    else if(choice == "b")
+    else if(choice == B)
     {
         return true;
     }
-    else if(choice == "d")
+    else if(choice == D)
     {
         return true;
     }
-    else if(choice == "g")
+    else if(choice == G)
     {
         return true;
     }
-    else if(choice == "l")
+    else if(choice == L)
     {
         return true;
     }
@@ -113,41 +117,45 @@ bool consoleUI::sortSpecialCommand(const string& choice)
 
 void consoleUI::printList(const string &_command)                   // Print if appropriate.
 {
-    if(_command == "list")
+    const string SORT = "sort";
+    const string ADD = "add";
+    const string LIST = "list";
+
+    if(_command == LIST)
     {
         _print = true;                                              // Print the original list.
     }
-    else if(_command == "add")
+    else if(_command == ADD)
     {
         _print = true;
         addCommand();
     }
-    else if(_command == "remove")
+    else if(_command == REMOVE)
     {
         _print = false;
         removeCommand();
     }
-    else if (_command == "find")
+    else if (_command == FIND)
     {
         _print = false;
         findCommand();
     }
-    else if(_command == "sort")                                     // Gives you additional options to choose how you would like the list sorted
+    else if(_command == SORT)                                     // Gives you additional options to choose how you would like the list sorted
     {
         _print = true;
         sortCommand();
     }
-    else if(_command == "quiz")
+    else if(_command == QUIZ)
     {
         _print = false;
         quizCommand();
     }
-    else if (_command == "quit")
+    else if (_command == QUIT)
     {
         _print = false;
         _turn.setProgram(_print);
     }
-    else if(_command =="status")
+    else if(_command == STATUS)
     {
         _print = false;
         statusCommand();
@@ -221,6 +229,8 @@ void consoleUI::addCommand()
     string name, gender, deathYear, birthYear;
     Person input;
     int birthCheck = 0, deathCheck = 0;
+    const int MINIMUM_BIRTH_YEAR = 1750, MAXIMUM_BIRTH_YEAR = 2000;
+    const int MINIMUM_DEATH_YEAR = 1800, MAXIMUM_DEATH_YEAR = 2017;
 
     cout << "Please enter the following information about the new computer scientist " << endl;
     cout << "in the following order." << endl;
@@ -234,7 +244,7 @@ void consoleUI::addCommand()
     {
         cout << "Gender (male/female) in lowercase: ";
         cin >> gender;
-        if (gender == "male" || gender == "female")
+        if (gender == MALE || gender == FEMALE)
         {
             break;
         }
@@ -250,7 +260,7 @@ void consoleUI::addCommand()
         cout << "Birth year (YYYY): ";
         cin >> birthYear;
         birthCheck = atoi(birthYear.c_str());
-        if (birthCheck > 1750 && birthCheck < 2000)
+        if (birthCheck > MINIMUM_BIRTH_YEAR && birthCheck < MAXIMUM_BIRTH_YEAR)
         {
             break;
         }
@@ -266,7 +276,7 @@ void consoleUI::addCommand()
         cout << "Died (input any other character if still alive): ";
         cin >> deathYear;
         deathCheck = atoi(deathYear.c_str());
-        if ((deathCheck > 1800 && deathCheck < 2100) || deathCheck == 0)
+        if ((deathCheck > MINIMUM_DEATH_YEAR && deathCheck < MAXIMUM_DEATH_YEAR) || deathCheck == 0)
         {
             break;
         }
@@ -287,12 +297,12 @@ void consoleUI::removeCommand()
 {
     string fullName;
     Person input;
-
+    const string EMPTY = "";
     cout << "Enter the full name of the scientist to remove from the database: ";
     getline(cin, fullName);
     input = _turn.findPersonExactly(fullName);
 
-    if (input.getName() == "")
+    if (input.getName() == EMPTY)
     {
         cout << endl << "Person not found!" << endl;
     }

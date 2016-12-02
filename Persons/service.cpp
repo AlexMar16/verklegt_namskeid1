@@ -1,6 +1,5 @@
 #include "service.h"
-#include <person.h>
-#include <algorithm>
+#include "person.h"
 
 using namespace std;
 
@@ -14,7 +13,7 @@ service::service(){
 
 bool service::alreadyInDatabase(const string& name)//checkar hvort nafnið sé til í databasinum
 {
-    for (size_t i=0; i< _listV.size(); i++)
+    for (size_t i = 0; i < _listV.size(); i++)
     {
         if (_listV[i].getName() == name)
         {
@@ -24,77 +23,92 @@ bool service::alreadyInDatabase(const string& name)//checkar hvort nafnið sé t
     return false;
 }
 
-bool service::lookForPerson(const string &name)//checkar hvort eh partur af nafni sé til í listanum
+bool service::lookForPerson(const string& name)//checkar hvort eh partur af nafni sé til í listanum
 {
-    bool foundname = false;
-    for (size_t i=0; i< _listV.size(); i++)
+    for (size_t i = 0; i < _listV.size(); i++)
     {
         if (toLower(_listV[i].getName()).find(toLower(name)) != string::npos)
         {
-            foundname = true;
+            return true;
         }
     }
-    return foundname;
+    return false;
 }
 
 bool service::getProgram() const {return _program;}
 
 Person service::findPersonExactly(const string& name)
 {
-    Person Personfoundexactly;
-    for (size_t i=0; i< _listV.size(); i++)
+    Person PersonFoundExactly;
+    for (size_t i = 0; i < _listV.size(); i++)
     {
         if (_listV[i].getName() == name)
         {
-            Personfoundexactly = _listV[i];
+            PersonFoundExactly = _listV[i];
         }
     }
-    return Personfoundexactly;
+    return PersonFoundExactly;
 }
 
 Person service::generateQuestion()
 {
     srand(time(0));
-    return _listV[rand()%_listV.size()];
+    return _listV[rand() % _listV.size()];
 }
 
-string service::getLastName(const string& nafn) const//nær í seinasta orðið í setningu eða seinast nafnið í nafna tilvikum
+string service::getLastName(const string& name) const       //nær í seinasta orðið í setningu eða seinast nafnið í nafna tilvikum
 {
-    int Li=0;
+    int spaceCounter = 0;
     string LastName;
-    for (size_t i=0; i<nafn.size(); i++)
+
+    for (size_t i = 0; i < name.size(); i++)
     {
-        if (nafn[i]==' ')
+        if (name[i] == SPACE)
         {
-            Li=i+1;
+            spaceCounter = i + 1;
         }
     }
-    for (size_t i=Li; i<nafn.size(); i++)
+    for (size_t i = spaceCounter; i < name.size(); i++)
     {
-        LastName += nafn[i];
+        LastName += name[i];
     }
     return LastName;
 }
 
 string service::assignSelection(string& answer, const string& a, const string& b, const string& c, const string& d)
 {
-    if (answer == "a")
+    const string A = "a";
+    const string B = "b";
+    const string C = "c";
+    const string D = "d";
+
+    if (answer == A)
+    {
         answer = a;
-    else if (answer == "b")
+    }
+    else if (answer == B)
+    {
         answer = b;
-    else if (answer == "c")
+    }
+    else if (answer == C)
+    {
         answer = c;
-    else if (answer == "d")
-        answer = d;
+    }
+    else if (answer == D)
+    {
+         answer = d;
+    }
     else
+    {
         answer = "0";
+    }
 
     return answer;
 }
 
 string service::genderCheck(const Person& p)
 {
-    if (p.getGender() == "male")
+    if (p.getGender() == MALE)
         return "He";
     else
         return "She";
@@ -102,57 +116,57 @@ string service::genderCheck(const Person& p)
 
 string service::aliveCheck(const Person& p)
 {
-    if (p.getDeathYear() != 0)
-        return "and died in " + to_string(p.getDeathYear()); //converting int to string to return it as one
+    if (p.getDeathYear() != ALIVE)
+        return "died in " + to_string(p.getDeathYear()); //converting int to string to return it as one
     else
-        return "and is still alive";
+        return "is still alive";
 }
 
 string service::toLower(const string& toLowerString)//to lower
 {
     string data = toLowerString;
-    std::transform(data.begin(), data.end(), data.begin(), ::tolower);
+    transform(data.begin(), data.end(), data.begin(), ::tolower);
     return data;
 }
 
-vector<int> service::properties()// The "status" command activates this function
+vector<int> service::properties()
 {
-    int nameQuant=0;
-    int deathQuant=0;
-    int MgenderQuant=0;
-    int FgenderQuant=0;
-    vector<int> StatusVec;
+    int nameQuant = 0;
+    int deathQuant = 0;
+    int MgenderQuant = 0;
+    int FgenderQuant = 0;
+    vector<int> statusVec;
 
-    for(size_t i=0; i< _listV.size(); i++)//goes through everything in the vector
+    for(size_t i = 0; i < _listV.size(); i++)
     {
         nameQuant++;
 
-        if(_listV[i].getDeathYear() != 0)
+        if(_listV[i].getDeathYear() != ALIVE)
         {
             deathQuant++;
         }
     }
-    for(size_t k= 0; k<_listV.size(); k++)
+    for(size_t k = 0; k < _listV.size(); k++)
     {
-        if(_listV[k].getGender()=="female")
+        if(_listV[k].getGender() == FEMALE)
         {
             FgenderQuant++;
         }
     }
     for(size_t z = 0; z < _listV.size(); z++)
     {
-        if(_listV[z].getGender()=="male")
+        if(_listV[z].getGender() == MALE)
         {
             MgenderQuant++;
         }
     }
 
-    _statusVec.push_back(nameQuant);
-    _statusVec.push_back(deathQuant);
-    _statusVec.push_back(FgenderQuant);
-    _statusVec.push_back(MgenderQuant);
+    statusVec.push_back(nameQuant);
+    statusVec.push_back(deathQuant);
+    statusVec.push_back(FgenderQuant);
+    statusVec.push_back(MgenderQuant);
 
-    return _statusVec;// returns the vector to consoleui.cpp
+    return statusVec;
 }
 
 vector<Person> service::getList() const {return _listV;}
@@ -160,9 +174,9 @@ vector<Person> service::getList() const {return _listV;}
 vector<Person> service::sortGender()//sorts the females in the list to the top
 {
     int counter = 0;
-    for(size_t i=0; i< _listV.size(); i++)
+    for(size_t i = 0; i < _listV.size(); i++)
     {
-        if(_listV[i].getGender() == "female")//if female push it to the top of the list
+        if(_listV[i].getGender() == FEMALE)//if female push it to the top of the list
         {
             swap(_listV[i], _listV[counter]);
             counter++;
@@ -177,7 +191,7 @@ vector<Person> service::sortAlphabetically()//insertion sort
     while (again)
     {
         again = false;
-        for (unsigned int i=0; i< _listV.size()-1; i++)
+        for (size_t i = 0; i < _listV.size() - 1; i++)
         {
             if (_listV[i].getName() > _listV[i+1].getName())
             {
@@ -197,12 +211,12 @@ vector<Person> service::sortAlphabeticallyLastName()
     while (again)
     {
         again = false;
-        for (unsigned int i=0; i< _listV.size()-1; i++)
+        for (size_t i = 0; i < _listV.size() - 1; i++)
         {
             name1= _listV[i].getName();
             name2= _listV[i+1].getName();
 
-            if (getLastName(name1) > getLastName(name2))   //bera saman last name
+            if (getLastName(name1) > getLastName(name2))
             {
                 swap( _listV[i], _listV[i+1]);
                 again = true;
@@ -215,10 +229,10 @@ vector<Person> service::sortAlphabeticallyLastName()
 vector<Person> service::sortBirthYear()
 {
     bool again = true;
-    while (again)
+    while(again)
     {
         again = false;
-        for (size_t i=0; i < _listV.size()-1; i++)
+        for (size_t i = 0; i < _listV.size() - 1; i++)
         {
             if ( _listV[i].getBirthYear() > _listV[i+1].getBirthYear())
             {
@@ -233,7 +247,7 @@ vector<Person> service::sortBirthYear()
 vector<Person> service::findPerson(const string &name)//finnur personunar og addar þeim í vector
 {
     _listSearchedPerson.clear();
-    for (size_t i=0; i< _listV.size(); i++)
+    for (size_t i = 0; i < _listV.size(); i++)
     {
         if (toLower(_listV[i].getName()).find(toLower(name)) != string::npos)//setur bæði í lower þannig að aLeN finnur Alen
         {
@@ -249,7 +263,7 @@ vector<Person> service::sortDeath()
     while (again)
     {
         again = false;
-        for (unsigned int i=0; i< _listV.size()-1; i++)
+        for (size_t i = 0; i < _listV.size()-1; i++)
         {
             if (_listV[i].getDeathYear() < _listV[i+1].getDeathYear())
             {
@@ -271,27 +285,27 @@ void service::swap(Person& a, Person& b)
 void service::sortList(const string& command)// depending on input from user, do something
 {
 
-    if(command == "a")
+    if(command == A)
     {
         _listV = sortAlphabetically();
     }
-    else if(command == "l")
+    else if(command == L)
     {
         _listV = sortAlphabeticallyLastName();
     }
-    else if(command == "b")
+    else if(command == B)
     {
         _listV = sortBirthYear();
     }
-    else if(command == "d")
+    else if(command == D)
     {
         _listV = sortDeath();
     }
-    else if(command == "g")
+    else if(command == G)
     {
         _listV = sortGender();
     }
-    else if(command == "quit")
+    else if(command == QUIT)
     {
         _program = false;
     }
@@ -322,35 +336,36 @@ void service::removePerson(const Person &input)//makes the user capable to remov
 
 void service::removeFromDatabase(const string &name)//takes the list, removes an elemnt then rewrites the info.txt with the list without what was removed
 {
-    for (size_t i=0; i< _listV.size(); i++)
+    for (size_t i = 0; i < _listV.size(); i++)
     {
         if (_listV[i].getName() == name)
         {
-            _listV.erase(_listV.begin()+i);
+            _listV.erase(_listV.begin() + i);
         }
     }
 }
 
 void service::generateOptions(const Person& correct, string& a, string& b, string& c, string& d)
 {
-    a = _listV[rand()%_listV.size()].getName(); //generating random answers
-    b = _listV[rand()%_listV.size()].getName();
-    c = _listV[rand()%_listV.size()].getName();
-    d = _listV[rand()%_listV.size()].getName();
+    const int CASE_0 = 0;
+    const int CASE_1 = 1;
+    const int CASE_2 = 2;
+
+    a = _listV[rand() % _listV.size()].getName(); //generating random answers
+    b = _listV[rand() % _listV.size()].getName();
+    c = _listV[rand() % _listV.size()].getName();
+    d = _listV[rand() % _listV.size()].getName();
 
     int random = rand() % 4;
-    if(random == 0)
+    if(random == CASE_0)
         a = correct.getName();      //assigning the correct answer to one of the answers
-    else if(random == 1)
+    else if(random == CASE_1)
         b = correct.getName();
-    else if(random == 2)
+    else if(random == CASE_2)
         c = correct.getName();
     else
         d = correct.getName();
 }
 
-void service::setProgram(const bool& input)
-{
-    _program = input;
-}
+void service::setProgram(const bool& input) {_program = input;}
 

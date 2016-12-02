@@ -7,10 +7,7 @@ dataAccess::dataAccess()
     getPersons();
 }
 
-vector<Person> dataAccess::getVector()
-{
-    return _persons;
-}
+vector<Person> dataAccess::getVector() const {return _persons;}
 
 void dataAccess::getPersons()
 {
@@ -37,7 +34,7 @@ void dataAccess::changeFile()
         {
             newPerson << _persons[i].getName() << endl << _persons[i].getGender()
                       << endl <<_persons[i].getBirthYear() << endl;
-            if(_persons[i].getDeathYear() != '0')
+            if(_persons[i].getDeathYear() != ALIVE)
             {
                 newPerson << _persons[i].getDeathYear() << endl;
             }

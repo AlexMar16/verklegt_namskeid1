@@ -9,7 +9,7 @@ class dataAccess
 {
 public:
     dataAccess();
-    vector<Person> getVector();
+    vector<Person> getVector() const;
     void setVector();
     void changeFile();
     void setVector(vector<Person> input);

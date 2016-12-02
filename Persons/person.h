@@ -7,9 +7,20 @@
 #include <iomanip>
 #include <cstdlib>
 #include <time.h>
+#include <algorithm>
 
 using namespace std;
 
+const char SPACE = ' ';
+const string MALE = "male";
+const string FEMALE = "female";
+const string A = "a";
+const string B = "b";
+const string D = "d";
+const string G = "g";
+const string L = "l";
+const string QUIT = "quit";
+const int ALIVE = 0;
 
 class Person
 {

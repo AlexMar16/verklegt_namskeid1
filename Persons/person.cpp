@@ -19,13 +19,12 @@ ifstream& operator >> (ifstream& in, Person& rhs)
 ostream& operator << (ostream& out, const Person& rhs)
 {
     const char DASH = '-';
-    const char SPACE = ' ';
     out << left << setw(75) << setfill(DASH) <<  "-" << endl;
     out << left << setw(30) << setfill(SPACE) <<  rhs._fullName;
     out << left << setw(15) << setfill(SPACE) << rhs._gender;
     out << left << setw(15) << setfill(SPACE) << rhs._birthYear;
 
-    if(rhs._deathYear!= 0)
+    if(rhs._deathYear!= ALIVE)
     {
         out << rhs._deathYear << endl;
     }
@@ -38,7 +37,6 @@ ostream& operator << (ostream& out, const Person& rhs)
 
 ostream& operator << (ostream& out, vector<Person>& rhs)
 {
-    const char SPACE = ' ';
     out << left << setw(30) << setfill(SPACE) <<"Name";
     out << left << setw(15) << setfill(SPACE) <<"Gender";
     out << left << setw(15) << setfill(SPACE) <<"BirthYear";

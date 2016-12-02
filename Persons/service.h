@@ -19,7 +19,7 @@ public:
     void sortList(const string& command);
     void setProgram(const bool& input);
     void generateOptions(const Person& correct, string& a, string& b, string& c, string& d);
-    string getLastName(const string& nafn) const;
+    string getLastName(const string& name) const;
     string toLower(const string &tolowerstring);
     string assignSelection(string& answer, const string& a, const string& b, const string& c, const string& d);
     string genderCheck(const Person& p);
@@ -30,7 +30,6 @@ private:
     bool _valid;
     bool _program;
     bool alreadyInDatabase(const string &name);
-    vector<int> _statusVec;
     vector<Person> _listV;
     vector<Person> _listSearchedPerson;
     vector<Person> sortAlphabetically();
