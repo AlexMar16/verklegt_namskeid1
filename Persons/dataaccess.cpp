@@ -20,13 +20,17 @@ bool dataAccess::getPersons()
         {
             _persons.push_back(temp);
         }
-        return true;
+        _fileFound = true;
     }
     else
     {
-        return false;
+        _fileFound = false;
     }
     personFile.close();
+}
+bool dataAccess::getfilefound()
+{
+    return _fileFound;
 }
 
 void dataAccess::changeFile()
