@@ -27,10 +27,6 @@ void dataAccess::getPersons()
         }
         _fileFound = true;
     }
-    else
-    {
-        _fileFound = false;
-    }
     personFile.close();
 }
 
