@@ -12,7 +12,7 @@ service::service(){
     _fileFound = temp.getFileFound();
 }
 
-bool service::alreadyInDatabase(const string& name)//checkar hvort nafnið sé til í databasinum
+bool service::alreadyInDatabase(const string& name)//checks if the name exists in the database
 {
     for (size_t i = 0; i < _listV.size(); i++)
     {
@@ -24,7 +24,7 @@ bool service::alreadyInDatabase(const string& name)//checkar hvort nafnið sé t
     return false;
 }
 
-bool service::lookForPerson(const string& name)//checkar hvort eh partur af nafni sé til í listanum
+bool service::lookForPerson(const string& name)//checks if any part of the name is on the list
 {
     for (size_t i = 0; i < _listV.size(); i++)
     {
@@ -57,7 +57,7 @@ Person service::generateQuestion()
     return _listV[rand() % _listV.size()];
 }
 
-string service::getLastName(const string& name) const       //nær í seinasta orðið í setningu eða seinast nafnið í nafna tilvikum
+string service::getLastName(const string& name) const// gets the last word in the sentence
 {
     int spaceCounter = 0;
     string LastName;
@@ -177,7 +177,7 @@ vector<Person> service::sortGender()//sorts the females in the list to the top
     int counter = 0;
     for(size_t i = 0; i < _listV.size(); i++)
     {
-        if(_listV[i].getGender() == FEMALE)//if female push it to the top of the list
+        if(_listV[i].getGender() == FEMALE)//if female, push it to the top of the list
         {
             swap(_listV[i], _listV[counter]);
             counter++;
@@ -245,14 +245,14 @@ vector<Person> service::sortBirthYear()
     return _listV;
 }
 
-vector<Person> service::findPerson(const string &name)//finnur personunar og addar þeim í vector
+vector<Person> service::findPerson(const string &name)//finds people and adds them to the vector
 {
     _listSearchedPerson.clear();
     for (size_t i = 0; i < _listV.size(); i++)
     {
-        if (toLower(_listV[i].getName()).find(toLower(name)) != string::npos)//setur bæði í lower þannig að aLeN finnur Alen
+        if (toLower(_listV[i].getName()).find(toLower(name)) != string::npos)//puts both instances to lowercase
         {
-            _listSearchedPerson.push_back(_listV[i]);//setur persons í lista sem að hafa input notenda í nafninu
+            _listSearchedPerson.push_back(_listV[i]);//puts people inn the list who apply to the input
         }
     }
     return _listSearchedPerson;
