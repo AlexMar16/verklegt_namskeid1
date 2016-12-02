@@ -1,6 +1,6 @@
 #include "dataaccess.h"
 
-const string FILENAME = "inso.txt";
+const string FILENAME = "info.txt";
 
 dataAccess::dataAccess()
 {
