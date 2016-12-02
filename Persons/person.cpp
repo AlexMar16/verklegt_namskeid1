@@ -1,4 +1,5 @@
 #include "person.h"
+const int COLUMN_WIDTH = 15;
 
 Person::Person()
 {
@@ -19,37 +20,36 @@ ifstream& operator >> (ifstream& in, Person& rhs)
 ostream& operator << (ostream& out, const Person& rhs)
 {
     const char DASH = '-';
-    const char SPACE = ' ';
-    out << left << setw(75) << setfill(DASH) <<  "-" << endl;
-    out << left << setw(30) << setfill(SPACE) <<  rhs._fullName;
-    out << left << setw(15) << setfill(SPACE) << rhs._gender;
-    out << left << setw(15) << setfill(SPACE) << rhs._birthYear;
+    out << left << setw(5*COLUMN_WIDTH) << setfill(DASH) <<  DASH << endl;
+    out << left << setw(2*COLUMN_WIDTH) << setfill(SPACE) <<  rhs._fullName;
+    out << left << setw(COLUMN_WIDTH) << setfill(SPACE) << rhs._gender;
+    out << left << setw(COLUMN_WIDTH) << setfill(SPACE) << rhs._birthYear;
 
-    if(rhs._deathYear!= 0)
+    if(rhs._deathYear!= ALIVE)
     {
-      out << rhs._deathYear << endl;
+        out << setw(COLUMN_WIDTH + 5) << setfill(SPACE) << rhs._deathYear << endl;
     }
     else
     {
-       out << setw(20) << setfill(SPACE) << "Still alive!" << endl;
+        out << setw(COLUMN_WIDTH + 5) << setfill(SPACE) << "Still alive!" << endl;
     }
     return out;
 }
 
 ostream& operator << (ostream& out, vector<Person>& rhs)
 {
-    const char SPACE = ' ';
-    out << left << setw(30) << setfill(SPACE) <<"Name";
-    out << left << setw(15) << setfill(SPACE) <<"Gender";
-    out << left << setw(15) << setfill(SPACE) <<"BirthYear";
-    out << left << setw(20) << setfill(SPACE) <<"Died" << endl;
+    out << left << setw(2*COLUMN_WIDTH) << setfill(SPACE) << "Name";
+    out << left << setw(COLUMN_WIDTH) << setfill(SPACE) << "Gender";
+    out << left << setw(COLUMN_WIDTH) << setfill(SPACE) << "BirthYear";
+    out << left << setw(COLUMN_WIDTH + 5) << setfill(SPACE) << "Died" << endl;
     for(size_t i = 0; i < rhs.size(); i++)
     {
-       out << rhs[i];
+        out << rhs[i];
     }
     out << endl;
     return out;
 }
+
 //Get functions
 string Person::getName() const {return _fullName;}
 string Person::getGender() const {return _gender;}

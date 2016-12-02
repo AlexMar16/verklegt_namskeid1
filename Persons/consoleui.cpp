@@ -3,97 +3,173 @@
 using namespace std;
 
 
+const string REMOVE = "remove";
+const string FIND = "find";
+const string QUIZ = "quiz";
+const string STATUS = "status";
+
 consoleUI::consoleUI(){}
 
 void consoleUI::run()
 {
-    const int ASTERISK_WIDTH = 75;
+    const int ASTERISK_WIDTH = 80;
     const char ASTERISK = '*';
-    string command;
+    const char BARRIER = '|';
+    string command, initial = "| This is a database for famous computer scientists! |";
+    cout << setw(initial.size()) << setfill(ASTERISK) << ASTERISK << endl;
+    cout << initial << endl;
     do
     {
-        cout << setw(ASTERISK_WIDTH)<< setfill(ASTERISK) <<  "*" << endl << endl;
-        cout << "Please enter one of the following commands:" << endl << endl;
-        cout << "list   - This command will list every person in the system." << endl;
-        cout << "sort   - This command will allow you to sort the scientists." << endl;
-        cout << "find   - This command allows you to find a certain person in the list." << endl;
-        cout << "quiz   - This command lets you take a quiz about the computer scientists." << endl;
-        cout << "add    - This command allows you to add a person to the list." << endl;
-        cout << "remove - This command allows you to remove a certain person from the list." << endl;
-        cout << "status - This command displays info about the list "<<endl;
-        cout << "quit   - This command will quit the program." << endl << endl;
-        cout << setw(ASTERISK_WIDTH)<< setfill(ASTERISK) <<  "*" << endl;
+        cout << setw(ASTERISK_WIDTH) << setfill(ASTERISK) <<  ASTERISK << endl;
+        cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| Please enter one of the following commands:"
+             << right << BARRIER << endl;
+        cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << BARRIER << right << BARRIER<< endl;
+        cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| list   - This command will list every person in the system."
+             << right << BARRIER << endl;
+        cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| sort   - This command will allow you to sort the scientists."
+             << right << BARRIER << endl;
+        cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| find   - This command allows you to find a certain person in the list."
+             << right << BARRIER << endl;
+        cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| quiz   - This command lets you take a quiz about the computer scientists."
+             << right << BARRIER << endl;
+        cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| add    - This command allows you to add a person to the list."
+             << right << BARRIER << endl;
+        cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| remove - This command allows you to remove a certain person from the list."
+             << right << BARRIER << endl;
+        cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| status - This command displays info about the list "
+             << right << BARRIER << endl;
+        cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| quit   - This command will quit the program."
+             << right << BARRIER << endl;
+        cout << setw(ASTERISK_WIDTH) << setfill(ASTERISK) << ASTERISK << endl;
         cout << "command: ";
-        getline(cin, command);
-        cout << endl;
 
-        _turn.setCommand(command);//setur command i service.cpp
-        validList(command);//checkar hvort input command fra user se legit og setur _valid true eda false
-        _turn.sortList();
+        getline(cin, command);                                      // Sets the private variable _command in the service class.
+        printList(command);                                         // Checks if there is a need for a printout of the list.
         _printOut = _turn.getList();
-        if(_valid)
+
+        if(_print)
         {
+            _printOut = _turn.getList();                            // getList() gets the list that's supposed to be printed out.
             cout << _printOut;
         }
-        else if (!_turn.specialCommand(command)) // Gera fall sem checkar a tessu
+        else if (!specialCommand(command))
         {
             cout << "Invalid command!" << endl << endl;
         }
-     }while(_turn.getProgram());
+    } while(_turn.getProgram());
 }
 
-void consoleUI::validList(string _command)// depending on input from user, do something
+bool consoleUI::specialCommand(const string& command)
 {
-    if(_command == "list")
+    if (command == FIND)
     {
-        _valid = true; //dont change list
+        return true;
     }
-    else if(_command == "add")
+    else if(command == QUIT)
     {
-        addCommand();
-        _valid = true;
+        return true;
     }
-    else if(_command == "remove")
+    else if(command == QUIZ)
     {
-        removeCommand();
-        _valid = false;
+        return true;
     }
-    else if (_command == "find")
+    else if(command == REMOVE)
     {
-        findCommand();
-        _valid = false;
+        return true;
     }
-    else if(_command == "sort")// gives you additional options to choose how you would like the list sorted
+    else if(command == STATUS)
     {
-        _valid = true;
-        sortCommand();
-    }
-    else if(_command == "quiz")
-    {
-        quizCommand();
-        _valid = false;
-    }
-    else if (_command == "quit")
-    {
-        _valid = false;
-    }
-    else if(_command =="status")
-    {
-        _valid= false;
-        statusCommand();
-
+        return true;
     }
     else
     {
-        _valid = false;
+        return false;
+    }
+}
+
+bool consoleUI::sortSpecialCommand(const string& choice)
+{
+    if(choice == A)
+    {
+        return true;
+    }
+    else if(choice == B)
+    {
+        return true;
+    }
+    else if(choice == D)
+    {
+        return true;
+    }
+    else if(choice == G)
+    {
+        return true;
+    }
+    else if(choice == L)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+void consoleUI::printList(const string &_command)                   // Print if appropriate.
+{
+    const string SORT = "sort";
+    const string ADD = "add";
+    const string LIST = "list";
+
+    if(_command == LIST)
+    {
+        _print = true;                                              // Print the original list.
+    }
+    else if(_command == ADD)
+    {
+        _print = true;
+        addCommand();
+    }
+    else if(_command == REMOVE)
+    {
+        _print = false;
+        removeCommand();
+    }
+    else if (_command == FIND)
+    {
+        _print = false;
+        findCommand();
+    }
+    else if(_command == SORT)                                     // Gives you additional options to choose how you would like the list sorted
+    {
+        _print = true;
+        sortCommand();
+    }
+    else if(_command == QUIZ)
+    {
+        _print = false;
+        quizCommand();
+    }
+    else if (_command == QUIT)
+    {
+        _print = false;
+        _turn.setProgram(_print);
+    }
+    else if(_command == STATUS)
+    {
+        _print = false;
+        statusCommand();
+    }
+    else
+    {
+        _print = false;
     }
 }
 
 void consoleUI::quizCommand()
 {
     Person question = _turn.generateQuestion();
-    //cout << "We are asking about " << question.getName() << endl;
-    cout << _turn.genderCheck(question) <<" was born in " << question.getBirthYear()
+    cout << _turn.genderCheck(question) << " was born in " << question.getBirthYear()
          << " and " << _turn.aliveCheck(question) << ", enter (a/b/c/d)" << endl;
 
     string a, b, c, d;
@@ -111,111 +187,122 @@ void consoleUI::quizCommand()
     _turn.assignSelection(answerString, a, b, c, d);
 
     if (answerString == question.getName())
+    {
         cout << endl << "Correct!!!" << endl << endl;
+    }
     else
+    {
         cout << endl << "Wrong!" << endl << endl;
+    }
     cin.ignore();
 }
 
 void consoleUI::sortCommand()
 {
-    cout << "a - Sort alphabetically. " << endl;
+    cout << "a - Sort alphabetically. "   << endl;
     cout << "b - Sort by year of birth. " << endl;
     cout << "d - Sort by year of death. " << endl;
-    cout << "g - Sort by gender. " << endl;
-    cout << "l - Sort by last name" << endl;
-    cout << "Select sorting method: ";
-    string input;
-    cin >> input;
+    cout << "g - Sort by gender. "        << endl;
+    cout << "l - Sort by last name."       << endl;
 
-    _turn.setCommand(input);// located in service.cpp
-    cin.ignore();
+    string choice;
+
+    while(true)
+    {
+        cout << "Select sorting method: ";
+        getline(cin, choice);
+
+        if(sortSpecialCommand(choice))
+        {
+            _turn.sortList(choice);
+            break;
+        }
+        else
+        {
+            cout << "Invalid input!" << endl;
+        }
+    }
 }
 
 void consoleUI::addCommand()
 {
-  string name, gender, deathYear;
-  int birthYear = 0, nameCounter = 0;
-  Person input;
+    string name, gender, deathYear, birthYear;
+    Person input;
+    int birthCheck = 0, deathCheck = 0;
+    const int MINIMUM_BIRTH_YEAR = 1750, MAXIMUM_BIRTH_YEAR = 2000;
+    const int MINIMUM_DEATH_YEAR = 1800, MAXIMUM_DEATH_YEAR = 2017;
 
-  cout << "Please enter the following information about the new computer scientist " << endl;
-  cout << "in the following order." << endl;
-  cout << "Be aware you cannot put letters that are not in the English alphabet." << endl;
+    cout << "Please enter the following information about the new computer scientist " << endl;
+    cout << "in the following order." << endl;
+    cout << "Be aware you cannot put letters that are not in the English alphabet." << endl;
 
-  cout << "Name: ";
-  getline(cin, name);
-  input.setName(name);
+    cout << "Name: ";
+    getline(cin, name);
+    input.setName(name);
 
-  while(true)
-  {
-      cout << "Gender (male/female) in lowercase: ";
-      cin >> gender;
-      if (gender == "male" || gender == "female")
-      {
-          break;
-      }
-      else
-      {
-          cout << "Invalid input!" << endl;
-      }
-  };
-  input.setGender(gender);
+    while(true)
+    {
+        cout << "Gender (male/female) in lowercase: ";
+        cin >> gender;
+        if (gender == MALE || gender == FEMALE)
+        {
+            break;
+        }
+        else
+        {
+            cout << "Invalid input!" << endl;
+        }
+    };
+    input.setGender(gender);
 
-  while(true)
-  {
-      cout << "Birth year (YYYY): ";
-      cin >> birthYear;
-      if (birthYear > 1750 && birthYear < 2000)
-      {
-          break;
-      }
-      else
-      {
-          cout << "Invalid input!" << endl;
-      };
-  }
-  input.setBirthYear(birthYear);
+    while(true)
+    {
+        cout << "Birth year (YYYY): ";
+        cin >> birthYear;
+        birthCheck = atoi(birthYear.c_str());
+        if (birthCheck > MINIMUM_BIRTH_YEAR && birthCheck < MAXIMUM_BIRTH_YEAR)
+        {
+            break;
+        }
+        else
+        {
+            cout << "Invalid input!" << endl;
+        };
+    }
+    input.setBirthYear(birthCheck);
 
-  int deathCheck = 0;
-  while(true)
-  {
-      cout << "Died (input any other character if still alive): ";
-      cin >> deathYear;
-      deathCheck = atoi(deathYear.c_str());
-      if ((deathCheck > 1800 && deathCheck < 2100) || deathCheck == 0)
-      {
-          break;
-      }
-      else
-      {
-          cout << "Invalid input!" << endl;
-          cin.clear();
-      };
-  }
-  input.setDeathYear(deathCheck);
+    while(true)
+    {
+        cout << "Died (input any other character if still alive): ";
+        cin >> deathYear;
+        deathCheck = atoi(deathYear.c_str());
+        if ((deathCheck > MINIMUM_DEATH_YEAR && deathCheck < MAXIMUM_DEATH_YEAR) || deathCheck == 0)
+        {
+            break;
+        }
+        else
+        {
+            cout << "Invalid input!" << endl;
+        };
+    }
+    input.setDeathYear(deathCheck);
 
-  cout << endl;
+    cout << endl;
 
-  _turn.addPerson(input);
-  cin.ignore();
+    _turn.addPerson(input);
+    cin.ignore();
 }
-
-
 
 void consoleUI::removeCommand()
 {
     string fullName;
     Person input;
-    int nameCounter = 0;
+    const string EMPTY = "";
     cout << "Enter the full name of the scientist to remove from the database: ";
-
     getline(cin, fullName);
-
-
-
-
     input = _turn.findPersonExactly(fullName);
-    if (input.getName() == "")
+
+    if (input.getName() == EMPTY)
     {
         cout << endl << "Person not found!" << endl;
     }
@@ -223,20 +310,24 @@ void consoleUI::removeCommand()
     {
         cout << endl << fullName << " removed" << endl;
     }
+
     input = _turn.findPersonExactly(fullName);
-
     _turn.removePerson(input);
-
-    //input.setDeathYear(deathYear);
-
-    //_turn.addPerson(input);
 }
 
 void consoleUI::findCommand()
 {
     string toFind;
+<<<<<<< HEAD
     cout << "Name to find: ";
     getline(cin, toFind);
+=======
+    cout << "Search name: ";
+
+    getline(cin, toFind);
+    cout << endl;
+
+>>>>>>> 9579cace24ba63b52d85e13358cf1d87ef174392
     _printOut = _turn.findPerson(toFind);
     if (_turn.lookForPerson(toFind))
     {
@@ -244,18 +335,17 @@ void consoleUI::findCommand()
     }
     else
     {
-        cout << "Person not found " << endl;
+        cout << "Person not found " << endl << endl;
     }
 }
 
-void consoleUI::statusCommand()//prints out number of people that fit to each category
+void consoleUI::statusCommand()
 {
     _printStatus = _turn.properties();
 
-   cout<< "Total names in list       : "<< _printStatus[0] << endl;
-   cout<< "Number of deceased        : "<< _printStatus[1] << endl;
-   cout<< "Total females on the list : "<< _printStatus[2] << endl;
-   cout<< "Total Males on the list   : "<< _printStatus[3] << endl << endl;
-
+    cout << "Total names in list       : " << _printStatus[0] << endl;
+    cout << "Number of deceased        : " << _printStatus[1] << endl;
+    cout << "Total females on the list : " << _printStatus[2] << endl;
+    cout << "Total Males on the list   : " << _printStatus[3] << endl << endl;
 }
 

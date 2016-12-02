@@ -9,10 +9,9 @@ class dataAccess
 {
 public:
     dataAccess();
-    vector<Person> getVector();
+    vector<Person> getVector() const;
     void setVector();
-    void addPerson();
-    void removePerson();
+    void changeFile();
     void setVector(vector<Person> input);
 private:
     vector<Person> _persons;
