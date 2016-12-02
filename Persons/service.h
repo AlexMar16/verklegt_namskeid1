@@ -24,14 +24,14 @@ public:
     string assignSelection(string& answer, const string& a, const string& b, const string& c, const string& d);
     string genderCheck(const Person& p);
     string aliveCheck(const Person& p);
+    bool fileFound();
 
-    bool filefound();
 private:
     bool _keepGoing;
     bool _valid;
     bool _program;
     bool alreadyInDatabase(const string &name);
-    bool _filefound;
+    bool _fileFound;
     vector<Person> _listV;
     vector<Person> _listSearchedPerson;
     vector<Person> sortAlphabetically();

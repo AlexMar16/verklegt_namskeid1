@@ -7,6 +7,8 @@ dataAccess::dataAccess()
     getPersons();
 }
 
+bool dataAccess::getFileFound() const {return _fileFound;}
+
 vector<Person> dataAccess::getVector() const {return _persons;}
 
 void dataAccess::getPersons()
@@ -27,10 +29,6 @@ void dataAccess::getPersons()
         _fileFound = false;
     }
     personFile.close();
-}
-bool dataAccess::getfilefound()
-{
-    return _fileFound;
 }
 
 void dataAccess::changeFile()

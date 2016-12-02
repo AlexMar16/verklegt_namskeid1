@@ -44,26 +44,25 @@ void consoleUI::run()
         cout << "command: ";
 
         getline(cin, command);                                      // Sets the private variable _command in the service class.
-        printList(command);                                         // Checks if there is a need for a printout of the list.
         _printOut = _turn.getList();
-
-        if(_print)
+        if(!_turn.fileFound())
         {
+            printList(command);                                         // Checks if there is a need for a printout of the list.
+        }
 
-            if(!_turn.filefound())
-            {
-                cout << endl << "File not found! " << endl << endl;
-            }
-
+        if(_print && _turn.fileFound())
+        {
             _printOut = _turn.getList();                            // getList() gets the list that's supposed to be printed out.
             cout << _printOut;
-
-
-
         }
         else if (!specialCommand(command))
         {
-            cout << "Invalid command!" << endl << endl;
+             cout << "Invalid command!" << endl << endl;
+        }
+
+        if(!_turn.fileFound())
+        {
+            cout << endl << "File not found! " << endl << endl;
         }
     } while(_turn.getProgram());
 }

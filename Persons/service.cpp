@@ -9,7 +9,7 @@ service::service(){
     _listSearchedPerson = temp.getVector();
     _listSearchedPerson.clear();
     _program = true;
-    _filefound = temp.getfilefound();
+    _fileFound = temp.getFileFound();
 }
 
 bool service::alreadyInDatabase(const string& name)//checkar hvort nafnið sé til í databasinum
@@ -282,9 +282,9 @@ void service::swap(Person& a, Person& b)
     a = b;
     b = temp;
 }
-bool service::filefound()
+bool service::fileFound()
 {
-    return _filefound;
+    return _fileFound;
 }
 
 void service::sortList(const string& command)// depending on input from user, do something

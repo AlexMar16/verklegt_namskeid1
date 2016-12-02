@@ -10,7 +10,7 @@ class dataAccess
 public:
     dataAccess();
     vector<Person> getVector() const;
-    bool getfilefound();
+    bool getFileFound() const;
     void setVector();
     void changeFile();
     void setVector(vector<Person> input);
