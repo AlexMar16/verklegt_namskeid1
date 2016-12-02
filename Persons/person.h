@@ -7,6 +7,7 @@
 #include <iomanip>
 #include <cstdlib>
 #include <time.h>
+#include <algorithm>
 
 using namespace std;
 
