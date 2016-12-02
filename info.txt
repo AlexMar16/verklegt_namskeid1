@@ -1,0 +1,252 @@
+Leonard Adleman
+male
+1945
+0
+Frances E. Allen
+male
+1932
+0
+Charles William Bachman
+male
+1924
+0
+John Backus
+male
+1924
+2007
+Manuel Blum
+male
+1938
+0
+Fred Brooks
+male
+1931
+0
+Vint Cerf
+male
+1943
+0
+Edmund M. Clarke
+male
+1945
+0
+John Cocke
+male
+1925
+2002
+Edgar Frank Codd
+male
+1923
+2003
+Stephen Arthur Cook
+male
+1939
+0
+Fernando Jose Corbato
+male
+1926
+0
+Ole-Johan Dahl
+male
+1931
+2002
+Whitfield Diffie
+male
+1944
+0
+Edsger Wybe Dijkstra
+male
+1930
+2002
+Ernest Allen Emerson
+male
+1954
+0
+Douglas Engelbart
+male
+1925
+2013
+Edward Feigenbaum
+male
+1936
+0
+Robert W. Floyd
+male
+1936
+2001
+Shafi Goldwasser
+female
+1958
+0
+Jim Gray
+male
+1944
+2012
+Richard Hamming
+male
+1915
+1998
+Juris Hartmanis
+male
+1928
+0
+Martin Hellman
+male
+1945
+0
+Tony Hoare
+male
+1934
+0
+John Hopcroft
+male
+1939
+0
+Kenneth Eugene Iverson
+male
+1920
+2004
+William Kahan
+male
+1933
+0
+Bob Kahn
+male
+1938
+0
+Richard MacAlistair Karp
+male
+1935
+0
+Alan Kay
+male
+1940
+0
+Donald Ervin Knuth
+male
+1938
+0
+Leslie Lamport
+male
+1941
+0
+Butler Lampson
+male
+1943
+0
+Barbara Liskov
+female
+1939
+0
+John McCarthy
+male
+1927
+2011
+Silvio Micali
+male
+1954
+0
+Robin Milner
+male
+1934
+2010
+Marvin Minsky
+male
+1927
+2016
+Peter Naur
+male
+1928
+2016
+Allen Newell
+male
+1927
+1992
+Kristen Nygaard
+male
+1926
+2002
+Judea Pearl
+male
+1936
+0
+Amir Pnueli
+male
+1941
+2009
+Michael Oser Rabin
+male
+1931
+0
+Raj Reddy
+male
+1937
+0
+Dennis Ritchie
+male
+1941
+2011
+Ron Rivest
+male
+1947
+0
+Dana Stewart Scott
+male
+1932
+0
+Adi Shamir
+male
+1952
+0
+Joseph Sifakis
+male
+1946
+0
+Herbert Alexander Simon
+male
+1916
+2001
+Richard E. Stearns
+male
+1936
+0
+Michael Stonebraker
+male
+1943
+0
+Ivan Sutherland
+male
+1938
+0
+Robert Tarjan
+male
+1948
+0
+Charles P. Thacker
+male
+1943
+0
+Ken Thompson
+male
+1943
+0
+Leslie Valiant
+male
+1949
+0
+Maurice Wilkes
+male
+1913
+2010
+James Hardy Wilkinson
+male
+1919
+1986
+Niklaus Wirth
+male
+1934
+0
+Andrew Yao
+male
+1946
+0
