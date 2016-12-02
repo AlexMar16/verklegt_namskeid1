@@ -38,7 +38,7 @@ void consoleUI::run()
              << right << BARRIER << endl;
         cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| status - This command displays info about the list "
              << right << BARRIER << endl;
-        cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| quit   - This command will quit the program."
+        cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| quit   - This command will quit the program. "
              << right << BARRIER << endl;
         cout << setw(ASTERISK_WIDTH) << setfill(ASTERISK) << ASTERISK << endl;
         cout << "command: ";
