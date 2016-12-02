@@ -97,7 +97,7 @@ string service::assignSelection(string& answer, const string& a, const string& b
     }
     else if (answer == D)
     {
-         answer = d;
+        answer = d;
     }
     else
     {
@@ -261,29 +261,35 @@ vector<Person> service::findPerson(const string &name)      // Finds people and 
 vector<Person> service::sortDeath()
 {
     bool again = true;
-    int aliveIndex = 0;
     while (again)
     {
-        /*for (size_t i = 0; i < _listV.size() - 1; i++)
-        {
-            if (_listV[i].getDeathYear() == ALIVE)
-            {
-                swap(_listV[aliveIndex], _listV[i]);
-                aliveIndex++;
-                again = true;
-            }
-        }*/
         again = false;
         for (size_t i = 0; i < _listV.size() - 1; i++)
         {
-            if (_listV[i].getDeathYear() < _listV[i+1].getDeathYear())
+            if (_listV[i].getDeathYear() > _listV[i+1].getDeathYear())      // Seperate the one's who are still alive and those who are not.
             {
                 swap(_listV[i], _listV[i+1]);
                 again = true;
             }
         }
     }
-    return _listV;
+    vector<Person> temp;
+    for(size_t i = 0; i < _listV.size(); i++)           // The one's who have died are put in the variable temp in order.
+    {
+        if(_listV[i].getDeathYear() != ALIVE)
+        {
+            temp.push_back(_listV[i]);
+        }
+    }
+    for(size_t i = 0; i < _listV.size(); i++)           // Then we put the one's who are still alive behind them.
+    {
+        if(_listV[i].getDeathYear() == ALIVE)
+        {
+            temp.push_back(_listV[i]);
+        }
+    }
+
+    return temp;
 }
 
 void service::swap(Person& a, Person& b)

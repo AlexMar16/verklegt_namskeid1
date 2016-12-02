@@ -14,7 +14,6 @@ vector<Person> dataAccess::getVector() const {return _persons;}
 
 void dataAccess::getPersons()
 {
-
     ifstream personFile;
     personFile.open(FILENAME);
     if(personFile)

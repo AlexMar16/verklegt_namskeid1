@@ -217,6 +217,7 @@ void consoleUI::sortCommand()
     cout << "l - Sort by last name."       << endl;
 
     string choice;
+    string upOrDown;
 
     while(true)
     {
@@ -233,7 +234,6 @@ void consoleUI::sortCommand()
             cout << "Invalid input!" << endl;
         }
     }
-    string upOrDown;
 
     cout << endl;
     cout << "asc - Show list in ascending order." << endl;
