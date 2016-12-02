@@ -25,11 +25,13 @@ public:
     string genderCheck(const Person& p);
     string aliveCheck(const Person& p);
 
+    bool filefound();
 private:
     bool _keepGoing;
     bool _valid;
     bool _program;
     bool alreadyInDatabase(const string &name);
+    bool _filefound;
     vector<Person> _listV;
     vector<Person> _listSearchedPerson;
     vector<Person> sortAlphabetically();
