@@ -4,8 +4,9 @@ const string FILENAME = "info.txt";
 
 dataAccess::dataAccess()
 {
-    getPersons();
     _fileFound = false;
+    getPersons();
+
 }
 
 bool dataAccess::getFileFound() const {return _fileFound;}
@@ -14,6 +15,7 @@ vector<Person> dataAccess::getVector() const {return _persons;}
 
 void dataAccess::getPersons()
 {
+
     ifstream personFile;
     personFile.open(FILENAME);
     if(personFile)
