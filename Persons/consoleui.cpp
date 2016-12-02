@@ -45,7 +45,7 @@ void consoleUI::run()
 
         getline(cin, command);                                      // Sets the private variable _command in the service class.
         _printOut = _turn.getList();
-        if(_turn.fileFound() || command == QUIT)
+        if(_turn.fileFound() || QUIT == command)
         {
             printList(command);                                         // Checks if there is a need for a printout of the list.
         }
