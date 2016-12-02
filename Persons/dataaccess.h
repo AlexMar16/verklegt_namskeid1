@@ -17,7 +17,7 @@ public:
 private:
     bool _fileFound;
     vector<Person> _persons;
-    bool getPersons();
+    void getPersons();
     void getQuestions();
 };
 
