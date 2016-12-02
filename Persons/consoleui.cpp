@@ -368,4 +368,3 @@ void consoleUI::statusCommand()
     cout << "Total females on the list : " << _printStatus[2] << endl;
     cout << "Total Males on the list   : " << _printStatus[3] << endl << endl;
 }
-

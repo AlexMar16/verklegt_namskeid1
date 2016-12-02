@@ -44,6 +44,10 @@ void dataAccess::changeFile()
             {
                 newPerson << _persons[i].getDeathYear() << endl;
             }
+            else
+            {
+                newPerson << ALIVE << endl;
+            }
         }
     }
     newPerson.close();
