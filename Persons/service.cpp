@@ -261,12 +261,22 @@ vector<Person> service::findPerson(const string &name)      // Finds people and 
 vector<Person> service::sortDeath()
 {
     bool again = true;
+    int aliveIndex = 0;
     while (again)
     {
+        /*for (size_t i = 0; i < _listV.size() - 1; i++)
+        {
+            if (_listV[i].getDeathYear() == ALIVE)
+            {
+                swap(_listV[aliveIndex], _listV[i]);
+                aliveIndex++;
+                again = true;
+            }
+        }*/
         again = false;
         for (size_t i = 0; i < _listV.size() - 1; i++)
         {
-            if (_listV[i].getDeathYear() > _listV[i+1].getDeathYear())
+            if (_listV[i].getDeathYear() < _listV[i+1].getDeathYear())
             {
                 swap(_listV[i], _listV[i+1]);
                 again = true;
@@ -381,3 +391,7 @@ void service::generateOptions(const Person& correct, string& a, string& b, strin
 
 void service::setProgram(const bool& input) {_program = input;}
 
+void service::reverseVector()
+{
+    reverse(_listV.begin(), _listV.end());
+}

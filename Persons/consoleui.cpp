@@ -207,6 +207,9 @@ void consoleUI::quizCommand()
 
 void consoleUI::sortCommand()
 {
+    const string ASC = "asc";
+    const string DESC = "desc";
+
     cout << "a - Sort alphabetically. "   << endl;
     cout << "b - Sort by year of birth. " << endl;
     cout << "d - Sort by year of death. " << endl;
@@ -228,6 +231,31 @@ void consoleUI::sortCommand()
         else
         {
             cout << "Invalid input!" << endl;
+        }
+    }
+    string upOrDown;
+
+    cout << endl;
+    cout << "asc - Show list in ascending order." << endl;
+    cout << "desc - Show list in descending order." << endl << endl;
+
+    while(true)
+    {
+        cout << "Select list representation: ";
+        getline(cin, upOrDown);
+
+        if(upOrDown == DESC)
+        {
+            _turn.reverseVector();
+            break;
+        }
+        else if(upOrDown != ASC)
+        {
+            cout << "Invalid input!" << endl;
+        }
+        else
+        {
+            break;
         }
     }
 }
