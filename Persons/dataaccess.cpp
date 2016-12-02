@@ -11,7 +11,7 @@ bool dataAccess::getFileFound() const {return _fileFound;}
 
 vector<Person> dataAccess::getVector() const {return _persons;}
 
-void dataAccess::getPersons()
+bool dataAccess::getPersons()
 {
     ifstream personFile;
     personFile.open(FILENAME);

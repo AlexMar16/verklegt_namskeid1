@@ -17,8 +17,8 @@ public:
 private:
     bool _fileFound;
     vector<Person> _persons;
-    void getPersons();
-    void getQuestions();    
+    bool getPersons();
+    void getQuestions();
 };
 
 #endif // DATAACCESS_H
