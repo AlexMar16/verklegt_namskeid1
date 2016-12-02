@@ -15,7 +15,7 @@ public:
     void setVector(vector<Person> input);
 private:
     vector<Person> _persons;
-    void getPersons();
+    bool getPersons();
     void getQuestions();
 };
 

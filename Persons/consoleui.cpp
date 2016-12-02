@@ -125,32 +125,32 @@ void consoleUI::printList(const string &_command)                   // Print if 
     {
         _print = true;                                              // Print the original list.
     }
-    else if(_command == ADD)
+    else if(_command == ADD)                                        // Tells the user to enter information (names, gender, birth year, death year) about the new scientist.
     {
         _print = true;
         addCommand();
     }
-    else if(_command == REMOVE)
+    else if(_command == REMOVE)                                     // Tells the user to enter the full name of the scientist to be removed from the list.
     {
         _print = false;
         removeCommand();
     }
-    else if (_command == FIND)
+    else if (_command == FIND)                                      // Tells the user to enter the name of the scientist to be located in the list.
     {
         _print = false;
         findCommand();
     }
-    else if(_command == SORT)                                     // Gives you additional options to choose how you would like the list sorted
+    else if(_command == SORT)                                       // Gives you additional options to choose how you would like the list sorted
     {
         _print = true;
         sortCommand();
     }
-    else if(_command == QUIZ)
+    else if(_command == QUIZ)                                       // Presents the user with a quiz relating to the birth and death year of a scientist.
     {
         _print = false;
         quizCommand();
     }
-    else if (_command == QUIT)
+    else if (_command == QUIT)                                      // Quits the program.
     {
         _print = false;
         _turn.setProgram(_print);
@@ -236,8 +236,19 @@ void consoleUI::addCommand()
     cout << "in the following order." << endl;
     cout << "Be aware you cannot put letters that are not in the English alphabet." << endl;
 
-    cout << "Name: ";
-    getline(cin, name);
+    while(true)
+    {
+        cout << "Name: ";
+        getline(cin, name);
+        if(name == "")
+        {
+            cout << "No input!" << endl;
+        }
+        else
+        {
+            break;
+        }
+    }
     input.setName(name);
 
     while(true)

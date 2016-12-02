@@ -9,7 +9,7 @@ dataAccess::dataAccess()
 
 vector<Person> dataAccess::getVector() const {return _persons;}
 
-void dataAccess::getPersons()
+bool dataAccess::getPersons()
 {
     ifstream personFile;
     personFile.open(FILENAME);
@@ -20,6 +20,11 @@ void dataAccess::getPersons()
         {
             _persons.push_back(temp);
         }
+        return true;
+    }
+    else
+    {
+        return false;
     }
     personFile.close();
 }
