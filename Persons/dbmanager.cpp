@@ -1,34 +1,25 @@
 #include "dbmanager.h"
+#include <QVariant>
+#include <QDebug>
 
 DbManager::DbManager(const QString &path)
 {
-    m_db = QSqlDatabase::addDatabase("QSQLITE");
-    m_db.setDatabaseName(path);
-
-    if (!m_db.open())
-    {
-        cout << "Error: connection with database fail" << endl;
-    }
-    else
-    {
-        cout << "Database: connection ok" << endl;
-    }
+    _db = QSqlDatabase::addDatabase("QSQLITE");
+    QString dbName = "ComputerScience.sqlite";
+    _db.setDatabaseName(dbName);
+    _db.open();
 }
-bool DbManager::addPerson(const Person& input)
+void DbManager::print() const
 {
-   bool success = false;
-   // you should check if args are ok first...
-   QSqlQuery query;
-   query.prepare("INSERT INTO people (Name) VALUES (:name)");
-   //input.bindValue(":name", input);
-   if(query.exec())
-   {
-       success = true;
-   }
-   else
-   {
-        cout << "addPerson error:  ";
-   }
-
-   return success;
+    QString s = "SELECT * FROM Students";
+    QSqlQuery query(_db);
+    cout << query.isSelect() << endl;
+    query.exec(s);
+    query.next();
+    while (query.next())
+    {
+        string jee = query.value("Name").toString().toStdString();
+        cout << jee << endl << endl;
+    }
+    cout << "nope" << endl;
 }
