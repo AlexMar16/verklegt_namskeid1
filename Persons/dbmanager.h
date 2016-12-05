@@ -12,12 +12,14 @@ using namespace std;
 class DbManager
 {
 public:
+    bool isOpen() const;
     DbManager();
     DbManager(const QString& path);
-    void getPersons();
+    vector<Person> getVector() const;
     void print() const;
-    vector<Person> getAllPersons();
 private:
+    vector<Person> _persons;
+    void getPersons();
     QSqlDatabase _db;
 };
 

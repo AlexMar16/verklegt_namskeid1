@@ -1,6 +1,6 @@
 #ifndef SERVICE_H
 #define SERVICE_H
-#include "dataaccess.h"
+#include "dbmanager.h"
 #include "person.h"
 
 class service

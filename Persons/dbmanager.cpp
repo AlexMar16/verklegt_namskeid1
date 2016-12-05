@@ -41,5 +41,9 @@ void DbManager::getPersons()
 
         int deathYear = query.value("deathYear").toUInt();
         temp.setDeathYear(deathYear);
+        _persons.push_back(temp);
     }
 }
+vector<Person> DbManager::getVector() const {return _persons;}
+
+bool DbManager::isOpen() const {return _db.isOpen();}

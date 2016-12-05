@@ -3,13 +3,13 @@
 
 using namespace std;
 
-service::service(){
-    dataAccess temp;        // The instance we use to communicate with dataAccess.
+service::service(){    
+     DbManager temp("ComputerScience.sqlite");
     _listV = temp.getVector();
     _listSearchedPerson = temp.getVector();
     _listSearchedPerson.clear();
     _program = true;
-    _fileFound = temp.getFileFound();
+    _fileFound = temp.isOpen();
 }
 
 bool service::alreadyInDatabase(const string& name)         // Checks if the name exists in the database
@@ -331,7 +331,7 @@ void service::sortList(const string& command)       // Sort the list according t
 }
 
 
-void service::addPerson(const Person &input)        // Makes the user capable to add people to the list, as long as they're not already on the list
+/*void service::addPerson(const Person &input)        // Makes the user capable to add people to the list, as long as they're not already on the list
 {
     if(!alreadyInDatabase(input.getName()))
     {
@@ -351,7 +351,7 @@ void service::removePerson(const Person &input)         // Makes the user capabl
         addNew.setVector(_listV);
         addNew.changeFile();
     }
-}
+}*/
 
 void service::removeFromDatabase(const string &name)        // Takes the list, removes an elemnt then rewrites the info.txt with the list without what was removed
 {
