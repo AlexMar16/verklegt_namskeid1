@@ -11,10 +11,7 @@ DbManager::DbManager(const QString &path)
     _db.open();
     getPersons();
 }
-DbManager::~DbManager()
-{
-    _db.close();
-}
+DbManager::~DbManager() {_db.close();}
 
 void DbManager::getPersons()
 {
@@ -41,3 +38,10 @@ void DbManager::getPersons()
 vector<Person> DbManager::getVector() const {return _persons;}
 
 bool DbManager::isOpen() const {return _db.isOpen();}
+
+void DbManager::setVector(const vector<Person> &input) {_persons = input;}
+
+void DbManager::changeData()
+{
+
+}

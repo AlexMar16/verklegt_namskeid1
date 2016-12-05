@@ -14,6 +14,8 @@ public:
     ~DbManager();
     DbManager(const QString& path);
     vector<Person> getVector() const;
+    void setVector(const vector<Person>& input);
+    void changeData();
 private:
     vector<Person> _persons;
     void getPersons();
