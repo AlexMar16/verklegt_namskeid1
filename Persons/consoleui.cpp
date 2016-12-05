@@ -9,6 +9,7 @@ const string FIND = "find";
 const string QUIZ = "quiz";
 const string STATUS = "status";
 const string EMPTY = "";
+const string BACK = "back";
 
 
 consoleUI::consoleUI() {_print = true;}
@@ -18,57 +19,73 @@ void consoleUI::run()
     const int ASTERISK_WIDTH = 80;
     const char ASTERISK = '*';
     const char BARRIER = '|';
-    string command, initial = "| This is a database for famous computer scientists and historical computers! |";
-    cout << setw(initial.size()) << setfill(ASTERISK) << ASTERISK << endl;
-    cout << initial << endl;
+    string command, database, initial = "| This is a database for famous computer scientists and historical computers! |";
     do
     {
-        cout << setw(ASTERISK_WIDTH) << setfill(ASTERISK) <<  ASTERISK << endl;     // Command box begins.
-        cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| Please enter one of the following commands:"
+        cout << setw(ASTERISK_WIDTH) << setfill(ASTERISK) <<  ASTERISK << endl;
+        cout << initial << endl << endl;
+        cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| Please enter the following commands to examine this database!"
              << right << BARRIER << endl;
-        cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << BARRIER << right << BARRIER<< endl;
-        cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| list   - This command will list every person in the system."
+        cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| person   - This command will gain you access to the person table."
              << right << BARRIER << endl;
-        cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| sort   - This command will allow you to sort the scientists."
+        cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| computer   - This command will gain you access to the computer table"
              << right << BARRIER << endl;
-        cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| find   - This command allows you to find a certain person in the list."
+        cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| connect   - This command will gain you access to connections of both."
              << right << BARRIER << endl;
-        cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| quiz   - This command lets you take a quiz about the computer scientists."
+        cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| Pick a database: "
              << right << BARRIER << endl;
-        cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| add    - This command allows you to add a person to the list."
-             << right << BARRIER << endl;
-        cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| remove - This command allows you to remove a certain person from the list."
-             << right << BARRIER << endl;
-        cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| status - This command displays info about the list "
-             << right << BARRIER << endl;
-        cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| addperson - This command adds an person to the database(testing atm)"
-             << right << BARRIER << endl;
-        cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| quit   - This command will quit the program. "
-             << right << BARRIER << endl;
-        cout << setw(ASTERISK_WIDTH) << setfill(ASTERISK) << ASTERISK << endl;      // Command box ends.
-        cout << "command: ";
+        getline(cin, database);
 
-        getline(cin, command);          // Sets the private variable _command in the service class.
-        _printOut = _turn.getList();
-        if(_turn.dataFound() || QUIT == command)
+        cout << setw(ASTERISK_WIDTH) << setfill(ASTERISK) <<  ASTERISK << endl;
+        do
         {
-            printList(command);         // Checks if there is a need for a printout of the list.
-        }
-        else
-        {
-            cout << endl << "File not found! " << endl << endl;
-        }
+            cout << setw(ASTERISK_WIDTH) << setfill(ASTERISK) <<  ASTERISK << endl;     // Command box begins.
+            cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| Please enter one of the following commands:"
+                 << right << BARRIER << endl;
+            cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << BARRIER << right << BARRIER<< endl;
+            cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| list   - This command will list every person in the system."
+                 << right << BARRIER << endl;
+            cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| sort   - This command will allow you to sort the scientists."
+                 << right << BARRIER << endl;
+            cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| find   - This command allows you to find a certain person in the list."
+                 << right << BARRIER << endl;
+            cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| quiz   - This command lets you take a quiz about the computer scientists."
+                 << right << BARRIER << endl;
+            cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| add    - This command allows you to add a person to the list."
+                 << right << BARRIER << endl;
+            cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| remove - This command allows you to remove a certain person from the list."
+                 << right << BARRIER << endl;
+            cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| status - This command displays info about the list "
+                 << right << BARRIER << endl;
+            cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| addperson - This command adds an person to the database(testing atm)"
+                 << right << BARRIER << endl;
+            cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| quit   - This command will quit the program. "
+                 << right << BARRIER << endl;
+            cout << setw(ASTERISK_WIDTH) << setfill(ASTERISK) << ASTERISK << endl;      // Command box ends.
+            cout << "command: ";
 
-        if(_print && _turn.dataFound())
-        {
-            _printOut = _turn.getList();// getList() gets the list that's supposed to be printed out.
-            cout << _printOut;
-        }
-        else if (!specialCommand(command) && _turn.dataFound())
-        {
-            cout << "Invalid command!" << endl << endl;
-        }
-    } while(_turn.getProgram());
+            getline(cin, command);          // Sets the private variable _command in the service class.
+            _printOut = _turn.getList();
+            if(_turn.dataFound() || QUIT == command)
+            {
+                printList(command);         // Checks if there is a need for a printout of the list.
+            }
+            else
+            {
+                cout << endl << "File not found! " << endl << endl;
+            }
+
+            if(_print && _turn.dataFound())
+            {
+                _printOut = _turn.getList();// getList() gets the list that's supposed to be printed out.
+                cout << _printOut;
+            }
+            else if (!specialCommand(command) && _turn.dataFound())
+            {
+                cout << "Invalid command!" << endl << endl;
+            }
+        } while(_turn.getProgram());
+    } while(command == BACK);
 }
 
 bool consoleUI::specialCommand(const string& command)
@@ -90,6 +107,10 @@ bool consoleUI::specialCommand(const string& command)
         return true;
     }
     else if(command == STATUS)
+    {
+        return true;
+    }
+    else if(command == BACK)
     {
         return true;
     }
@@ -168,7 +189,7 @@ void consoleUI::printList(const string &_command)       // Print if appropriate.
         _print = false;
         quizCommand();
     }
-    else if (_command == QUIT)      // Quits the program.
+    else if (_command == QUIT || _)      // Quits the program.
     {
         _print = false;
         _turn.setProgram(_print);
