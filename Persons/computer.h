@@ -31,6 +31,7 @@ public:
     void setName(const string input);
     void setType(const string input);
     void setYearbuild(const int input);
+
     void setBuilt(const bool input);
     friend ostream& operator << (ostream& out, const Computer& rhs);
     friend ifstream& operator >> (ifstream& in, Computer& rhs);

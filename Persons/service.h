@@ -2,6 +2,7 @@
 #define SERVICE_H
 #include "dbmanager.h"
 #include "person.h"
+#include "computer.h"
 
 class service
 {
@@ -16,6 +17,7 @@ public:
     vector<Person> findPerson(const string& name);
     vector<Person> getList() const;
     void addPerson(const Person& input);
+    void addComputer(const Computer& input);
     void removePerson(const Person& input);
     void sortList(const string& command);
     void setProgram(const bool& input);

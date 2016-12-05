@@ -348,7 +348,7 @@ void consoleUI::addCommand()
 
     cout << endl;
 
-    //_turn.addPerson(input);
+    _turn.addPerson(input);
     cin.ignore();
 }
 
@@ -397,38 +397,47 @@ void consoleUI::addPersonCommand()
 
     while(true)
     {
-        cout << "Was the computer ever built?" << endl;
+        cout << "Was the computer ever built? (y/n)" << endl;
         cin >> wasitbuilt;
-        if(wasitbuilt == "Y" || wasitbuilt == "y")
+        if(wasitbuilt == "Y" || wasitbuilt == "y" || wasitbuilt == "yes")
         {
             built = true;
+            break;
         }
-        else if (wasitbuilt == "n" || wasitbuilt == "N")
+        else if (wasitbuilt == "n" || wasitbuilt == "N" || wasitbuilt == "no")
         {
             built = false;
-        }
-    }
-    input.setYearbuild(birthCheck);
-
-    while(true)
-    {
-        cout << "Build year (YYYY): ";
-        //cin >> birthYear;
-        //birthCheck = atoi(birthYear.c_str());       // Removes alphanumeric values from the input.
-        /*if (birthCheck > MINIMUM_BIRTH_YEAR && birthCheck < MAXIMUM_BIRTH_YEAR)
-        {
             break;
         }
         else
         {
             cout << "Invalid input!" << endl;
-        };*/
+        }
     }
-    //input.setDeathYear(deathCheck);
+    input.setBuilt(built);
+    if(built)
+    {
+        while(true)
+        {
+            cout << "Build year (YYYY): ";
+            cin >> yearBuilt;
+            birthCheck = atoi(yearBuilt.c_str());       // Removes alphanumeric values from the input.
+            if (birthCheck > MINIMUM_Built_YEAR && birthCheck < MAXIMUM_Built_YEAR)
+            {
+                break;
+            }
+            else
+            {
+                cout << "Invalid input!" << endl;
+            }
+        }
+        input.setYearbuild(deathCheck);
+    }
+
 
     cout << endl;
 
-    //_turn.addPerson(input);
+    _turn.addComputer(input);
     cin.ignore();
 }
 void consoleUI::removeCommand()

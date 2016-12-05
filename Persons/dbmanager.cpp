@@ -45,3 +45,7 @@ void DbManager::changeData()
 {
 
 }
+void insertIntoComputer(const Computer &input)
+{
+
+}
