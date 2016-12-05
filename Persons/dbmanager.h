@@ -16,8 +16,9 @@ public:
     DbManager(const QString& path);
     bool addPerson(const Person& input);
     void print() const;
+    vector<Person> getAllPersons();
 private:
-    QSqlDatabase m_db;
+    QSqlDatabase _db;
 };
 
 #endif // DBMANAGER_H

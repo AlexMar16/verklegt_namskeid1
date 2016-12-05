@@ -4,26 +4,22 @@
 
 DbManager::DbManager(const QString &path)
 {
-    m_db = QSqlDatabase::addDatabase("QSQLITE");
-    m_db.setDatabaseName(path);
-
-    if (!m_db.open())
-    {
-        cout << "Error: connection with database fail" << endl;
-    }
-    else
-    {
-        cout << "Database: connection ok" << endl;
-    }
-    print();
+    _db = QSqlDatabase::addDatabase("QSQLITE");
+    QString dbName = "ComputerScience.sqlite";
+    _db.setDatabaseName(dbName);
+    _db.open();
 }
 void DbManager::print() const
 {
-    QSqlQuery query("SELECT * FROM jee");
-    int idName = query.record().indexOf("jee");
+    QString s = "SELECT * FROM Students";
+    QSqlQuery query(_db);
+    cout << query.isSelect() << endl;
+    query.exec(s);
+    query.next();
     while (query.next())
     {
-        QString name = query.value(idName).toString();
-        qDebug() << name;
+        string jee = query.value("Name").toString().toStdString();
+        cout << jee << endl << endl;
     }
+    cout << "nope" << endl;
 }
