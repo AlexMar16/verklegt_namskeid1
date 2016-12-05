@@ -7,9 +7,10 @@ int main()
 {
     consoleUI program;
 
-    program.run();
+  //  program.run();
 
-    DbManager("/Users/alexgunnarsson/verklegt_namskeid1/ComputerScience.db");
+    DbManager test("/Users/alexgunnarsson/verklegt_namskeid1/ComputerScience.db");
+    test.print();
     return 0;
 }
 
