@@ -45,7 +45,10 @@ void DbManager::changeData()
 {
 
 }
-void insertIntoComputer(const Computer &input)
+void DbManager::insertIntoComputer(const Computer &input)
 {
+    cout << "name: " << input.getName() << endl;
+    cout << "type: " << input.getType() << endl;
+    cout << "yaerbuilt: " << input.getYearBuilt() << endl;
 
 }

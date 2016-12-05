@@ -347,7 +347,7 @@ void service::addComputer(const Computer &input)        // Makes the user capabl
     {
         DbManager addNewComputer;
         addNewComputer.insertIntoComputer(input);
-        //_listV.push_back(input);
+        //_listV.push_back(input)
         //addNew.setVector(_listV);
         //addNew.changeData();
     }
