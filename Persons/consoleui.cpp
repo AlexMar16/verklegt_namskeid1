@@ -1,4 +1,5 @@
 #include "consoleui.h"
+#include "dbmanager.h"
 
 using namespace std;
 
@@ -9,10 +10,12 @@ const string QUIZ = "quiz";
 const string STATUS = "status";
 const string EMPTY = "";
 
+
 consoleUI::consoleUI() {_print = true;}
 
 void consoleUI::run()
 {
+    DbManager dbmconnection("C:/Users/Rabo/HR/onn1/Verklegt Namskeid/verklegt_namskeid1/ComputerScience.db");
     const int ASTERISK_WIDTH = 80;
     const char ASTERISK = '*';
     const char BARRIER = '|';
