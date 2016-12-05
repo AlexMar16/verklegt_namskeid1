@@ -397,7 +397,4 @@ void service::generateOptions(const Person& correct, string& a, string& b, strin
 
 void service::setProgram(const bool& input) {_program = input;}
 
-void service::reverseVector()
-{
-    reverse(_listV.begin(), _listV.end());
-}
+void service::reverseVector() {reverse(_listV.begin(), _listV.end());}

@@ -11,8 +11,7 @@
 
 using namespace std;
 
-// Constants in more than one file.
-const char SPACE = ' ';
+const char SPACE = ' '; // All the constants in more than one file.
 const int ALIVE = 0;
 const string MALE = "male";
 const string FEMALE = "female";
