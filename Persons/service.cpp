@@ -9,7 +9,7 @@ service::service(){
     _listSearchedPerson = temp.getVector();
     _listSearchedPerson.clear();
     _program = true;
-    _fileFound = temp.isOpen();
+    _dataFound = temp.isOpen();
 }
 
 bool service::alreadyInDatabase(const string& name)         // Checks if the name exists in the database
@@ -298,7 +298,7 @@ void service::swap(Person& a, Person& b)
     a = b;
     b = temp;
 }
-bool service::fileFound()const {return _fileFound;}
+bool service::dataFound()const {return _dataFound;}
 
 void service::sortList(const string& command)       // Sort the list according to the input.
 {
@@ -325,6 +325,7 @@ void service::sortList(const string& command)       // Sort the list according t
     }
     else if(command == QUIT)
     {
+
         _program = false;
     }
 
