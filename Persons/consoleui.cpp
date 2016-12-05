@@ -189,7 +189,7 @@ void consoleUI::printList(const string &_command)       // Print if appropriate.
         _print = false;
         quizCommand();
     }
-    else if (_command == QUIT || _)      // Quits the program.
+    else if (_command == QUIT)      // Quits the program.
     {
         _print = false;
         _turn.setProgram(_print);
