@@ -19,7 +19,7 @@ void consoleUI::run()
     const int ASTERISK_WIDTH = 80;
     const char ASTERISK = '*';
     const char BARRIER = '|';
-    string command, initial = "| This is a database for famous computer scientists! |";
+    string command, initial = "| This is a database for famous computer scientists and historical computers! |";
     cout << setw(initial.size()) << setfill(ASTERISK) << ASTERISK << endl;
     cout << initial << endl;
     do
@@ -339,7 +339,7 @@ void consoleUI::addCommand()
 
     cout << endl;
 
-    _turn.addPerson(input);
+    //_turn.addPerson(input);
     cin.ignore();
 }
 
@@ -361,7 +361,7 @@ void consoleUI::removeCommand()
     }
 
     input = _turn.findPersonExactly(fullName);
-    _turn.removePerson(input);
+    //_turn.removePerson(input);
 }
 
 void consoleUI::findCommand()
@@ -381,6 +381,7 @@ void consoleUI::findCommand()
         _printOut = _turn.findPerson(toFind);
         if (_turn.lookForPerson(toFind))
         {
+            cout << "Person found! " << endl;
             cout << _printOut;
         }
         else

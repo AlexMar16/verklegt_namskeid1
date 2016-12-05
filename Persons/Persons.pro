@@ -15,11 +15,13 @@ SOURCES += main.cpp \
     service.cpp \
     dataaccess.cpp \
     person.cpp \
-    dbmanager.cpp
+    dbmanager.cpp \
+    computer.cpp
 
 HEADERS += \
     consoleui.h \
     service.h \
     dataaccess.h \
     person.h \
-    dbmanager.h
+    dbmanager.h \
+    computer.h
