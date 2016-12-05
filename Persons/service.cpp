@@ -335,10 +335,21 @@ void service::addPerson(const Person &input)        // Makes the user capable to
 {
     if(!alreadyInDatabase(input.getName()))
     {
-        DbManager addNew;
+        DbManager addNewPerson;
         _listV.push_back(input);
-        addNew.setVector(_listV);
-        addNew.changeData();
+        addNewPerson.setVector(_listV);
+        addNewPerson.changeData();
+    }
+}
+void service::addComputer(const Computer &input)        // Makes the user capable to add people to the list, as long as they're not already on the list
+{
+    if(true)//!alreadyInDatabase(input.getName())
+    {
+        DbManager addNewComputer;
+        addNewComputer.insertIntoComputer(input);
+        //_listV.push_back(input);
+        //addNew.setVector(_listV);
+        //addNew.changeData();
     }
 }
 

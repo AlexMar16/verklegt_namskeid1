@@ -4,6 +4,7 @@
 #include <QSql>
 #include <QSqlQuery>
 #include "person.h"
+#include "computer.h"
 using namespace std;
 
 class DbManager
@@ -15,6 +16,7 @@ public:
     DbManager(const QString& path);
     vector<Person> getVector() const;
     void setVector(const vector<Person>& input);
+    void insertIntoComputer(const Computer &input);
     void changeData();
 private:
     vector<Person> _persons;
