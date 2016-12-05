@@ -14,7 +14,7 @@ class DbManager
 public:
     DbManager();
     DbManager(const QString& path);
-    bool addPerson(const Person& input);
+    void getPersons();
     void print() const;
     vector<Person> getAllPersons();
 private:

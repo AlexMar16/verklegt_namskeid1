@@ -9,7 +9,7 @@ int main()
 
   //  program.run();
 
-    DbManager test("/Users/alexgunnarsson/verklegt_namskeid1/lala.sqlite");
+    DbManager test("ComputerScience.sqlite");
     test.print();
     return 0;
 }
