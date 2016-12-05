@@ -1,7 +1,7 @@
 #include "dbmanager.h"
 #include <QVariant>
-#include <QDebug>
-#include <QSqlError>
+
+DbManager::DbManager(){}
 
 DbManager::DbManager(const QString &path)
 {
@@ -11,17 +11,8 @@ DbManager::DbManager(const QString &path)
     _db.open();
     getPersons();
 }
-void DbManager::print() const
-{
-    QString s = "SELECT * FROM Computers";
-    QSqlQuery query(_db);
-    query.exec(s);
-    while (query.next())
-    {
-        string jee = query.value("Name").toString().toStdString();
-        cout << jee << endl;
-    }
-}
+DbManager::~DbManager() {_db.close();}
+
 void DbManager::getPersons()
 {
     QString s = "SELECT * FROM Persons";
@@ -47,3 +38,10 @@ void DbManager::getPersons()
 vector<Person> DbManager::getVector() const {return _persons;}
 
 bool DbManager::isOpen() const {return _db.isOpen();}
+
+void DbManager::setVector(const vector<Person> &input) {_persons = input;}
+
+void DbManager::changeData()
+{
+
+}

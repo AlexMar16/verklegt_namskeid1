@@ -9,7 +9,7 @@ service::service(){
     _listSearchedPerson = temp.getVector();
     _listSearchedPerson.clear();
     _program = true;
-    _fileFound = temp.isOpen();
+    _dataFound = temp.isOpen();
 }
 
 bool service::alreadyInDatabase(const string& name)         // Checks if the name exists in the database
@@ -298,7 +298,7 @@ void service::swap(Person& a, Person& b)
     a = b;
     b = temp;
 }
-bool service::fileFound()const {return _fileFound;}
+bool service::dataFound()const {return _dataFound;}
 
 void service::sortList(const string& command)       // Sort the list according to the input.
 {
@@ -325,20 +325,22 @@ void service::sortList(const string& command)       // Sort the list according t
     }
     else if(command == QUIT)
     {
+        DbManager quit;
+        quit.~DbManager();
         _program = false;
     }
 
 }
 
 
-/*void service::addPerson(const Person &input)        // Makes the user capable to add people to the list, as long as they're not already on the list
+void service::addPerson(const Person &input)        // Makes the user capable to add people to the list, as long as they're not already on the list
 {
     if(!alreadyInDatabase(input.getName()))
     {
-        dataAccess addNew;
+        DbManager addNew;
         _listV.push_back(input);
         addNew.setVector(_listV);
-        addNew.changeFile();
+        addNew.changeData();
     }
 }
 
@@ -346,12 +348,12 @@ void service::removePerson(const Person &input)         // Makes the user capabl
 {
     if(alreadyInDatabase(input.getName()))      // Checks if the name is already in the database.
     {
-        dataAccess addNew;
+        DbManager removePerson;
         removeFromDatabase(input.getName());
-        addNew.setVector(_listV);
-        addNew.changeFile();
+        removePerson.setVector(_listV);
+        removePerson.changeData();
     }
-}*/
+}
 
 void service::removeFromDatabase(const string &name)        // Takes the list, removes an elemnt then rewrites the info.txt with the list without what was removed
 {

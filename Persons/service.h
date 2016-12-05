@@ -9,7 +9,7 @@ public:
     service();
     bool lookForPerson(const string& name);
     bool getProgram() const;
-    bool fileFound() const;
+    bool dataFound() const;
     Person findPersonExactly(const string& name);
     Person generateQuestion();
     vector<int> properties();
@@ -32,7 +32,7 @@ private:
     bool _valid;
     bool _program;
     bool alreadyInDatabase(const string &name);
-    bool _fileFound;
+    bool _dataFound;
     vector<Person> _listV;
     vector<Person> _listSearchedPerson;
     vector<Person> sortAlphabetically();
