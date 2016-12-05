@@ -1,6 +1,7 @@
 #include "consoleui.h"
 #include "dbmanager.h"
 
+
 using namespace std;
 
 
@@ -42,6 +43,8 @@ void consoleUI::run()
              << right << BARRIER << endl;
         cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| status - This command displays info about the list "
              << right << BARRIER << endl;
+        cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| addperson - This command adds an person to the database(testing atm)"
+             << right << BARRIER << endl;
         cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| quit   - This command will quit the program. "
              << right << BARRIER << endl;
         cout << setw(ASTERISK_WIDTH) << setfill(ASTERISK) << ASTERISK << endl;      // Command box ends.
@@ -60,7 +63,7 @@ void consoleUI::run()
 
         if(_print && _turn.dataFound())
         {
-            _printOut = _turn.getList();        // getList() gets the list that's supposed to be printed out.
+            _printOut = _turn.getList();// getList() gets the list that's supposed to be printed out.
             cout << _printOut;
         }
         else if (!specialCommand(command) && _turn.dataFound())
@@ -130,6 +133,7 @@ void consoleUI::printList(const string &_command)       // Print if appropriate.
 {
     const string SORT = "sort";
     const string ADD = "add";
+    const string ADDP = "addperson";
     const string LIST = "list";
 
     if(_command == LIST)            // Print the original list.
@@ -140,6 +144,11 @@ void consoleUI::printList(const string &_command)       // Print if appropriate.
     {
         _print = true;
         addCommand();
+    }
+    else if(_command == ADDP)        // Tells the user to enter information (names, gender, birth year, death year) about the new scientist.
+    {
+        _print = true;
+        addPersonCommand();
     }
     else if(_command == REMOVE)     // Tells the user to enter the full name of the scientist to be removed from the list.
     {
@@ -343,6 +352,85 @@ void consoleUI::addCommand()
     cin.ignore();
 }
 
+void consoleUI::addPersonCommand()
+{
+    string name, type, yearBuilt, wasitbuilt;
+    bool built;
+    Computer input;
+    int birthCheck = 0, deathCheck = 0;
+    const int MINIMUM_Built_YEAR = 1500, MAXIMUM_Built_YEAR = 2030;
+
+    cout << "Please enter the following information about the new Computer " << endl;
+    cout << "in the following order." << endl;
+    cout << "Be aware you cannot put letters that are not in the English alphabet." << endl;
+
+    while(true)
+    {
+        cout << "Name: ";
+        getline(cin, name);
+        if(name == EMPTY)
+        {
+            cout << "No input!" << endl;
+        }
+        else
+        {
+            break;
+        }
+    }
+    input.setName(name);
+
+    while(true)
+    {
+        cout << "Type of computer: ";
+        getline(cin, type);
+        if(type == EMPTY)
+        {
+            cout << "No input!" << endl;
+        }
+        else
+        {
+            break;
+        }
+    }
+    input.setType(type);
+
+
+    while(true)
+    {
+        cout << "Was the computer ever built?" << endl;
+        cin >> wasitbuilt;
+        if(wasitbuilt == "Y" || wasitbuilt == "y")
+        {
+            built = true;
+        }
+        else if (wasitbuilt == "n" || wasitbuilt == "N")
+        {
+            built = false;
+        }
+    }
+    input.setYearbuild(birthCheck);
+
+    while(true)
+    {
+        cout << "Build year (YYYY): ";
+        //cin >> birthYear;
+        //birthCheck = atoi(birthYear.c_str());       // Removes alphanumeric values from the input.
+        /*if (birthCheck > MINIMUM_BIRTH_YEAR && birthCheck < MAXIMUM_BIRTH_YEAR)
+        {
+            break;
+        }
+        else
+        {
+            cout << "Invalid input!" << endl;
+        };*/
+    }
+    //input.setDeathYear(deathCheck);
+
+    cout << endl;
+
+    //_turn.addPerson(input);
+    cin.ignore();
+}
 void consoleUI::removeCommand()
 {
     string fullName;

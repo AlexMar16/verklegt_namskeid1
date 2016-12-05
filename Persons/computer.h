@@ -11,7 +11,7 @@
 
 using namespace std;
 
-const char SPACE = ' '; // All the constants in more than one file.
+/*const char SPACE = ' '; // All the constants in more than one file.
 
 const string A = "a";
 const string B = "b";
@@ -19,7 +19,7 @@ const string D = "d";
 const string G = "g";
 const string L = "l";
 const string QUIT = "quit";
-
+*/
 class Computer
 {
 public:
