@@ -325,8 +325,6 @@ void service::sortList(const string& command)       // Sort the list according t
     }
     else if(command == QUIT)
     {
-        DbManager quit;
-        quit.~DbManager();
         _program = false;
     }
 
@@ -397,6 +395,11 @@ void service::generateOptions(const Person& correct, string& a, string& b, strin
 }
 
 
-void service::setProgram(const bool& input) {_program = input;}
+void service::setProgram(const bool& input)
+{
+    _program = input;
+    DbManager quit;
+    quit.~DbManager();
+}
 
 void service::reverseVector() {reverse(_listV.begin(), _listV.end());}
