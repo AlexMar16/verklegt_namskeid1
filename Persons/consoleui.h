@@ -1,6 +1,7 @@
 #ifndef CONSOLEUI_H
 #define CONSOLEUI_H
 #include "person.h"
+#include "computer.h"
 #include "service.h"
 #include <iostream>
 #include <vector>
@@ -21,6 +22,7 @@ private:
     bool sortSpecialCommand(const string& choice);
     void printList(const string& _command);
     void addCommand();
+    void addPersonCommand();
     void removeCommand();
     void sortCommand();
     void findCommand();
