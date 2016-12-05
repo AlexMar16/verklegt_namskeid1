@@ -24,5 +24,22 @@ void DbManager::print() const
 }
 void DbManager::getPersons()
 {
+    QString s = "SELECT * FROM Persons";
+    QSqlQuery query(_db);
+    query.exec(s);
+    Person temp;
+    while (query.next())
+    {
+        string name = query.value("Name").toString().toStdString();
+        temp.setName(name);
 
+        string gender = query.value("Gender").toString().toStdString();
+        temp.setGender(gender);
+
+        int birthYear = query.value("birthYear").toUInt();
+        temp.setBirthYear(birthYear);
+
+        int deathYear = query.value("deathYear").toUInt();
+        temp.setDeathYear(deathYear);
+    }
 }
