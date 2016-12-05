@@ -9,6 +9,8 @@ const string QUIZ = "quiz";
 const string STATUS = "status";
 const string EMPTY = "";
 
+
+databaselayer database;
 consoleUI::consoleUI() {_print = true;}
 
 void consoleUI::run()
