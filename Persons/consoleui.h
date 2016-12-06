@@ -17,9 +17,10 @@ public:
 
 private:
     vector<int> _printStatus;
-    vector<Person> _printOut;
+    vector<Computer> _printOutComputer;
+    vector<Person> _printOutPerson;
     bool _print;
-    bool beginningCommand(const string& input);
+    bool beginningCommand();
     bool specialCommandPerson(const string& command);
     bool sortSpecialCommandPerson(const string& choice);
     void specialCommandComputer(const string& command);
@@ -33,8 +34,13 @@ private:
     void findCommand();
     void quizCommand();
     void statusCommand();
-    PersonService _turn;      //The instance we use to communicate with the PersonService layer.
-    computerService _turn2;
+    void firstCommandBox();
+    void commandBox();
+    PersonService _turnP;      //The instance we use to communicate with the PersonService layer.
+    string theRightOne;
+    string command;
+    string database;
+    computerService _turnC;
 
 };
 

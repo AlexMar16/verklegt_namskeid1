@@ -1,18 +1,14 @@
 #include "computerService.h"
-#include "service.h"
-#include "Computer.h"
 #include "computer.h"
 
 using namespace std;
 
-computerService::computerService()
-{
-     DbManager temp("ComputerScience.sqlite");
-    _listComputer = temp.getCVector();
-    _listSearchedComputer = temp.getCVector();
+computerService::computerService(){
+    _listComputer = _database.getCVector();
+    _listSearchedComputer = _database.getCVector();
     _listSearchedComputer.clear();
     _program = true;
-    _dataFound = temp.isOpen();
+    _dataFound = _database.isOpen();
 }
 
 bool computerService::alreadyInDatabase(const string& name)         // Checks if the name exists in the database
@@ -98,13 +94,6 @@ string computerService::aliveCheck(const Computer& p)
         return "is still alive";
 }*/
 
-string computerService::toLower(const string& toLowerString)    // Makes everything lowercase
-{
-    string data = toLowerString;
-    transform(data.begin(), data.end(), data.begin(), ::tolower);
-    return data;
-}
-
 vector<int> computerService::computerProperties()
 {
     const string ELECTRONIC = "Electronic";
@@ -183,7 +172,7 @@ vector<int> computerService::computerProperties()
     return statusVec;
 }
 
-vector<Computer> computerService::getList() const {return _listComputer;}
+vector<Computer> computerService::getComputerList() const {return _listComputer;}
 
 vector<Computer> computerService::sortType()
 {
@@ -212,6 +201,24 @@ vector<Computer> computerService::sortAlphabetically()
         for (size_t i = 0; i < _listComputer.size() - 1; i++)
         {
             if (_listComputer[i].getName() > _listComputer[i+1].getName())
+            {
+                swap(_listComputer[i], _listComputer[i+1]);
+                again = true;
+            }
+        }
+    }
+    return _listComputer;
+}
+
+vector<Computer> computerService::sortBuilt()
+{
+    bool again = true;
+    while(again)
+    {
+        again = false;
+        for (size_t i = 0; i < _listComputer.size() - 1; i++)
+        {
+            if ( _listComputer[i].getBuilt() > _listComputer[i+1].getBuilt())
             {
                 swap(_listComputer[i], _listComputer[i+1]);
                 again = true;
@@ -252,40 +259,6 @@ vector<Computer> computerService::findComputer(const string &name)
     }
     return _listSearchedComputer;
 }
-/*
-vector<Computer> computerService::sortDeath()
-{
-    bool again = true;
-    while (again)
-    {
-        again = false;
-        for (size_t i = 0; i < _listComputer.size() - 1; i++)
-        {
-            if (_listComputer[i].getDeathYear() > _listComputer[i+1].getDeathYear())      // Seperate the one's who are still alive and those who are not.
-            {
-                swap(_listComputer[i], _listComputer[i+1]);
-                again = true;
-            }
-        }
-    }
-    vector<Computer> temp;
-    for(size_t i = 0; i < _listComputer.size(); i++)           // The one's who have died are put in the variable temp in order.
-    {
-        if(_listComputer[i].getDeathYear() != ALIVE)
-        {
-            temp.push_back(_listComputer[i]);
-        }
-    }
-    for(size_t i = 0; i < _listComputer.size(); i++)           // Then we put the one's who are still alive behind them.
-    {
-        if(_listComputer[i].getDeathYear() == ALIVE)
-        {
-            temp.push_back(_listComputer[i]);
-        }
-    }
-
-    return temp;
-}
 
 void computerService::swap(Computer& a, Computer& b)
 {
@@ -306,7 +279,11 @@ void computerService::sortList(const string& command)       // Sort the list acc
     {
         _listComputer = sortBuilt();
     }
-    else if(command == T)
+    else if(command == "c") //LAGA!!!
+    {
+        _listComputer = sortCreationYear();
+    }
+    else if(command == "t") //LAGA!!
     {
         _listComputer = sortType();
     }
@@ -317,7 +294,7 @@ void computerService::sortList(const string& command)       // Sort the list acc
 
 }
 
-*/
+
 void computerService::addComputer(const Computer &input)        // Makes the user capable to add people to the list, as long as they're not already on the list
 {
     if(!alreadyInDatabase(input.getName()))
@@ -385,8 +362,14 @@ void computerService::removeFromDatabase(const string &name)        // Takes the
 void computerService::setProgram(const bool& input)
 {
     _program = input;
-    DbManager quit;
-    quit.~DbManager();
+    _database.~DbManager();
 }
 
 void computerService::reverseVector() {reverse(_listComputer.begin(), _listComputer.end());}
+
+string computerService::toLower(const string& toLowerString)    // Makes everything lowercase
+{
+    string data = toLowerString;
+    transform(data.begin(), data.end(), data.begin(), ::tolower);
+    return data;
+}

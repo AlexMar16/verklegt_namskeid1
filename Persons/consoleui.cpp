@@ -10,18 +10,71 @@ const string QUIZ = "quiz";
 const string STATUS = "status";
 const string EMPTY = "";
 const string BACK = "back";
-
+const int ASTERISK_WIDTH = 80;
+const char ASTERISK = '*';
+const char BARRIER = '|';
 
 consoleUI::consoleUI() {_print = true;}
 
 void consoleUI::run()
 {
-    const int ASTERISK_WIDTH = 80;
-    const char ASTERISK = '*';
-    const char BARRIER = '|';
-    string command, database, initial = "| This is a database for famous computer scientists and historical computers! |";
     do
     {
+        firstCommandBox();
+    if(beginningCommand())
+    {
+    do
+    {
+        commandBox();
+
+        if(database == "person")
+        {
+        _printOutPerson = _turnP.getPersonList();
+        }
+        else if(database == "computer")
+        {
+        _printOutComputer = _turnC.getComputerList();
+        }
+
+        if((_turnP.dataFound() || QUIT == command)&& theRightOne=="person")
+        {
+            printListPerson(command);         // Checks if there is a need for a printout of the list.
+        }
+        else if((_turnP.dataFound() || QUIT == command)&& theRightOne=="computer")
+        {
+            printListComputer(command);
+        }
+        else
+        {
+            cout << endl << "File not found! " << endl << endl;
+        }
+
+
+        if(_print && _turnP.dataFound() && database=="person")
+        {
+            _printOutPerson = _turnP.getPersonList();// getList() gets the list that's supposed to be printed out.
+            cout << _printOutPerson;
+        }
+        else if(_print && database=="computer")
+        {
+            _printOutComputer = _turnC.getComputerList(); // todo setja inn dataFound lika
+            cout << _printOutComputer;
+        }
+
+        else if (!specialCommandPerson(command) && _turnP.dataFound())
+        {
+            cout << "Invalid command!" << endl << endl;
+        }
+    }while(command != BACK || !(beginningCommand()));
+    }
+    }while(_turnP.getProgram());
+}
+
+void consoleUI::firstCommandBox()
+{
+    string initial = "| This is a database for famous computer scientists and historical computers! |";
+
+
         cout << setw(ASTERISK_WIDTH) << setfill(ASTERISK) <<  ASTERISK << endl;
         cout << initial << endl << endl;
         cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| Please enter the following commands to examine this database!"
@@ -32,11 +85,11 @@ void consoleUI::run()
              << right << BARRIER << endl;
         cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| connect   - This command will gain you access to connections of both."
              << right << BARRIER << endl;
-        cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| Pick a database: "
-             << right << BARRIER << endl;
+        cout << setw(ASTERISK_WIDTH) << setfill(ASTERISK) <<  ASTERISK << endl;
+        cout << "Pick a database: ";
         getline(cin, database);
-        beginningCommand(database);
-        string theRightOne;
+        beginningCommand();
+
         if(database== "person")
         {
             theRightOne= "person";
@@ -45,82 +98,52 @@ void consoleUI::run()
         {
             theRightOne="computer";
         }
-
-        cout << setw(ASTERISK_WIDTH) << setfill(ASTERISK) <<  ASTERISK << endl;
-        if(beginningCommand(database))
-        {
-        do
-        {
-
-            cout << setw(ASTERISK_WIDTH) << setfill(ASTERISK) <<  ASTERISK << endl;     // Command box begins.
-            cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| Please enter one of the following commands:"
-                 << right << BARRIER << endl;
-            cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << BARRIER << right << BARRIER<< endl;
-            cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| list   - This command will list every "+theRightOne+" in the system."
-                 << right << BARRIER << endl;
-            cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| sort   - This command will allow you to sort the"+ theRightOne+ "s."
-                 << right << BARRIER << endl;
-            cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| find   - This command allows you to find a certain"+theRightOne+" in the list."
-                 << right << BARRIER << endl;
-            cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| quiz   - This command lets you take a quiz about the computer scientists."
-                 << right << BARRIER << endl;
-            cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| add    - This command allows you to add a "+theRightOne+" to the list."
-                 << right << BARRIER << endl;
-            cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| remove - This command allows you to remove a certain "+theRightOne+" from the list."
-                 << right << BARRIER << endl;
-            cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| status - This command displays info about the list "
-                 << right << BARRIER << endl;
-            cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| addcomp- This command adds an computer to the database(testing atm)"
-                 << right << BARRIER << endl;
-            cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| removec- This command adds an computer to the database(testing atm)"
-                 << right << BARRIER << endl;
-            cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| quit   - This command will quit the program. "
-                 << right << BARRIER << endl;
-            cout << setw(ASTERISK_WIDTH) << setfill(ASTERISK) << ASTERISK << endl;      // Command box ends.
-            cout << "command: ";
-
-            getline(cin, command);          // Sets the private variable _command in the service class.
-            _printOut = _turn.getList();
-            if((_turn.dataFound() || QUIT == command)&& theRightOne=="person")
-            {
-                printListPerson(command);         // Checks if there is a need for a printout of the list.
-            }
-            else if((_turn.dataFound() || QUIT == command)&& theRightOne=="computer")
-            {
-                printListComputer(command);
-            }
-            else
-            {
-                cout << endl << "File not found! " << endl << endl;
-            }
-
-
-            if(_print && _turn.dataFound()&& database=="person")
-            {
-                _printOut = _turn.getList();// getList() gets the list that's supposed to be printed out.
-                cout << _printOut;
-            }
-           // todo ! else if()thegar vector er kominn, gera ad printcomputer vector
-            else if (!specialCommandPerson(command) && _turn.dataFound())
-            {
-                cout << "Invalid command!" << endl << endl;
-            }
-
-        } while(_turn.getProgram());
-        }
-    } while(command == BACK || !(beginningCommand(database)));
 }
-bool consoleUI::beginningCommand(const string& input)
+
+void consoleUI::commandBox()
 {
-    if(input == "person")
+    cout << setw(ASTERISK_WIDTH) << setfill(ASTERISK) <<  ASTERISK << endl;     // Command box begins.
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| Please enter one of the following commands:"
+         << right << BARRIER << endl;
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << BARRIER << right << BARRIER<< endl;
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| list   - This command will list every "+theRightOne+" in the system."
+         << right << BARRIER << endl;
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| sort   - This command will allow you to sort the"+ theRightOne+ "s."
+         << right << BARRIER << endl;
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| find   - This command allows you to find a certain"+theRightOne+" in the list."
+         << right << BARRIER << endl;
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| quiz   - This command lets you take a quiz about the computer scientists."
+         << right << BARRIER << endl;
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| add    - This command allows you to add a "+theRightOne+" to the list."
+         << right << BARRIER << endl;
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| remove - This command allows you to remove a certain "+theRightOne+" from the list."
+         << right << BARRIER << endl;
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| status - This command displays info about the list "
+         << right << BARRIER << endl;
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| addcomp- This command adds an computer to the database(testing atm)"
+         << right << BARRIER << endl;
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| removec- This command adds an computer to the database(testing atm)"
+         << right << BARRIER << endl;
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| quit   - This command will quit the program. "
+         << right << BARRIER << endl;
+    cout << setw(ASTERISK_WIDTH) << setfill(ASTERISK) << ASTERISK << endl;      // Command box ends.
+    cout << "command: ";
+    getline(cin, command);          // Sets the private variable _command in the service class.
+
+
+}
+
+bool consoleUI::beginningCommand()
+{
+    if(database == "person")
     {
         return true;
     }
-    else if(input =="computer")
+    else if(database =="computer")
     {
         return true;
     }
-    else if(input =="connect")
+    else if(database =="connect")
     {
         return true;
     }
@@ -136,12 +159,12 @@ bool consoleUI::beginningCommand(const string& input)
 
 void consoleUI::quizCommand()
 {
-    Person question = _turn.generateQuestion();
-    cout << _turn.genderCheck(question) << " was born in " << question.getBirthYear()
-         << " and " << _turn.aliveCheck(question) << ", enter (a/b/c/d)" << endl;
+    Person question = _turnP.generateQuestion();
+    cout << _turnP.genderCheck(question) << " was born in " << question.getBirthYear()
+         << " and " << _turnP.aliveCheck(question) << ", enter (a/b/c/d)" << endl;
 
     string a, b, c, d;
-    _turn.generateOptions(question, a, b, c, d);
+    _turnP.generateOptions(question, a, b, c, d);
 
     cout << "a)\t" << a << endl;
     cout << "b)\t" << b << endl;
@@ -152,7 +175,7 @@ void consoleUI::quizCommand()
     cout << "My answer: ";
     cin >> answerString;
 
-    _turn.assignSelection(answerString, a, b, c, d);
+    _turnP.assignSelection(answerString, a, b, c, d);
 
     if (answerString == question.getName())
     {
@@ -245,7 +268,7 @@ void consoleUI::addCommand()
 
     cout << endl;
 
-    _turn.addPerson(input);
+    _turnP.addPerson(input);
     cin.ignore();
 }
 
@@ -333,7 +356,7 @@ void consoleUI::addCompCommand()
 
     cout << endl;
 
-    _turn.addComputer(input);
+    _turnP.addComputer(input);
     cin.ignore();
 }
 void consoleUI::removeCommand()
@@ -342,7 +365,7 @@ void consoleUI::removeCommand()
     Person input;
     cout << "Enter the full name of the scientist to remove from the database: ";
     getline(cin, fullName);
-    input = _turn.findPersonExactly(fullName);
+    input = _turnP.findPersonExactly(fullName);
 
     if (input.getName() == EMPTY)
     {
@@ -353,8 +376,8 @@ void consoleUI::removeCommand()
         cout << endl << fullName << " removed" << endl;
     }
 
-    input = _turn.findPersonExactly(fullName);
-    //_turn.removePerson(input);
+    input = _turnP.findPersonExactly(fullName);
+    //_turnP.removePerson(input);
 }
 
 void consoleUI::findCommand()
@@ -371,11 +394,11 @@ void consoleUI::findCommand()
     }
     else
     {
-        _printOut = _turn.findPerson(toFind);
-        if (_turn.lookForPerson(toFind))
+        _printOutPerson = _turnP.findPerson(toFind);
+        if (_turnP.lookForPerson(toFind))
         {
             cout << "Person found! " << endl;
-            cout << _printOut;
+            cout << _printOutPerson;
         }
         else
         {
@@ -386,7 +409,7 @@ void consoleUI::findCommand()
 
 void consoleUI::statusCommand()
 {
-    _printStatus = _turn.properties();
+    _printStatus = _turnP.properties();
     const int NAMES = 0;
     const int DIED = 1;
     const int FEMALES = 2;
@@ -480,7 +503,7 @@ void consoleUI::sortCommandPerson()
 
         if(sortSpecialCommandPerson(choice))
         {
-            _turn.sortList(choice);
+            _turnP.sortList(choice);
             break;
         }
         else
@@ -500,7 +523,7 @@ void consoleUI::sortCommandPerson()
 
         if(upOrDown == DESC)
         {
-            _turn.reverseVector();
+            _turnP.reverseVector();
             break;
         }
         else if(upOrDown != ASC)
@@ -554,7 +577,7 @@ void consoleUI::printListPerson(const string &_command)       // Print if approp
     else if (_command == QUIT)      // Quits the program.
     {
         _print = false;
-        _turn.setProgram(_print);
+        _turnP.setProgram(_print);
     }
     else if(_command == STATUS)
     {
@@ -592,7 +615,7 @@ void consoleUI::sortCommandComputer()
 
         if(sortSpecialCommandPerson(choice))
         {
-            //_turn2.sortList(choice);
+            //_turnP2.sortList(choice);
             // þegar computerservice er up and running fara sort föllin þar inn og kallað í þau hér !
             break;
         }
@@ -613,7 +636,7 @@ void consoleUI::sortCommandComputer()
 
         if(upOrDown == DESC)
         {
-           // _turn2.reverseVector(); uncommenta thegar vector er kominn
+           // _turnP2.reverseVector(); uncommenta thegar vector er kominn
             break;
         }
         else if(upOrDown != ASC)
@@ -693,7 +716,7 @@ void consoleUI::printListComputer(const string &_command)
     else if (_command == QUIT)
     {
         _print = false;
-        //_turn.setProgram(_print);
+        _turnP.setProgram(_print);
     }
     else if(_command == STATUS)
     {

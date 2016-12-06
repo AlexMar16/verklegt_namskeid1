@@ -15,7 +15,7 @@ public:
     Person generateQuestion();
     vector<int> properties();
     vector<Person> findPerson(const string& name);
-    vector<Person> getList() const;
+    vector<Person> getPersonList() const;
     void addPerson(const Person& input);
     void addComputer(const Computer& input);
     void removePerson(const Person& input);
@@ -30,11 +30,10 @@ public:
     string aliveCheck(const Person& p);
 
 private:
-    bool _keepGoing;
-    bool _valid;
     bool _program;
     bool alreadyInDatabase(const string &name);
     bool _dataFound;
+    DbManager _database;
     vector<Person> _listV;
     vector<Person> _listSearchedPerson;
     vector<Person> sortAlphabetically();
