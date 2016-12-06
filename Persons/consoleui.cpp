@@ -21,53 +21,52 @@ void consoleUI::run()
     do
     {
         firstCommandBox();
-    if(beginningCommand())
-    {
-    do
-    {
-        commandBox();
+        if(beginningCommand())
+        {
+            do
+            {
+                commandBox();
 
-        if(database == "person")
-        {
-        _printOutPerson = _turnP.getPersonList();
-        }
-        else if(database == "computer")
-        {
-        _printOutComputer = _turnC.getComputerList();
-        }
+                if(database == "person")
+                {
+                    _printOutPerson = _turnP.getPersonList();
+                }
+                else if(database == "computer")
+                {
+                    _printOutComputer = _turnC.getComputerList();
+                }
 
-        if((_turnP.dataFound() || QUIT == _command)&& theRightOne=="person")
-        {
-            printListPerson(_command);         // Checks if there is a need for a printout of the list.
-        }
-        else if((_turnP.dataFound() || QUIT == _command)&& theRightOne=="computer")
-        {
-            printListComputer(_command);
-        }
-        else
-        {
-            cout << endl << "File not found! " << endl << endl;
-        }
+                if((_turnP.dataFound() || QUIT == _command)&& theRightOne=="person")
+                {
+                    printListPerson(_command);         // Checks if there is a need for a printout of the list.
+                }
+                else if((_turnP.dataFound() || QUIT == _command)&& theRightOne=="computer")
+                {
+                    printListComputer(_command);
+                }
+                else
+                {
+                    cout << endl << "File not found! " << endl << endl;
+                }
 
 
-        if(_print && _turnP.dataFound() && database=="person")
-        {
-            _printOutPerson = _turnP.getPersonList();// getList() gets the list that's supposed to be printed out.
-            cout << _printOutPerson;
-        }
-        else if(_print && database=="computer")
-        {
-            _printOutComputer = _turnC.getComputerList(); // todo setja inn dataFound lika
-            cout << _printOutComputer;
-        }
+                if(_print && _turnP.dataFound() && database=="person")
+                {
+                    _printOutPerson = _turnP.getPersonList();// getList() gets the list that's supposed to be printed out.
+                    cout << _printOutPerson;
+                }
+                else if(_print && database=="computer")
+                {
+                    _printOutComputer = _turnC.getComputerList(); // todo setja inn dataFound lika
+                    cout << _printOutComputer;
+                }
 
-        else if (!specialCommandPerson(_command) && _turnP.dataFound())
-        {
-            cout << "Invalid command!" << endl << endl;
+                else if (!specialCommandPerson(_command) && _turnP.dataFound())
+                {
+                    cout << "Invalid command!" << endl << endl;
+                }
+            }while(_command != BACK && _command != QUIT);
         }
-        _turnP.sortList(_command);
-    }while(_command != BACK && _command != QUIT);
-    }
     }while(_turnP.getProgram());
 }
 
@@ -76,29 +75,29 @@ void consoleUI::firstCommandBox()
     string initial = "| This is a database for famous computer scientists and historical computers! |";
 
 
-        cout << setw(ASTERISK_WIDTH) << setfill(ASTERISK) <<  ASTERISK << endl;
-        cout << initial << endl << endl;
-        cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| Please enter the following commands to examine this database!"
-             << right << BARRIER << endl;
-        cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| person   - This command will gain you access to the person table."
-             << right << BARRIER << endl;
-        cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| computer   - This command will gain you access to the computer table"
-             << right << BARRIER << endl;
-        cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| connect   - This command will gain you access to connections of both."
-             << right << BARRIER << endl;
-        cout << setw(ASTERISK_WIDTH) << setfill(ASTERISK) <<  ASTERISK << endl;
-        cout << "Pick a database: ";
-        getline(cin, database);
-        beginningCommand();
+    cout << setw(ASTERISK_WIDTH) << setfill(ASTERISK) <<  ASTERISK << endl;
+    cout << initial << endl << endl;
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| Please enter the following commands to examine this database!"
+         << right << BARRIER << endl;
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| person   - This command will gain you access to the person table."
+         << right << BARRIER << endl;
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| computer   - This command will gain you access to the computer table"
+         << right << BARRIER << endl;
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| connect   - This command will gain you access to connections of both."
+         << right << BARRIER << endl;
+    cout << setw(ASTERISK_WIDTH) << setfill(ASTERISK) <<  ASTERISK << endl;
+    cout << "Pick a database: ";
+    getline(cin, database);
+    beginningCommand();
 
-        if(database== "person")
-        {
-            theRightOne= "person";
-        }
-        else if(database=="computer")
-        {
-            theRightOne="computer";
-        }
+    if(database== "person")
+    {
+        theRightOne= "person";
+    }
+    else if(database=="computer")
+    {
+        theRightOne="computer";
+    }
 }
 
 void consoleUI::commandBox()
@@ -597,26 +596,26 @@ void consoleUI::printListPerson(const string &_command)       // Print if approp
 
 void consoleUI::statusCommandComputer()
 {
-  _printStatus = _turnC.computerProperties();
-  int nameQuant= 0;
-  int typeElecQuant=1;
-  int typeMechQuant=2;
-  int typeElecMechQuant=3;
-  int typeTransQuant=4;
-  int typeTransMicroQuant=5;
-  int typeSuperQuant=6;
-  int typeQuantumQuant=7;
-  int builtQuant=8;
+    _printStatus = _turnC.computerProperties();
+    int nameQuant= 0;
+    int typeElecQuant=1;
+    int typeMechQuant=2;
+    int typeElecMechQuant=3;
+    int typeTransQuant=4;
+    int typeTransMicroQuant=5;
+    int typeSuperQuant=6;
+    int typeQuantumQuant=7;
+    int builtQuant=8;
 
-  cout<< _printStatus[nameQuant]<<endl;
-  cout<< _printStatus[typeElecQuant]<<endl;
-  cout<< _printStatus[typeMechQuant]<<endl;
-  cout<< _printStatus[typeElecMechQuant]<<endl;
-  cout<< _printStatus[typeTransQuant]<<endl;
-  cout<< _printStatus[typeTransMicroQuant]<<endl;
-  cout<< _printStatus[typeSuperQuant]<<endl;
-  cout<< _printStatus[typeQuantumQuant]<<endl;
-  cout<< _printStatus[builtQuant]<<endl;
+    cout<< _printStatus[nameQuant]<<endl;
+    cout<< _printStatus[typeElecQuant]<<endl;
+    cout<< _printStatus[typeMechQuant]<<endl;
+    cout<< _printStatus[typeElecMechQuant]<<endl;
+    cout<< _printStatus[typeTransQuant]<<endl;
+    cout<< _printStatus[typeTransMicroQuant]<<endl;
+    cout<< _printStatus[typeSuperQuant]<<endl;
+    cout<< _printStatus[typeQuantumQuant]<<endl;
+    cout<< _printStatus[builtQuant]<<endl;
 
 
 }
@@ -661,7 +660,7 @@ void consoleUI::sortCommandComputer()
 
         if(upOrDown == DESC)
         {
-           // _turnP2.reverseVector(); uncommenta thegar vector er kominn
+            // _turnP2.reverseVector(); uncommenta thegar vector er kominn
             break;
         }
         else if(upOrDown != ASC)
@@ -681,7 +680,7 @@ void consoleUI::specialCommandComputer(const string &_command)
 {
     if(_command == "a")
     {
-       //alphabet sort fall fyrir computer
+        //alphabet sort fall fyrir computer
     }
     if(_command=="y")
     {

@@ -1,5 +1,5 @@
 #include "person.h"
-const int COLUMN_WIDTH = 15;
+const int COLUMN_WIDTH = 20;
 const int FIVE = 5;
 const int TWO = 2;
 
