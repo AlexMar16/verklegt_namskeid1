@@ -4,7 +4,7 @@
 using namespace std;
 
 service::service(){    
-     DbManager temp("C:/Users/Rabo/HR/onn1/Verklegt Namskeid/verklegt_namskeid1/ComputerScience.sqlite");
+     DbManager temp("ComputerScience.sqlite");
     _listV = temp.getVector();
     _listSearchedPerson = temp.getVector();
     _listSearchedPerson.clear();
