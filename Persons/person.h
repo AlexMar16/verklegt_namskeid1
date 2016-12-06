@@ -35,7 +35,6 @@ public:
     void setBirthYear(const int input);
     void setDeathYear(const int input);
     friend ostream& operator << (ostream& out, const Person& rhs);
-    friend ifstream& operator >> (ifstream& in, Person& rhs);
     friend ostream& operator << (ostream& out, vector<Person>& rhs);
 
 private:
