@@ -38,7 +38,7 @@ private:
     void commandBox();
     PersonService _turnP;      //The instance we use to communicate with the PersonService layer.
     string theRightOne;
-    string command;
+    string _command;
     string database;
     computerService _turnC;
 

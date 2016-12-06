@@ -36,13 +36,13 @@ void consoleUI::run()
         _printOutComputer = _turnC.getComputerList();
         }
 
-        if((_turnP.dataFound() || QUIT == command)&& theRightOne=="person")
+        if((_turnP.dataFound() || QUIT == _command)&& theRightOne=="person")
         {
-            printListPerson(command);         // Checks if there is a need for a printout of the list.
+            printListPerson(_command);         // Checks if there is a need for a printout of the list.
         }
-        else if((_turnP.dataFound() || QUIT == command)&& theRightOne=="computer")
+        else if((_turnP.dataFound() || QUIT == _command)&& theRightOne=="computer")
         {
-            printListComputer(command);
+            printListComputer(_command);
         }
         else
         {
@@ -61,11 +61,12 @@ void consoleUI::run()
             cout << _printOutComputer;
         }
 
-        else if (!specialCommandPerson(command) && _turnP.dataFound())
+        else if (!specialCommandPerson(_command) && _turnP.dataFound())
         {
             cout << "Invalid command!" << endl << endl;
         }
-    }while(command != BACK || !(beginningCommand()));
+        _turnP.sortList(_command);
+    }while(_command != BACK && _command != QUIT);
     }
     }while(_turnP.getProgram());
 }
@@ -128,7 +129,7 @@ void consoleUI::commandBox()
          << right << BARRIER << endl;
     cout << setw(ASTERISK_WIDTH) << setfill(ASTERISK) << ASTERISK << endl;      // Command box ends.
     cout << "command: ";
-    getline(cin, command);          // Sets the private variable _command in the service class.
+    getline(cin, _command);          // Sets the private variable _command in the service class.
 
 
 }
