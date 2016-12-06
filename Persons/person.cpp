@@ -8,16 +8,6 @@ Person::Person()
     _birthYear = 0;
     _deathYear = 0;
 }
-ifstream& operator >> (ifstream& in, Person& rhs)
-{
-    getline(in, rhs._fullName);
-    getline(in, rhs._gender);
-    in >> rhs._birthYear;
-    in >> rhs._deathYear;
-    in.ignore();
-
-    return in;
-}
 
 ostream& operator << (ostream& out, const Person& rhs)
 {

@@ -276,7 +276,7 @@ void consoleUI::addCompCommand()
 {
     string name, type, yearBuilt, wasitbuilt, built;
     Computer input;
-    int birthCheck = 0, deathCheck = 0;
+    int birthCheck = 0; //deathCheck = 0;
     const int MINIMUM_Built_YEAR = 1500, MAXIMUM_Built_YEAR = 2030;
 
     cout << "Please enter the following information about the new Computer " << endl;
@@ -649,7 +649,6 @@ void consoleUI::sortCommandComputer()
         }
     }
 
-    //todo láta ganga upp
 }
 
 
