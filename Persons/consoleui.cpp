@@ -597,15 +597,15 @@ void consoleUI::statusCommandComputer()
     int typeQuantumQuant=7;
     int builtQuant=8;
 
-    cout<< _printStatus[nameQuant]<<endl;
-    cout<< _printStatus[typeElecQuant]<<endl;
-    cout<< _printStatus[typeMechQuant]<<endl;
-    cout<< _printStatus[typeElecMechQuant]<<endl;
-    cout<< _printStatus[typeTransQuant]<<endl;
-    cout<< _printStatus[typeTransMicroQuant]<<endl;
-    cout<< _printStatus[typeSuperQuant]<<endl;
-    cout<< _printStatus[typeQuantumQuant]<<endl;
-    cout<< _printStatus[builtQuant]<<endl;
+    cout<<"Total computers in list          : "<< _printStatus[nameQuant]<<endl;
+    cout<<"Electronical computers           : "<< _printStatus[typeElecQuant]<<endl;
+    cout<<"Mechanical computers             : "<< _printStatus[typeMechQuant]<<endl;
+    cout<<"Electro-Mechanical computers     : "<< _printStatus[typeElecMechQuant]<<endl;
+    cout<<"Transistor computers             : "<< _printStatus[typeTransQuant]<<endl;
+    cout<<"Transistor/int.circuit computers : "<< _printStatus[typeTransMicroQuant]<<endl;
+    cout<<"Super computers                  : "<< _printStatus[typeSuperQuant]<<endl;
+    cout<<"Quantum computers                : "<< _printStatus[typeQuantumQuant]<<endl;
+    cout<<"Computers that were built        : "<< _printStatus[builtQuant]<<endl;
 
 
 }
