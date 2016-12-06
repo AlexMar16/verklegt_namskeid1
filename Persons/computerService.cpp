@@ -1,6 +1,4 @@
 #include "computerService.h"
-#include "service.h"
-#include "Computer.h"
 #include "computer.h"
 
 using namespace std;
@@ -24,8 +22,8 @@ bool computerService::alreadyInDatabase(const string& name)         // Checks if
     }
     return false;
 }
-/*
-bool service::lookForComputer(const string& name)         // Checks if any part of the name is on the list
+
+bool computerService::lookForComputer(const string& name)         // Checks if any part of the name is on the list
 {
     for (size_t i = 0; i < _listComputer.size(); i++)
     {
@@ -35,7 +33,7 @@ bool service::lookForComputer(const string& name)         // Checks if any part 
         }
     }
     return false;
-} */
+}
 
 bool computerService::getProgram() const {return _program;}
 
@@ -175,16 +173,20 @@ vector<int> computerService::computerProperties()
 }
 
 vector<Computer> computerService::getComputerList() const {return _listComputer;}
-/*
-vector<Computer> computerService::sortType()        // Sorts the list by gender, beginning with women.
+
+vector<Computer> computerService::sortType()
 {
-    int counter = 0;
-    for(size_t i = 0; i < _listComputer.size(); i++)
+    bool again = true;
+    while (again)
     {
-        if(_listComputer[i].getType() == FEMALE)
+        again = false;
+        for (size_t i = 0; i < _listComputer.size() - 1; i++)
         {
-            swap(_listComputer[i], _listComputer[counter]);
-            counter++;
+            if (_listComputer[i].getType() > _listComputer[i+1].getType())
+            {
+                swap(_listComputer[i], _listComputer[i+1]);
+                again = true;
+            }
         }
     }
     return _listComputer;
@@ -208,30 +210,7 @@ vector<Computer> computerService::sortAlphabetically()
     return _listComputer;
 }
 
-vector<Computer> computerService::sortAlphabeticallyLastName()
-{
-    string name1;
-    string name2;
-    bool again = true;
-    while (again)
-    {
-        again = false;
-        for (size_t i = 0; i < _listComputer.size() - 1; i++)
-        {
-            name1= _listComputer[i].getName();
-            name2= _listComputer[i+1].getName();
-
-            if (getLastName(name1) > getLastName(name2))
-            {
-                swap( _listComputer[i], _listComputer[i+1]);
-                again = true;
-            }
-        }
-    }
-    return _listComputer;
-}
-
-vector<Computer> computerService::sortBirthYear()
+vector<Computer> computerService::sortBuilt()
 {
     bool again = true;
     while(again)
@@ -239,7 +218,7 @@ vector<Computer> computerService::sortBirthYear()
         again = false;
         for (size_t i = 0; i < _listComputer.size() - 1; i++)
         {
-            if ( _listComputer[i].getBirthYear() > _listComputer[i+1].getBirthYear())
+            if ( _listComputer[i].getBuilt() > _listComputer[i+1].getBuilt())
             {
                 swap(_listComputer[i], _listComputer[i+1]);
                 again = true;
@@ -249,51 +228,36 @@ vector<Computer> computerService::sortBirthYear()
     return _listComputer;
 }
 
-vector<Computer> computerService::findComputer(const string &name)      // Finds people and adds them to the vector
-{
-    _listSearchedComputer.clear();
-    for (size_t i = 0; i < _listComputer.size(); i++)
-    {
-        if (toLower(_listComputer[i].getName()).find(toLower(name)) != string::npos)       // Puts both instances to lowercase
-        {
-            _listSearchedComputer.push_back(_listComputer[i]);       // Puts people in the list who apply to the input
-        }
-    }
-    return _listSearchedComputer;
-}
 
-vector<Computer> computerService::sortDeath()
+vector<Computer> computerService::sortCreationYear()
 {
     bool again = true;
-    while (again)
+    while(again)
     {
         again = false;
         for (size_t i = 0; i < _listComputer.size() - 1; i++)
         {
-            if (_listComputer[i].getDeathYear() > _listComputer[i+1].getDeathYear())      // Seperate the one's who are still alive and those who are not.
+            if ( _listComputer[i].getYearBuilt() > _listComputer[i+1].getYearBuilt())
             {
                 swap(_listComputer[i], _listComputer[i+1]);
                 again = true;
             }
         }
     }
-    vector<Computer> temp;
-    for(size_t i = 0; i < _listComputer.size(); i++)           // The one's who have died are put in the variable temp in order.
-    {
-        if(_listComputer[i].getDeathYear() != ALIVE)
-        {
-            temp.push_back(_listComputer[i]);
-        }
-    }
-    for(size_t i = 0; i < _listComputer.size(); i++)           // Then we put the one's who are still alive behind them.
-    {
-        if(_listComputer[i].getDeathYear() == ALIVE)
-        {
-            temp.push_back(_listComputer[i]);
-        }
-    }
+    return _listComputer;
+}
 
-    return temp;
+vector<Computer> computerService::findComputer(const string &name)
+{
+    _listSearchedComputer.clear();
+    for (size_t i = 0; i < _listComputer.size(); i++)
+    {
+        if (toLower(_listComputer[i].getName()).find(toLower(name)) != string::npos)       // Puts both instances to lowercase
+        {
+            _listSearchedComputer.push_back(_listComputer[i]);
+        }
+    }
+    return _listSearchedComputer;
 }
 
 void computerService::swap(Computer& a, Computer& b)
@@ -315,7 +279,11 @@ void computerService::sortList(const string& command)       // Sort the list acc
     {
         _listComputer = sortBuilt();
     }
-    else if(command == T)
+    else if(command == "c") //LAGA!!!
+    {
+        _listComputer = sortCreationYear();
+    }
+    else if(command == "t") //LAGA!!
     {
         _listComputer = sortType();
     }
@@ -326,7 +294,7 @@ void computerService::sortList(const string& command)       // Sort the list acc
 
 }
 
-*/
+
 void computerService::addComputer(const Computer &input)        // Makes the user capable to add people to the list, as long as they're not already on the list
 {
     if(!alreadyInDatabase(input.getName()))
@@ -360,7 +328,7 @@ void computerService::removeFromDatabase(const string &name)        // Takes the
     }
 }
 
-void computerService::generateOptions(const Computer& correct, string& a, string& b, string& c, string& d)
+/*void computerService::generateOptions(const Computer& correct, string& a, string& b, string& c, string& d)
 {
     const int CASE_0 = 0;
     const int CASE_1 = 1;
@@ -388,7 +356,7 @@ void computerService::generateOptions(const Computer& correct, string& a, string
     {
         d = correct.getName();
     }
-}
+}*/
 
 
 void computerService::setProgram(const bool& input)
@@ -398,3 +366,10 @@ void computerService::setProgram(const bool& input)
 }
 
 void computerService::reverseVector() {reverse(_listComputer.begin(), _listComputer.end());}
+
+string computerService::toLower(const string& toLowerString)    // Makes everything lowercase
+{
+    string data = toLowerString;
+    transform(data.begin(), data.end(), data.begin(), ::tolower);
+    return data;
+}
