@@ -13,18 +13,18 @@ TEMPLATE = app
 
 SOURCES += main.cpp \
     consoleui.cpp \
-    service.cpp \
     dataaccess.cpp \
     person.cpp \
     dbmanager.cpp \
     computer.cpp \
-    computerService.cpp
+    computerService.cpp \
+    PersonService.cpp
 
 HEADERS += \
     consoleui.h \
-    service.h \
     dataaccess.h \
     person.h \
     dbmanager.h \
     computer.h \
-    computerService.h
+    computerService.h \
+    PersonService.h

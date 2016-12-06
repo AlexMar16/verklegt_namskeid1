@@ -7,7 +7,7 @@ using namespace std;
 
 class dataAccess
 {
-public:
+/*public:
     dataAccess();
     vector<Person> getVector() const;
     bool getFileFound() const;
@@ -18,7 +18,7 @@ private:
     bool _fileFound;
     vector<Person> _persons;
     void getPersons();
-    void getQuestions();
+    void getQuestions();*/
 };
 
 #endif // DATAACCESS_H
