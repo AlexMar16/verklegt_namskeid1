@@ -57,7 +57,7 @@ void consoleUI::run()
                  << right << BARRIER << endl;
             cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| status - This command displays info about the list "
                  << right << BARRIER << endl;
-            cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| addperson - This command adds an person to the database(testing atm)"
+            cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| addcomp- This command adds an computer to the database(testing atm)"
                  << right << BARRIER << endl;
             cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| quit   - This command will quit the program. "
                  << right << BARRIER << endl;
@@ -152,7 +152,7 @@ void consoleUI::printList(const string &_command)       // Print if appropriate.
 {
     const string SORT = "sort";
     const string ADD = "add";
-    const string ADDP = "addperson";
+    const string ADDC = "addcomp";
     const string LIST = "list";
 
     if(_command == LIST)            // Print the original list.
@@ -164,10 +164,10 @@ void consoleUI::printList(const string &_command)       // Print if appropriate.
         _print = true;
         addCommand();
     }
-    else if(_command == ADDP)        // Tells the user to enter information (names, gender, birth year, death year) about the new scientist.
+    else if(_command == ADDC)        // Tells the user to enter information (names, gender, birth year, death year) about the new scientist.
     {
         _print = true;
-        addPersonCommand();
+        addCompCommand();
     }
     else if(_command == REMOVE)     // Tells the user to enter the full name of the scientist to be removed from the list.
     {
@@ -371,10 +371,9 @@ void consoleUI::addCommand()
     cin.ignore();
 }
 
-void consoleUI::addPersonCommand()
+void consoleUI::addCompCommand()
 {
-    string name, type, yearBuilt, wasitbuilt;
-    bool built;
+    string name, type, yearBuilt, wasitbuilt, built;
     Computer input;
     int birthCheck = 0, deathCheck = 0;
     const int MINIMUM_Built_YEAR = 1500, MAXIMUM_Built_YEAR = 2030;
@@ -420,12 +419,12 @@ void consoleUI::addPersonCommand()
         cin >> wasitbuilt;
         if(wasitbuilt == "Y" || wasitbuilt == "y" || wasitbuilt == "yes")
         {
-            built = true;
+            built = "yes";
             break;
         }
         else if (wasitbuilt == "n" || wasitbuilt == "N" || wasitbuilt == "no")
         {
-            built = false;
+            built = "no";
             break;
         }
         else
@@ -434,7 +433,7 @@ void consoleUI::addPersonCommand()
         }
     }
     input.setBuilt(built);
-    if(built)
+    if(built == "yes")
     {
         while(true)
         {
@@ -450,7 +449,7 @@ void consoleUI::addPersonCommand()
                 cout << "Invalid input!" << endl;
             }
         }
-        input.setYearbuild(deathCheck);
+        input.setYearbuild(birthCheck);
     }
 
 

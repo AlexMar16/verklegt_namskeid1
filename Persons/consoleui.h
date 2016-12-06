@@ -22,7 +22,7 @@ private:
     bool sortSpecialCommand(const string& choice);
     void printList(const string& _command);
     void addCommand();
-    void addPersonCommand();
+    void addCompCommand();
     void removeCommand();
     void sortCommand();
     void findCommand();

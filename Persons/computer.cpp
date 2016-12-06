@@ -27,7 +27,7 @@ ostream& operator << (ostream& out, const Computer& rhs)
     out << left << setw(COLUMN_WIDTH) << setfill(SPACE) << rhs._type;
     out << left << setw(COLUMN_WIDTH) << setfill(SPACE) << rhs._yearBuilt;
 
-    if(rhs._built == true)
+    if(rhs._built == "yes")
     {
         out << setw(COLUMN_WIDTH + FIVE) << setfill(SPACE) << rhs._yearBuilt << endl;
     }
@@ -59,7 +59,7 @@ string Computer::getType() const {return _type;}
 
 int Computer::getYearBuilt() const {return _yearBuilt;}
 
-bool Computer::getBuilt() const {return _built;}
+string Computer::getBuilt() const {return _built;}
 
 //Set functions
 void Computer::setName(const string input) {_name = input;}
@@ -68,4 +68,4 @@ void Computer::setType(const string input){_type = input;}
 
 void Computer::setYearbuild(const int input){_yearBuilt = input;}
 
-void Computer::setBuilt(const bool input){_built = input;}
+void Computer::setBuilt(const string input){_built = input;}

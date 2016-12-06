@@ -27,12 +27,12 @@ public:
     string getName() const;
     string getType() const;
     int getYearBuilt() const;
-    bool getBuilt() const;
+    string getBuilt() const;
     void setName(const string input);
     void setType(const string input);
     void setYearbuild(const int input);
+    void setBuilt(const string input);
 
-    void setBuilt(const bool input);
     friend ostream& operator << (ostream& out, const Computer& rhs);
     friend ifstream& operator >> (ifstream& in, Computer& rhs);
     friend ostream& operator << (ostream& out, vector<Computer>& rhs);
@@ -41,7 +41,7 @@ private:
     string _name;
     string _type;
     int _yearBuilt;
-    bool _built;
+    string _built;
 };
 
 #endif // COMPUTER_H
