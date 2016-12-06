@@ -597,12 +597,29 @@ void consoleUI::printListPerson(const string &_command)       // Print if approp
 
 void consoleUI::statusCommandComputer()
 {
-  // _printOutComputer temp;
+  _printStatus = _turnC.computerProperties();
+  int nameQuant= 0;
+  int typeElecQuant=1;
+  int typeMechQuant=2;
+  int typeElecMechQuant=3;
+  int typeTransQuant=4;
+  int typeTransMicroQuant=5;
+  int typeSuperQuant=6;
+  int typeQuantumQuant=7;
+  int builtQuant=8;
 
+  cout<< _printStatus[nameQuant]<<endl;
+  cout<< _printStatus[typeElecQuant]<<endl;
+  cout<< _printStatus[typeMechQuant]<<endl;
+  cout<< _printStatus[typeElecMechQuant]<<endl;
+  cout<< _printStatus[typeTransQuant]<<endl;
+  cout<< _printStatus[typeTransMicroQuant]<<endl;
+  cout<< _printStatus[typeSuperQuant]<<endl;
+  cout<< _printStatus[typeQuantumQuant]<<endl;
+  cout<< _printStatus[builtQuant]<<endl;
 
 
 }
-
 void consoleUI::sortCommandComputer()
 {
     const string ASC = "asc";
@@ -728,7 +745,7 @@ void consoleUI::printListComputer(const string &_command)
     else if(_command == STATUS)
     {
         _print = false;
-        //setja videigandi
+        statusCommandComputer();
     }
     else
     {
