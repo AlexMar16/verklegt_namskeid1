@@ -10,7 +10,7 @@ public:
 private:
     bool _keepGoing;
     bool _valid;
-    bool _program
+    bool _program;
 };
 
 #endif // COMPUTERSERVICE_H

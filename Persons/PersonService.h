@@ -1,13 +1,13 @@
-#ifndef SERVICE_H
-#define SERVICE_H
+#ifndef PersonService_H
+#define PersonService_H
 #include "dbmanager.h"
 #include "person.h"
 #include "computer.h"
 
-class service
+class PersonService
 {
 public:
-    service();
+    PersonService();
     bool lookForPerson(const string& name);
     bool getProgram() const;
     bool dataFound() const;
@@ -47,4 +47,4 @@ private:
     void swap(Person& a, Person& b);
 };
 
-#endif // SERVICE_H
+#endif // PersonService_H

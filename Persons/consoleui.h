@@ -2,7 +2,7 @@
 #define CONSOLEUI_H
 #include "person.h"
 #include "computer.h"
-#include "service.h"
+#include "PersonService.h"
 #include <iostream>
 #include <vector>
 #include "dbmanager.h"
@@ -28,7 +28,7 @@ private:
     void findCommand();
     void quizCommand();
     void statusCommand();
-    service _turn;      //The instance we use to communicate with the service layer.
+    PersonService _turn;      //The instance we use to communicate with the PersonService layer.
 };
 
 #endif // CONSOLEUI_H
