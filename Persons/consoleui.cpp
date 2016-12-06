@@ -100,7 +100,7 @@ void consoleUI::run()
             }
 
 
-            if(_print && _turnP.dataFound()&& database=="person")
+            if(_print && _turnP.dataFound() && database=="person")
             {
                 _printOutPerson = _turnP.getPersonList();// getList() gets the list that's supposed to be printed out.
                 cout << _printOutPerson;
