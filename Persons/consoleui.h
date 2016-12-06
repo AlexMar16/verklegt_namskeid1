@@ -18,6 +18,7 @@ private:
     vector<int> _printStatus;
     vector<Person> _printOut;
     bool _print;
+    bool beginningCommand(const string& input);
     bool specialCommand(const string& command);
     bool sortSpecialCommand(const string& choice);
     void printList(const string& _command);

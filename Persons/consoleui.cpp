@@ -35,6 +35,7 @@ void consoleUI::run()
         cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| Pick a database: "
              << right << BARRIER << endl;
         getline(cin, database);
+        beginningCommand(database);
         string theRightOne;
         if(database== "person")
         {
@@ -44,7 +45,10 @@ void consoleUI::run()
         {
             theRightOne="computer";
         }
+
         cout << setw(ASTERISK_WIDTH) << setfill(ASTERISK) <<  ASTERISK << endl;
+        if(beginningCommand(database))
+        {
         do
         {
 
@@ -84,6 +88,7 @@ void consoleUI::run()
                 cout << endl << "File not found! " << endl << endl;
             }
 
+
             if(_print && _turn.dataFound())
             {
                 _printOut = _turn.getList();// getList() gets the list that's supposed to be printed out.
@@ -93,8 +98,29 @@ void consoleUI::run()
             {
                 cout << "Invalid command!" << endl << endl;
             }
+
         } while(_turn.getProgram());
-    } while(command == BACK);
+        }
+    } while(command == BACK || !(beginningCommand(database)));
+}
+bool consoleUI::beginningCommand(const string& input)
+{
+    if(input == "person")
+    {
+        return true;
+    }
+    else if(input =="computer")
+    {
+        return true;
+    }
+    else if(input =="connect")
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
 bool consoleUI::specialCommand(const string& command)
