@@ -1,23 +1,26 @@
 #ifndef DBMANAGER_H
 #define DBMANAGER_H
-#include <Qstring>
 #include <QSqlDatabase>
 #include <QSql>
 #include <QSqlQuery>
-#include <QSqlRecord>
-#include <iostream>
 #include "person.h"
+#include "computer.h"
 using namespace std;
 
 class DbManager
 {
 public:
+    bool isOpen() const;
     DbManager();
+    ~DbManager();
     DbManager(const QString& path);
-    void getPersons();
-    void print() const;
-    vector<Person> getAllPersons();
+    vector<Person> getVector() const;
+    void setVector(const vector<Person>& input);
+    void insertIntoComputer(const Computer &input);
+    void changeData();
 private:
+    vector<Person> _persons;
+    void getPersons();
     QSqlDatabase _db;
 };
 

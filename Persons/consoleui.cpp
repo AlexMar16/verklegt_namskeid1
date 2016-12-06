@@ -1,5 +1,5 @@
 #include "consoleui.h"
-#include "dbmanager.h"
+
 
 using namespace std;
 
@@ -9,65 +9,83 @@ const string FIND = "find";
 const string QUIZ = "quiz";
 const string STATUS = "status";
 const string EMPTY = "";
+const string BACK = "back";
 
 
 consoleUI::consoleUI() {_print = true;}
 
 void consoleUI::run()
 {
-    DbManager dbmconnection("C:/Users/Rabo/HR/onn1/Verklegt Namskeid/verklegt_namskeid1/ComputerScience.db");
     const int ASTERISK_WIDTH = 80;
     const char ASTERISK = '*';
     const char BARRIER = '|';
-    string command, initial = "| This is a database for famous computer scientists! |";
-    cout << setw(initial.size()) << setfill(ASTERISK) << ASTERISK << endl;
-    cout << initial << endl;
+    string command, database, initial = "| This is a database for famous computer scientists and historical computers! |";
     do
     {
-        cout << setw(ASTERISK_WIDTH) << setfill(ASTERISK) <<  ASTERISK << endl;     // Command box begins.
-        cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| Please enter one of the following commands:"
+        cout << setw(ASTERISK_WIDTH) << setfill(ASTERISK) <<  ASTERISK << endl;
+        cout << initial << endl << endl;
+        cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| Please enter the following commands to examine this database!"
              << right << BARRIER << endl;
-        cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << BARRIER << right << BARRIER<< endl;
-        cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| list   - This command will list every person in the system."
+        cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| person   - This command will gain you access to the person table."
              << right << BARRIER << endl;
-        cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| sort   - This command will allow you to sort the scientists."
+        cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| computer   - This command will gain you access to the computer table"
              << right << BARRIER << endl;
-        cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| find   - This command allows you to find a certain person in the list."
+        cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| connect   - This command will gain you access to connections of both."
              << right << BARRIER << endl;
-        cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| quiz   - This command lets you take a quiz about the computer scientists."
+        cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| Pick a database: "
              << right << BARRIER << endl;
-        cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| add    - This command allows you to add a person to the list."
-             << right << BARRIER << endl;
-        cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| remove - This command allows you to remove a certain person from the list."
-             << right << BARRIER << endl;
-        cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| status - This command displays info about the list "
-             << right << BARRIER << endl;
-        cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| quit   - This command will quit the program. "
-             << right << BARRIER << endl;
-        cout << setw(ASTERISK_WIDTH) << setfill(ASTERISK) << ASTERISK << endl;      // Command box ends.
-        cout << "command: ";
+        getline(cin, database);
 
-        getline(cin, command);          // Sets the private variable _command in the service class.
-        _printOut = _turn.getList();
-        if(_turn.fileFound() || QUIT == command)
+        cout << setw(ASTERISK_WIDTH) << setfill(ASTERISK) <<  ASTERISK << endl;
+        do
         {
-            printList(command);         // Checks if there is a need for a printout of the list.
-        }
-        else
-        {
-            cout << endl << "File not found! " << endl << endl;
-        }
+            cout << setw(ASTERISK_WIDTH) << setfill(ASTERISK) <<  ASTERISK << endl;     // Command box begins.
+            cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| Please enter one of the following commands:"
+                 << right << BARRIER << endl;
+            cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << BARRIER << right << BARRIER<< endl;
+            cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| list   - This command will list every person in the system."
+                 << right << BARRIER << endl;
+            cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| sort   - This command will allow you to sort the scientists."
+                 << right << BARRIER << endl;
+            cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| find   - This command allows you to find a certain person in the list."
+                 << right << BARRIER << endl;
+            cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| quiz   - This command lets you take a quiz about the computer scientists."
+                 << right << BARRIER << endl;
+            cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| add    - This command allows you to add a person to the list."
+                 << right << BARRIER << endl;
+            cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| remove - This command allows you to remove a certain person from the list."
+                 << right << BARRIER << endl;
+            cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| status - This command displays info about the list "
+                 << right << BARRIER << endl;
+            cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| addcomp- This command adds an computer to the database(testing atm)"
+                 << right << BARRIER << endl;
+            cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| quit   - This command will quit the program. "
+                 << right << BARRIER << endl;
+            cout << setw(ASTERISK_WIDTH) << setfill(ASTERISK) << ASTERISK << endl;      // Command box ends.
+            cout << "command: ";
 
-        if(_print && _turn.fileFound())
-        {
-            _printOut = _turn.getList();        // getList() gets the list that's supposed to be printed out.
-            cout << _printOut;
-        }
-        else if (!specialCommand(command) && _turn.fileFound())
-        {
-            cout << "Invalid command!" << endl << endl;
-        }
-    } while(_turn.getProgram());
+            getline(cin, command);          // Sets the private variable _command in the service class.
+            _printOut = _turn.getList();
+            if(_turn.dataFound() || QUIT == command)
+            {
+                printList(command);         // Checks if there is a need for a printout of the list.
+            }
+            else
+            {
+                cout << endl << "File not found! " << endl << endl;
+            }
+
+            if(_print && _turn.dataFound())
+            {
+                _printOut = _turn.getList();// getList() gets the list that's supposed to be printed out.
+                cout << _printOut;
+            }
+            else if (!specialCommand(command) && _turn.dataFound())
+            {
+                cout << "Invalid command!" << endl << endl;
+            }
+        } while(_turn.getProgram());
+    } while(command == BACK);
 }
 
 bool consoleUI::specialCommand(const string& command)
@@ -89,6 +107,10 @@ bool consoleUI::specialCommand(const string& command)
         return true;
     }
     else if(command == STATUS)
+    {
+        return true;
+    }
+    else if(command == BACK)
     {
         return true;
     }
@@ -130,6 +152,7 @@ void consoleUI::printList(const string &_command)       // Print if appropriate.
 {
     const string SORT = "sort";
     const string ADD = "add";
+    const string ADDC = "addcomp";
     const string LIST = "list";
 
     if(_command == LIST)            // Print the original list.
@@ -140,6 +163,11 @@ void consoleUI::printList(const string &_command)       // Print if appropriate.
     {
         _print = true;
         addCommand();
+    }
+    else if(_command == ADDC)        // Tells the user to enter information (names, gender, birth year, death year) about the new scientist.
+    {
+        _print = true;
+        addCompCommand();
     }
     else if(_command == REMOVE)     // Tells the user to enter the full name of the scientist to be removed from the list.
     {
@@ -343,6 +371,93 @@ void consoleUI::addCommand()
     cin.ignore();
 }
 
+void consoleUI::addCompCommand()
+{
+    string name, type, yearBuilt, wasitbuilt, built;
+    Computer input;
+    int birthCheck = 0, deathCheck = 0;
+    const int MINIMUM_Built_YEAR = 1500, MAXIMUM_Built_YEAR = 2030;
+
+    cout << "Please enter the following information about the new Computer " << endl;
+    cout << "in the following order." << endl;
+    cout << "Be aware you cannot put letters that are not in the English alphabet." << endl;
+
+    while(true)
+    {
+        cout << "Name: ";
+        getline(cin, name);
+        if(name == EMPTY)
+        {
+            cout << "No input!" << endl;
+        }
+        else
+        {
+            break;
+        }
+    }
+    input.setName(name);
+
+    while(true)
+    {
+        cout << "Type of computer: ";
+        getline(cin, type);
+        if(type == EMPTY)
+        {
+            cout << "No input!" << endl;
+        }
+        else
+        {
+            break;
+        }
+    }
+    input.setType(type);
+
+
+    while(true)
+    {
+        cout << "Was the computer ever built? (y/n)" << endl;
+        cin >> wasitbuilt;
+        if(wasitbuilt == "Y" || wasitbuilt == "y" || wasitbuilt == "yes")
+        {
+            built = "yes";
+            break;
+        }
+        else if (wasitbuilt == "n" || wasitbuilt == "N" || wasitbuilt == "no")
+        {
+            built = "no";
+            break;
+        }
+        else
+        {
+            cout << "Invalid input!" << endl;
+        }
+    }
+    input.setBuilt(built);
+    if(built == "yes")
+    {
+        while(true)
+        {
+            cout << "Build year (YYYY): ";
+            cin >> yearBuilt;
+            birthCheck = atoi(yearBuilt.c_str());       // Removes alphanumeric values from the input.
+            if (birthCheck > MINIMUM_Built_YEAR && birthCheck < MAXIMUM_Built_YEAR)
+            {
+                break;
+            }
+            else
+            {
+                cout << "Invalid input!" << endl;
+            }
+        }
+        input.setYearbuild(birthCheck);
+    }
+
+
+    cout << endl;
+
+    _turn.addComputer(input);
+    cin.ignore();
+}
 void consoleUI::removeCommand()
 {
     string fullName;
@@ -361,7 +476,7 @@ void consoleUI::removeCommand()
     }
 
     input = _turn.findPersonExactly(fullName);
-    _turn.removePerson(input);
+    //_turn.removePerson(input);
 }
 
 void consoleUI::findCommand()
@@ -381,6 +496,7 @@ void consoleUI::findCommand()
         _printOut = _turn.findPerson(toFind);
         if (_turn.lookForPerson(toFind))
         {
+            cout << "Person found! " << endl;
             cout << _printOut;
         }
         else

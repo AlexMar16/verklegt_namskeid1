@@ -3,13 +3,13 @@
 
 using namespace std;
 
-service::service(){
-    dataAccess temp;        // The instance we use to communicate with dataAccess.
+service::service(){    
+     DbManager temp("C:/Users/Rabo/HR/onn1/Verklegt Namskeid/verklegt_namskeid1/ComputerScience.sqlite");
     _listV = temp.getVector();
     _listSearchedPerson = temp.getVector();
     _listSearchedPerson.clear();
     _program = true;
-    _fileFound = temp.getFileFound();
+    _dataFound = temp.isOpen();
 }
 
 bool service::alreadyInDatabase(const string& name)         // Checks if the name exists in the database
@@ -298,7 +298,7 @@ void service::swap(Person& a, Person& b)
     a = b;
     b = temp;
 }
-bool service::fileFound()const {return _fileFound;}
+bool service::dataFound()const {return _dataFound;}
 
 void service::sortList(const string& command)       // Sort the list according to the input.
 {
@@ -335,10 +335,21 @@ void service::addPerson(const Person &input)        // Makes the user capable to
 {
     if(!alreadyInDatabase(input.getName()))
     {
-        dataAccess addNew;
+        DbManager addNewPerson;
         _listV.push_back(input);
-        addNew.setVector(_listV);
-        addNew.changeFile();
+        addNewPerson.setVector(_listV);
+        addNewPerson.changeData();
+    }
+}
+void service::addComputer(const Computer &input)        // Makes the user capable to add people to the list, as long as they're not already on the list
+{
+    if(true)//!alreadyInDatabase(input.getName())
+    {
+        DbManager addNewComputer;
+        addNewComputer.insertIntoComputer(input);
+        //_listV.push_back(input)
+        //addNew.setVector(_listV);
+        //addNew.changeData();
     }
 }
 
@@ -346,10 +357,10 @@ void service::removePerson(const Person &input)         // Makes the user capabl
 {
     if(alreadyInDatabase(input.getName()))      // Checks if the name is already in the database.
     {
-        dataAccess addNew;
+        DbManager removePerson;
         removeFromDatabase(input.getName());
-        addNew.setVector(_listV);
-        addNew.changeFile();
+        removePerson.setVector(_listV);
+        removePerson.changeData();
     }
 }
 
@@ -395,6 +406,11 @@ void service::generateOptions(const Person& correct, string& a, string& b, strin
 }
 
 
-void service::setProgram(const bool& input) {_program = input;}
+void service::setProgram(const bool& input)
+{
+    _program = input;
+    DbManager quit;
+    quit.~DbManager();
+}
 
 void service::reverseVector() {reverse(_listV.begin(), _listV.end());}
