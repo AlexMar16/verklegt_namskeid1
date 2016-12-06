@@ -15,7 +15,7 @@ public:
     Person generateQuestion();
     vector<int> properties();
     vector<Person> findPerson(const string& name);
-    vector<Person> getList() const;
+    vector<Person> getPersonList() const;
     void addPerson(const Person& input);
     void addComputer(const Computer& input);
     void removePerson(const Person& input);

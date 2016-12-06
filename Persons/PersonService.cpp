@@ -170,7 +170,7 @@ vector<int> PersonService::properties()
     return statusVec;
 }
 
-vector<Person> PersonService::getList() const {return _listV;}
+vector<Person> PersonService::getPersonList() const {return _listV;}
 
 vector<Person> PersonService::sortGender()        // Sorts the list by gender, beginning with women.
 {

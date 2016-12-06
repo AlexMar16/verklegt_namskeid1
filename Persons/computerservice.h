@@ -14,7 +14,7 @@ public:
     Computer generateQuestion();
     vector<int> computerProperties();
     vector<Computer> findComputer(const string& name);
-    vector<Computer> getList() const;
+    vector<Computer> getComputerList() const;
     void addComputer(const Computer& input);
     void removeComputer(const Computer& input);
     void sortList(const string& command);

@@ -182,7 +182,7 @@ vector<int> computerService::computerProperties()
     return statusVec;
 }
 
-vector<Computer> computerService::getList() const {return _listComputer;}
+vector<Computer> computerService::getComputerList() const {return _listComputer;}
 /*
 vector<Computer> computerService::sortType()        // Sorts the list by gender, beginning with women.
 {
