@@ -16,7 +16,86 @@ const char BARRIER = '|';
 
 consoleUI::consoleUI() {_print = true;}
 
-void consoleUI::commandBox(const string& theRightOne)
+void consoleUI::run()
+{
+    do
+    {
+        firstCommandBox();
+    if(beginningCommand())
+    {
+    do
+    {
+        commandBox();
+
+        if(database == "person")
+        {
+        _printOutPerson = _turnP.getPersonList();
+        }
+        else if(database == "computer")
+        {
+        _printOutComputer = _turnC.getComputerList();
+        }
+
+        if((_turnP.dataFound() || QUIT == command)&& theRightOne=="person")
+        {
+            printListPerson(command);         // Checks if there is a need for a printout of the list.
+        }
+        else if((_turnP.dataFound() || QUIT == command)&& theRightOne=="computer")
+        {
+            printListComputer(command);
+        }
+        else
+        {
+            cout << endl << "File not found! " << endl << endl;
+        }
+
+
+        if(_print && _turnP.dataFound() && database=="person")
+        {
+            _printOutPerson = _turnP.getPersonList();// getList() gets the list that's supposed to be printed out.
+            cout << _printOutPerson;
+        }
+       // todo ! else if()thegar vector er kominn, gera ad printcomputer vector
+        else if (!specialCommandPerson(command) && _turnP.dataFound())
+        {
+            cout << "Invalid command!" << endl << endl;
+        }
+    }while(command != BACK || !(beginningCommand()));
+    }
+    }while(_turnP.getProgram());
+}
+
+void consoleUI::firstCommandBox()
+{
+    string initial = "| This is a database for famous computer scientists and historical computers! |";
+
+
+        cout << setw(ASTERISK_WIDTH) << setfill(ASTERISK) <<  ASTERISK << endl;
+        cout << initial << endl << endl;
+        cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| Please enter the following commands to examine this database!"
+             << right << BARRIER << endl;
+        cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| person   - This command will gain you access to the person table."
+             << right << BARRIER << endl;
+        cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| computer   - This command will gain you access to the computer table"
+             << right << BARRIER << endl;
+        cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| connect   - This command will gain you access to connections of both."
+             << right << BARRIER << endl;
+        cout << setw(ASTERISK_WIDTH) << setfill(ASTERISK) <<  ASTERISK << endl;
+        cout << "Pick a database: ";
+        getline(cin, database);
+        beginningCommand();
+
+        if(database== "person")
+        {
+            theRightOne= "person";
+        }
+        else if(database=="computer")
+        {
+            theRightOne="computer";
+        }
+}
+
+void consoleUI::commandBox()
 {
     cout << setw(ASTERISK_WIDTH) << setfill(ASTERISK) <<  ASTERISK << endl;     // Command box begins.
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| Please enter one of the following commands:"
@@ -44,88 +123,22 @@ void consoleUI::commandBox(const string& theRightOne)
          << right << BARRIER << endl;
     cout << setw(ASTERISK_WIDTH) << setfill(ASTERISK) << ASTERISK << endl;      // Command box ends.
     cout << "command: ";
+    getline(cin, command);          // Sets the private variable _command in the service class.
+
 
 }
 
-void consoleUI::run()
+bool consoleUI::beginningCommand()
 {
-    string command, database, initial = "| This is a database for famous computer scientists and historical computers! |";
-    do
-    {
-        cout << setw(ASTERISK_WIDTH) << setfill(ASTERISK) <<  ASTERISK << endl;
-        cout << initial << endl << endl;
-        cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| Please enter the following commands to examine this database!"
-             << right << BARRIER << endl;
-        cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| person   - This command will gain you access to the person table."
-             << right << BARRIER << endl;
-        cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| computer   - This command will gain you access to the computer table"
-             << right << BARRIER << endl;
-        cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| connect   - This command will gain you access to connections of both."
-             << right << BARRIER << endl;
-        cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| Pick a database: "
-             << right << BARRIER << endl;
-        getline(cin, database);
-        beginningCommand(database);
-        string theRightOne;
-        if(database== "person")
-        {
-            theRightOne= "person";
-        }
-        else if(database=="computer")
-        {
-            theRightOne="computer";
-        }
-
-        cout << setw(ASTERISK_WIDTH) << setfill(ASTERISK) <<  ASTERISK << endl;
-        if(beginningCommand(database))
-        {
-        do
-        {
-            commandBox(theRightOne);
-            getline(cin, command);          // Sets the private variable _command in the service class.
-            if(database == "person")
-            _printOutPerson = _turnP.getPersonList();
-            _printOutComputer = _turnC.getComputerList();
-            if((_turnP.dataFound() || QUIT == command)&& theRightOne=="person")
-            {
-                printListPerson(command);         // Checks if there is a need for a printout of the list.
-            }
-            else if((_turnP.dataFound() || QUIT == command)&& theRightOne=="computer")
-            {
-                printListComputer(command);
-            }
-            else
-            {
-                cout << endl << "File not found! " << endl << endl;
-            }
-
-
-            if(_print && _turnP.dataFound() && database=="person")
-            {
-                _printOutPerson = _turnP.getPersonList();// getList() gets the list that's supposed to be printed out.
-                cout << _printOutPerson;
-            }
-           // todo ! else if()thegar vector er kominn, gera ad printcomputer vector
-            else if (!specialCommandPerson(command) && _turnP.dataFound())
-            {
-                cout << "Invalid command!" << endl << endl;
-            }
-
-        } while(_turnP.getProgram());
-        }
-    } while(command == BACK || !(beginningCommand(database)));
-}
-bool consoleUI::beginningCommand(const string& input)
-{
-    if(input == "person")
+    if(database == "person")
     {
         return true;
     }
-    else if(input =="computer")
+    else if(database =="computer")
     {
         return true;
     }
-    else if(input =="connect")
+    else if(database =="connect")
     {
         return true;
     }
