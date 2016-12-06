@@ -6,12 +6,11 @@
 using namespace std;
 
 computerService::computerService(){
-     DbManager temp("ComputerScience.sqlite");
-    _listComputer = temp.getCVector();
-    _listSearchedComputer = temp.getCVector();
+    _listComputer = _database.getCVector();
+    _listSearchedComputer = _database.getCVector();
     _listSearchedComputer.clear();
     _program = true;
-    _dataFound = temp.isOpen();
+    _dataFound = _database.isOpen();
 }
 
 bool computerService::alreadyInDatabase(const string& name)         // Checks if the name exists in the database
@@ -96,13 +95,6 @@ string computerService::aliveCheck(const Computer& p)
     else
         return "is still alive";
 }*/
-
-string computerService::toLower(const string& toLowerString)    // Makes everything lowercase
-{
-    string data = toLowerString;
-    transform(data.begin(), data.end(), data.begin(), ::tolower);
-    return data;
-}
 
 vector<int> computerService::computerProperties()
 {
@@ -402,8 +394,7 @@ void computerService::generateOptions(const Computer& correct, string& a, string
 void computerService::setProgram(const bool& input)
 {
     _program = input;
-    DbManager quit;
-    quit.~DbManager();
+    _database.~DbManager();
 }
 
 void computerService::reverseVector() {reverse(_listComputer.begin(), _listComputer.end());}

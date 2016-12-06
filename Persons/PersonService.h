@@ -30,11 +30,10 @@ public:
     string aliveCheck(const Person& p);
 
 private:
-    bool _keepGoing;
-    bool _valid;
     bool _program;
     bool alreadyInDatabase(const string &name);
     bool _dataFound;
+    DbManager _database;
     vector<Person> _listV;
     vector<Person> _listSearchedPerson;
     vector<Person> sortAlphabetically();

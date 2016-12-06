@@ -33,6 +33,7 @@ private:
     bool _program;
     bool alreadyInDatabase(const string &name);
     bool _dataFound;
+    DbManager _database;
     vector<Computer> _listComputer;
     vector<Computer> _listSearchedComputer;
     vector<Computer> sortAlphabetically();

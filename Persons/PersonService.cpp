@@ -4,12 +4,11 @@
 using namespace std;
 
 PersonService::PersonService(){
-     DbManager temp("ComputerScience.sqlite");
-    _listV = temp.getVector();
-    _listSearchedPerson = temp.getVector();
+    _listV = _database.getVector();
+    _listSearchedPerson = _database.getVector();
     _listSearchedPerson.clear();
     _program = true;
-    _dataFound = temp.isOpen();
+    _dataFound = _database.isOpen();
 }
 
 bool PersonService::alreadyInDatabase(const string& name)         // Checks if the name exists in the database
@@ -409,8 +408,7 @@ void PersonService::generateOptions(const Person& correct, string& a, string& b,
 void PersonService::setProgram(const bool& input)
 {
     _program = input;
-    DbManager quit;
-    quit.~DbManager();
+    _database.~DbManager();
 }
 
 void PersonService::reverseVector() {reverse(_listV.begin(), _listV.end());}

@@ -18,7 +18,8 @@ SOURCES += main.cpp \
     dbmanager.cpp \
     computer.cpp \
     computerService.cpp \
-    PersonService.cpp
+    PersonService.cpp \
+    generalService.cpp
 
 HEADERS += \
     consoleui.h \
@@ -27,4 +28,5 @@ HEADERS += \
     dbmanager.h \
     computer.h \
     computerService.h \
-    PersonService.h
+    PersonService.h \
+    generalService.h
