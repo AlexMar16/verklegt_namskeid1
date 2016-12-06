@@ -1,6 +1,7 @@
 #include "dbmanager.h"
 #include <QVariant>
 #include <QSqlQuery>
+#include <computer.h>
 
 
 DbManager::DbManager(){}
@@ -15,6 +16,7 @@ DbManager::DbManager(const QString &path)
 
 }
 DbManager::~DbManager() {_db.close();}
+
 
 void DbManager::getPersons()
 {
@@ -38,11 +40,38 @@ void DbManager::getPersons()
         _persons.push_back(temp);
     }
 }
+
+void DbManager::getComputers()
+{
+    QString s = "SELECT * FROM Computers";
+    QSqlQuery query(_db);
+    query.exec(s);
+    Computer temp;
+    while (query.next())
+    {
+        string name = query.value("Name").toString().toStdString();
+        temp.setName(name);
+
+        int YearBuilt = query.value("YearBuilt").toUInt();
+        temp.setYearbuild(YearBuilt);
+
+        string Type = query.value("Type").toString().toStdString();
+        temp.setType(Type);
+
+        string Built = query.value("Built").toString().toStdString();
+        temp.setBuilt(Built);
+        _Computer.push_back(temp);
+    }
+}
 vector<Person> DbManager::getVector() const {return _persons;}
+
+vector<Computer> DbManager::getCVector() const {return _Computer;}
 
 bool DbManager::isOpen() const {return _db.isOpen();}
 
 void DbManager::setVector(const vector<Person> &input) {_persons = input;}
+
+void DbManager::setCVector(const vector<Computer> &input){_Computer = input;}
 
 void DbManager::changeData()
 {
