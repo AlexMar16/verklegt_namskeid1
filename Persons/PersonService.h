@@ -23,6 +23,7 @@ public:
     void setProgram(const bool& input);
     void generateOptions(const Person& correct, string& a, string& b, string& c, string& d);
     void reverseVector();
+    void closeDatabase();
     string getLastName(const string& name) const;
     string toLower(const string &tolowerstring);
     string assignSelection(string& answer, const string& a, const string& b, const string& c, const string& d);

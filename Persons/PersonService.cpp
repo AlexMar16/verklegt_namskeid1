@@ -412,3 +412,8 @@ void PersonService::setProgram(const bool& input)
 }
 
 void PersonService::reverseVector() {reverse(_listV.begin(), _listV.end());}
+
+void PersonService::closeDatabase()
+{
+    _database.~DbManager();
+}

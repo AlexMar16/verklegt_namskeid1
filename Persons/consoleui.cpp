@@ -26,16 +26,6 @@ void consoleUI::run()
             do
             {
                 commandBox();
-
-                if(database == "person")
-                {
-                    _printOutPerson = _turnP.getPersonList();
-                }
-                else if(database == "computer")
-                {
-                    _printOutComputer = _turnC.getComputerList();
-                }
-
                 if((_turnP.dataFound() || QUIT == _command)&& theRightOne=="person")
                 {
                     printListPerson(_command);         // Checks if there is a need for a printout of the list.
