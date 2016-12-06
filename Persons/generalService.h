@@ -8,6 +8,10 @@ class generalService
 public:
     generalService();
     string toLower(const string& toLowerString);
+    void setProgram(const string& command);
+    bool getProgram() const;
+private:
+    bool _program;
 };
 
 #endif // GENERALSERVICE_H

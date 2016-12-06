@@ -4,8 +4,7 @@
 #include "computer.h"
 #include "PersonService.h"
 #include "computerService.h"
-#include <iostream>
-#include <vector>
+#include "generalService.h"
 #include "dbmanager.h"
 using namespace std;
 
@@ -16,6 +15,7 @@ public:
     void run();
 
 private:
+    generalService _turnG;
     vector<int> _printStatus;
     vector<Computer> _printOutComputer;
     vector<Person> _printOutPerson;

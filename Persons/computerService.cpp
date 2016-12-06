@@ -1,4 +1,5 @@
 #include "computerService.h"
+#include "generalservice.h"
 #include "computer.h"
 
 using namespace std;
