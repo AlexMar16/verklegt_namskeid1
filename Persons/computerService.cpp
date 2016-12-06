@@ -25,9 +25,10 @@ bool computerService::alreadyInDatabase(const string& name)         // Checks if
 
 bool computerService::lookForComputer(const string& name)         // Checks if any part of the name is on the list
 {
+    generalService gen;
     for (size_t i = 0; i < _listComputer.size(); i++)
     {
-        if (toLower(_listComputer[i].getName()).find(toLower(name)) != string::npos)       // Enables us to search in lower case letters.
+        if (gen.toLower(_listComputer[i].getName()).find(gen.toLower(name)) != string::npos)       // Enables us to search in lower case letters.
         {
             return true;
         }
@@ -249,10 +250,11 @@ vector<Computer> computerService::sortCreationYear()
 
 vector<Computer> computerService::findComputer(const string &name)
 {
+    generalService gen;
     _listSearchedComputer.clear();
     for (size_t i = 0; i < _listComputer.size(); i++)
     {
-        if (toLower(_listComputer[i].getName()).find(toLower(name)) != string::npos)       // Puts both instances to lowercase
+        if (gen.toLower(_listComputer[i].getName()).find(gen.toLower(name)) != string::npos)       // Puts both instances to lowercase
         {
             _listSearchedComputer.push_back(_listComputer[i]);
         }
@@ -367,9 +369,4 @@ void computerService::setProgram(const bool& input)
 
 void computerService::reverseVector() {reverse(_listComputer.begin(), _listComputer.end());}
 
-string computerService::toLower(const string& toLowerString)    // Makes everything lowercase
-{
-    string data = toLowerString;
-    transform(data.begin(), data.end(), data.begin(), ::tolower);
-    return data;
-}
+

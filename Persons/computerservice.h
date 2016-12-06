@@ -2,6 +2,7 @@
 #define COMPUTERSERVICE_H
 #include "dbmanager.h"
 #include "computer.h"
+#include "generalService.h"
 
 class computerService
 {
@@ -21,14 +22,13 @@ public:
     void setProgram(const bool& input);
     //void generateOptions(const Computer& correct, string& a, string& b, string& c, string& d);
     void reverseVector();
-    string toLower(const string &tolowerstring);
     //string assignSelection(string& answer, const string& a, const string& b, const string& c, const string& d);
     //string genderCheck(const Computer& p);
    // string aliveCheck(const Computer& p);
 
 private:
-    bool _keepGoing;
-    bool _valid;
+    /*bool _keepGoing;
+    bool _valid;*/
     bool _program;
     bool alreadyInDatabase(const string &name);
     bool _dataFound;
