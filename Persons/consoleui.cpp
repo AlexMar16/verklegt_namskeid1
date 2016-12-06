@@ -19,6 +19,7 @@ void consoleUI::run()
     const int ASTERISK_WIDTH = 80;
     const char ASTERISK = '*';
     const char BARRIER = '|';
+    string theRightOne;
     string command, database, initial = "| This is a database for famous computer scientists and historical computers! |";
     do
     {
@@ -35,25 +36,33 @@ void consoleUI::run()
         cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| Pick a database: "
              << right << BARRIER << endl;
         getline(cin, database);
-
+        if(database== "person")
+        {
+            theRightOne== "person";
+        }
+        else if(database=="computer")
+        {
+            theRightOne=="computer";
+        }
         cout << setw(ASTERISK_WIDTH) << setfill(ASTERISK) <<  ASTERISK << endl;
         do
         {
+
             cout << setw(ASTERISK_WIDTH) << setfill(ASTERISK) <<  ASTERISK << endl;     // Command box begins.
             cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| Please enter one of the following commands:"
                  << right << BARRIER << endl;
             cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << BARRIER << right << BARRIER<< endl;
-            cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| list   - This command will list every person in the system."
+            cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| list   - This command will list every"+ theRightOne+ "in the system."
                  << right << BARRIER << endl;
-            cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| sort   - This command will allow you to sort the scientists."
+            cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| sort   - This command will allow you to sort the"+ theRightOne+ "s."
                  << right << BARRIER << endl;
-            cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| find   - This command allows you to find a certain person in the list."
+            cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| find   - This command allows you to find a certain"+theRightOne+" in the list."
                  << right << BARRIER << endl;
             cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| quiz   - This command lets you take a quiz about the computer scientists."
                  << right << BARRIER << endl;
-            cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| add    - This command allows you to add a person to the list."
+            cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| add    - This command allows you to add a "+theRightOne+" to the list."
                  << right << BARRIER << endl;
-            cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| remove - This command allows you to remove a certain person from the list."
+            cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| remove - This command allows you to remove a certain "+theRightOne+" from the list."
                  << right << BARRIER << endl;
             cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| status - This command displays info about the list "
                  << right << BARRIER << endl;

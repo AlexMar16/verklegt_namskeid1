@@ -10,7 +10,7 @@ dataAccess::dataAccess()
 
 bool dataAccess::getFileFound() const {return _fileFound;}
 
-vector<Person> dataAccess::getVector() const {return _persons;}
+vector<Person> dataAccess::getVector() const {return gs;}
 
 void dataAccess::getPersons()
 {
