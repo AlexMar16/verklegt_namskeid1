@@ -33,6 +33,7 @@ public:
     void setYearbuild(const int input);
     void setBuilt(const string input);
 
+
     friend ostream& operator << (ostream& out, const Computer& rhs);
     friend ifstream& operator >> (ifstream& in, Computer& rhs);
     friend ostream& operator << (ostream& out, vector<Computer>& rhs);
@@ -42,6 +43,7 @@ private:
     string _type;
     int _yearBuilt;
     string _built;
+
 };
 
 #endif // COMPUTER_H
