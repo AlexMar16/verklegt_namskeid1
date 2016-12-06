@@ -8,8 +8,8 @@ DbManager::DbManager(){}
 
 DbManager::DbManager(const QString &path)
 {
-    _db = QSqlDatabase::addDatabase("QSQLITE");
-    //_db = QSqlDatabase::addDatabase("QSQLITE", "dbconnection");
+    //_db = QSqlDatabase::addDatabase("QSQLITE");
+    _db = QSqlDatabase::addDatabase("QSQLITE", "dbconnection");
     QString dbName = path;
     _db.setDatabaseName(dbName);
     _db.open();
@@ -106,22 +106,26 @@ void DbManager::insertIntoComputer(const Computer &input)
     if(_db.open())
     {
         cout << "opened!" << endl;
-        QSqlQuery qry;
+        QSqlQuery qry(_db);
         qry.prepare("INSERT INTO Computers(Name, yearBuilt, Type, Built)"
-                    "VALUES(:C_Name,:C_yearBuilt,:C_Type,:C_Built");
+                    "VALUES(:C_Name,:C_yearBuilt,:C_Type,:C_Built)");
         qry.bindValue(":C_Name",qsName);
         qry.bindValue(":C_yearBuilt",input.getYearBuilt());
         qry.bindValue(":C_Type",qsType);
         qry.bindValue(":C_Built",qsBuilt);
+        //qry.exec();
         if( !qry.exec() )
             //qDebug() << qry.lastError().text();
+
             cout << "error inserting into database";
         else
+        {
             qDebug( "Inserted!" );
-        cout << "inserted! " << endl;
+            cout << "inserted! " << endl;
+        }
     }
     else
     {
-        cout << "not open " << endl;
+        cout << "not openajsd ajsln " << endl;
     }
 }

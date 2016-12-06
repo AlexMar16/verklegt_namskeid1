@@ -59,6 +59,8 @@ void consoleUI::run()
                  << right << BARRIER << endl;
             cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| addcomp- This command adds an computer to the database(testing atm)"
                  << right << BARRIER << endl;
+            cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| removec- This command adds an computer to the database(testing atm)"
+                 << right << BARRIER << endl;
             cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| quit   - This command will quit the program. "
                  << right << BARRIER << endl;
             cout << setw(ASTERISK_WIDTH) << setfill(ASTERISK) << ASTERISK << endl;      // Command box ends.
