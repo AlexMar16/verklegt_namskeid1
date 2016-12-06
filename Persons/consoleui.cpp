@@ -55,7 +55,12 @@ void consoleUI::run()
             _printOutPerson = _turnP.getPersonList();// getList() gets the list that's supposed to be printed out.
             cout << _printOutPerson;
         }
-       // todo ! else if()thegar vector er kominn, gera ad printcomputer vector
+        else if(_print && database=="computer")
+        {
+            _printOutComputer = _turnC.getComputerList(); // todo setja inn dataFound lika
+            cout << _printOutComputer;
+        }
+
         else if (!specialCommandPerson(command) && _turnP.dataFound())
         {
             cout << "Invalid command!" << endl << endl;
@@ -711,7 +716,7 @@ void consoleUI::printListComputer(const string &_command)
     else if (_command == QUIT)
     {
         _print = false;
-        //_turnP.setProgram(_print);
+        _turnP.setProgram(_print);
     }
     else if(_command == STATUS)
     {
