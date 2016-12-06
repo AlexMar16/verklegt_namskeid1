@@ -519,7 +519,6 @@ void consoleUI::printListPerson(const string &_command)       // Print if approp
 {
     const string SORT = "sort";
     const string ADD = "add";
-    const string ADDC = "addcomp";
     const string LIST = "list";
 
     if(_command == LIST)            // Print the original list.
@@ -531,11 +530,7 @@ void consoleUI::printListPerson(const string &_command)       // Print if approp
         _print = true;
         addCommand();
     }
-    else if(_command == ADDC)        // Tells the user to enter information (names, gender, birth year, death year) about the new scientist.
-    {
-        _print = true;
-        addCompCommand();
-    }
+
     else if(_command == REMOVE)     // Tells the user to enter the full name of the scientist to be removed from the list.
     {
         _print = false;
@@ -635,7 +630,7 @@ void consoleUI::sortCommandComputer()
 }
 
 
-void consoleUI::printListComputer(const string &_command)
+void consoleUI::specialCommandComputer(const string &_command)
 {
     if(_command == "a")
     {
@@ -657,5 +652,58 @@ void consoleUI::printListComputer(const string &_command)
     {
         //printvectorFyrirCompuer= false
     }
+}
+
+void consoleUI::printListComputer(const string &_command)
+{
+    const string SORT = "sort";
+    const string ADD = "addcomp";
+    const string LIST = "list";
+
+    if(_command == LIST)            // Print the original list.
+    {
+        _print = true;
+    }
+
+    else if(_command == ADD)
+    {
+        _print = true;
+        addCompCommand();
+    }
+    else if(_command == REMOVE)
+    {
+        _print = false;
+        removeCommand();
+    }
+    else if (_command == FIND)
+    {
+        _print = false;
+        findCommand();
+    }
+    else if(_command == SORT)
+    {
+        _print = true;
+        sortCommandComputer();
+    }
+    else if(_command == QUIZ)
+    {
+        _print = false;
+        quizCommand();
+    }
+    else if (_command == QUIT)
+    {
+        _print = false;
+        //_turn.setProgram(_print);
+    }
+    else if(_command == STATUS)
+    {
+        _print = false;
+        //setja videigandi
+    }
+    else
+    {
+        _print = false;
+    }
+
 }
 
