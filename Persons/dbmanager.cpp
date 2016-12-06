@@ -13,7 +13,7 @@ DbManager::DbManager()
     _db.setDatabaseName(dbName);
     _db.open();
     getPersons();
-
+    getComputers();
 }
 DbManager::~DbManager() {_db.close();}
 

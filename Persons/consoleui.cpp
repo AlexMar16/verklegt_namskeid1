@@ -715,7 +715,7 @@ void consoleUI::printListComputer(const string &_command)
     else if (_command == QUIT)
     {
         _print = false;
-        _turnP.setProgram(_print);
+        _turnC.setProgram(_print);
     }
     else if(_command == STATUS)
     {
