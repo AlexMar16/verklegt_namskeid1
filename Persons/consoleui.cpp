@@ -19,7 +19,6 @@ void consoleUI::run()
     const int ASTERISK_WIDTH = 80;
     const char ASTERISK = '*';
     const char BARRIER = '|';
-    string theRightOne;
     string command, database, initial = "| This is a database for famous computer scientists and historical computers! |";
     do
     {
@@ -36,13 +35,14 @@ void consoleUI::run()
         cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| Pick a database: "
              << right << BARRIER << endl;
         getline(cin, database);
+        string theRightOne;
         if(database== "person")
         {
-            theRightOne== "person";
+            theRightOne= "person";
         }
         else if(database=="computer")
         {
-            theRightOne=="computer";
+            theRightOne="computer";
         }
         cout << setw(ASTERISK_WIDTH) << setfill(ASTERISK) <<  ASTERISK << endl;
         do
@@ -52,7 +52,7 @@ void consoleUI::run()
             cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| Please enter one of the following commands:"
                  << right << BARRIER << endl;
             cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << BARRIER << right << BARRIER<< endl;
-            cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| list   - This command will list every"+ theRightOne+ "in the system."
+            cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| list   - This command will list every "+theRightOne+" in the system."
                  << right << BARRIER << endl;
             cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| sort   - This command will allow you to sort the"+ theRightOne+ "s."
                  << right << BARRIER << endl;
