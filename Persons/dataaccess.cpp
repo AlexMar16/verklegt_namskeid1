@@ -1,6 +1,6 @@
 #include "dataaccess.h"
 
-/*const string FILENAME = "info.txt";
+/*const string FILENAME = "info.txt";  //commentað afþví ekki notað en gæti verið gagnlegt seinna meir
 
 dataAccess::dataAccess()
 {
