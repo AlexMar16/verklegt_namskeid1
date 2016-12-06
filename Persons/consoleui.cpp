@@ -408,7 +408,11 @@ void consoleUI::findCommand()
     }
 }
 
-void consoleUI::statusCommand()
+
+
+//person
+
+void consoleUI::statusCommandPerson()
 {
     _printStatus = _turnP.properties();
     const int NAMES = 0;
@@ -420,8 +424,6 @@ void consoleUI::statusCommand()
     cout << "Total females on the list : " << _printStatus[FEMALES] << endl;
     cout << "Total Males on the list   : " << _printStatus[MALES] << endl << endl;
 }
-
-//person
 
 bool consoleUI::specialCommandPerson(const string& command)
 {
@@ -583,7 +585,7 @@ void consoleUI::printListPerson(const string &_command)       // Print if approp
     else if(_command == STATUS)
     {
         _print = false;
-        statusCommand();
+        statusCommandPerson();
     }
     else
     {
@@ -593,8 +595,13 @@ void consoleUI::printListPerson(const string &_command)       // Print if approp
 
 //computer
 
+void consoleUI::statusCommandComputer()
+{
+  // _printOutComputer temp;
 
 
+
+}
 
 void consoleUI::sortCommandComputer()
 {

@@ -33,7 +33,8 @@ private:
     void sortCommandComputer();
     void findCommand();
     void quizCommand();
-    void statusCommand();
+    void statusCommandPerson();
+    void statusCommandComputer();
     void firstCommandBox();
     void commandBox();
     PersonService _turnP;      //The instance we use to communicate with the PersonService layer.
