@@ -3,7 +3,7 @@
 #include "person.h"
 #include "computer.h"
 #include "PersonService.h"
-#include "computerservice.h"
+#include "computerService.h"
 #include <iostream>
 #include <vector>
 #include "dbmanager.h"
@@ -22,6 +22,7 @@ private:
     bool beginningCommand(const string& input);
     bool specialCommandPerson(const string& command);
     bool sortSpecialCommandPerson(const string& choice);
+    void specialCommandComputer(const string& command);
     void printListPerson(const string& _command);
     void printListComputer(const string& _command);
     void addCommand();
@@ -33,7 +34,7 @@ private:
     void quizCommand();
     void statusCommand();
     PersonService _turn;      //The instance we use to communicate with the PersonService layer.
-    ComputerService _turn2;
+    computerService _turn2;
 
 };
 

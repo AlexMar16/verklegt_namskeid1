@@ -8,6 +8,7 @@ TARGET = Persons
 CONFIG += console
 CONFIG -= app_bundle
 
+
 TEMPLATE = app
 
 SOURCES += main.cpp \
@@ -16,7 +17,7 @@ SOURCES += main.cpp \
     person.cpp \
     dbmanager.cpp \
     computer.cpp \
-    computerservice.cpp \
+    computerService.cpp \
     PersonService.cpp
 
 HEADERS += \
@@ -25,5 +26,5 @@ HEADERS += \
     person.h \
     dbmanager.h \
     computer.h \
-    computerservice.h \
+    computerService.h \
     PersonService.h

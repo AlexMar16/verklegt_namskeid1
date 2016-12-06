@@ -1,14 +1,15 @@
 #include "dbmanager.h"
 #include <QVariant>
 #include <QSqlQuery>
-#include <computer.h>
+#include "computer.h"
 
 
 DbManager::DbManager(){}
 
 DbManager::DbManager(const QString &path)
 {
-    _db = QSqlDatabase::addDatabase("QSQLITE");
+    //_db = QSqlDatabase::addDatabase("QSQLITE");
+    _db = QSqlDatabase::addDatabase("QSQLITE", "dbconnection");
     QString dbName = path;
     _db.setDatabaseName(dbName);
     _db.open();
@@ -87,30 +88,44 @@ void DbManager::insertIntoComputer(const Computer &input)
     QString qsType= QString::fromStdString(input.getType());
     QString qsBuilt = QString::fromStdString(input.getBuilt());
     QString path = "C:/Users/Rabo/HR/onn1/Verklegt Namskeid/verklegt_namskeid1/ComputerScience.sqlite";
-    _db = QSqlDatabase::addDatabase("QSQLITE");
+    if( QSqlDatabase::contains( "dbconnection" ) )
+    {
+        cout << "dbconnection found " << endl;
+
+        //Do stuff...
+    }
+    else
+    {
+        cout << "dbconnection not found" << endl;
+    }
+    QSqlDatabase _db = QSqlDatabase::database("dbconnection");
     QString dbName = path;
     _db.setDatabaseName(dbName);
     _db.open();
 
     if(_db.open())
     {
-        cout << "opened!";
-        QSqlQuery qry;
+        cout << "opened!" << endl;
+        QSqlQuery qry(_db);
         qry.prepare("INSERT INTO Computers(Name, yearBuilt, Type, Built)"
-                    "VALUES(:C_Name,:C_yearBuilt,:C_Type,:C_Built");
+                    "VALUES(:C_Name,:C_yearBuilt,:C_Type,:C_Built)");
         qry.bindValue(":C_Name",qsName);
         qry.bindValue(":C_yearBuilt",input.getYearBuilt());
         qry.bindValue(":C_Type",qsType);
         qry.bindValue(":C_Built",qsBuilt);
+        //qry.exec();
         if( !qry.exec() )
             //qDebug() << qry.lastError().text();
+
             cout << "error inserting into database";
         else
+        {
             qDebug( "Inserted!" );
-        cout << "inserted! " << endl;
+            cout << "inserted! " << endl;
+        }
     }
     else
     {
-        cout << "not open " << endl;
+        cout << "not openajsd ajsln " << endl;
     }
 }
