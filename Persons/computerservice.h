@@ -22,6 +22,7 @@ public:
     void setProgram(const bool& input);
     //void generateOptions(const Computer& correct, string& a, string& b, string& c, string& d);
     void reverseVector();
+    void closeDatabase();
     //string assignSelection(string& answer, const string& a, const string& b, const string& c, const string& d);
     //string genderCheck(const Computer& p);
    // string aliveCheck(const Computer& p);

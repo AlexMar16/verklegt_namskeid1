@@ -369,4 +369,7 @@ void computerService::setProgram(const bool& input)
 
 void computerService::reverseVector() {reverse(_listComputer.begin(), _listComputer.end());}
 
-
+void computerService::closeDatabase()
+{
+    _database.~DbManager();
+}
