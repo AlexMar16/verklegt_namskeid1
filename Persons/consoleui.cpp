@@ -110,7 +110,7 @@ void consoleUI::commandBox()
          << right << BARRIER << endl;
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| sort   - This command will allow you to sort the"+ theRightOne+ "s."
          << right << BARRIER << endl;
-    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| find   - This command allows you to find a certain"+theRightOne+" in the list."
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| find   - This command allows you to find a certain "+theRightOne+" in the list."
          << right << BARRIER << endl;
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| quiz   - This command lets you take a quiz about the computer scientists."
          << right << BARRIER << endl;
@@ -276,7 +276,7 @@ void consoleUI::addCompCommand()
 {
     string name, type, yearBuilt, wasitbuilt, built;
     Computer input;
-    int birthCheck = 0; //deathCheck = 0;
+    int birthCheck = 0;
     const int MINIMUM_Built_YEAR = 1500, MAXIMUM_Built_YEAR = 2030;
 
     cout << "Please enter the following information about the new Computer " << endl;
