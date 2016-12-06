@@ -35,25 +35,38 @@ void consoleUI::run()
         cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| Pick a database: "
              << right << BARRIER << endl;
         getline(cin, database);
+        beginningCommand(database);
+        string theRightOne;
+        if(database== "person")
+        {
+            theRightOne= "person";
+        }
+        else if(database=="computer")
+        {
+            theRightOne="computer";
+        }
 
         cout << setw(ASTERISK_WIDTH) << setfill(ASTERISK) <<  ASTERISK << endl;
+        if(beginningCommand(database))
+        {
         do
         {
+
             cout << setw(ASTERISK_WIDTH) << setfill(ASTERISK) <<  ASTERISK << endl;     // Command box begins.
             cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| Please enter one of the following commands:"
                  << right << BARRIER << endl;
             cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << BARRIER << right << BARRIER<< endl;
-            cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| list   - This command will list every person in the system."
+            cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| list   - This command will list every "+theRightOne+" in the system."
                  << right << BARRIER << endl;
-            cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| sort   - This command will allow you to sort the scientists."
+            cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| sort   - This command will allow you to sort the"+ theRightOne+ "s."
                  << right << BARRIER << endl;
-            cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| find   - This command allows you to find a certain person in the list."
+            cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| find   - This command allows you to find a certain"+theRightOne+" in the list."
                  << right << BARRIER << endl;
             cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| quiz   - This command lets you take a quiz about the computer scientists."
                  << right << BARRIER << endl;
-            cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| add    - This command allows you to add a person to the list."
+            cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| add    - This command allows you to add a "+theRightOne+" to the list."
                  << right << BARRIER << endl;
-            cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| remove - This command allows you to remove a certain person from the list."
+            cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| remove - This command allows you to remove a certain "+theRightOne+" from the list."
                  << right << BARRIER << endl;
             cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| status - This command displays info about the list "
                  << right << BARRIER << endl;
@@ -68,51 +81,46 @@ void consoleUI::run()
 
             getline(cin, command);          // Sets the private variable _command in the service class.
             _printOut = _turn.getList();
-            if(_turn.dataFound() || QUIT == command)
+            if((_turn.dataFound() || QUIT == command)&& theRightOne=="person")
             {
-                printList(command);         // Checks if there is a need for a printout of the list.
+                printListPerson(command);         // Checks if there is a need for a printout of the list.
+            }
+            else if((_turn.dataFound() || QUIT == command)&& theRightOne=="computer")
+            {
+                printListComputer(command);
             }
             else
             {
                 cout << endl << "File not found! " << endl << endl;
             }
 
-            if(_print && _turn.dataFound())
+
+            if(_print && _turn.dataFound() && command=="person")
             {
                 _printOut = _turn.getList();// getList() gets the list that's supposed to be printed out.
                 cout << _printOut;
             }
-            else if (!specialCommand(command) && _turn.dataFound())
+           // todo ! else if()thegar vector er kominn, gera ad printcomputer vector
+            else if (!specialCommandPerson(command) && _turn.dataFound())
             {
                 cout << "Invalid command!" << endl << endl;
             }
+
         } while(_turn.getProgram());
-    } while(command == BACK);
+        }
+    } while(command == BACK || !(beginningCommand(database)));
 }
-
-bool consoleUI::specialCommand(const string& command)
+bool consoleUI::beginningCommand(const string& input)
 {
-    if (command == FIND)
+    if(input == "person")
     {
         return true;
     }
-    else if(command == QUIT)
+    else if(input =="computer")
     {
         return true;
     }
-    else if(command == QUIZ)
-    {
-        return true;
-    }
-    else if(command == REMOVE)
-    {
-        return true;
-    }
-    else if(command == STATUS)
-    {
-        return true;
-    }
-    else if(command == BACK)
+    else if(input =="connect")
     {
         return true;
     }
@@ -122,90 +130,9 @@ bool consoleUI::specialCommand(const string& command)
     }
 }
 
-bool consoleUI::sortSpecialCommand(const string& choice)
-{
-    if(choice == A)
-    {
-        return true;
-    }
-    else if(choice == B)
-    {
-        return true;
-    }
-    else if(choice == D)
-    {
-        return true;
-    }
-    else if(choice == G)
-    {
-        return true;
-    }
-    else if(choice == L)
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
-}
 
-void consoleUI::printList(const string &_command)       // Print if appropriate.
-{
-    const string SORT = "sort";
-    const string ADD = "add";
-    const string ADDC = "addcomp";
-    const string LIST = "list";
 
-    if(_command == LIST)            // Print the original list.
-    {
-        _print = true;
-    }
-    else if(_command == ADD)        // Tells the user to enter information (names, gender, birth year, death year) about the new scientist.
-    {
-        _print = true;
-        addCommand();
-    }
-    else if(_command == ADDC)        // Tells the user to enter information (names, gender, birth year, death year) about the new scientist.
-    {
-        _print = true;
-        addCompCommand();
-    }
-    else if(_command == REMOVE)     // Tells the user to enter the full name of the scientist to be removed from the list.
-    {
-        _print = false;
-        removeCommand();
-    }
-    else if (_command == FIND)      // Tells the user to enter the name of the scientist to be located in the list.
-    {
-        _print = false;
-        findCommand();
-    }
-    else if(_command == SORT)       // Gives you additional options to choose how you would like the list sorted
-    {
-        _print = true;
-        sortCommand();
-    }
-    else if(_command == QUIZ)       // Presents the user with a quiz relating to the birth and death year of a scientist.
-    {
-        _print = false;
-        quizCommand();
-    }
-    else if (_command == QUIT)      // Quits the program.
-    {
-        _print = false;
-        _turn.setProgram(_print);
-    }
-    else if(_command == STATUS)
-    {
-        _print = false;
-        statusCommand();
-    }
-    else
-    {
-        _print = false;
-    }
-}
+
 
 void consoleUI::quizCommand()
 {
@@ -238,60 +165,9 @@ void consoleUI::quizCommand()
     cin.ignore();
 }
 
-void consoleUI::sortCommand()
-{
-    const string ASC = "asc";
-    const string DESC = "desc";
 
-    cout << "a - Sort alphabetically. "   << endl;
-    cout << "b - Sort by year of birth. " << endl;
-    cout << "d - Sort by year of death. " << endl;
-    cout << "g - Sort by gender. "        << endl;
-    cout << "l - Sort by last name."       << endl;
 
-    string choice;
-    string upOrDown;
 
-    while(true)
-    {
-        cout << "Select sorting method: ";
-        getline(cin, choice);
-
-        if(sortSpecialCommand(choice))
-        {
-            _turn.sortList(choice);
-            break;
-        }
-        else
-        {
-            cout << "Invalid input!" << endl;
-        }
-    }
-
-    cout << endl;
-    cout << "asc - Show list in ascending order." << endl;
-    cout << "desc - Show list in descending order." << endl << endl;
-
-    while(true)
-    {
-        cout << "Select list representation: ";
-        getline(cin, upOrDown);
-
-        if(upOrDown == DESC)
-        {
-            _turn.reverseVector();
-            break;
-        }
-        else if(upOrDown != ASC)
-        {
-            cout << "Invalid input!" << endl;
-        }
-        else
-        {
-            break;
-        }
-    }
-}
 
 void consoleUI::addCommand()
 {
@@ -520,3 +396,266 @@ void consoleUI::statusCommand()
     cout << "Total females on the list : " << _printStatus[FEMALES] << endl;
     cout << "Total Males on the list   : " << _printStatus[MALES] << endl << endl;
 }
+
+//person
+
+bool consoleUI::specialCommandPerson(const string& command)
+{
+    if (command == FIND)
+    {
+        return true;
+    }
+    else if(command == QUIT)
+    {
+        return true;
+    }
+    else if(command == QUIZ)
+    {
+        return true;
+    }
+    else if(command == REMOVE)
+    {
+        return true;
+    }
+    else if(command == STATUS)
+    {
+        return true;
+    }
+    else if(command == BACK)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+bool consoleUI::sortSpecialCommandPerson(const string& choice)
+{
+    if(choice == A)
+    {
+        return true;
+    }
+    else if(choice == B)
+    {
+        return true;
+    }
+    else if(choice == D)
+    {
+        return true;
+    }
+    else if(choice == G)
+    {
+        return true;
+    }
+    else if(choice == L)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+void consoleUI::sortCommandPerson()
+{
+    const string ASC = "asc";
+    const string DESC = "desc";
+
+    cout << "a - Sort alphabetically. "   << endl;
+    cout << "b - Sort by year of birth. " << endl;
+    cout << "d - Sort by year of death. " << endl;
+    cout << "g - Sort by gender. "        << endl;
+    cout << "l - Sort by last name."       << endl;
+
+    string choice;
+    string upOrDown;
+
+    while(true)
+    {
+        cout << "Select sorting method: ";
+        getline(cin, choice);
+
+        if(sortSpecialCommandPerson(choice))
+        {
+            _turn.sortList(choice);
+            break;
+        }
+        else
+        {
+            cout << "Invalid input!" << endl;
+        }
+    }
+
+    cout << endl;
+    cout << "asc - Show list in ascending order." << endl;
+    cout << "desc - Show list in descending order." << endl << endl;
+
+    while(true)
+    {
+        cout << "Select list representation: ";
+        getline(cin, upOrDown);
+
+        if(upOrDown == DESC)
+        {
+            _turn.reverseVector();
+            break;
+        }
+        else if(upOrDown != ASC)
+        {
+            cout << "Invalid input!" << endl;
+        }
+        else
+        {
+            break;
+        }
+    }
+}
+
+
+void consoleUI::printListPerson(const string &_command)       // Print if appropriate.
+{
+    const string SORT = "sort";
+    const string ADD = "add";
+    const string ADDC = "addcomp";
+    const string LIST = "list";
+
+    if(_command == LIST)            // Print the original list.
+    {
+        _print = true;
+    }
+    else if(_command == ADD)        // Tells the user to enter information (names, gender, birth year, death year) about the new scientist.
+    {
+        _print = true;
+        addCommand();
+    }
+    else if(_command == ADDC)        // Tells the user to enter information (names, gender, birth year, death year) about the new scientist.
+    {
+        _print = true;
+        addCompCommand();
+    }
+    else if(_command == REMOVE)     // Tells the user to enter the full name of the scientist to be removed from the list.
+    {
+        _print = false;
+        removeCommand();
+    }
+    else if (_command == FIND)      // Tells the user to enter the name of the scientist to be located in the list.
+    {
+        _print = false;
+        findCommand();
+    }
+    else if(_command == SORT)       // Gives you additional options to choose how you would like the list sorted
+    {
+        _print = true;
+        sortCommandPerson();
+    }
+    else if(_command == QUIZ)       // Presents the user with a quiz relating to the birth and death year of a scientist.
+    {
+        _print = false;
+        quizCommand();
+    }
+    else if (_command == QUIT)      // Quits the program.
+    {
+        _print = false;
+        _turn.setProgram(_print);
+    }
+    else if(_command == STATUS)
+    {
+        _print = false;
+        statusCommand();
+    }
+    else
+    {
+        _print = false;
+    }
+}
+
+//computer
+
+
+
+
+void consoleUI::sortCommandComputer()
+{
+    const string ASC = "asc";
+    const string DESC = "desc";
+
+    cout << "a - Sort alphabetically. "   << endl;
+    cout << "y - Sort by year built. " << endl;
+    cout << "t - Sort by type. " << endl;
+    cout << "b - To see if the computer was built. "        << endl;
+
+    string choice;
+    string upOrDown;
+
+    while(true)
+    {
+        cout << "Select sorting method: ";
+        getline(cin, choice);
+
+        if(sortSpecialCommandPerson(choice))
+        {
+            //_turn2.sortList(choice);
+            // þegar computerservice er up and running fara sort föllin þar inn og kallað í þau hér !
+            break;
+        }
+        else
+        {
+            cout << "Invalid input!" << endl;
+        }
+    }
+
+    cout << endl;
+    cout << "asc - Show list in ascending order." << endl;
+    cout << "desc - Show list in descending order." << endl << endl;
+
+    while(true)
+    {
+        cout << "Select list representation: ";
+        getline(cin, upOrDown);
+
+        if(upOrDown == DESC)
+        {
+           // _turn2.reverseVector(); uncommenta thegar vector er kominn
+            break;
+        }
+        else if(upOrDown != ASC)
+        {
+            cout << "Invalid input!" << endl;
+        }
+        else
+        {
+            break;
+        }
+    }
+
+    //todo láta ganga upp
+}
+
+
+void consoleUI::printListComputer(const string &_command)
+{
+    if(_command == "a")
+    {
+       //alphabet sort fall fyrir computer
+    }
+    if(_command=="y")
+    {
+        //yearbuilt sort fall fyrir computer
+    }
+    if(_command=="t")
+    {
+        //type sort fall fyrir computer
+    }
+    else if(_command =="b")
+    {
+        //var tolvan byggd ?
+    }
+    else
+    {
+        //printvectorFyrirCompuer= false
+    }
+}
+

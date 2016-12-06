@@ -1,6 +1,6 @@
 #include "dataaccess.h"
 
-const string FILENAME = "info.txt";
+/*const string FILENAME = "info.txt";
 
 dataAccess::dataAccess()
 {
@@ -10,7 +10,7 @@ dataAccess::dataAccess()
 
 bool dataAccess::getFileFound() const {return _fileFound;}
 
-vector<Person> dataAccess::getVector() const {return _persons;}
+//vector<Person> dataAccess::getVector() const {return gs;}
 
 void dataAccess::getPersons()
 {
@@ -51,4 +51,4 @@ void dataAccess::changeFile()
     newPerson.close();
 }
 
-void dataAccess::setVector(vector<Person> input) {_persons = input;}
+void dataAccess::setVector(vector<Person> input) {_persons = input;}*/

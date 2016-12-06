@@ -2,7 +2,8 @@
 #define CONSOLEUI_H
 #include "person.h"
 #include "computer.h"
-#include "service.h"
+#include "PersonService.h"
+#include "computerService.h"
 #include <iostream>
 #include <vector>
 #include "dbmanager.h"
@@ -18,17 +19,22 @@ private:
     vector<int> _printStatus;
     vector<Person> _printOut;
     bool _print;
-    bool specialCommand(const string& command);
-    bool sortSpecialCommand(const string& choice);
-    void printList(const string& _command);
+    bool beginningCommand(const string& input);
+    bool specialCommandPerson(const string& command);
+    bool sortSpecialCommandPerson(const string& choice);
+    void printListPerson(const string& _command);
+    void printListComputer(const string& _command);
     void addCommand();
     void addCompCommand();
     void removeCommand();
-    void sortCommand();
+    void sortCommandPerson();
+    void sortCommandComputer();
     void findCommand();
     void quizCommand();
     void statusCommand();
-    service _turn;      //The instance we use to communicate with the service layer.
+    PersonService _turn;      //The instance we use to communicate with the PersonService layer.
+    computerService _turn2;
+
 };
 
 #endif // CONSOLEUI_H

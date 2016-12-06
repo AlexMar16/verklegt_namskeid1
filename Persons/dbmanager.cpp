@@ -1,7 +1,7 @@
 #include "dbmanager.h"
 #include <QVariant>
 #include <QSqlQuery>
-#include <computer.h>
+#include "computer.h"
 
 
 DbManager::DbManager(){}
