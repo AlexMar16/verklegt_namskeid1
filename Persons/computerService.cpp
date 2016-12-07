@@ -23,10 +23,10 @@ bool computerService::alreadyInDatabase(const string& name)         // Checks if
 
 bool computerService::lookForComputer(const string& name)         // Checks if any part of the name is on the list
 {
-    generalService gen;
+    generalService GS;
     for (size_t i = 0; i < _listComputer.size(); i++)
     {
-        if (gen.toLower(_listComputer[i].getName()).find(gen.toLower(name)) != string::npos)       // Enables us to search in lower case letters.
+        if (GS.toLower(_listComputer[i].getName()).find(GS.toLower(name)) != string::npos)       // Enables us to search in lower case letters.
         {
             return true;
         }
@@ -254,11 +254,11 @@ vector<Computer> computerService::sortCreationYear()
 
 vector<Computer> computerService::findComputer(const string &name)
 {
-    generalService gen;
+    generalService GS;
     _listSearchedComputer.clear();
     for (size_t i = 0; i < _listComputer.size(); i++)
     {
-        if (gen.toLower(_listComputer[i].getName()).find(gen.toLower(name)) != string::npos)       // Puts both instances to lowercase
+        if (GS.toLower(_listComputer[i].getName()).find(GS.toLower(name)) != string::npos)       // Puts both instances to lowercase
         {
             _listSearchedComputer.push_back(_listComputer[i]);
         }
