@@ -192,8 +192,8 @@ void DbManager::insertIntoPerson(const Person &input)
     {
         cout << "dbconnection not found" << endl;
     }*/
-
-    QSqlDatabase _db = QSqlDatabase::database("dbconnection");
+    cout << "not go in";
+    //QSqlDatabase _db = QSqlDatabase::database("dbconnection");
     QString dbName = path;
     _db.setDatabaseName(dbName);
     _db.open();
@@ -207,6 +207,7 @@ void DbManager::insertIntoPerson(const Person &input)
         qry.bindValue(":P_birthYear", input.getBirthYear());
         qry.bindValue(":P_deathYear", input.getDeathYear());
         qry.exec();
+        cout << "cool beans";
         if( !qry.exec() )
         {
             //qDebug() << qry.lastError().text();

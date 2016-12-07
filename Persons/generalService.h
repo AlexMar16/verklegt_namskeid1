@@ -15,6 +15,8 @@ public:
     vector<Person> getOriginalPersons() const;
     vector<Computer> getOriginalComputers() const;
     bool quizDuplicatedAnswer(const string& a, const string& b, const string& c, const string& d);
+    void addPerson(const Person &input);
+    bool alreadyInDatabase(const string& name);
 
 private:
     bool _program;
