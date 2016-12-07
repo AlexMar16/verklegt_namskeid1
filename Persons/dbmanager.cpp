@@ -34,7 +34,6 @@ void DbManager::getPersons()
     QSqlDatabase _db = QSqlDatabase::database("dbconnection");
     QString dbName = path;
     _db.setDatabaseName(dbName);
-    _db.open();
     QString s = "SELECT * FROM Persons";
     QSqlQuery query(_db);
     query.exec(s);
@@ -62,7 +61,6 @@ void DbManager::getComputers()
     QSqlDatabase _db = QSqlDatabase::database("dbconnection");
     QString dbName = path;
     _db.setDatabaseName(dbName);
-    _db.open();//getum verið að opna of oft!!
     QString s = "SELECT * FROM Computers";
     QSqlQuery query(_db);
     query.exec(s);
