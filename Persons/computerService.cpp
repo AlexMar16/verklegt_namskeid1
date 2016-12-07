@@ -5,10 +5,8 @@
 using namespace std;
 
 computerService::computerService(){
-    _listComputer = _database.getCVector();
-    _listSearchedComputer = _database.getCVector();
-    _listSearchedComputer.clear();
-    _dataFound = _database.isOpen();
+    generalService getVector;
+    _listComputer = getVector.getOriginalComputers();
 }
 
 bool computerService::alreadyInDatabase(const string& name)         // Checks if the name exists in the database
@@ -266,7 +264,6 @@ void computerService::swap(Computer& a, Computer& b)
     a = b;
     b = temp;
 }
-bool computerService::dataFound()const {return _dataFound;}
 
 void computerService::sortList(const string& command)       // Sort the list according to the input.
 {
@@ -353,8 +350,3 @@ void computerService::removeFromDatabase(const string &name)        // Takes the
 }*/
 
 void computerService::reverseVector() {reverse(_listComputer.begin(), _listComputer.end());}
-
-void computerService::closeDatabase()
-{
-    _database.~DbManager();
-}

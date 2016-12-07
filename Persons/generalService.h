@@ -13,6 +13,8 @@ public:
     bool getProgram() const;
     void closeDatabase();
     bool dataFound() const;
+    vector<Person> getOriginalPersons() const;
+    vector<Computer> getOriginalComputers() const;
 private:
     bool _program;
     bool _dataFound;

@@ -3,7 +3,11 @@
 
 using namespace std;
 
-PersonService::PersonService(){}
+PersonService::PersonService()
+{
+    generalService getVector;
+    _listV = getVector.getOriginalPersons();
+}
 
 bool PersonService::alreadyInDatabase(const string& name)         // Checks if the name exists in the database
 {

@@ -2,6 +2,7 @@
 #define PersonService_H
 #include "person.h"
 #include "computer.h"
+#include "generalservice.h"
 #include "dbmanager.h"
 
 class PersonService

@@ -31,3 +31,6 @@ void generalService::closeDatabase()
 }
 
 bool generalService::dataFound()const {return _dataFound;}
+
+vector<Person> generalService::getOriginalPersons() const {return _persons;}
+vector<Computer> generalService::getOriginalComputers() const {return _computers;}
