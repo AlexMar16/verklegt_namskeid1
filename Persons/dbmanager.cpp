@@ -6,7 +6,6 @@
 
 DbManager::DbManager()
 {
-<<<<<<< HEAD
     if( QSqlDatabase::contains( "dbconnection" ) )
     {
         //cout << "dbconnection found " << endl;
@@ -23,14 +22,6 @@ DbManager::DbManager()
         _db.open();
     }
 
-=======
-    //_db = QSqlDatabase::addDatabase("QSQLITE");
-    const QString path = "ComputerScienceBackup.sqlite";
-    _db = QSqlDatabase::addDatabase("QSQLITE", "dbconnection");
-    QString dbName = path;
-    _db.setDatabaseName(dbName);
-    _db.open();
->>>>>>> d16f23df6bbf136593b8a0446733aa10b54522dd
     getPersons();
     getComputers();
 }
@@ -53,6 +44,7 @@ void DbManager::getPersons()
     {
         string name = query.value("Name").toString().toStdString();
         temp.setName(name);
+        cout << "name: " << name << endl;
 
         string gender = query.value("Gender").toString().toStdString();
         temp.setGender(gender);
