@@ -37,31 +37,32 @@ void consoleUI::run()
 
 void consoleUI::firstCommandBox()
 {
-    string initial = "| This is a database for famous computer scientists and historical computers! |";
-
-
     cout << setw(ASTERISK_WIDTH) << setfill(ASTERISK) <<  ASTERISK << endl;
-    cout << initial << endl << endl;
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| This is a database for famous computer scientists and historical computers!"
+         << right << BARRIER << endl;
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| Please enter the following commands to examine this database!"
          << right << BARRIER << endl;
-    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| person   - This command will gain you access to the person table."
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << BARRIER << right << BARRIER<< endl;
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| person    - This command will gain you access to the person table."
          << right << BARRIER << endl;
-    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| computer   - This command will gain you access to the computer table"
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| computer  - This command will gain you access to the computer table"
          << right << BARRIER << endl;
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| connect   - This command will gain you access to connections of both."
+         << right << BARRIER << endl;
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| quit      - This command will quit the program. "
          << right << BARRIER << endl;
     cout << setw(ASTERISK_WIDTH) << setfill(ASTERISK) <<  ASTERISK << endl;
     cout << "Pick a database: ";
     getline(cin, _database);
     beginningCommand();
-
-    if(_database== "person")
+    _turnG.setProgram(_database);
+    if(_database == "person")
     {
-        _theRightOne= "person";
+        _theRightOne = "person";
     }
-    else if(_database=="computer")
+    else if(_database == "computer")
     {
-        _theRightOne="computer";
+        _theRightOne = "computer";
     }
 }
 
@@ -104,11 +105,11 @@ bool consoleUI::beginningCommand()
     {
         return true;
     }
-    else if(_database =="computer")
+    else if(_database == "computer")
     {
         return true;
     }
-    else if(_database =="connect")
+    else if(_database == "connect")
     {
         return true;
     }
