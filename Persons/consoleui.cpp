@@ -32,8 +32,6 @@ void consoleUI::run()
             _turnG.setProgram(_command);
         }
     }while(_turnG.getProgram());
-
-    //_turnG.closeDatabase();
 }
 
 void consoleUI::firstCommandBox()
@@ -75,7 +73,7 @@ void consoleUI::commandBox()
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << BARRIER << right << BARRIER<< endl;
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| list   - This command will list every "+_theRightOne+" in the system."
          << right << BARRIER << endl;
-    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| sort   - This command will allow you to sort the"+ _theRightOne+ "s."
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| sort   - This command will allow you to sort the "+ _theRightOne+ "s."
          << right << BARRIER << endl;
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| find   - This command allows you to find a certain "+_theRightOne+" in the list."
          << right << BARRIER << endl;
@@ -86,10 +84,6 @@ void consoleUI::commandBox()
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| remove - This command allows you to remove a certain "+_theRightOne+" from the list."
          << right << BARRIER << endl;
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| status - This command displays info about the list "
-         << right << BARRIER << endl;
-    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| addcomp- This command adds an computer to the database(testing atm)"
-         << right << BARRIER << endl;
-    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| removec- This command adds an computer to the database(testing atm)"
          << right << BARRIER << endl;
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| back   - This command will allow you to choose another database. "
          << right << BARRIER << endl;
@@ -335,10 +329,10 @@ void consoleUI::addCompCommand()
 
     cout << endl;
 
-    _turnP.addComputer(input);
+    _turnC.addComputer(input);
     cin.ignore();
 }
-void consoleUI::removeCommand()
+void consoleUI::removeCommandPerson()
 {
     string fullName;
     Person input;
@@ -356,7 +350,7 @@ void consoleUI::removeCommand()
     }
 
     input = _turnP.findPersonExactly(fullName);
-    //_turnP.removePerson(input);
+    _turnP.removePerson(input);
 }
 //person
 
@@ -482,7 +476,7 @@ void consoleUI::sortCommandPerson()
 
         if(sortSpecialCommandPerson(choice))
         {
-            _turnC.sortComputerList(choice);
+            _turnP.sortPersonList(choice);
             break;
         }
         else
@@ -502,7 +496,7 @@ void consoleUI::sortCommandPerson()
 
         if(upOrDown == DESC)
         {
-            _turnC.reverseVector();
+            _turnP.reverseVector();
             break;
         }
         else if(upOrDown != ASC)
@@ -536,7 +530,7 @@ void consoleUI::printListPerson()       // Print if appropriate.
     else if(_command == REMOVE)     // Tells the user to enter the full name of the scientist to be removed from the list.
     {
         _print = false;
-        removeCommand();
+        removeCommandPerson();
     }
     else if (_command == FIND)      // Tells the user to enter the name of the scientist to be located in the list.
     {
@@ -569,6 +563,27 @@ void consoleUI::printListPerson()       // Print if appropriate.
 }
 
 //computer
+
+void consoleUI::removeCommandComputer()
+{
+    string fullName;
+    Computer input;
+    cout << "Enter the full name of the computer to remove from the database: ";
+    getline(cin, fullName);
+    input = _turnC.findComputerExactly(fullName);
+
+    if (input.getName() == EMPTY)
+    {
+        cout << endl << "Computer not found!" << endl;
+    }
+    else
+    {
+        cout << endl << fullName << " removed" << endl;
+    }
+
+    input = _turnC.findComputerExactly(fullName);
+    _turnC.removeComputer(input);
+}
 
 void consoleUI::findCommandComputer()
 {
@@ -708,7 +723,7 @@ bool consoleUI::specialCommandComputer(const string &_command)
 void consoleUI::printListComputer()
 {
     const string SORT = "sort";
-    const string ADD = "addcomp";
+    const string ADD = "add";
     const string LIST = "list";
 
     if(_command == LIST)            // Print the original list.
@@ -724,7 +739,7 @@ void consoleUI::printListComputer()
     else if(_command == REMOVE)
     {
         _print = false;
-        removeCommand();
+        removeCommandComputer();
     }
     else if (_command == FIND)
     {
@@ -775,7 +790,7 @@ void consoleUI::printList()
 
 void consoleUI::print()
 {
-    if(_print && _turnG.dataFound() && _database=="person")
+    if(_print  && _database=="person")
     {
         _printOutPerson = _turnP.getPersonList();// getList() gets the list that's supposed to be printed out.
         cout << _printOutPerson;

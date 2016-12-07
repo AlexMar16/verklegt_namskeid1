@@ -215,17 +215,19 @@ vector<Computer> computerService::sortAlphabetically()
 
 vector<Computer> computerService::sortBuilt()
 {
-    bool again = true;
-    while(again)
+    vector<Computer> temp;
+    for (size_t i = 0; i < _listComputer.size() - 1; i++)
     {
-        again = false;
-        for (size_t i = 0; i < _listComputer.size() - 1; i++)
+        if ( _listComputer[i].getBuilt() == "Yes")
         {
-            if ( _listComputer[i].getBuilt() > _listComputer[i+1].getBuilt())
-            {
-                swap(_listComputer[i], _listComputer[i+1]);
-                again = true;
-            }
+            temp.push_back(_listComputer[i]);
+        }
+    }
+    for (size_t i = 0; i < _listComputer.size() - 1; i++)
+    {
+        if ( _listComputer[i].getBuilt() == "Never Built!")
+        {
+            temp.push_back(_listComputer[i]);
         }
     }
     return _listComputer;
@@ -299,7 +301,7 @@ void computerService::addComputer(const Computer &input)        // Makes the use
         DbManager addNewComputer;
         _listComputer.push_back(input);
         addNewComputer.setCVector(_listComputer);
-        addNewComputer.changeData();
+        addNewComputer.insertIntoComputer(input);
     }
 }
 
@@ -310,7 +312,7 @@ void computerService::removeComputer(const Computer &input)         // Makes the
         DbManager removeComputer;
         removeFromDatabase(input.getName());
         removeComputer.setCVector(_listComputer);
-        removeComputer.changeData();
+        removeComputer.removeFromComputers(input);
     }
 }
 

@@ -28,7 +28,7 @@ private:
     void printListComputer();
     void addCommand();
     void addCompCommand();
-    void removeCommand();
+    void removeCommandPerson();
     void sortCommandPerson();
     void sortCommandComputer();
     void findCommandPerson();
@@ -36,6 +36,7 @@ private:
     void quizCommand();
     void statusCommandPerson();
     void statusCommandComputer();
+    void removeCommandComputer();
     void firstCommandBox();
     void commandBox();
     void printList();
