@@ -47,43 +47,12 @@ Computer computerService::findComputerExactly(const string& name)
     return ComputerFoundExactly;
 }
 
-Computer computerService::generateQuestion()
+Computer computerService::generateAnswer()
 {
     srand(time(0));
     return _listComputer[rand() % _listComputer.size()]; // Randomizing questions.
 }
-/*
-string computerService::assignSelection(string& answer, const string& a, const string& b, const string& c, const string& d)
-{
-    const string A = "a";
-    const string B = "b";
-    const string C = "c";
-    const string D = "d";
 
-    if (answer == A)
-    {
-        answer = a;
-    }
-    else if (answer == B)
-    {
-        answer = b;
-    }
-    else if (answer == C)
-    {
-        answer = c;
-    }
-    else if (answer == D)
-    {
-        answer = d;
-    }
-    else
-    {
-        answer = "0";
-    }
-
-    return answer;
-}
-*/
 string computerService::builtCheck(const Computer& c)
 {
     if (c.getBuilt() == "Yes")
@@ -333,28 +302,32 @@ void computerService::generateOptions(const Computer& correct, string& a, string
     const int CASE_1 = 1;
     const int CASE_2 = 2;
 
-    a = _listComputer[rand() % _listComputer.size()].getName();       // Generating random answers
-    b = _listComputer[rand() % _listComputer.size()].getName();
-    c = _listComputer[rand() % _listComputer.size()].getName();
-    d = _listComputer[rand() % _listComputer.size()].getName();
+    generalService GS;
+    do
+    {
+        a = _listComputer[rand() % _listComputer.size()].getName();       // Generating random answers
+        b = _listComputer[rand() % _listComputer.size()].getName();
+        c = _listComputer[rand() % _listComputer.size()].getName();
+        d = _listComputer[rand() % _listComputer.size()].getName();
 
-    int random = rand() % 4;
-    if(random == CASE_0)
-    {
-        a = correct.getName();      // Assigning the correct answer to one of the answers
-    }
-    else if(random == CASE_1)
-    {
-        b = correct.getName();
-    }
-    else if(random == CASE_2)
-    {
-        c = correct.getName();
-    }
-    else
-    {
-        d = correct.getName();
-    }
+        int random = rand() % 4;
+        if(random == CASE_0)
+        {
+            a = correct.getName();      // Assigning the correct answer to one of the answers
+        }
+        else if(random == CASE_1)
+        {
+            b = correct.getName();
+        }
+        else if(random == CASE_2)
+        {
+            c = correct.getName();
+        }
+        else
+        {
+            d = correct.getName();
+        }
+    } while(GS.quizDuplicatedAnswer(a, b, c, d));
 }
 
 void computerService::reverseVector() {reverse(_listComputer.begin(), _listComputer.end());}

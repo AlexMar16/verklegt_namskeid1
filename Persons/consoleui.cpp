@@ -119,7 +119,7 @@ void consoleUI::quizCommand()
     string a, b, c, d, answerName;
     if (_database == "person")
     {
-        Person questionP = _turnP.generateQuestion();
+        Person questionP = _turnP.generateAnswer();
         cout << _turnP.genderCheck(questionP) << " was born in " << questionP.getBirthYear()
              << " and " << _turnP.aliveCheck(questionP) << ", enter (a/b/c/d)" << endl;
         _turnP.generateOptions(questionP, a, b, c, d);
@@ -127,7 +127,7 @@ void consoleUI::quizCommand()
     }
     else
     {
-        Computer questionC = _turnC.generateQuestion();
+        Computer questionC = _turnC.generateAnswer();
         cout << "This " << _turnC.typeCheck(questionC) << " computer was " << _turnC.builtCheck(questionC)
              << ", enter (a/b/c/d)" << endl;
         _turnC.generateOptions(questionC, a, b, c, d);

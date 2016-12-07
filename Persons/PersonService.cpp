@@ -66,10 +66,10 @@ string PersonService::getLastName(const string& name) const
     return LastName;
 }
 
-Person PersonService::generateQuestion()
+Person PersonService::generateAnswer()
 {
     srand(time(0));
-    return _listPerson[rand() % _listPerson.size()]; // Randomizing questions.
+    return _listPerson[rand() % _listPerson.size()]; // Randomizing Answer.
 }
 
 string PersonService::assignSelection(string& answer, const string& a, const string& b, const string& c, const string& d)
@@ -366,28 +366,32 @@ void PersonService::generateOptions(const Person& correct, string& a, string& b,
     const int CASE_1 = 1;
     const int CASE_2 = 2;
 
-    a = _listPerson[rand() % _listPerson.size()].getName();       // Generating random answers
-    b = _listPerson[rand() % _listPerson.size()].getName();
-    c = _listPerson[rand() % _listPerson.size()].getName();
-    d = _listPerson[rand() % _listPerson.size()].getName();
+    generalService GS;
+    do
+    {
+        a = _listPerson[rand() % _listPerson.size()].getName();       // Generating random answers
+        b = _listPerson[rand() % _listPerson.size()].getName();
+        c = _listPerson[rand() % _listPerson.size()].getName();
+        d = _listPerson[rand() % _listPerson.size()].getName();
 
-    int random = rand() % 4;
-    if(random == CASE_0)
-    {
-        a = correct.getName();      // Assigning the correct answer to one of the answers
-    }
-    else if(random == CASE_1)
-    {
-        b = correct.getName();
-    }
-    else if(random == CASE_2)
-    {
-        c = correct.getName();
-    }
-    else
-    {
-        d = correct.getName();
-    }
+        int random = rand() % 4;
+        if(random == CASE_0)
+        {
+            a = correct.getName();      // Assigning the correct answer to one of the answers
+        }
+        else if(random == CASE_1)
+        {
+            b = correct.getName();
+        }
+        else if(random == CASE_2)
+        {
+            c = correct.getName();
+        }
+        else
+        {
+            d = correct.getName();
+        }
+    } while(GS.quizDuplicatedAnswer(a, b, c, d));
 }
 
 

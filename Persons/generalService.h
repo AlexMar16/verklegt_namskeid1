@@ -14,13 +14,14 @@ public:
     bool dataFound() const;
     vector<Person> getOriginalPersons() const;
     vector<Computer> getOriginalComputers() const;
+    bool quizDuplicatedAnswer(const string& a, const string& b, const string& c, const string& d);
+
 private:
     bool _program;
     bool _dataFound;
     vector<Person> _persons;
     vector<Computer> _computers;
     DbManager _database;
-
 };
 
 #endif // GENERALSERVICE_H

@@ -11,7 +11,7 @@ public:
     PersonService();
     bool lookForPerson(const string& name);
     Person findPersonExactly(const string& name);
-    Person generateQuestion();
+    Person generateAnswer();
     vector<int> properties();
     vector<Person> findPerson(const string& name);
     vector<Person> getPersonList() const;
