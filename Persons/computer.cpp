@@ -13,7 +13,7 @@ ifstream& operator >> (ifstream& in, Computer& rhs)
     getline(in, rhs._name);
     getline(in, rhs._type);
     in >> rhs._yearBuilt;
-    rhs._built = true;//Todo útfæra að hægt sé að ráða hvort talvan hafi verið smíðuð eða ekki
+    rhs._built = false;//Todo útfæra að hægt sé að ráða hvort talvan hafi verið smíðuð eða ekki
     in.ignore();
 
     return in;
@@ -25,7 +25,14 @@ ostream& operator << (ostream& out, const Computer& rhs)
     out << left << setw(FIVE * COLUMN_WIDTH + FIVE) << setfill(DASH) <<  DASH << endl;
     out << left << setw(COLUMN_WIDTH) << setfill(SPACE) <<  rhs._name;
     out << left << setw(COLUMN_WIDTH) << setfill(SPACE) << rhs._type;
-    out << left << setw(15) << setfill(SPACE) << rhs._yearBuilt;
+    if(rhs._yearBuilt == 0)
+    {
+        out << setw(15) << setfill(SPACE) << "Never Built!";
+    }
+    else
+    {
+        out << setw(15) << setfill(SPACE) << rhs._yearBuilt;
+    }
 
     if(rhs._built == "Yes")
     {

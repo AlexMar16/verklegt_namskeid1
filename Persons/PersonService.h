@@ -29,7 +29,7 @@ public:
 
 private:
     bool alreadyInDatabase(const string &name);
-    vector<Person> _listV;
+    vector<Person> _listPerson;
     vector<Person> _listSearchedPerson;
     vector<Person> sortAlphabetically();
     vector<Person> sortBirthYear();

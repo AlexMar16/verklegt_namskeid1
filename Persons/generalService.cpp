@@ -25,10 +25,6 @@ void generalService::setProgram(const string& command)
 
 bool generalService::getProgram() const {return _program;}
 
-void generalService::closeDatabase()
-{
-    _database.~DbManager();
-}
 
 bool generalService::dataFound()const {return _dataFound;}
 

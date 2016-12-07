@@ -11,7 +11,6 @@ public:
     string toLower(const string& toLowerString);
     void setProgram(const string& command);
     bool getProgram() const;
-    void closeDatabase();
     bool dataFound() const;
     vector<Person> getOriginalPersons() const;
     vector<Computer> getOriginalComputers() const;
