@@ -392,7 +392,7 @@ void consoleUI::statusCommandPerson()
     cout << "Total names in list       : " << _printStatus[NAMES] << endl;
     cout << "Number of deceased        : " << _printStatus[DIED] << endl;
     cout << "Total females on the list : " << _printStatus[FEMALES] << endl;
-    cout << "Total Males on the list   : " << _printStatus[MALES] << endl << endl;
+    cout << "Total males on the list   : " << _printStatus[MALES] << endl << endl;
 }
 
 bool consoleUI::specialCommandPerson()
