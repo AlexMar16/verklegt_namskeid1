@@ -46,12 +46,6 @@ Person PersonService::findPersonExactly(const string& name)
     return PersonFoundExactly;
 }
 
-Person PersonService::generateQuestion()
-{
-    srand(time(0));
-    return _listV[rand() % _listV.size()]; // Randomizing questions.
-}
-
 string PersonService::getLastName(const string& name) const
 {
     int spaceCounter = 0;
@@ -69,6 +63,12 @@ string PersonService::getLastName(const string& name) const
         LastName += name[i];
     }
     return LastName;
+}
+
+Person PersonService::generateQuestion()
+{
+    srand(time(0));
+    return _listV[rand() % _listV.size()]; // Randomizing questions.
 }
 
 string PersonService::assignSelection(string& answer, const string& a, const string& b, const string& c, const string& d)
