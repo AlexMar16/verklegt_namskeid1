@@ -23,10 +23,10 @@ bool computerService::alreadyInDatabase(const string& name)         // Checks if
 
 bool computerService::lookForComputer(const string& name)         // Checks if any part of the name is on the list
 {
-    generalService gen;
+    generalService GS;
     for (size_t i = 0; i < _listComputer.size(); i++)
     {
-        if (gen.toLower(_listComputer[i].getName()).find(gen.toLower(name)) != string::npos)       // Enables us to search in lower case letters.
+        if (GS.toLower(_listComputer[i].getName()).find(GS.toLower(name)) != string::npos)       // Enables us to search in lower case letters.
         {
             return true;
         }
@@ -47,43 +47,12 @@ Computer computerService::findComputerExactly(const string& name)
     return ComputerFoundExactly;
 }
 
-Computer computerService::generateQuestion()
+Computer computerService::generateAnswer()
 {
     srand(time(0));
     return _listComputer[rand() % _listComputer.size()]; // Randomizing questions.
 }
-/*
-string computerService::assignSelection(string& answer, const string& a, const string& b, const string& c, const string& d)
-{
-    const string A = "a";
-    const string B = "b";
-    const string C = "c";
-    const string D = "d";
 
-    if (answer == A)
-    {
-        answer = a;
-    }
-    else if (answer == B)
-    {
-        answer = b;
-    }
-    else if (answer == C)
-    {
-        answer = c;
-    }
-    else if (answer == D)
-    {
-        answer = d;
-    }
-    else
-    {
-        answer = "0";
-    }
-
-    return answer;
-}
-*/
 string computerService::builtCheck(const Computer& c)
 {
     if (c.getBuilt() == "Yes")
@@ -254,11 +223,11 @@ vector<Computer> computerService::sortCreationYear()
 
 vector<Computer> computerService::findComputer(const string &name)
 {
-    generalService gen;
+    generalService GS;
     _listSearchedComputer.clear();
     for (size_t i = 0; i < _listComputer.size(); i++)
     {
-        if (gen.toLower(_listComputer[i].getName()).find(gen.toLower(name)) != string::npos)       // Puts both instances to lowercase
+        if (GS.toLower(_listComputer[i].getName()).find(GS.toLower(name)) != string::npos)       // Puts both instances to lowercase
         {
             _listSearchedComputer.push_back(_listComputer[i]);
         }
@@ -333,28 +302,32 @@ void computerService::generateOptions(const Computer& correct, string& a, string
     const int CASE_1 = 1;
     const int CASE_2 = 2;
 
-    a = _listComputer[rand() % _listComputer.size()].getName();       // Generating random answers
-    b = _listComputer[rand() % _listComputer.size()].getName();
-    c = _listComputer[rand() % _listComputer.size()].getName();
-    d = _listComputer[rand() % _listComputer.size()].getName();
+    generalService GS;
+    do
+    {
+        a = _listComputer[rand() % _listComputer.size()].getName();       // Generating random answers
+        b = _listComputer[rand() % _listComputer.size()].getName();
+        c = _listComputer[rand() % _listComputer.size()].getName();
+        d = _listComputer[rand() % _listComputer.size()].getName();
 
-    int random = rand() % 4;
-    if(random == CASE_0)
-    {
-        a = correct.getName();      // Assigning the correct answer to one of the answers
-    }
-    else if(random == CASE_1)
-    {
-        b = correct.getName();
-    }
-    else if(random == CASE_2)
-    {
-        c = correct.getName();
-    }
-    else
-    {
-        d = correct.getName();
-    }
+        int random = rand() % 4;
+        if(random == CASE_0)
+        {
+            a = correct.getName();      // Assigning the correct answer to one of the answers
+        }
+        else if(random == CASE_1)
+        {
+            b = correct.getName();
+        }
+        else if(random == CASE_2)
+        {
+            c = correct.getName();
+        }
+        else
+        {
+            d = correct.getName();
+        }
+    } while(GS.quizDuplicatedAnswer(a, b, c, d));
 }
 
 void computerService::reverseVector() {reverse(_listComputer.begin(), _listComputer.end());}

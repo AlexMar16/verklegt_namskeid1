@@ -23,9 +23,10 @@ bool PersonService::alreadyInDatabase(const string& name)         // Checks if t
 
 bool PersonService::lookForPerson(const string& name)         // Checks if any part of the name is on the list
 {
+    generalService GS;
     for (size_t i = 0; i < _listPerson.size(); i++)
     {
-        if (toLower(_listPerson[i].getName()).find(toLower(name)) != string::npos)       // Enables us to search in lower case letters.
+        if (GS.toLower(_listPerson[i].getName()).find(GS.toLower(name)) != string::npos)       // Enables us to search in lower case letters.
         {
             return true;
         }
@@ -65,10 +66,10 @@ string PersonService::getLastName(const string& name) const
     return LastName;
 }
 
-Person PersonService::generateQuestion()
+Person PersonService::generateAnswer()
 {
     srand(time(0));
-    return _listPerson[rand() % _listPerson.size()]; // Randomizing questions.
+    return _listPerson[rand() % _listPerson.size()]; // Randomizing Answer.
 }
 
 string PersonService::assignSelection(string& answer, const string& a, const string& b, const string& c, const string& d)
@@ -116,13 +117,6 @@ string PersonService::aliveCheck(const Person& p)
         return "died in " + to_string(p.getDeathYear());     // Converting the integer to a string to return a sentence.
     else
         return "is still alive";
-}
-
-string PersonService::toLower(const string& toLowerString)    // Makes everything lowercase
-{
-    string data = toLowerString;
-    transform(data.begin(), data.end(), data.begin(), ::tolower);
-    return data;
 }
 
 vector<int> PersonService::properties()
@@ -243,9 +237,10 @@ vector<Person> PersonService::sortBirthYear()
 vector<Person> PersonService::findPerson(const string &name)      // Finds people and adds them to the vector
 {
     _listSearchedPerson.clear();
+    generalService GS;
     for (size_t i = 0; i < _listPerson.size(); i++)
     {
-        if (toLower(_listPerson[i].getName()).find(toLower(name)) != string::npos)       // Puts both instances to lowercase
+        if (GS.toLower(_listPerson[i].getName()).find(GS.toLower(name)) != string::npos)       // Puts both instances to lowercase
         {
             _listSearchedPerson.push_back(_listPerson[i]);       // Puts people in the list who apply to the input
         }
@@ -403,28 +398,32 @@ void PersonService::generateOptions(const Person& correct, string& a, string& b,
     const int CASE_1 = 1;
     const int CASE_2 = 2;
 
-    a = _listPerson[rand() % _listPerson.size()].getName();       // Generating random answers
-    b = _listPerson[rand() % _listPerson.size()].getName();
-    c = _listPerson[rand() % _listPerson.size()].getName();
-    d = _listPerson[rand() % _listPerson.size()].getName();
+    generalService GS;
+    do
+    {
+        a = _listPerson[rand() % _listPerson.size()].getName();       // Generating random answers
+        b = _listPerson[rand() % _listPerson.size()].getName();
+        c = _listPerson[rand() % _listPerson.size()].getName();
+        d = _listPerson[rand() % _listPerson.size()].getName();
 
-    int random = rand() % 4;
-    if(random == CASE_0)
-    {
-        a = correct.getName();      // Assigning the correct answer to one of the answers
-    }
-    else if(random == CASE_1)
-    {
-        b = correct.getName();
-    }
-    else if(random == CASE_2)
-    {
-        c = correct.getName();
-    }
-    else
-    {
-        d = correct.getName();
-    }
+        int random = rand() % 4;
+        if(random == CASE_0)
+        {
+            a = correct.getName();      // Assigning the correct answer to one of the answers
+        }
+        else if(random == CASE_1)
+        {
+            b = correct.getName();
+        }
+        else if(random == CASE_2)
+        {
+            c = correct.getName();
+        }
+        else
+        {
+            d = correct.getName();
+        }
+    } while(GS.quizDuplicatedAnswer(a, b, c, d));
 }
 
 
