@@ -231,7 +231,7 @@ void consoleUI::addCommand()
         cout << "Died (input any other character if still alive): ";
         cin >> deathYear;
         deathCheck = atoi(deathYear.c_str());       // Removes alphanumeric values from the input.
-        if ((deathCheck > MINIMUM_DEATH_YEAR && deathCheck < MAXIMUM_DEATH_YEAR) || deathCheck == 0)
+        if ((deathYear >= birthYear && deathCheck > MINIMUM_DEATH_YEAR && deathCheck < MAXIMUM_DEATH_YEAR) || deathCheck == 0 )
         {
             break;
         }
