@@ -20,6 +20,7 @@ public:
     void setVector(const vector<Person>& input);
     void setCVector(const vector<Computer>& input);
     void insertIntoComputer(const Computer &input);
+    void insertIntoPerson(const Person &input);
     void removeFromComputers(const Computer &input);
     void changeData();
     void getComputers();

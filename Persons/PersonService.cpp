@@ -327,19 +327,7 @@ void PersonService::addPerson(const Person &input)        // Makes the user capa
     {
         DbManager addNewPerson;
         _listPerson.push_back(input);
-        addNewPerson.setVector(_listPerson);
-        addNewPerson.changeData();
-    }
-}
-void PersonService::addComputer(const Computer &input)        // Makes the user capable to add people to the list, as long as they're not already on the list
-{
-    if(true)//!alreadyInDatabase(input.getName())
-    {
-        DbManager addNewComputer;
-        addNewComputer.insertIntoComputer(input);
-        //_listPerson.push_back(input)
-        //addNew.setVector(_listPerson);
-        //addNew.changeData();
+        addNewPerson.insertIntoPerson(input);
     }
 }
 
