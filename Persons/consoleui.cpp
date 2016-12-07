@@ -74,7 +74,7 @@ void consoleUI::commandBox()
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << BARRIER << right << BARRIER<< endl;
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| list   - This command will list every "+_theRightOne+" in the system."
          << right << BARRIER << endl;
-    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| sort   - This command will allow you to sort the"+ _theRightOne+ "s."
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| sort   - This command will allow you to sort the "+ _theRightOne+ "s."
          << right << BARRIER << endl;
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| find   - This command allows you to find a certain "+_theRightOne+" in the list."
          << right << BARRIER << endl;
@@ -728,7 +728,7 @@ bool consoleUI::specialCommandComputer(const string &_command)
 void consoleUI::printListComputer()
 {
     const string SORT = "sort";
-    const string ADD = "addcomp";
+    const string ADD = "add";
     const string LIST = "list";
 
     if(_command == LIST)            // Print the original list.

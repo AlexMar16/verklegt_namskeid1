@@ -43,7 +43,6 @@ void DbManager::getPersons()
     {
         string name = query.value("Name").toString().toStdString();
         temp.setName(name);
-        cout << "name: " << name << endl;
 
         string gender = query.value("Gender").toString().toStdString();
         temp.setGender(gender);
@@ -108,7 +107,7 @@ void DbManager::insertIntoComputer(const Computer &input)
     QString qsName = QString::fromStdString(input.getName());
     QString qsType= QString::fromStdString(input.getType());
     QString qsBuilt = QString::fromStdString(input.getBuilt());
-    QString path = "C:/Users/Rabo/HR/onn1/Verklegt Namskeid/verklegt_namskeid1/ComputerScience.sqlite";
+    QString path = "ComputerScience.sqlite";
     if( QSqlDatabase::contains( "dbconnection" ) )
     {
         cout << "dbconnection found " << endl;
