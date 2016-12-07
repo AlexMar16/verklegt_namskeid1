@@ -332,7 +332,7 @@ void consoleUI::addCompCommand()
 
     cout << endl;
 
-    _turnP.addComputer(input);
+    _turnC.addComputer(input);
     cin.ignore();
 }
 void consoleUI::removeCommandPerson()
