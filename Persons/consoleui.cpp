@@ -86,8 +86,6 @@ void consoleUI::commandBox()
          << right << BARRIER << endl;
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| status - This command displays info about the list "
          << right << BARRIER << endl;
-    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| removec- This command adds an computer to the database(testing atm)"
-         << right << BARRIER << endl;
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| back   - This command will allow you to choose another database. "
          << right << BARRIER << endl;
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| quit   - This command will quit the program. "
@@ -571,7 +569,7 @@ void consoleUI::removeCommandComputer()
 {
     string fullName;
     Computer input;
-    cout << "Enter the full name of the scientist to remove from the database: ";
+    cout << "Enter the full name of the computer to remove from the database: ";
     getline(cin, fullName);
     input = _turnC.findComputerExactly(fullName);
 
