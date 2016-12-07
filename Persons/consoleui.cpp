@@ -337,7 +337,7 @@ void consoleUI::addCompCommand()
     _turnP.addComputer(input);
     cin.ignore();
 }
-void consoleUI::removeCommand()
+void consoleUI::removeCommandPerson()
 {
     string fullName;
     Person input;
@@ -355,7 +355,7 @@ void consoleUI::removeCommand()
     }
 
     input = _turnP.findPersonExactly(fullName);
-    //_turnP.removePerson(input);
+    _turnP.removePerson(input);
 }
 //person
 
@@ -535,7 +535,7 @@ void consoleUI::printListPerson()       // Print if appropriate.
     else if(_command == REMOVE)     // Tells the user to enter the full name of the scientist to be removed from the list.
     {
         _print = false;
-        removeCommand();
+        removeCommandPerson();
     }
     else if (_command == FIND)      // Tells the user to enter the name of the scientist to be located in the list.
     {
@@ -568,6 +568,27 @@ void consoleUI::printListPerson()       // Print if appropriate.
 }
 
 //computer
+
+void consoleUI::removeCommandComputer()
+{
+    string fullName;
+    Computer input;
+    cout << "Enter the full name of the scientist to remove from the database: ";
+    getline(cin, fullName);
+    input = _turnC.findComputerExactly(fullName);
+
+    if (input.getName() == EMPTY)
+    {
+        cout << endl << "Computer not found!" << endl;
+    }
+    else
+    {
+        cout << endl << fullName << " removed" << endl;
+    }
+
+    input = _turnC.findComputerExactly(fullName);
+    _turnC.removeComputer(input);
+}
 
 void consoleUI::findCommandComputer()
 {
@@ -723,7 +744,7 @@ void consoleUI::printListComputer()
     else if(_command == REMOVE)
     {
         _print = false;
-        removeCommand();
+        removeCommandComputer();
     }
     else if (_command == FIND)
     {
