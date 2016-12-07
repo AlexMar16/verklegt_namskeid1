@@ -30,7 +30,7 @@ DbManager::~DbManager() {_db.close();}
 
 void DbManager::getPersons()
 {
-    const QString path = "ComputerScience.sqlite";
+    const QString path = "ComputerScienceBackup.sqlite";
     QSqlDatabase _db = QSqlDatabase::database("dbconnection");
     QString dbName = path;
     _db.setDatabaseName(dbName);
@@ -43,7 +43,6 @@ void DbManager::getPersons()
     {
         string name = query.value("Name").toString().toStdString();
         temp.setName(name);
-        cout << "name: " << name << endl;
 
         string gender = query.value("Gender").toString().toStdString();
         temp.setGender(gender);
@@ -59,7 +58,7 @@ void DbManager::getPersons()
 
 void DbManager::getComputers()
 {
-    const QString path = "ComputerScience.sqlite";
+    const QString path = "ComputerScienceBackup.sqlite";
     QSqlDatabase _db = QSqlDatabase::database("dbconnection");
     QString dbName = path;
     _db.setDatabaseName(dbName);
