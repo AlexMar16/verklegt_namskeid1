@@ -7,6 +7,7 @@ PersonService::PersonService()
 {
     generalService getVector;
     _listPerson = getVector.getOriginalPersons();
+    _personIndex = 0;
 }
 
 bool PersonService::alreadyInDatabase(const string& name)         // Checks if the name exists in the database
@@ -397,3 +398,20 @@ void PersonService::generateOptions(const Person& correct, string& a, string& b,
 
 
 void PersonService::reverseVector() {reverse(_listPerson.begin(), _listPerson.end());}
+
+Person PersonService::findPersonNumber(string nabn)
+{
+    for (size_t i=0; i<_listPerson.size(); i++)
+    {
+        if(_listPerson[i].getName()==nabn)
+        {
+            _personIndex = i;
+        }
+    }
+    return _listPerson[_personIndex];
+}
+
+void PersonService::changePerson(const Person& someGuy)
+{
+    _listPerson[_personIndex]=someGuy;
+}

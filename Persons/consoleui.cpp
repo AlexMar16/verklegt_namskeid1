@@ -3,7 +3,7 @@
 
 using namespace std;
 
-
+const string MODIFY = "modify";
 const string REMOVE = "remove";
 const string FIND = "find";
 const string QUIZ = "quiz";
@@ -381,6 +381,116 @@ void consoleUI::findCommandPerson()
     }
 }
 
+void consoleUI::modifyCommandPerson()
+{
+    string toModify;
+
+    cout << "Search for a person to modify: ";
+
+
+
+    while(true)
+    {
+        getline(cin, toModify);
+
+        _printOutPerson = _turnP.findPerson(toModify);
+
+        if (_turnP.lookForPerson(toModify))
+        {
+            cout << _printOutPerson;
+        }
+        if (_printOutPerson.size()==1) //here the magic happens
+        {
+            cout << "Hooray you found a person to modify! " << endl;
+            Person id = _turnP.findPersonNumber(_printOutPerson[0].getName()); //bý bara til fkn copy af kallinum sem eg vill breyta, vil breyta actual gæjanum!
+            personValidation(id);
+            _turnP.changePerson(id);
+            break;
+        }
+        else
+        {
+            cout << "please be more specific: " << endl;
+        }
+    }
+
+}
+
+void consoleUI::personValidation(Person &input)
+{
+    string name, gender, deathYear, birthYear;
+    int birthCheck = 0, deathCheck = 0;
+    const int MINIMUM_BIRTH_YEAR = 1750, MAXIMUM_BIRTH_YEAR = 2000;
+    const int MINIMUM_DEATH_YEAR = 1800, MAXIMUM_DEATH_YEAR = 2017;
+
+    cout << "Please enter the following information about the new computer scientist " << endl;
+    cout << "in the following order." << endl;
+    cout << "Be aware you cannot put letters that are not in the English alphabet." << endl;
+
+    while(true)
+    {
+        cout << "Name: ";
+        getline(cin, name);
+        if(name == EMPTY)
+        {
+            cout << "No input!" << endl;
+        }
+        else
+        {
+            break;
+        }
+    }
+    input.setName(name);
+
+    while(true)
+    {
+        cout << "Gender (male/female) in lowercase: ";
+        cin >> gender;
+        if (gender == MALE || gender == FEMALE)
+        {
+            break;
+        }
+        else
+        {
+            cout << "Invalid input!" << endl;
+        }
+    };
+    input.setGender(gender);
+
+    while(true)
+    {
+        cout << "Birth year (YYYY): ";
+        cin >> birthYear;
+        birthCheck = atoi(birthYear.c_str());       // Removes alphanumeric values from the input.
+        if (birthCheck > MINIMUM_BIRTH_YEAR && birthCheck < MAXIMUM_BIRTH_YEAR)
+        {
+            break;
+        }
+        else
+        {
+            cout << "Invalid input!" << endl;
+        };
+    }
+    input.setBirthYear(birthCheck);
+
+    while(true)
+    {
+        cout << "Died (input any other character if still alive): ";
+        cin >> deathYear;
+        deathCheck = atoi(deathYear.c_str());       // Removes alphanumeric values from the input.
+        if ((deathYear >= birthYear && deathCheck > MINIMUM_DEATH_YEAR && deathCheck < MAXIMUM_DEATH_YEAR) || deathCheck == 0 )
+        {
+            break;
+        }
+        else
+        {
+            cout << "Invalid input!" << endl;
+        };
+    }
+    input.setDeathYear(deathCheck);
+
+    cout << endl;
+    cin.ignore();
+}
 
 void consoleUI::statusCommandPerson()
 {
@@ -418,6 +528,10 @@ bool consoleUI::specialCommandPerson()
         return true;
     }
     else if(_command == BACK)
+    {
+        return true;
+    }
+    else if(_command == MODIFY)
     {
         return true;
     }
@@ -555,6 +669,11 @@ void consoleUI::printListPerson()       // Print if appropriate.
     {
         _print = false;
         statusCommandPerson();
+    }
+    else if(_command == MODIFY)
+    {
+        _print = false;
+        modifyCommandPerson();
     }
     else
     {
