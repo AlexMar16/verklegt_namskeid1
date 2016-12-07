@@ -8,9 +8,11 @@ class computerService
 public:
     computerService();
     bool lookForComputer(const string& name);
+    bool lookForDigits(const int& num);
     Computer findComputerExactly(const string& name);
     vector<int> computerProperties();
     vector<Computer> findComputer(const string& name);
+    vector<Computer> findDigits(const int& num);
     vector<Computer> getComputerList() const;
     void addComputer(const Computer& input);
     void removeComputer(const Computer& input);
@@ -27,6 +29,7 @@ private:
     bool alreadyInDatabase(const string &name);
     vector<Computer> _listComputer;
     vector<Computer> _listSearchedComputer;
+    vector<Computer> _listSearchedDigits;
     vector<Computer> sortAlphabetically();
     vector<Computer> sortBuilt();
     vector<Computer> sortType();

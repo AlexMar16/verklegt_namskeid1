@@ -248,6 +248,38 @@ vector<Person> PersonService::findPerson(const string &name)      // Finds peopl
     return _listSearchedPerson;
 }
 
+bool PersonService::lookForDigits(const int& num)
+{
+    for (size_t i = 0; i < _listPerson.size(); i++)
+    {
+
+        if (_listPerson[i].getBirthYear()== num)
+        {
+            return true;
+        }
+        else if(_listPerson[i].getDeathYear()==num)
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+vector<Person> PersonService::findDigits(const int& num)
+{
+    _listSearchedDigits.clear();
+
+    for (size_t i = 0; i < _listPerson.size(); i++)
+    {
+        if (_listPerson[i].getDeathYear()== num || _listPerson[i].getBirthYear()== num)
+        {
+            _listSearchedDigits.push_back(_listPerson[i]);       // Puts people in the list who apply to the input
+        }
+    }
+    return _listSearchedDigits;
+
+}
+
 vector<Person> PersonService::sortDeath()
 {
     bool again = true;

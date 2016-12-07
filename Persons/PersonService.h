@@ -14,6 +14,8 @@ public:
     Person generateAnswer();
     vector<int> properties();
     vector<Person> findPerson(const string& name);
+    bool lookForDigits(const int& num);
+    vector<Person> findDigits(const int& num);
     vector<Person> getPersonList() const;
     void addPerson(const Person& input);
     void addComputer(const Computer& input);
@@ -31,6 +33,7 @@ private:
     bool alreadyInDatabase(const string &name);
     vector<Person> _listPerson;
     vector<Person> _listSearchedPerson;
+    vector<Person> _listSearchedDigits;
     vector<Person> sortAlphabetically();
     vector<Person> sortBirthYear();
     vector<Person> sortDeath();

@@ -9,6 +9,7 @@
 #include <time.h>
 #include <algorithm>
 
+
 using namespace std;
 
 const char SPACE = ' '; // All the constants in more than one file.
