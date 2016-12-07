@@ -31,7 +31,8 @@ private:
     void removeCommand();
     void sortCommandPerson();
     void sortCommandComputer();
-    void findCommand();
+    void findCommandPerson();
+    void findCommandComputer();
     void quizCommand();
     void statusCommandPerson();
     void statusCommandComputer();
