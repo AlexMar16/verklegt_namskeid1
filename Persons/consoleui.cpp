@@ -73,7 +73,7 @@ void consoleUI::commandBox()
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << BARRIER << right << BARRIER<< endl;
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| list   - This command will list every "+_theRightOne+" in the system."
          << right << BARRIER << endl;
-    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| sort   - This command will allow you to sort the"+ _theRightOne+ "s."
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| sort   - This command will allow you to sort the "+ _theRightOne+ "s."
          << right << BARRIER << endl;
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| find   - This command allows you to find a certain "+_theRightOne+" in the list."
          << right << BARRIER << endl;
@@ -84,8 +84,6 @@ void consoleUI::commandBox()
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| remove - This command allows you to remove a certain "+_theRightOne+" from the list."
          << right << BARRIER << endl;
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| status - This command displays info about the list "
-         << right << BARRIER << endl;
-    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| addcomp- This command adds an computer to the database(testing atm)"
          << right << BARRIER << endl;
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| removec- This command adds an computer to the database(testing atm)"
          << right << BARRIER << endl;
@@ -333,7 +331,7 @@ void consoleUI::addCompCommand()
 
     cout << endl;
 
-    _turnP.addComputer(input);
+    _turnC.addComputer(input);
     cin.ignore();
 }
 void consoleUI::removeCommandPerson()
@@ -727,7 +725,7 @@ bool consoleUI::specialCommandComputer(const string &_command)
 void consoleUI::printListComputer()
 {
     const string SORT = "sort";
-    const string ADD = "addcomp";
+    const string ADD = "add";
     const string LIST = "list";
 
     if(_command == LIST)            // Print the original list.
