@@ -6,20 +6,36 @@
 
 DbManager::DbManager()
 {
-    //_db = QSqlDatabase::addDatabase("QSQLITE");
-    const QString path = "ComputerScience.sqlite";
-    _db = QSqlDatabase::addDatabase("QSQLITE", "dbconnection");
-    QString dbName = path;
-    _db.setDatabaseName(dbName);
-    _db.open();
+    if( QSqlDatabase::contains( "dbconnection" ) )
+    {
+        //cout << "dbconnection found " << endl;
+
+        //Do stuff...
+    }
+    else
+    {
+        //_db = QSqlDatabase::addDatabase("QSQLITE");
+        const QString path = "ComputerScience.sqlite";
+        _db = QSqlDatabase::addDatabase("QSQLITE", "dbconnection");
+        QString dbName = path;
+        _db.setDatabaseName(dbName);
+        _db.open();
+    }
+
     getPersons();
     getComputers();
 }
 DbManager::~DbManager() {_db.close();}
 
 
+
 void DbManager::getPersons()
 {
+    const QString path = "ComputerScience.sqlite";
+    QSqlDatabase _db = QSqlDatabase::database("dbconnection");
+    QString dbName = path;
+    _db.setDatabaseName(dbName);
+    _db.open();
     QString s = "SELECT * FROM Persons";
     QSqlQuery query(_db);
     query.exec(s);
@@ -43,6 +59,11 @@ void DbManager::getPersons()
 
 void DbManager::getComputers()
 {
+    const QString path = "ComputerScience.sqlite";
+    QSqlDatabase _db = QSqlDatabase::database("dbconnection");
+    QString dbName = path;
+    _db.setDatabaseName(dbName);
+    _db.open();//getum verið að opna of oft!!
     QString s = "SELECT * FROM Computers";
     QSqlQuery query(_db);
     query.exec(s);
