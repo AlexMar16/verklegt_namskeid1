@@ -3,13 +3,7 @@
 
 using namespace std;
 
-PersonService::PersonService(){
-    _listV = _database.getVector();
-    _listSearchedPerson = _database.getVector();
-    _listSearchedPerson.clear();
-    _program = true;
-    _dataFound = _database.isOpen();
-}
+PersonService::PersonService(){}
 
 bool PersonService::alreadyInDatabase(const string& name)         // Checks if the name exists in the database
 {
@@ -34,8 +28,6 @@ bool PersonService::lookForPerson(const string& name)         // Checks if any p
     }
     return false;
 }
-
-bool PersonService::getProgram() const {return _program;}
 
 Person PersonService::findPersonExactly(const string& name)
 {
@@ -297,7 +289,7 @@ void PersonService::swap(Person& a, Person& b)
     a = b;
     b = temp;
 }
-bool PersonService::dataFound()const {return _dataFound;}
+
 
 void PersonService::sortList(const string& command)       // Sort the list according to the input.
 {
@@ -322,11 +314,6 @@ void PersonService::sortList(const string& command)       // Sort the list accor
     {
         _listV = sortGender();
     }
-    else if(command == QUIT)
-    {
-        _program = false;
-    }
-
 }
 
 
@@ -405,15 +392,4 @@ void PersonService::generateOptions(const Person& correct, string& a, string& b,
 }
 
 
-void PersonService::setProgram(const bool& input)
-{
-    _program = input;
-    _database.~DbManager();
-}
-
 void PersonService::reverseVector() {reverse(_listV.begin(), _listV.end());}
-
-void PersonService::closeDatabase()
-{
-    _database.~DbManager();
-}

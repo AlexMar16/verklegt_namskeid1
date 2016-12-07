@@ -26,11 +26,11 @@ void consoleUI::run()
             do
             {
                 commandBox();
-                if((_turnP.dataFound() || QUIT == _command)&& theRightOne=="person")
+                if((_turnG.dataFound() || QUIT == _command)&& theRightOne=="person")
                 {
                     printListPerson(_command);         // Checks if there is a need for a printout of the list.
                 }
-                else if((_turnP.dataFound() || QUIT == _command)&& theRightOne=="computer")
+                else if((_turnG.dataFound() || QUIT == _command)&& theRightOne=="computer")
                 {
                     printListComputer(_command);
                 }
@@ -40,7 +40,7 @@ void consoleUI::run()
                 }
 
 
-                if(_print && _turnP.dataFound() && database=="person")
+                if(_print && _turnG.dataFound() && database=="person")
                 {
                     _printOutPerson = _turnP.getPersonList();// getList() gets the list that's supposed to be printed out.
                     cout << _printOutPerson;
@@ -51,15 +51,15 @@ void consoleUI::run()
                     cout << _printOutComputer;
                 }
 
-                else if (!specialCommandPerson(_command) && _turnP.dataFound())
+                else if (!specialCommandPerson(_command) && _turnG.dataFound())
                 {
                     cout << "Invalid command!" << endl << endl;
                 }
             }while(_command != BACK && _command != QUIT);
+            _turnG.setProgram(_command);
         }
     }while(_turnG.getProgram());
-    _turnP.closeDatabase();
-    _turnC.closeDatabase();
+    _turnG.closeDatabase();
 }
 
 void consoleUI::firstCommandBox()
@@ -571,7 +571,6 @@ void consoleUI::printListPerson(const string &_command)       // Print if approp
     else if (_command == QUIT)      // Quits the program.
     {
         _print = false;
-        _turnP.setProgram(_print);
     }
     else if(_command == STATUS)
     {
@@ -731,7 +730,6 @@ void consoleUI::printListComputer(const string &_command)
     else if (_command == QUIT)
     {
         _print = false;
-        _turnC.setProgram(_print);
     }
     else if(_command == STATUS)
     {

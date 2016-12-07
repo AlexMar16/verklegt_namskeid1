@@ -1,7 +1,7 @@
 #include "computer.h"
 #include "person.h"
-const int COLUMN_WIDTH = 15;
-const int FIVE = 5;
+const int COLUMN_WIDTH = 30;
+const int FIVE = 3;
 const int TWO = 2;
 
 Computer::Computer()
@@ -22,28 +22,28 @@ ifstream& operator >> (ifstream& in, Computer& rhs)
 ostream& operator << (ostream& out, const Computer& rhs)
 {
     const char DASH = '-';
-    out << left << setw(FIVE * COLUMN_WIDTH) << setfill(DASH) <<  DASH << endl;
-    out << left << setw(TWO * COLUMN_WIDTH) << setfill(SPACE) <<  rhs._name;
+    out << left << setw(FIVE * COLUMN_WIDTH + FIVE) << setfill(DASH) <<  DASH << endl;
+    out << left << setw(COLUMN_WIDTH) << setfill(SPACE) <<  rhs._name;
     out << left << setw(COLUMN_WIDTH) << setfill(SPACE) << rhs._type;
-    out << left << setw(COLUMN_WIDTH) << setfill(SPACE) << rhs._yearBuilt;
+    out << left << setw(15) << setfill(SPACE) << rhs._yearBuilt;
 
     if(rhs._built == "yes")
     {
-        out << setw(COLUMN_WIDTH + FIVE) << setfill(SPACE) << rhs._yearBuilt << endl;
+        out << setw(15) << setfill(SPACE) << rhs._yearBuilt << endl;
     }
     else
     {
-        out << setw(COLUMN_WIDTH + FIVE) << setfill(SPACE) << "Never built!" << endl;
+        out << setw(15) << setfill(SPACE) << "Never built!" << endl;
     }
     return out;
 }
 
 ostream& operator << (ostream& out, vector<Computer>& rhs)
 {
-    out << left << setw(TWO * COLUMN_WIDTH) << setfill(SPACE) << "Name";
+    out << left << setw(COLUMN_WIDTH) << setfill(SPACE) << "Name";
     out << left << setw(COLUMN_WIDTH) << setfill(SPACE) << "Type";
-    out << left << setw(COLUMN_WIDTH) << setfill(SPACE) << "Year built";
-    out << left << setw(COLUMN_WIDTH + FIVE) << setfill(SPACE) << "Built: " << endl;
+    out << left << setw(15) << setfill(SPACE) << "Year built";
+    out << left << setw(COLUMN_WIDTH) << setfill(SPACE) << "Built" << endl;
     for(size_t i = 0; i < rhs.size(); i++)
     {
         out << rhs[i];
