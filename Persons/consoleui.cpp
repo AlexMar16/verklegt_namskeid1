@@ -92,8 +92,6 @@ void consoleUI::commandBox()
     cout << setw(ASTERISK_WIDTH) << setfill(ASTERISK) << ASTERISK << endl;      // Command box ends.
     cout << "command: ";
     getline(cin, _command);          // Sets the private variable _command in the service class.
-
-
 }
 
 bool consoleUI::beginningCommand()
@@ -115,10 +113,6 @@ bool consoleUI::beginningCommand()
         return false;
     }
 }
-
-
-
-
 
 void consoleUI::quizCommand()
 {
