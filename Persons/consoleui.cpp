@@ -662,7 +662,7 @@ void consoleUI::sortCommandComputer()
 
         if(upOrDown == DESC)
         {
-            // _turnP2.reverseVector(); uncommenta thegar vector er kominn
+            _turnC.reverseVector();
             break;
         }
         else if(upOrDown != ASC)

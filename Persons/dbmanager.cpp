@@ -7,7 +7,7 @@
 DbManager::DbManager()
 {
     //_db = QSqlDatabase::addDatabase("QSQLITE");
-    const QString path = "ComputerScience.sqlite";
+    const QString path = "ComputerScienceBackup.sqlite";
     _db = QSqlDatabase::addDatabase("QSQLITE", "dbconnection");
     QString dbName = path;
     _db.setDatabaseName(dbName);
