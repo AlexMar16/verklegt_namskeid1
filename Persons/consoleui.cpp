@@ -610,7 +610,6 @@ void consoleUI::removeCommandComputer()
 void consoleUI::findCommandComputer()
 {
     string toFind;
-    int toFindDigits;
 
     cout << "Search computer: ";
 
