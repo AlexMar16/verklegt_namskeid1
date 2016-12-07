@@ -179,7 +179,7 @@ vector<Computer> computerService::sortType()
         again = false;
         for (size_t i = 0; i < _listComputer.size() - 1; i++)
         {
-            if (_listComputer[i].getType() > _listComputer[i+1].getType())
+            if (_listComputer[i].getType() < _listComputer[i+1].getType())
             {
                 swap(_listComputer[i], _listComputer[i+1]);
                 again = true;
@@ -234,7 +234,7 @@ vector<Computer> computerService::sortCreationYear()
         again = false;
         for (size_t i = 0; i < _listComputer.size() - 1; i++)
         {
-            if ( _listComputer[i].getYearBuilt() > _listComputer[i+1].getYearBuilt())
+            if ( _listComputer[i].getYearBuilt() < _listComputer[i+1].getYearBuilt())
             {
                 swap(_listComputer[i], _listComputer[i+1]);
                 again = true;
@@ -265,7 +265,7 @@ void computerService::swap(Computer& a, Computer& b)
     b = temp;
 }
 
-void computerService::sortList(const string& command)       // Sort the list according to the input.
+void computerService::sortComputerList(const string& command)       // Sort the list according to the input.
 {
 
     if(command == A)
@@ -276,7 +276,7 @@ void computerService::sortList(const string& command)       // Sort the list acc
     {
         _listComputer = sortBuilt();
     }
-    else if(command == "c") //LAGA!!!
+    else if(command == "y") //LAGA!!!
     {
         _listComputer = sortCreationYear();
     }

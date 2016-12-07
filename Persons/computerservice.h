@@ -15,7 +15,7 @@ public:
     vector<Computer> getComputerList() const;
     void addComputer(const Computer& input);
     void removeComputer(const Computer& input);
-    void sortList(const string& command);
+    void sortComputerList(const string& command);
     //void generateOptions(const Computer& correct, string& a, string& b, string& c, string& d);
     void reverseVector();
     //string assignSelection(string& answer, const string& a, const string& b, const string& c, const string& d);

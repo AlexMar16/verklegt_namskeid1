@@ -18,7 +18,7 @@ public:
     void addPerson(const Person& input);
     void addComputer(const Computer& input);
     void removePerson(const Person& input);
-    void sortList(const string& command);
+    void sortPersonList(const string& command);
     void generateOptions(const Person& correct, string& a, string& b, string& c, string& d);
     void reverseVector();
     string getLastName(const string& name) const;

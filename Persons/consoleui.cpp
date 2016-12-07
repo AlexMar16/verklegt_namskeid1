@@ -471,7 +471,7 @@ void consoleUI::sortCommandPerson()
 
         if(sortSpecialCommandPerson(choice))
         {
-            _turnP.sortList(choice);
+            _turnC.sortComputerList(choice);
             break;
         }
         else
@@ -491,7 +491,7 @@ void consoleUI::sortCommandPerson()
 
         if(upOrDown == DESC)
         {
-            _turnP.reverseVector();
+            _turnC.reverseVector();
             break;
         }
         else if(upOrDown != ASC)
@@ -602,8 +602,9 @@ void consoleUI::sortCommandComputer()
         cout << "Select sorting method: ";
         getline(cin, choice);
 
-        if(sortSpecialCommandPerson(choice))
+        if(specialCommandComputer(choice))
         {
+            _turnC.sortComputerList(choice);
             //_turnP2.sortList(choice);
             // þegar computerservice er up and running fara sort föllin þar inn og kallað í þau hér !
             break;
@@ -641,27 +642,27 @@ void consoleUI::sortCommandComputer()
 }
 
 
-void consoleUI::specialCommandComputer(const string &_command)
+bool consoleUI::specialCommandComputer(const string &_command)
 {
     if(_command == "a")
     {
-        //alphabet sort fall fyrir computer
+        return true;
     }
     if(_command=="y")
     {
-        //yearbuilt sort fall fyrir computer
+        return true;
     }
     if(_command=="t")
     {
-        //type sort fall fyrir computer
+        return true;
     }
     else if(_command =="b")
     {
-        //var tolvan byggd ?
+        return true;
     }
     else
     {
-        //printvectorFyrirCompuer= false
+       return false;
     }
 }
 

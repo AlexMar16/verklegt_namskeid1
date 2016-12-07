@@ -23,7 +23,7 @@ private:
     bool beginningCommand();
     bool specialCommandPerson();
     bool sortSpecialCommandPerson(const string& choice);
-    void specialCommandComputer(const string& command);
+    bool specialCommandComputer(const string& command);
     void printListPerson();
     void printListComputer();
     void addCommand();

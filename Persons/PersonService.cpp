@@ -295,7 +295,7 @@ void PersonService::swap(Person& a, Person& b)
 }
 
 
-void PersonService::sortList(const string& command)       // Sort the list according to the input.
+void PersonService::sortPersonList(const string& command)       // Sort the list according to the input.
 {
 
     if(command == A)
