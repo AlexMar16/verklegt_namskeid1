@@ -59,7 +59,7 @@ void consoleUI::run()
             _turnG.setProgram(_command);
         }
     }while(_turnG.getProgram());
-    _turnG.closeDatabase();
+    //_turnG.closeDatabase();
 }
 
 void consoleUI::firstCommandBox()
