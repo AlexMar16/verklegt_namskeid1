@@ -125,25 +125,35 @@ bool consoleUI::beginningCommand()
 
 void consoleUI::quizCommand()
 {
-    Person question = _turnP.generateQuestion();
-    cout << _turnP.genderCheck(question) << " was born in " << question.getBirthYear()
-         << " and " << _turnP.aliveCheck(question) << ", enter (a/b/c/d)" << endl;
-
-    string a, b, c, d;
-    _turnP.generateOptions(question, a, b, c, d);
-
+    string a, b, c, d, answerName;
+    if (_database == "person")
+    {
+        Person questionP = _turnP.generateQuestion();
+        cout << _turnP.genderCheck(questionP) << " was born in " << questionP.getBirthYear()
+             << " and " << _turnP.aliveCheck(questionP) << ", enter (a/b/c/d)" << endl;
+        _turnP.generateOptions(questionP, a, b, c, d);
+        answerName = questionP.getName();
+    }
+    else
+    {
+        Computer questionC = _turnC.generateQuestion();
+        cout << "This " << _turnC.typeCheck(questionC) << " computer was " << _turnC.builtCheck(questionC)
+             << ", enter (a/b/c/d)" << endl;
+        _turnC.generateOptions(questionC, a, b, c, d);
+        answerName = questionC.getName();
+    }
     cout << "a)\t" << a << endl;
     cout << "b)\t" << b << endl;
     cout << "c)\t" << c << endl;
     cout << "d)\t" << d << endl;
 
-    string answerString;
+    string userAnswer;
     cout << "My answer: ";
-    cin >> answerString;
+    cin >> userAnswer;
 
-    _turnP.assignSelection(answerString, a, b, c, d);
+    _turnP.assignSelection(userAnswer, a, b, c, d);
 
-    if (answerString == question.getName())
+    if (userAnswer == answerName)
     {
         cout << endl << "Correct!!!" << endl << endl;
     }

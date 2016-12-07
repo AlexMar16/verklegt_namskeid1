@@ -46,12 +46,13 @@ Computer computerService::findComputerExactly(const string& name)
     }
     return ComputerFoundExactly;
 }
-/*
+
 Computer computerService::generateQuestion()
 {
     srand(time(0));
     return _listComputer[rand() % _listComputer.size()]; // Randomizing questions.
 }
+/*
 string computerService::assignSelection(string& answer, const string& a, const string& b, const string& c, const string& d)
 {
     const string A = "a";
@@ -82,14 +83,19 @@ string computerService::assignSelection(string& answer, const string& a, const s
 
     return answer;
 }
-
-string computerService::aliveCheck(const Computer& p)
+*/
+string computerService::builtCheck(const Computer& c)
 {
-    if (p.getDeathYear() != ALIVE)
-        return "died in " + to_string(p.getDeathYear());     // Converting the integer to a string to return a sentence.
+    if (c.getBuilt() == "Yes")
+        return "built in " + to_string(c.getYearBuilt());     // Converting the integer to a string to return a sentence.
     else
-        return "is still alive";
-}*/
+        return "designed in " + to_string(c.getYearBuilt());
+}
+
+string computerService::typeCheck(const Computer& c)
+{
+    return c.getType();
+}
 
 vector<int> computerService::computerProperties()
 {
@@ -319,7 +325,7 @@ void computerService::removeFromDatabase(const string &name)        // Takes the
     }
 }
 
-/*void computerService::generateOptions(const Computer& correct, string& a, string& b, string& c, string& d)
+void computerService::generateOptions(const Computer& correct, string& a, string& b, string& c, string& d)
 {
     const int CASE_0 = 0;
     const int CASE_1 = 1;
@@ -347,6 +353,6 @@ void computerService::removeFromDatabase(const string &name)        // Takes the
     {
         d = correct.getName();
     }
-}*/
+}
 
 void computerService::reverseVector() {reverse(_listComputer.begin(), _listComputer.end());}
