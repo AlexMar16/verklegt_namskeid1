@@ -161,9 +161,8 @@ void DbManager::removeFromComputers(const Computer &input)
     if(_db.open())
     {
         QSqlQuery qry(_db);
-        qry.prepare("DELETE FROM Computers WHERE Name='"+qsName+"'");
-        //qry.bindValue(":C_Name",qsName);
-        //qry.exec();
+        qry.prepare("DELETE FROM Computers WHERE Name=':C_Name'");
+        qry.bindValue(":C_Name",qsName);
         if( !qry.exec() )
             //qDebug() << qry.lastError().text();
             cout << "error removing from database";
