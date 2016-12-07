@@ -1,7 +1,7 @@
 #ifndef GENERALSERVICE_H
 #define GENERALSERVICE_H
-#include "person.h"
-#include "computer.h"
+//#include "person.h"
+//#include "computer.h"
 #include "dbmanager.h"
 
 class generalService
