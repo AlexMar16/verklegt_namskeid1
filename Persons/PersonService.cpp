@@ -186,10 +186,12 @@ vector<Person> PersonService::sortAlphabetically()
     bool again = true;
     while (again)
     {
+        cout << "HAAAAAAAAAAAAAAAAAAAAAALLLLLLLLLLLLLLLLLLLLLOOOOOOOOOOOOOOOOOOOOOO" << endl;
         again = false;
         for (size_t i = 0; i < _listV.size() - 1; i++)
         {
-            if (_listV[i].getName() > _listV[i+1].getName())
+            cout << "!!!!!!!!!!!!!!!ASDFASDFASDFASDF!!!!!!!!!!!!" <<GS.toLower(_listV[i].getName()) << "---" << GS.toLower(_listV[i+1].getName()) << endl;
+            if (GS.toLower(_listV[i].getName()) > GS.toLower(_listV[i+1].getName()))
             {
                 swap(_listV[i], _listV[i+1]);
                 again = true;

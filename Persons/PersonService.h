@@ -39,6 +39,8 @@ private:
     vector<Person> sortAlphabeticallyLastName();
     void removeFromDatabase(const string& name);
     void swap(Person& a, Person& b);
+
+    generalService GS;
 };
 
 #endif // PersonService_H
