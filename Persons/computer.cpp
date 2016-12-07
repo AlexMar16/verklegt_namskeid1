@@ -13,7 +13,7 @@ ifstream& operator >> (ifstream& in, Computer& rhs)
     getline(in, rhs._name);
     getline(in, rhs._type);
     in >> rhs._yearBuilt;
-    rhs._built = false;//Todo útfæra að hægt sé að ráða hvort talvan hafi verið smíðuð eða ekki
+    //rhs._built = false;//Todo útfæra að hægt sé að ráða hvort talvan hafi verið smíðuð eða ekki
     in.ignore();
 
     return in;

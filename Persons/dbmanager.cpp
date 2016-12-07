@@ -147,3 +147,47 @@ void DbManager::insertIntoComputer(const Computer &input)
         cout << "not openajsd ajsln " << endl;
     }
 }
+
+void DbManager::removeFromComputers(const Computer &input)
+{
+    cout << "name: " << input.getName() << endl;
+    QString qsName = QString::fromStdString(input.getName());
+    QString path = "ComputerScience.sqlite";
+    if( QSqlDatabase::contains( "dbconnection" ) )
+    {
+        cout << "dbconnection found " << endl;
+
+        //Do stuff...
+    }
+    else
+    {
+        cout << "dbconnection not found" << endl;
+    }
+    QSqlDatabase _db = QSqlDatabase::database("dbconnection");
+    QString dbName = path;
+    _db.setDatabaseName(dbName);
+    _db.open();
+
+    if(_db.open())
+    {
+        cout << "opened!" << endl;
+        QSqlQuery qry(_db);
+        qry.prepare("DELETE FROM Computers"
+                    "WHERE Name=:C_Name");
+        qry.bindValue(":C_Name",qsName);
+        //qry.exec();
+        if( !qry.exec() )
+            //qDebug() << qry.lastError().text();
+
+            cout << "error removing from database";
+        else
+        {
+            qDebug( "Removed" );
+            cout << "Removed! " << endl;
+        }
+    }
+    else
+    {
+        cout << "not openajsd ajsln " << endl;
+    }
+}
