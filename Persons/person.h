@@ -13,8 +13,8 @@ using namespace std;
 
 const char SPACE = ' '; // All the constants in more than one file.
 const int ALIVE = 0;
-const string MALE = "Male";
-const string FEMALE = "Female";
+const string MALE = "male";
+const string FEMALE = "female";
 const string A = "a";
 const string B = "b";
 const string D = "d";
