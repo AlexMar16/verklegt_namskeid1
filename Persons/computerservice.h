@@ -1,7 +1,6 @@
 #ifndef COMPUTERSERVICE_H
 #define COMPUTERSERVICE_H
 #include "dbmanager.h"
-#include "computer.h"
 #include "generalclass.h"
 
 class computerService

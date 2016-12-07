@@ -63,6 +63,7 @@ void DbManager::getComputers()
         _Computer.push_back(temp);
     }
 }
+
 vector<Person> DbManager::getVector() const {return _persons;}
 
 vector<Computer> DbManager::getCVector() const {return _Computer;}
