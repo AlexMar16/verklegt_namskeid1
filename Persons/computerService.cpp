@@ -301,7 +301,7 @@ void computerService::addComputer(const Computer &input)        // Makes the use
         DbManager addNewComputer;
         _listComputer.push_back(input);
         addNewComputer.setCVector(_listComputer);
-        addNewComputer.changeData();
+        addNewComputer.insertIntoComputer(input);
     }
 }
 

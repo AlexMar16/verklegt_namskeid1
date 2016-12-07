@@ -144,7 +144,7 @@ void DbManager::insertIntoComputer(const Computer &input)
     }
     else
     {
-        cout << "not openajsd ajsln " << endl;
+        cout << "not inserted" << endl;
     }
 }
 
