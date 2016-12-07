@@ -9,14 +9,13 @@ public:
     computerService();
     bool lookForComputer(const string& name);
     Computer findComputerExactly(const string& name);
-    //Computer generateQuestion();
     vector<int> computerProperties();
     vector<Computer> findComputer(const string& name);
     vector<Computer> getComputerList() const;
     void addComputer(const Computer& input);
     void removeComputer(const Computer& input);
     void sortComputerList(const string& command);
-    Computer generateQuestion();
+    Computer generateAnswer();
     string builtCheck(const Computer& c);
     void generateOptions(const Computer& correct, string& a, string& b, string& c, string& d);
     string typeCheck(const Computer& c);

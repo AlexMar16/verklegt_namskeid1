@@ -11,7 +11,7 @@ public:
     PersonService();
     bool lookForPerson(const string& name);
     Person findPersonExactly(const string& name);
-    Person generateQuestion();
+    Person generateAnswer();
     vector<int> properties();
     vector<Person> findPerson(const string& name);
     vector<Person> getPersonList() const;
@@ -39,6 +39,8 @@ private:
     vector<Person> sortAlphabeticallyLastName();
     void removeFromDatabase(const string& name);
     void swap(Person& a, Person& b);
+
+    generalService GS;
 };
 
 #endif // PersonService_H
