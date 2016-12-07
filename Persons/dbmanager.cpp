@@ -21,7 +21,6 @@ DbManager::DbManager()
         _db.setDatabaseName(dbName);
         _db.open();
     }
-
     getPersons();
     getComputers();
 }
