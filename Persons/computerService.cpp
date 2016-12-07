@@ -331,3 +331,33 @@ void computerService::generateOptions(const Computer& correct, string& a, string
 }
 
 void computerService::reverseVector() {reverse(_listComputer.begin(), _listComputer.end());}
+
+bool computerService::lookForDigits(const int& num)
+{
+
+    for (size_t i = 0; i < _listComputer.size(); i++)
+    {
+
+        if (_listComputer[i].getYearBuilt()== num)
+        {
+            return true;
+        }
+
+    }
+    return false;
+}
+
+vector<Computer> computerService::findDigits(const int& num)
+{
+    _listSearchedDigits.clear();
+
+    for (size_t i = 0; i < _listComputer.size(); i++)
+    {
+        if (_listComputer[i].getYearBuilt()== num)
+        {
+            _listSearchedDigits.push_back(_listComputer[i]);       // Puts people in the list who apply to the input
+        }
+    }
+    return _listSearchedDigits;
+
+}
