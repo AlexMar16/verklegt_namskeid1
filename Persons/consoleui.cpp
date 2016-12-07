@@ -355,8 +355,9 @@ void consoleUI::removeCommand()
     input = _turnP.findPersonExactly(fullName);
     //_turnP.removePerson(input);
 }
+//person
 
-void consoleUI::findCommand()
+void consoleUI::findCommandPerson()
 {
     string toFind;
 
@@ -383,9 +384,6 @@ void consoleUI::findCommand()
     }
 }
 
-
-
-//person
 
 void consoleUI::statusCommandPerson()
 {
@@ -540,7 +538,7 @@ void consoleUI::printListPerson()       // Print if appropriate.
     else if (_command == FIND)      // Tells the user to enter the name of the scientist to be located in the list.
     {
         _print = false;
-        findCommand();
+        findCommandPerson();
     }
     else if(_command == SORT)       // Gives you additional options to choose how you would like the list sorted
     {
@@ -568,6 +566,34 @@ void consoleUI::printListPerson()       // Print if appropriate.
 }
 
 //computer
+
+void consoleUI::findCommandComputer()
+{
+    string toFind;
+
+    cout << "Search computer: ";
+
+    getline(cin, toFind);
+    cout << endl;
+    if(toFind == "dickbutt")
+    {
+        cout << "                                      PrumpPrum                                         " << endl;                                                                                         cout << "                                  pPrumpPrumpPrumpP                                     " << endl << "                              rumpPrumpPrumpPrumpPrump                                  " << endl << "                      PrumpPrumpPrump           PrumpPru                                " << endl << "                   mpPrumpPrumpP                  rumpPru                               " << endl << "                 mpPrumpPrumpPru                   mpPrum                               " << endl << "                 pPrumpPrumpPrump                   Prump" << endl << "                 PrumpPrumpP rumpPr    umpPrumpPru  mpPru" << endl << "                 mpPrumpPrumpPrumpPr umpPrumpPrumpPr umpP" << endl << "                 rumpPrumpPrumpPru  mpPrumpPrumpPrumpPrum" << endl << "                pPrum  pPrumpPrump  PrumpPrumpPrumpPrumpP" << endl << "               rumpPrumpPrumpPrumpP rumpPrumpPr umpPrumpP" << endl << "              rumpPrumpPrumpPrump   PrumpPrumpPrumpPrumpP" << endl << "             rumpPrumpPrumpPrumpPrumpPrumpPrumpPr  umpPr" << endl << "            umpPr          umpPrumpPrumpPrump     PrumpP" << endl << "           rumpP                      rumpPru     mpPrum" << endl << "          pPrump                                 PrumpP" << endl << "         rumpPr                                 umpPru" << endl << "        mpPrum                                  pPrump" << endl << "        Prump                      Prum        pPrump" << endl << "        Prum                      pPrum pPr   umpPru" << endl << "        mpPr                      umpPrumpPr  umpPr                         umpPrumpP" << endl << "       rumpP                      rumpPrump  Prump                        PrumpPrumpPr" << endl << "       umpPr                     umpPrumpPr umpPr                       umpPru    mpPr" << endl << "       umpPr                     umpPrumpP  rumpP                     rumpPru    mpPru" << endl << "       mpPru                    mpPrumpPr  umpPru                   mpPrump     Prump" << endl << "       Prump                    PrumpPru   mpPrumpPrumpPrumpPru   mpPrump     Prump" << endl << "        Prum                   pPrumpPr    umpPrumpPrumpPrumpPrumpPrump      Prump" << endl << "        Prum                   pPrumpP     rumpP   rumpP   rumpPrumpP      rumpPr" << endl << "        umpP                  rumpPrum      pPr   umpPrumpPrumpPrum      pPrump" << endl << "        Prump               Prump Prump         PrumpPrumpPrumpPru     mpPrump" << endl << "         Prum             pPrum  pPrumpP         rumpPrumpPrumpPrump   PrumpPru" << endl << "         mpPru            mpPrumpPrumpPr                     umpPrump    PrumpPrum" << endl << "          pPrum            pPrumpPrumpP              rump       PrumpP  rump Prump" << endl << "          PrumpP              rump                   Prum        pPrump  PrumpPru" << endl << "           mpPrum                                pPr              umpPr    umpP" << endl << "            rumpPrum                            pPru              mpPru     mpPr" << endl << "               umpPrum                          pPru              mpPrumpPrumpPr" << endl << "     ump        PrumpPrump                       Prum           pPrumpPrumpPrum" << endl << "    pPrumpP    rumpPrumpPrumpPru                  mpP         rumpPru    m" << endl << "   pPrumpPrumpPru mpPrumpPrumpPrumpPrum           pPru    mpPrump" << endl << "    Prum pPrumpPrumpPru    mpPrumpPrumpPru mpPrumpPrumpPrumpPrum" << endl << "     pPru  mpPrumpPru         mpPrumpPrum pPrumpPrumpPrumpPru" << endl << "      mpPr   umpPru         mpPrumpPrump Prump PrumpPrumpP" << endl << "       rumpPrumpP           rumpPrumpPr  umpP" << endl << "        rumpPru              mpPrumpP   rump" << endl << "          Pru                mpPrum    pPru" << endl << "                              mpPrum  pPru" << endl << "                               mpPrumpPru" << endl << "                                 mpPrump" << endl << "                                   Pru  " << endl;
+    }
+    else
+    {
+        _printOutComputer = _turnC.findComputer(toFind);
+        if (_turnC.lookForComputer(toFind))
+        {
+            cout << "Computer found! " << endl;
+            cout << _printOutComputer;
+        }
+        else
+        {
+            cout << "Computer not found " << endl << endl;
+        }
+    }
+}
+
 
 void consoleUI::statusCommandComputer()
 {
@@ -700,7 +726,7 @@ void consoleUI::printListComputer()
     else if (_command == FIND)
     {
         _print = false;
-        findCommand();
+        findCommandComputer();
     }
     else if(_command == SORT)
     {
