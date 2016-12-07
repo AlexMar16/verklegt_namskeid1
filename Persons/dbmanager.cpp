@@ -98,32 +98,27 @@ void DbManager::changeData()
 }
 void DbManager::insertIntoComputer(const Computer &input)
 {
-    cout << "name: " << input.getName() << endl;
-    cout << "type: " << input.getType() << endl;
-    cout << "year: " << input.getYearBuilt() << endl;
-    cout << "built? " << input.getBuilt() << endl;
     QString qsName = QString::fromStdString(input.getName());
     QString qsType= QString::fromStdString(input.getType());
     QString qsBuilt = QString::fromStdString(input.getBuilt());
     QString path = "ComputerScience.sqlite";
+    /* nota seinna mögulega
     if( QSqlDatabase::contains( "dbconnection" ) )
     {
-        cout << "dbconnection found " << endl;
+        //cout << "dbconnection found " << endl;
 
-        //Do stuff...
     }
     else
     {
         cout << "dbconnection not found" << endl;
-    }
+    }*/
+
     QSqlDatabase _db = QSqlDatabase::database("dbconnection");
     QString dbName = path;
     _db.setDatabaseName(dbName);
     _db.open();
-
     if(_db.open())
     {
-        cout << "opened!" << endl;
         QSqlQuery qry(_db);
         qry.prepare("INSERT INTO Computers(Name, yearBuilt, Type, Built)"
                     "VALUES(:C_Name,:C_yearBuilt,:C_Type,:C_Built)");
@@ -133,14 +128,11 @@ void DbManager::insertIntoComputer(const Computer &input)
         qry.bindValue(":C_Built",qsBuilt);
         //qry.exec();
         if( !qry.exec() )
-            //qDebug() << qry.lastError().text();
-
-            cout << "error inserting into database";
-        else
         {
-            qDebug( "Inserted!" );
-            cout << "inserted! " << endl;
+            //qDebug() << qry.lastError().text();
+            cout << "error inserting into database";
         }
+
     }
     else
     {
@@ -150,18 +142,16 @@ void DbManager::insertIntoComputer(const Computer &input)
 
 void DbManager::removeFromComputers(const Computer &input)
 {
-    cout << "name: " << input.getName() << endl;
+    //cout << "name: " << input.getName() << endl; henda ut fyrir skil
     QString qsName = QString::fromStdString(input.getName());
     QString path = "ComputerScience.sqlite";
     if( QSqlDatabase::contains( "dbconnection" ) )
     {
-        cout << "dbconnection found " << endl;
-
-        //Do stuff...
+        //cout << "dbconnection found " << endl;
     }
     else
     {
-        cout << "dbconnection not found" << endl;
+        //cout << "dbconnection not found" << endl;
     }
     QSqlDatabase _db = QSqlDatabase::database("dbconnection");
     QString dbName = path;
@@ -170,20 +160,16 @@ void DbManager::removeFromComputers(const Computer &input)
 
     if(_db.open())
     {
-        cout << "opened!" << endl;
         QSqlQuery qry(_db);
-        qry.prepare("DELETE FROM Computers"
-                    "WHERE Name=:C_Name");
-        qry.bindValue(":C_Name",qsName);
+        qry.prepare("DELETE FROM Computers WHERE Name='"+qsName+"'");
+        //qry.bindValue(":C_Name",qsName);
         //qry.exec();
         if( !qry.exec() )
             //qDebug() << qry.lastError().text();
-
             cout << "error removing from database";
         else
         {
-            qDebug( "Removed" );
-            cout << "Removed! " << endl;
+            cout << "Removed " << input.getName() << endl;
         }
     }
     else

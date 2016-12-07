@@ -312,7 +312,7 @@ void computerService::removeComputer(const Computer &input)         // Makes the
         DbManager removeComputer;
         removeFromDatabase(input.getName());
         removeComputer.setCVector(_listComputer);
-        removeComputer.changeData();
+        removeComputer.removeFromComputers(input);
     }
 }
 
