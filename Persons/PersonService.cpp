@@ -183,6 +183,8 @@ vector<Person> PersonService::sortGender()        // Sorts the list by gender, b
 
 vector<Person> PersonService::sortAlphabetically()
 {
+    cout << "batman was here"<< endl;
+    cout << _listV.size();
     bool again = true;
     while (again)
     {

@@ -32,7 +32,6 @@ void consoleUI::run()
             _turnG.setProgram(_command);
         }
     }while(_turnG.getProgram());
-    //_turnG.closeDatabase();
 }
 
 void consoleUI::firstCommandBox()
@@ -481,7 +480,7 @@ void consoleUI::sortCommandPerson()
 
         if(sortSpecialCommandPerson(choice))
         {
-            _turnC.sortComputerList(choice);
+            _turnP.sortPersonList(choice);
             break;
         }
         else
@@ -501,7 +500,7 @@ void consoleUI::sortCommandPerson()
 
         if(upOrDown == DESC)
         {
-            _turnC.reverseVector();
+            _turnP.reverseVector();
             break;
         }
         else if(upOrDown != ASC)
@@ -795,7 +794,7 @@ void consoleUI::printList()
 
 void consoleUI::print()
 {
-    if(_print && _turnG.dataFound() && _database=="person")
+    if(_print  && _database=="person")
     {
         _printOutPerson = _turnP.getPersonList();// getList() gets the list that's supposed to be printed out.
         cout << _printOutPerson;
