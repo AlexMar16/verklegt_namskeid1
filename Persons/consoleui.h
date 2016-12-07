@@ -6,6 +6,8 @@
 #include "computerService.h"
 #include "generalService.h"
 //#include "dbmanager.h"
+
+
 using namespace std;
 
 class consoleUI
@@ -31,6 +33,7 @@ private:
     void removeCommandPerson();
     void sortCommandPerson();
     void sortCommandComputer();
+    bool is_digits(const string& numbers);
     void findCommandPerson();
     void findCommandComputer();
     void quizCommand();
