@@ -27,9 +27,9 @@ ostream& operator << (ostream& out, const Computer& rhs)
     out << left << setw(COLUMN_WIDTH) << setfill(SPACE) << rhs._type;
     out << left << setw(15) << setfill(SPACE) << rhs._yearBuilt;
 
-    if(rhs._built == "yes")
+    if(rhs._built == "Yes")
     {
-        out << setw(15) << setfill(SPACE) << rhs._yearBuilt << endl;
+        out << setw(15) << setfill(SPACE) << rhs._built << endl;
     }
     else
     {
