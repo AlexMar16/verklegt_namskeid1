@@ -7,8 +7,8 @@ class Connection
 public:
     Connection();
 private:
-    int _ComputerID;
-    int _PersonID;
+    int _ComputerName;
+    int _PersonName;
 };
 
 #endif // CONNECTION_H

@@ -5,6 +5,7 @@
 #include "PersonService.h"
 #include "computerService.h"
 #include "generalService.h"
+#include "connectionservice.h"
 //#include "dbmanager.h"
 
 
@@ -45,6 +46,7 @@ private:
     void firstCommandBox();
     void commandBox();
     void printList();
+    void connectionPrintList();
     void print();
     void commandBoxConnect();
     PersonService _turnP;      //The instance we use to communicate with the PersonService layer.
@@ -52,6 +54,8 @@ private:
     string _command;
     string _database;
     computerService _turnC;
+    connectionService _turnCon;
+
 
     void modifyCommandPerson();
     void personValidation(Person &input);
