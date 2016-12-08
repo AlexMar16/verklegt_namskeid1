@@ -1,8 +1,10 @@
 #ifndef CONNECTION_H
 #define CONNECTION_H
 
-#include "dbmanager.h"
+//b#include "dbmanager.h"
+#include <string>
 
+using namespace std;
 class Connection
 {
 public:

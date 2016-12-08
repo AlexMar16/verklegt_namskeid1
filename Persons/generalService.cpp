@@ -6,6 +6,7 @@ generalService::generalService()
     _dataFound = false;
     _persons = _database.getPVector();
     _computers = _database.getCVector();
+    //_connections = _database.getConnections();
     _dataFound = _database.isOpen();
 }
 string generalService::toLower(const string& toLowerString)    // Makes everything lowercase

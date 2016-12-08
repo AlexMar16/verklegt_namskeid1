@@ -1156,12 +1156,12 @@ void consoleUI::printList()
 
 void consoleUI::print()
 {
-    if(_print  && _database=="person")
+    if(_print  && (_database=="person" || _database == "p"))
     {
         _printOutPerson = _turnP.getPersonList();// getList() gets the list that's supposed to be printed out.
         cout << _printOutPerson;
     }
-    else if(_print && _database=="computer")
+    else if(_print && (_database=="computer" || _database == "c"))
     {
         _printOutComputer = _turnC.getComputerList(); // todo setja inn dataFound lika
         cout << _printOutComputer;
