@@ -50,3 +50,24 @@ bool generalService::quizDuplicatedAnswer(const string& a, const string& b, cons
         return false;
     }
 }
+
+void generalService::addPerson(const Person &input)        // Makes the user capable to add people to the list, as long as they're not already on the list
+{
+    if(!alreadyInDatabase(input.getName()))
+    {
+        _persons.push_back(input);
+        _database.insertIntoPerson(input);
+    }
+}
+
+bool generalService::alreadyInDatabase(const string& name)         // Checks if the name exists in the database
+{
+    for (size_t i = 0; i < _persons.size(); i++)
+    {
+        if (_persons[i].getName() == name)
+        {
+            return true;
+        }
+    }
+    return false;
+}

@@ -142,17 +142,8 @@ void DbManager::insertIntoComputer(const Computer &input)
 
 void DbManager::removeFromComputers(const Computer &input)
 {
-    //cout << "name: " << input.getName() << endl; henda ut fyrir skil
     QString qsName = QString::fromStdString(input.getName());
     QString path = "ComputerScience.sqlite";
-    if( QSqlDatabase::contains( "dbconnection" ) )
-    {
-        //cout << "dbconnection found " << endl;
-    }
-    else
-    {
-        //cout << "dbconnection not found" << endl;
-    }
     QSqlDatabase _db = QSqlDatabase::database("dbconnection");
     QString dbName = path;
     _db.setDatabaseName(dbName);
@@ -161,18 +152,94 @@ void DbManager::removeFromComputers(const Computer &input)
     if(_db.open())
     {
         QSqlQuery qry(_db);
-        qry.prepare("DELETE FROM Computers WHERE Name=':C_Name'");
+        qry.prepare("DELETE FROM Computers WHERE Name=:C_Name");
         qry.bindValue(":C_Name",qsName);
         if( !qry.exec() )
             //qDebug() << qry.lastError().text();
             cout << "error removing from database";
         else
         {
+            qry.exec();
             cout << "Removed " << input.getName() << endl;
         }
     }
     else
     {
         cout << "not openajsd ajsln " << endl;
+    }
+}
+
+//<<<<<<< HEAD
+void DbManager::removeFromPersons(const Person &input)
+{
+    QString qsName = QString::fromStdString(input.getName());
+    QString path = "ComputerScience.sqlite";
+    QSqlDatabase _db = QSqlDatabase::database("dbconnection");
+    QString dbName = path;
+    _db.setDatabaseName(dbName);
+    _db.open();
+
+    if(_db.open())
+    {
+        QSqlQuery qry(_db);
+        qry.prepare("DELETE FROM Persons WHERE Name=:C_Name");
+        qry.bindValue(":C_Name",qsName);
+        if( !qry.exec() )
+            //qDebug() << qry.lastError().text();
+            cout << "error removing from database";
+        else
+        {
+            qry.exec();
+            cout << "Removed " << input.getName() << endl;
+        }
+    }
+    else
+    {
+        cout << "not openajsd ajsln " << endl;
+    }
+}
+//=======
+void DbManager::insertIntoPerson(const Person &input)
+{
+    QString qsName = QString::fromStdString(input.getName());
+    QString qsGender= QString::fromStdString(input.getGender());
+    QString path = "ComputerScience.sqlite";
+    /* nota seinna mögulega
+    if( QSqlDatabase::contains( "dbconnection" ) )
+    {
+        //cout << "dbconnection found " << endl;
+
+    }
+    else
+    {
+        cout << "dbconnection not found" << endl;
+    }*/
+    cout << "not go in";
+    //QSqlDatabase _db = QSqlDatabase::database("dbconnection");
+    QString dbName = path;
+    _db.setDatabaseName(dbName);
+    _db.open();
+    if(_db.open())
+    {
+        QSqlQuery qry(_db);
+        qry.prepare("INSERT INTO Persons(Name, Gender, birthYear, deathYear)"
+                    "VALUES(:P_Name, :P_Gender, :P_birthYear, :P_deathYear)");
+        qry.bindValue(":P_Name",qsName);
+        qry.bindValue(":P_Gender",qsGender);
+        qry.bindValue(":P_birthYear", input.getBirthYear());
+        qry.bindValue(":P_deathYear", input.getDeathYear());
+        qry.exec();
+        cout << "cool beans";
+        if( !qry.exec() )
+        {
+            //qDebug() << qry.lastError().text();
+            cout << "error inserting into database";
+        }
+
+    }
+    else
+    {
+        cout << "not inserted" << endl;
+//>>>>>>> ea26743472f4b25a995db197380beb40a5641246
     }
 }
