@@ -99,23 +99,23 @@ void DbManager::getConnections()
     while (query.next())
     {
         int connectionid = query.value("ID").toInt();
-        //cout << connectionid << ":";
+        //cout << connectionid << " : ";
         temp.setConnectionID(connectionid);
 
         int personid = query.value("PID").toInt();
-        //cout << personid << ":";
+        //cout << personid << " : ";
         temp.setPersonID(personid);
 
         string Pname = query.value("PName").toString().toStdString();
-        //cout << Pname << ":";
+        //cout << Pname << " : ";
         temp.setPersonName(Pname);
 
         int computerid = query.value("CID").toInt();
-        //cout << computerid;
+        //cout << computerid << " : ";
         temp.setComputerID(computerid);
 
-        string Cname = query.value("PName").toString().toStdString();
-        //cout << Cname << ":";
+        string Cname = query.value("CName").toString().toStdString();
+        //cout << Cname << endl;
         temp.setComputerName(Cname);
 
 
