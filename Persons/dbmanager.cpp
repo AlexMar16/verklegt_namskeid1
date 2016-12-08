@@ -92,18 +92,30 @@ void DbManager::getConnections()
     QSqlDatabase _db = QSqlDatabase::database("dbconnection");
     QString dbName = path;
     _db.setDatabaseName(dbName);
-    QString s = "SELECT * FROM Connections";
+    QString s = "select Connections.ID, Persons.ID as 'PID', Persons.Name as 'PName', Computers.ID as 'CID', Computers.Name as 'CName' from Persons INNER JOIN Connections on Persons.ID=Connections.PersonID INNER JOIN Computers on Connections.ComputerID=Computers.ID";
     QSqlQuery query(_db);
     query.exec(s);
     Connection temp;
     while (query.next())
     {
-        int personid = query.value("PersonID").toInt();
+        int personid = query.value("PID").toInt();
         cout << personid;
         //temp.setPersonID(personid);
 
+        string Pname = query.value("PName").toString().toStdString();
+        temp.setPersonName(Pname);
 
-        int computerid = query.value("computerID").toInt();
+        int computerid = query.value("CID").toInt();
+        cout << computerid;
+        //temp.setComputerID(personid);
+
+        //string Pname = query.value("PName").toString().toStdString();
+        //temp.setPersonName(Pname);
+
+
+
+
+        //int computerid = query.value("computerID").toInt();
         //temp.setComputerID(computerid);
         cout << computerid << endl;
 
