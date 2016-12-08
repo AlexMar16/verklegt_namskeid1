@@ -66,6 +66,8 @@ string Computer::getType() const {return _type;}
 
 int Computer::getYearBuilt() const {return _yearBuilt;}
 
+int Computer::getID() const {return _ID;}
+
 string Computer::getBuilt() const {return _built;}
 
 

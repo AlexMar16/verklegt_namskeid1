@@ -1,9 +1,8 @@
 #include "dbmanager.h"
 #include <QVariant>
-#include <QSqlQuery>
+//#include <QSqlQuery>
 #include <Qdebug>
-#include "computer.h"
-
+//b#include "computer.h"
 
 DbManager::DbManager()
 {
@@ -24,6 +23,7 @@ DbManager::DbManager()
     }
     getPersons();
     getComputers();
+    getConnections();
 }
 DbManager::~DbManager() {_db.close();}
 
@@ -83,7 +83,33 @@ void DbManager::getComputers()
     }
 }
 
-vector<Person> DbManager::getVector() const {return _persons;}
+vector<Person> DbManager::getPVector() const {return _persons;}
+
+void DbManager::getConnections()
+{
+
+    const QString path = "ComputerScienceBackup.sqlite";
+    QSqlDatabase _db = QSqlDatabase::database("dbconnection");
+    QString dbName = path;
+    _db.setDatabaseName(dbName);
+    QString s = "SELECT * FROM Connections";
+    QSqlQuery query(_db);
+    query.exec(s);
+    Connection temp;
+    while (query.next())
+    {
+        int personid = query.value("PersonID").toInt();
+        cout << personid;
+        //temp.setPersonID(personid);
+
+
+        int computerid = query.value("computerID").toInt();
+        //temp.setComputerID(computerid);
+        cout << computerid << endl;
+
+        _connections.push_back(temp);
+    }
+}
 
 vector<Computer> DbManager::getCVector() const {return _computers;}
 
@@ -178,10 +204,11 @@ void DbManager::removeFromPersons(const Person &input)
     QString dbName = path;
     _db.setDatabaseName(dbName);
     _db.open();
-
+    string asd = "sadasd";
     if(_db.open())
     {
         QSqlQuery qry(_db);
+
         qry.prepare("DELETE FROM Persons WHERE Name=:C_Name");
         qry.bindValue(":C_Name",qsName);
         if( !qry.exec() )
@@ -335,10 +362,6 @@ void DbManager::changeComputer(const Computer& input, const int computerIndex)
                 //cout << qry.lastError().text();
                 cout << "error updating into database";
             }
-        }
-        else
-        {
-            cout << "FAILLLLLL";
         }
     }
     else

@@ -29,6 +29,7 @@ public:
     Person();
     string getName() const;
     string getGender() const;
+    int getID() const;
     int getBirthYear() const;
     int getDeathYear() const;
     void setName(const string input);
@@ -43,6 +44,7 @@ private:
     string _gender;
     int _birthYear;
     int _deathYear;
+    int _ID;
 };
 
 #endif // PERSON_H

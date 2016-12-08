@@ -35,6 +35,7 @@ public:
     string getName() const;
     string getType() const;
     int getYearBuilt() const;
+    int getID() const;
     string getBuilt() const;
     void setName(const string input);
     void setType(const string input);
@@ -50,6 +51,7 @@ private:
     string _name;
     string _type;
     int _yearBuilt;
+    int _ID;
     string _built;
 
 };
