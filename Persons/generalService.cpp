@@ -4,7 +4,7 @@ generalService::generalService()
 {
     _program = true;
     _dataFound = false;
-    _persons = _database.getVector();
+    _persons = _database.getPVector();
     _computers = _database.getCVector();
     _dataFound = _database.isOpen();
 }

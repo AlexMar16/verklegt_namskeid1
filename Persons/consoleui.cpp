@@ -25,23 +25,27 @@ void consoleUI::run()
     do
     {
         firstCommandBox();
-        if(beginningCommand())
+        if(beginningCommand() && _turnG.dataFound())
         {
             do
             {
                 if(_database == "person" || _database == "computer" || _database == "c" || _database == "p")
                 {
-                commandBox();
-                printList();
-                print();
+                    commandBox();
+                    printList();
+                    print();
                 }
                 else
                 {
-                commandBoxConnect();
-                 //setja foll
+                    commandBoxConnect();
+                    //setja foll
                 }
             }while(_command != BACK && _command != QUIT);
             _turnG.setProgram(_command);
+        }
+        else
+        {
+            cout << endl << "The database " << _database << " was not found" << endl;
         }
     }while(_turnG.getProgram());
 }
@@ -152,22 +156,22 @@ void consoleUI::commandBoxSubConnect()
 
 bool consoleUI::specialCommandConnect()
 {
-   if(_command == ALL)
-   {
-       return true;
-   }
-   else if(_command == ADD)
-   {
-       return true;
-   }
-   else if(_command == REMOVE)
-   {
-       return true;
-   }
-   else
-   {
-       return false;
-   }
+    if(_command == ALL)
+    {
+        return true;
+    }
+    else if(_command == ADD)
+    {
+        return true;
+    }
+    else if(_command == REMOVE)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
 bool consoleUI::beginningCommand()
@@ -399,21 +403,21 @@ void consoleUI::addCompCommand()
 
     //if(built == "yes" || built == "no")
     //{
-        while(true)
+    while(true)
+    {
+        cout << "Year (YYYY): ";
+        cin >> yearBuilt;
+        birthCheck = atoi(yearBuilt.c_str());       // Removes alphanumeric values from the input.
+        if (birthCheck > MINIMUM_Built_YEAR && birthCheck < MAXIMUM_Built_YEAR)
         {
-            cout << "Year (YYYY): ";
-            cin >> yearBuilt;
-            birthCheck = atoi(yearBuilt.c_str());       // Removes alphanumeric values from the input.
-            if (birthCheck > MINIMUM_Built_YEAR && birthCheck < MAXIMUM_Built_YEAR)
-            {
-                break;
-            }
-            else
-            {
-                cout << "Invalid input!" << endl;
-            }
+            break;
         }
-        input.setYearbuild(birthCheck);
+        else
+        {
+            cout << "Invalid input!" << endl;
+        }
+    }
+    input.setYearbuild(birthCheck);
     //}
 
     while(true)
@@ -621,7 +625,7 @@ bool consoleUI::checkModifyPerson( const string& toModify)
         {
             return true;
         }
-  /*      string check = _printOutPerson[i].getName();
+        /*      string check = _printOutPerson[i].getName();
         else if(check[i] == toModify[i])
         {
             counter++;
@@ -942,8 +946,8 @@ void consoleUI::findCommandComputer()
         _printOutComputer = _turnC.findDigits(toFindDigits);
         if (_turnC.lookForDigits(toFindDigits))
         {
-           cout << "Computer found! " << endl;
-           cout << _printOutComputer;
+            cout << "Computer found! " << endl;
+            cout << _printOutComputer;
         }
         else
         {
@@ -1073,7 +1077,7 @@ bool consoleUI::specialCommandComputer(const string &_command)
     }
     else
     {
-       return false;
+        return false;
     }
 }
 
@@ -1276,21 +1280,21 @@ void consoleUI::computerValidation(Computer& input)
 
     //if(built == "Yes")
     //{
-        while(true)
+    while(true)
+    {
+        cout << "Year (YYYY): ";
+        cin >> yearBuilt;
+        birthCheck = atoi(yearBuilt.c_str());       // Removes alphanumeric values from the input.
+        if (birthCheck > MINIMUM_Built_YEAR && birthCheck < MAXIMUM_Built_YEAR)
         {
-            cout << "Year (YYYY): ";
-            cin >> yearBuilt;
-            birthCheck = atoi(yearBuilt.c_str());       // Removes alphanumeric values from the input.
-            if (birthCheck > MINIMUM_Built_YEAR && birthCheck < MAXIMUM_Built_YEAR)
-            {
-                break;
-            }
-            else
-            {
-                cout << "Invalid input!" << endl;
-            }
+            break;
         }
-        input.setYearbuild(birthCheck);
+        else
+        {
+            cout << "Invalid input!" << endl;
+        }
+    }
+    input.setYearbuild(birthCheck);
     //}
 
     while(true)

@@ -83,7 +83,7 @@ void DbManager::getComputers()
     }
 }
 
-vector<Person> DbManager::getVector() const {return _persons;}
+vector<Person> DbManager::getPVector() const {return _persons;}
 
 vector<Computer> DbManager::getCVector() const {return _computers;}
 
@@ -335,10 +335,6 @@ void DbManager::changeComputer(const Computer& input, const int computerIndex)
                 //cout << qry.lastError().text();
                 cout << "error updating into database";
             }
-        }
-        else
-        {
-            cout << "FAILLLLLL";
         }
     }
     else
