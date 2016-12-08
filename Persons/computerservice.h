@@ -33,10 +33,9 @@ public:
     string aliveCheck(const Computer& p);
     string typeCheck(const Computer& c);
     string builtCheck(const Computer& c);
-
-
     Computer findComputerNumber(string name);
     void changeComputer(const Computer& somecomp);
+
 
 private:
     bool _keepGoing;
@@ -58,4 +57,3 @@ private:
 };
 
 #endif // COMPUTERSERVICE_H
-
