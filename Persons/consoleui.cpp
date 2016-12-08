@@ -243,6 +243,7 @@ void consoleUI::addCommand()
 
     cout << endl;
 
+    _turnG.addPerson(input);
     _turnP.addPerson(input);
     cin.ignore();
 }
