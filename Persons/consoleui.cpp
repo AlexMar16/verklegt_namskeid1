@@ -190,11 +190,16 @@ void consoleUI::addCommand()
 
     while(true)
     {
-        cout << "Gender (male/female) in lowercase: ";
+        cout << "Gender (male/female): ";
         cin >> gender;
-        gender =_turnG.toLower(gender);
-        if (gender == MALE || gender == FEMALE)
+        if (_turnG.toLower(gender) == "male")
         {
+            gender = MALE;
+            break;
+        }
+        else if (_turnG.toLower(gender) == "female")
+        {
+            gender = FEMALE;
             break;
         }
         else
