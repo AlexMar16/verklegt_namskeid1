@@ -3,7 +3,7 @@
 #include <QSqlQuery>
 #include <Qdebug>
 #include "computer.h"
-
+#include "connection.h"
 
 DbManager::DbManager()
 {
@@ -24,6 +24,7 @@ DbManager::DbManager()
     }
     getPersons();
     getComputers();
+    getConnections();
 }
 DbManager::~DbManager() {_db.close();}
 
@@ -80,6 +81,32 @@ void DbManager::getComputers()
         string Built = query.value("Built").toString().toStdString();
         temp.setBuilt(Built);
         _computers.push_back(temp);
+    }
+}
+
+void DbManager::getConnections()
+{
+
+    const QString path = "ComputerScienceBackup.sqlite";
+    QSqlDatabase _db = QSqlDatabase::database("dbconnection");
+    QString dbName = path;
+    _db.setDatabaseName(dbName);
+    QString s = "SELECT * FROM Connections";
+    QSqlQuery query(_db);
+    query.exec(s);
+    Connection temp;
+    while (query.next())
+    {
+        int personid = query.value("PersonID").toInt();
+        cout << personid;
+        //temp.setPersonID(personid);
+
+
+        int computerid = query.value("computerID").toInt();
+        //temp.setComputerID(computerid);
+        cout << computerid << endl;
+
+        _connections.push_back(temp);
     }
 }
 
@@ -178,10 +205,11 @@ void DbManager::removeFromPersons(const Person &input)
     QString dbName = path;
     _db.setDatabaseName(dbName);
     _db.open();
-
+    string asd = "sadasd";
     if(_db.open())
     {
         QSqlQuery qry(_db);
+
         qry.prepare("DELETE FROM Persons WHERE Name=:C_Name");
         qry.bindValue(":C_Name",qsName);
         if( !qry.exec() )
