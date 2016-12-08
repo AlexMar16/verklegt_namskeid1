@@ -52,6 +52,9 @@ private:
 
     void modifyCommandPerson();
     void personValidation(Person &input);
+    void modifyCommandComputer();
+    void computerValidation(Computer& input);
+
 
 };
 
