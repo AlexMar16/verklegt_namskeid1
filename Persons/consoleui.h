@@ -50,6 +50,9 @@ private:
     string _database;
     computerService _turnC;
 
+    void modifyCommandPerson();
+    void personValidation(Person &input);
+
 };
 
 #endif // CONSOLEUI_H

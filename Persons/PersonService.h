@@ -29,6 +29,9 @@ public:
     string genderCheck(const Person& p);
     string aliveCheck(const Person& p);
 
+    Person findPersonNumber(string nabn); //we will change this to ID later
+    void changePerson(const Person& someGuy);
+
 private:
     bool alreadyInDatabase(const string &name);
     vector<Person> _listPerson;
@@ -43,7 +46,10 @@ private:
     void removeFromDatabase(const string& name);
     void swap(Person& a, Person& b);
 
+    int _personIndex;
+
     generalService GS;
+
 };
 
 #endif // PersonService_H
