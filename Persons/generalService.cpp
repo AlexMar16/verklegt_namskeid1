@@ -71,3 +71,5 @@ bool generalService::alreadyInDatabase(const string& name)         // Checks if 
     }
     return false;
 }
+
+

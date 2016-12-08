@@ -19,7 +19,9 @@ SOURCES += main.cpp \
     computer.cpp \
     computerService.cpp \
     PersonService.cpp \
-    generalService.cpp
+    generalService.cpp \
+    connection.cpp \
+    connectionservice.cpp
 
 HEADERS += \
     consoleui.h \
@@ -29,4 +31,6 @@ HEADERS += \
     computer.h \
     computerService.h \
     PersonService.h \
-    generalService.h
+    generalService.h \
+    connection.h \
+    connectionservice.h
