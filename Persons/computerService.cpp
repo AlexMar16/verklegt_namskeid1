@@ -353,3 +353,20 @@ vector<Computer> computerService::findDigits(const int& num)
     return _listSearchedDigits;
 
 }
+
+Computer computerService::findComputerNumber(string name)
+{
+    for (size_t i=0; i<_listComputer.size(); i++)
+    {
+        if(_listComputer[i].getName()==name)
+        {
+            _computerIndex = i;
+        }
+    }
+    return _listComputer[_computerIndex];
+}
+
+void computerService::changeComputer(const Computer& somecomp)
+{
+    _listComputer[_computerIndex]=somecomp;
+}
