@@ -315,7 +315,7 @@ void DbManager::changeComputer(const Computer& input, const int computerIndex)
     QString dbName = path;
     _db.setDatabaseName(dbName);
     _db.open();
-    const QString SQLCommand = "UPDATE Persons SET Name = :C_Name, "
+    const QString SQLCommand = "UPDATE Computers SET Name = :C_Name, "
                                "yearBuilt = :C_YearBuilt ,  Type = :C_Type,  Built = "
                                ":C_Built WHERE Name = :C_OldName";
     if(_db.open())
@@ -335,6 +335,10 @@ void DbManager::changeComputer(const Computer& input, const int computerIndex)
                 //cout << qry.lastError().text();
                 cout << "error updating into database";
             }
+        }
+        else
+        {
+            cout << "FAILLLLLL";
         }
     }
     else
