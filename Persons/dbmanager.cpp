@@ -144,14 +144,6 @@ void DbManager::removeFromComputers(const Computer &input)
 {
     QString qsName = QString::fromStdString(input.getName());
     QString path = "ComputerScience.sqlite";
-    /*if( QSqlDatabase::contains( "dbconnection" ) )
-    {
-        //cout << "dbconnection found " << endl;
-    }
-    else
-    {
-        //cout << "dbconnection not found" << endl;
-    }*/
     QSqlDatabase _db = QSqlDatabase::database("dbconnection");
     QString dbName = path;
     _db.setDatabaseName(dbName);
@@ -159,7 +151,6 @@ void DbManager::removeFromComputers(const Computer &input)
 
     if(_db.open())
     {
-        cout << "Hi IM HEre!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << endl;
         QSqlQuery qry(_db);
         qry.prepare("DELETE FROM Computers WHERE Name=:C_Name");
         qry.bindValue(":C_Name",qsName);
