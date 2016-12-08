@@ -197,7 +197,7 @@ void DbManager::removeFromPersons(const Person &input)
         cout << "not openajsd ajsln " << endl;
     }
 }
-//=======
+
 void DbManager::insertIntoPerson(const Person &input)
 {
     QString qsName = QString::fromStdString(input.getName());
