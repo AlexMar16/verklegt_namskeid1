@@ -1,14 +1,18 @@
 #include "consoleui.h"
+#include <cctype>
+
 
 
 using namespace std;
 
-
+const string MODIFY = "modify";
 const string REMOVE = "remove";
 const string FIND = "find";
 const string QUIZ = "quiz";
 const string STATUS = "status";
 const string EMPTY = "";
+const string ALL = "all";
+const string ADD = "add";
 const string BACK = "back";
 const int ASTERISK_WIDTH = 80;
 const char ASTERISK = '*';
@@ -25,9 +29,17 @@ void consoleUI::run()
         {
             do
             {
+                if(_database == "person" || _database == "computer" || _database == "c" || _database == "p")
+                {
                 commandBox();
                 printList();
                 print();
+                }
+                else
+                {
+                commandBoxConnect();
+                 //setja foll
+                }
             }while(_command != BACK && _command != QUIT);
             _turnG.setProgram(_command);
         }
@@ -55,11 +67,11 @@ void consoleUI::firstCommandBox()
     getline(cin, _database);
     beginningCommand();
     _turnG.setProgram(_database);
-    if(_database == "person")
+    if(_database == "person" || _database == "p")
     {
         _theRightOne = "person";
     }
-    else if(_database == "computer")
+    else if(_database == "computer" || _database == "c")
     {
         _theRightOne = "computer";
     }
@@ -83,6 +95,8 @@ void consoleUI::commandBox()
          << right << BARRIER << endl;
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| remove - This command allows you to remove a certain "+_theRightOne+" from the list."
          << right << BARRIER << endl;
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| modify - This command allows you to modify a certain "+_theRightOne+" in the list."
+         << right << BARRIER << endl;
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| status - This command displays info about the list "
          << right << BARRIER << endl;
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| back   - This command will allow you to choose another database. "
@@ -92,17 +106,77 @@ void consoleUI::commandBox()
     cout << setw(ASTERISK_WIDTH) << setfill(ASTERISK) << ASTERISK << endl;      // Command box ends.
     cout << "command: ";
     getline(cin, _command);          // Sets the private variable _command in the service class.
+}
 
+void consoleUI::commandBoxConnect()
+{
+    cout << setw(ASTERISK_WIDTH) << setfill(ASTERISK) <<  ASTERISK << endl;     // Command box begins.
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| Please enter one of the following commands:"
+         << right << BARRIER << endl;
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << BARRIER << right << BARRIER<< endl;
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| person to computer - This command will print a specific connection."
+         << right << BARRIER << endl;
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| computer to person - This command will print all connections."
+         << right << BARRIER << endl;
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| back               - This command will allow you to choose another database."
+         << right << BARRIER << endl;
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| quit               - This command will quit the program."
+         << right << BARRIER << endl;
+    cout << setw(ASTERISK_WIDTH) << setfill(ASTERISK) << ASTERISK << endl;      // Command box ends.
+    cout << "command: ";
+    getline(cin, _command);
+}
+/*
+void consoleUI::commandBoxSubConnect()
+{
+    cout << setw(ASTERISK_WIDTH) << setfill(ASTERISK) <<  ASTERISK << endl;     // Command box begins.
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| Please enter one of the following commands:"
+         << right << BARRIER << endl;
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << BARRIER << right << BARRIER<< endl;
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| specific   - This command will print a specific connection"
+         << right << BARRIER << endl;
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| all        - This command will print all connections"
+         << right << BARRIER << endl;
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| add        - This command allows you to add a connection"
+         << right << BARRIER << endl;
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| remove     - This command allows you to remove a connection"
+         << right << BARRIER << endl;
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| back       - This command will allow you to choose another database. "
+         << right << BARRIER << endl;
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| quit       - This command will quit the program. "
+         << right << BARRIER << endl;
+    cout << setw(ASTERISK_WIDTH) << setfill(ASTERISK) << ASTERISK << endl;      // Command box ends.
+    cout << "command: ";
+    getline(cin, _command);
+}*/
 
+bool consoleUI::specialCommandConnect()
+{
+   if(_command == ALL)
+   {
+       return true;
+   }
+   else if(_command == ADD)
+   {
+       return true;
+   }
+   else if(_command == REMOVE)
+   {
+       return true;
+   }
+   else
+   {
+       return false;
+   }
 }
 
 bool consoleUI::beginningCommand()
 {
-    if(_database == "person")
+    if(_database == "person" || _database == "p")
     {
         return true;
     }
-    else if(_database == "computer")
+    else if(_database == "computer" || _database == "c")
     {
         return true;
     }
@@ -116,16 +190,12 @@ bool consoleUI::beginningCommand()
     }
 }
 
-
-
-
-
 void consoleUI::quizCommand()
 {
     string a, b, c, d, answerName;
     if (_database == "person")
     {
-        Person questionP = _turnP.generateQuestion();
+        Person questionP = _turnP.generateAnswer();
         cout << _turnP.genderCheck(questionP) << " was born in " << questionP.getBirthYear()
              << " and " << _turnP.aliveCheck(questionP) << ", enter (a/b/c/d)" << endl;
         _turnP.generateOptions(questionP, a, b, c, d);
@@ -133,7 +203,7 @@ void consoleUI::quizCommand()
     }
     else
     {
-        Computer questionC = _turnC.generateQuestion();
+        Computer questionC = _turnC.generateAnswer();
         cout << "This " << _turnC.typeCheck(questionC) << " computer was " << _turnC.builtCheck(questionC)
              << ", enter (a/b/c/d)" << endl;
         _turnC.generateOptions(questionC, a, b, c, d);
@@ -194,10 +264,16 @@ void consoleUI::addCommand()
 
     while(true)
     {
-        cout << "Gender (male/female) in lowercase: ";
+        cout << "Gender (male/female): ";
         cin >> gender;
-        if (gender == MALE || gender == FEMALE)
+        if (_turnG.toLower(gender) == "male")
         {
+            gender = MALE;
+            break;
+        }
+        else if (_turnG.toLower(gender) == "female")
+        {
+            gender = FEMALE;
             break;
         }
         else
@@ -279,39 +355,53 @@ void consoleUI::addCompCommand()
         {
             cout << "No input!" << endl;
         }
+        else if (_turnG.toLower(type) == "mechanical")
+        {
+            type = MECHANICAL;
+            break;
+        }
+        else if (_turnG.toLower(type) == "electronic")
+        {
+            type = ELECTRONIC;
+            break;
+        }
+        else if (_turnG.toLower(type) == "electro-mechanical")
+        {
+            type = ELECTROMECHANICAL;
+            break;
+        }
+        else if (_turnG.toLower(type) == "transistor")
+        {
+            type = TRANSISTOR;
+            break;
+        }
+        else if (_turnG.toLower(type) == "transistor/microchip")
+        {
+            type = TRANSISTORMICROCHIP;
+            break;
+        }
+        else if (_turnG.toLower(type) == "supercomputer")
+        {
+            type = SUPERCOMPUTER;
+            break;
+        }
+        else if (_turnG.toLower(type) == "quantum computer")
+        {
+            type = QUANTUMCOMPUTER;
+            break;
+        }
         else
         {
-            break;
+            cout << "Invalid type!" << endl;
         }
     }
     input.setType(type);
 
-
-    while(true)
-    {
-        cout << "Was the computer ever built? (y/n)" << endl;
-        cin >> wasitbuilt;
-        if(wasitbuilt == "Y" || wasitbuilt == "y" || wasitbuilt == "yes")
-        {
-            built = "yes";
-            break;
-        }
-        else if (wasitbuilt == "n" || wasitbuilt == "N" || wasitbuilt == "no")
-        {
-            built = "no";
-            break;
-        }
-        else
-        {
-            cout << "Invalid input!" << endl;
-        }
-    }
-    input.setBuilt(built);
-    if(built == "yes")
-    {
+    //if(built == "yes" || built == "no")
+    //{
         while(true)
         {
-            cout << "Build year (YYYY): ";
+            cout << "Year (YYYY): ";
             cin >> yearBuilt;
             birthCheck = atoi(yearBuilt.c_str());       // Removes alphanumeric values from the input.
             if (birthCheck > MINIMUM_Built_YEAR && birthCheck < MAXIMUM_Built_YEAR)
@@ -324,8 +414,28 @@ void consoleUI::addCompCommand()
             }
         }
         input.setYearbuild(birthCheck);
-    }
+    //}
 
+    while(true)
+    {
+        cout << "Was the computer ever built? (y/n)" << endl;
+        cin >> wasitbuilt;
+        if(wasitbuilt == "Y" || wasitbuilt == "y" || wasitbuilt == "Yes" || wasitbuilt == "yes")
+        {
+            built = "Yes";
+            break;
+        }
+        else if (wasitbuilt == "N" || wasitbuilt == "n" || wasitbuilt == "No" || wasitbuilt == "no")
+        {
+            built = "No";
+            break;
+        }
+        else
+        {
+            cout << "Invalid input!" << endl;
+        }
+    }
+    input.setBuilt(built);
 
     cout << endl;
 
@@ -352,19 +462,106 @@ void consoleUI::removeCommandPerson()
     input = _turnP.findPersonExactly(fullName);
     _turnP.removePerson(input);
 }
+
+bool consoleUI::is_digits(const string &numbers)
+{
+    return numbers.find_first_not_of("0123456789") == std::string::npos;
+}
+
+//connection
+/*
+bool consoleUI::connectCommand()
+{
+    if(_command == "person to computer")
+    {
+        return true;
+    }
+    else if(_command == "computer to person")
+    {
+        return true;
+    }
+    else if(_command == "back")
+    {
+        return true;
+    }
+    else if(_command == "quit")
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+bool consoleUI::connectSubCommand()
+{
+    if(_command == "specific")
+    {
+        return true;
+    }
+    else if(_command == "all")
+    {
+        return true;
+    }
+    else if(_command == "add")
+    {
+        return true;
+    }
+    else if(_command == "remove")
+    {
+        return true;
+    }
+    else if(_command == "back")
+    {
+        return true;
+    }
+    else if(_command == "quit")
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+*/
+
+
+
 //person
 
 void consoleUI::findCommandPerson()
 {
     string toFind;
 
-    cout << "Search name: ";
+
+    cout << "Search name/year: ";
 
     getline(cin, toFind);
     cout << endl;
+
+
     if(toFind == "dickbutt")
     {
         cout << "                                      PrumpPrum                                         " << endl;                                                                                         cout << "                                  pPrumpPrumpPrumpP                                     " << endl << "                              rumpPrumpPrumpPrumpPrump                                  " << endl << "                      PrumpPrumpPrump           PrumpPru                                " << endl << "                   mpPrumpPrumpP                  rumpPru                               " << endl << "                 mpPrumpPrumpPru                   mpPrum                               " << endl << "                 pPrumpPrumpPrump                   Prump" << endl << "                 PrumpPrumpP rumpPr    umpPrumpPru  mpPru" << endl << "                 mpPrumpPrumpPrumpPr umpPrumpPrumpPr umpP" << endl << "                 rumpPrumpPrumpPru  mpPrumpPrumpPrumpPrum" << endl << "                pPrum  pPrumpPrump  PrumpPrumpPrumpPrumpP" << endl << "               rumpPrumpPrumpPrumpP rumpPrumpPr umpPrumpP" << endl << "              rumpPrumpPrumpPrump   PrumpPrumpPrumpPrumpP" << endl << "             rumpPrumpPrumpPrumpPrumpPrumpPrumpPr  umpPr" << endl << "            umpPr          umpPrumpPrumpPrump     PrumpP" << endl << "           rumpP                      rumpPru     mpPrum" << endl << "          pPrump                                 PrumpP" << endl << "         rumpPr                                 umpPru" << endl << "        mpPrum                                  pPrump" << endl << "        Prump                      Prum        pPrump" << endl << "        Prum                      pPrum pPr   umpPru" << endl << "        mpPr                      umpPrumpPr  umpPr                         umpPrumpP" << endl << "       rumpP                      rumpPrump  Prump                        PrumpPrumpPr" << endl << "       umpPr                     umpPrumpPr umpPr                       umpPru    mpPr" << endl << "       umpPr                     umpPrumpP  rumpP                     rumpPru    mpPru" << endl << "       mpPru                    mpPrumpPr  umpPru                   mpPrump     Prump" << endl << "       Prump                    PrumpPru   mpPrumpPrumpPrumpPru   mpPrump     Prump" << endl << "        Prum                   pPrumpPr    umpPrumpPrumpPrumpPrumpPrump      Prump" << endl << "        Prum                   pPrumpP     rumpP   rumpP   rumpPrumpP      rumpPr" << endl << "        umpP                  rumpPrum      pPr   umpPrumpPrumpPrum      pPrump" << endl << "        Prump               Prump Prump         PrumpPrumpPrumpPru     mpPrump" << endl << "         Prum             pPrum  pPrumpP         rumpPrumpPrumpPrump   PrumpPru" << endl << "         mpPru            mpPrumpPrumpPr                     umpPrump    PrumpPrum" << endl << "          pPrum            pPrumpPrumpP              rump       PrumpP  rump Prump" << endl << "          PrumpP              rump                   Prum        pPrump  PrumpPru" << endl << "           mpPrum                                pPr              umpPr    umpP" << endl << "            rumpPrum                            pPru              mpPru     mpPr" << endl << "               umpPrum                          pPru              mpPrumpPrumpPr" << endl << "     ump        PrumpPrump                       Prum           pPrumpPrumpPrum" << endl << "    pPrumpP    rumpPrumpPrumpPru                  mpP         rumpPru    m" << endl << "   pPrumpPrumpPru mpPrumpPrumpPrumpPrum           pPru    mpPrump" << endl << "    Prum pPrumpPrumpPru    mpPrumpPrumpPru mpPrumpPrumpPrumpPrum" << endl << "     pPru  mpPrumpPru         mpPrumpPrum pPrumpPrumpPrumpPru" << endl << "      mpPr   umpPru         mpPrumpPrump Prump PrumpPrumpP" << endl << "       rumpPrumpP           rumpPrumpPr  umpP" << endl << "        rumpPru              mpPrumpP   rump" << endl << "          Pru                mpPrum    pPru" << endl << "                              mpPrum  pPru" << endl << "                               mpPrumpPru" << endl << "                                 mpPrump" << endl << "                                   Pru  " << endl;
+    }
+    else if(is_digits(toFind))
+    {
+        int toFindDigits= stoi(toFind);
+        _printOutPerson = _turnP.findDigits(toFindDigits);
+
+        if (_turnP.lookForDigits(toFindDigits))
+        {
+            cout << "Person found! " << endl;
+            cout << _printOutPerson;
+        }
+        else
+        {
+            cout << "Person not found " << endl << endl;
+        }
+
     }
     else
     {
@@ -381,6 +578,138 @@ void consoleUI::findCommandPerson()
     }
 }
 
+void consoleUI::modifyCommandPerson()
+{
+    string toModify;
+
+    cout << "Search for a person to modify: ";
+
+
+
+    while(true)
+    {
+        getline(cin, toModify);
+
+        _printOutPerson = _turnP.findPerson(toModify);
+
+        if (_turnP.lookForPerson(toModify))
+        {
+            cout << _printOutPerson;
+        }
+        if (checkModifyPerson(toModify)) //here the magic happens
+        {
+            cout << "Hooray you found a person to modify! " << endl;
+            Person id = _turnP.findPersonNumber(_printOutPerson[0].getName()); //bý bara til fkn copy af kallinum sem eg vill breyta, vil breyta actual gæjanum!
+            personValidation(id);
+            _turnP.changePerson(id);
+            break;
+        }
+        else
+        {
+            cout << "please be more specific: " << endl;
+        }
+    }
+
+}
+
+bool consoleUI::checkModifyPerson( const string& toModify)
+{
+    int counter = 0;
+    for(size_t i = 0; i < _printOutPerson.size(); i++)
+    {
+        if(_printOutPerson.size() == 1)
+        {
+            return true;
+        }
+  /*      string check = _printOutPerson[i].getName();
+        else if(check[i] == toModify[i])
+        {
+            counter++;
+            if(counter == toModify.size())
+            {
+                return true;
+            }
+        }*/
+    }
+    return false;
+}
+
+void consoleUI::personValidation(Person &input)
+{
+    string name, gender, deathYear, birthYear;
+    int birthCheck = 0, deathCheck = 0;
+    const int MINIMUM_BIRTH_YEAR = 1750, MAXIMUM_BIRTH_YEAR = 2000;
+    const int MINIMUM_DEATH_YEAR = 1800, MAXIMUM_DEATH_YEAR = 2017;
+
+    cout << "Please enter the following information about the new computer scientist " << endl;
+    cout << "in the following order." << endl;
+    cout << "Be aware you cannot put letters that are not in the English alphabet." << endl;
+
+    while(true)
+    {
+        cout << "Name: ";
+        getline(cin, name);
+        if(name == EMPTY)
+        {
+            cout << "No input!" << endl;
+        }
+        else
+        {
+            break;
+        }
+    }
+    input.setName(name);
+
+    while(true)
+    {
+        cout << "Gender (male/female) in lowercase: ";
+        cin >> gender;
+        if (gender == MALE || gender == FEMALE)
+        {
+            break;
+        }
+        else
+        {
+            cout << "Invalid input!" << endl;
+        }
+    };
+    input.setGender(gender);
+
+    while(true)
+    {
+        cout << "Birth year (YYYY): ";
+        cin >> birthYear;
+        birthCheck = atoi(birthYear.c_str());       // Removes alphanumeric values from the input.
+        if (birthCheck > MINIMUM_BIRTH_YEAR && birthCheck < MAXIMUM_BIRTH_YEAR)
+        {
+            break;
+        }
+        else
+        {
+            cout << "Invalid input!" << endl;
+        };
+    }
+    input.setBirthYear(birthCheck);
+
+    while(true)
+    {
+        cout << "Died (input any other character if still alive): ";
+        cin >> deathYear;
+        deathCheck = atoi(deathYear.c_str());       // Removes alphanumeric values from the input.
+        if ((deathYear >= birthYear && deathCheck > MINIMUM_DEATH_YEAR && deathCheck < MAXIMUM_DEATH_YEAR) || deathCheck == 0 )
+        {
+            break;
+        }
+        else
+        {
+            cout << "Invalid input!" << endl;
+        };
+    }
+    input.setDeathYear(deathCheck);
+
+    cout << endl;
+    cin.ignore();
+}
 
 void consoleUI::statusCommandPerson()
 {
@@ -392,7 +721,7 @@ void consoleUI::statusCommandPerson()
     cout << "Total names in list       : " << _printStatus[NAMES] << endl;
     cout << "Number of deceased        : " << _printStatus[DIED] << endl;
     cout << "Total females on the list : " << _printStatus[FEMALES] << endl;
-    cout << "Total Males on the list   : " << _printStatus[MALES] << endl << endl;
+    cout << "Total males on the list   : " << _printStatus[MALES] << endl << endl;
 }
 
 bool consoleUI::specialCommandPerson()
@@ -418,6 +747,10 @@ bool consoleUI::specialCommandPerson()
         return true;
     }
     else if(_command == BACK)
+    {
+        return true;
+    }
+    else if(_command == MODIFY)
     {
         return true;
     }
@@ -556,6 +889,11 @@ void consoleUI::printListPerson()       // Print if appropriate.
         _print = false;
         statusCommandPerson();
     }
+    else if(_command == MODIFY)
+    {
+        _print = false;
+        modifyCommandPerson();
+    }
     else
     {
         _print = false;
@@ -597,6 +935,22 @@ void consoleUI::findCommandComputer()
     {
         cout << "                                      PrumpPrum                                         " << endl;                                                                                         cout << "                                  pPrumpPrumpPrumpP                                     " << endl << "                              rumpPrumpPrumpPrumpPrump                                  " << endl << "                      PrumpPrumpPrump           PrumpPru                                " << endl << "                   mpPrumpPrumpP                  rumpPru                               " << endl << "                 mpPrumpPrumpPru                   mpPrum                               " << endl << "                 pPrumpPrumpPrump                   Prump" << endl << "                 PrumpPrumpP rumpPr    umpPrumpPru  mpPru" << endl << "                 mpPrumpPrumpPrumpPr umpPrumpPrumpPr umpP" << endl << "                 rumpPrumpPrumpPru  mpPrumpPrumpPrumpPrum" << endl << "                pPrum  pPrumpPrump  PrumpPrumpPrumpPrumpP" << endl << "               rumpPrumpPrumpPrumpP rumpPrumpPr umpPrumpP" << endl << "              rumpPrumpPrumpPrump   PrumpPrumpPrumpPrumpP" << endl << "             rumpPrumpPrumpPrumpPrumpPrumpPrumpPr  umpPr" << endl << "            umpPr          umpPrumpPrumpPrump     PrumpP" << endl << "           rumpP                      rumpPru     mpPrum" << endl << "          pPrump                                 PrumpP" << endl << "         rumpPr                                 umpPru" << endl << "        mpPrum                                  pPrump" << endl << "        Prump                      Prum        pPrump" << endl << "        Prum                      pPrum pPr   umpPru" << endl << "        mpPr                      umpPrumpPr  umpPr                         umpPrumpP" << endl << "       rumpP                      rumpPrump  Prump                        PrumpPrumpPr" << endl << "       umpPr                     umpPrumpPr umpPr                       umpPru    mpPr" << endl << "       umpPr                     umpPrumpP  rumpP                     rumpPru    mpPru" << endl << "       mpPru                    mpPrumpPr  umpPru                   mpPrump     Prump" << endl << "       Prump                    PrumpPru   mpPrumpPrumpPrumpPru   mpPrump     Prump" << endl << "        Prum                   pPrumpPr    umpPrumpPrumpPrumpPrumpPrump      Prump" << endl << "        Prum                   pPrumpP     rumpP   rumpP   rumpPrumpP      rumpPr" << endl << "        umpP                  rumpPrum      pPr   umpPrumpPrumpPrum      pPrump" << endl << "        Prump               Prump Prump         PrumpPrumpPrumpPru     mpPrump" << endl << "         Prum             pPrum  pPrumpP         rumpPrumpPrumpPrump   PrumpPru" << endl << "         mpPru            mpPrumpPrumpPr                     umpPrump    PrumpPrum" << endl << "          pPrum            pPrumpPrumpP              rump       PrumpP  rump Prump" << endl << "          PrumpP              rump                   Prum        pPrump  PrumpPru" << endl << "           mpPrum                                pPr              umpPr    umpP" << endl << "            rumpPrum                            pPru              mpPru     mpPr" << endl << "               umpPrum                          pPru              mpPrumpPrumpPr" << endl << "     ump        PrumpPrump                       Prum           pPrumpPrumpPrum" << endl << "    pPrumpP    rumpPrumpPrumpPru                  mpP         rumpPru    m" << endl << "   pPrumpPrumpPru mpPrumpPrumpPrumpPrum           pPru    mpPrump" << endl << "    Prum pPrumpPrumpPru    mpPrumpPrumpPru mpPrumpPrumpPrumpPrum" << endl << "     pPru  mpPrumpPru         mpPrumpPrum pPrumpPrumpPrumpPru" << endl << "      mpPr   umpPru         mpPrumpPrump Prump PrumpPrumpP" << endl << "       rumpPrumpP           rumpPrumpPr  umpP" << endl << "        rumpPru              mpPrumpP   rump" << endl << "          Pru                mpPrum    pPru" << endl << "                              mpPrum  pPru" << endl << "                               mpPrumpPru" << endl << "                                 mpPrump" << endl << "                                   Pru  " << endl;
     }
+    else if(is_digits(toFind))
+    {
+        int toFindDigits= stoi(toFind);
+
+        _printOutComputer = _turnC.findDigits(toFindDigits);
+        if (_turnC.lookForDigits(toFindDigits))
+        {
+           cout << "Computer found! " << endl;
+           cout << _printOutComputer;
+        }
+        else
+        {
+            cout << "Computer not found " << endl << endl;
+        }
+
+    }
     else
     {
         _printOutComputer = _turnC.findComputer(toFind);
@@ -626,6 +980,7 @@ void consoleUI::statusCommandComputer()
     int typeQuantumQuant=7;
     int builtQuant=8;
 
+
     cout<<"Total computers in list          : " << _printStatus[nameQuant]<<endl;
     cout<<"Electronical computers           : " << _printStatus[typeElecQuant]<<endl;
     cout<<"Mechanical computers             : " << _printStatus[typeMechQuant]<<endl;
@@ -635,6 +990,8 @@ void consoleUI::statusCommandComputer()
     cout<<"Super computers                  : " << _printStatus[typeSuperQuant]<<endl;
     cout<<"Quantum computers                : " << _printStatus[typeQuantumQuant]<<endl;
     cout<<"Computers that were built        : " << _printStatus[builtQuant]<<endl;
+
+
 
 
 }
@@ -765,6 +1122,11 @@ void consoleUI::printListComputer()
         _print = false;
         statusCommandComputer();
     }
+    else if(_command == MODIFY)
+    {
+        _print = false;
+        modifyCommandComputer();
+    }
     else
     {
         _print = false;
@@ -804,4 +1166,155 @@ void consoleUI::print()
     {
         cout << "Invalid command!" << endl << endl;
     }
+}
+
+void consoleUI::modifyCommandComputer()
+{
+    string toFind;
+
+    cout << "Search for a computer to modify: ";
+    while(true)
+    {
+        getline(cin, toFind);
+        cout << endl;
+
+        _printOutComputer = _turnC.findComputer(toFind);
+        if (_turnC.lookForComputer(toFind))
+        {
+            cout << _printOutComputer;
+        }
+        if (_printOutComputer.size()==1)
+        {
+            cout << "Hooray you found a computer to modify!" << endl;
+            Computer id = _turnC.findComputerNumber(_printOutComputer[0].getName());
+            computerValidation(id);
+            _turnC.changeComputer(id);
+            break;
+        }
+        else
+        {
+            cout << "Please be more specific: " << endl << endl;
+        }
+    }
+
+}
+
+void consoleUI::computerValidation(Computer& input)
+{
+    string name, type, yearBuilt, wasitbuilt, built;
+    int birthCheck = 0;
+    const int MINIMUM_Built_YEAR = 1500, MAXIMUM_Built_YEAR = 2030;
+
+    cout << "Please enter the following information about the new Computer " << endl;
+    cout << "in the following order." << endl;
+    cout << "Be aware you cannot put letters that are not in the English alphabet." << endl;
+
+    while(true)
+    {
+        cout << "Name: ";
+        getline(cin, name);
+        if(name == EMPTY)
+        {
+            cout << "No input!" << endl;
+        }
+        else
+        {
+            break;
+        }
+    }
+    input.setName(name);
+
+    while(true)
+    {
+        cout << "Type of computer: ";
+        getline(cin, type);
+        if(type == EMPTY)
+        {
+            cout << "No input!" << endl;
+        }
+        else if (_turnG.toLower(type) == "mechanical")
+        {
+            type = MECHANICAL;
+            break;
+        }
+        else if (_turnG.toLower(type) == "electronic")
+        {
+            type = ELECTRONIC;
+            break;
+        }
+        else if (_turnG.toLower(type) == "electro-mechanical")
+        {
+            type = ELECTROMECHANICAL;
+            break;
+        }
+        else if (_turnG.toLower(type) == "transistor")
+        {
+            type = TRANSISTOR;
+            break;
+        }
+        else if (_turnG.toLower(type) == "transistor/microchip")
+        {
+            type = TRANSISTORMICROCHIP;
+            break;
+        }
+        else if (_turnG.toLower(type) == "supercomputer")
+        {
+            type = SUPERCOMPUTER;
+            break;
+        }
+        else if (_turnG.toLower(type) == "quantum computer")
+        {
+            type = QUANTUMCOMPUTER;
+            break;
+        }
+        else
+        {
+            cout << "Invalid type!" << endl;
+        }
+    }
+    input.setType(type);
+
+    //if(built == "Yes")
+    //{
+        while(true)
+        {
+            cout << "Year (YYYY): ";
+            cin >> yearBuilt;
+            birthCheck = atoi(yearBuilt.c_str());       // Removes alphanumeric values from the input.
+            if (birthCheck > MINIMUM_Built_YEAR && birthCheck < MAXIMUM_Built_YEAR)
+            {
+                break;
+            }
+            else
+            {
+                cout << "Invalid input!" << endl;
+            }
+        }
+        input.setYearbuild(birthCheck);
+    //}
+
+    while(true)
+    {
+        cout << "Was the computer ever built? (y/n)" << endl;
+        cin >> wasitbuilt;
+        if(wasitbuilt == "Y" || wasitbuilt == "y" || wasitbuilt == "Yes" || wasitbuilt == "yes")
+        {
+            built = "Yes";
+            break;
+        }
+        else if (wasitbuilt == "N" || wasitbuilt == "n" || wasitbuilt == "No" || wasitbuilt == "no")
+        {
+            built = "No";
+            break;
+        }
+        else
+        {
+            cout << "Invalid input!" << endl;
+        }
+    }
+    input.setBuilt(built);
+
+
+    cout << endl;
+    cin.ignore();
 }

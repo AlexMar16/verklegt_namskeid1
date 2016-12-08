@@ -6,6 +6,8 @@
 #include "computerService.h"
 #include "generalService.h"
 //#include "dbmanager.h"
+
+
 using namespace std;
 
 class consoleUI
@@ -20,10 +22,12 @@ private:
     vector<Computer> _printOutComputer;
     vector<Person> _printOutPerson;
     bool _print;
+    bool checkModifyPerson(const string& toModify);
     bool beginningCommand();
     bool specialCommandPerson();
     bool sortSpecialCommandPerson(const string& choice);
     bool specialCommandComputer(const string& command);
+    bool specialCommandConnect();
     void printListPerson();
     void printListComputer();
     void addCommand();
@@ -31,6 +35,7 @@ private:
     void removeCommandPerson();
     void sortCommandPerson();
     void sortCommandComputer();
+    bool is_digits(const string& numbers);
     void findCommandPerson();
     void findCommandComputer();
     void quizCommand();
@@ -41,11 +46,18 @@ private:
     void commandBox();
     void printList();
     void print();
+    void commandBoxConnect();
     PersonService _turnP;      //The instance we use to communicate with the PersonService layer.
     string _theRightOne;
     string _command;
     string _database;
     computerService _turnC;
+
+    void modifyCommandPerson();
+    void personValidation(Person &input);
+    void modifyCommandComputer();
+    void computerValidation(Computer& input);
+
 
 };
 

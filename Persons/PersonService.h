@@ -11,9 +11,11 @@ public:
     PersonService();
     bool lookForPerson(const string& name);
     Person findPersonExactly(const string& name);
-    Person generateQuestion();
+    Person generateAnswer();
     vector<int> properties();
     vector<Person> findPerson(const string& name);
+    bool lookForDigits(const int& num);
+    vector<Person> findDigits(const int& num);
     vector<Person> getPersonList() const;
     void addPerson(const Person& input);
     void addComputer(const Computer& input);
@@ -27,10 +29,14 @@ public:
     string genderCheck(const Person& p);
     string aliveCheck(const Person& p);
 
+    Person findPersonNumber(string nabn); //we will change this to ID later
+    void changePerson(const Person& input);
+
 private:
     bool alreadyInDatabase(const string &name);
     vector<Person> _listPerson;
     vector<Person> _listSearchedPerson;
+    vector<Person> _listSearchedDigits;
     vector<Person> sortAlphabetically();
     vector<Person> sortBirthYear();
     vector<Person> sortDeath();
@@ -39,6 +45,11 @@ private:
     vector<Person> sortAlphabeticallyLastName();
     void removeFromDatabase(const string& name);
     void swap(Person& a, Person& b);
+
+    int _personIndex;
+
+    generalService GS;
+
 };
 
 #endif // PersonService_H

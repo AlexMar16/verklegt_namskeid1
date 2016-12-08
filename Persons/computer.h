@@ -20,6 +20,14 @@ const string G = "g";
 const string L = "l";
 const string QUIT = "quit";
 */
+const string ELECTRONIC = "Electronic";
+const string MECHANICAL = "Mechanical";
+const string ELECTROMECHANICAL = "Electro-Mechanical";
+const string TRANSISTOR = "Transistor";
+const string TRANSISTORMICROCHIP = "Transistor/Microchip";
+const string SUPERCOMPUTER = "Supercomputer";
+const string QUANTUMCOMPUTER = "Quantum computer";
+
 class Computer
 {
 public:
