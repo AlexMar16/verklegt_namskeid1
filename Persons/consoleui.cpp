@@ -40,8 +40,10 @@ void consoleUI::run()
                 commandBoxConnect();
                 if(_turnCon.personORComputer(_command))
                 {
-                    cout << "tu komst!!!!! ASDFASDFASDF";
                     int prump;
+
+                    _printOutConnection = _turnCon.getConnectionList();
+                    cout << _printOutConnection;
                     cin >> prump;
                     //connectionPrintList();
                 }

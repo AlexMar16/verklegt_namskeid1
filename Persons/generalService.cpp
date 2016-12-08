@@ -6,6 +6,7 @@ generalService::generalService()
     _dataFound = false;
     _persons = _database.getPVector();
     _computers = _database.getCVector();
+    _connections = _database.getCOVector();
     //_connections = _database.getConnections();
     _dataFound = _database.isOpen();
 }
@@ -31,6 +32,7 @@ bool generalService::dataFound()const {return _dataFound;}
 
 vector<Person> generalService::getOriginalPersons() const {return _persons;}
 vector<Computer> generalService::getOriginalComputers() const {return _computers;}
+vector<Connection> generalService::getOriginalConnections() const {return _connections;}
 
 bool generalService::quizDuplicatedAnswer(const string& a, const string& b, const string& c, const string& d)
 {

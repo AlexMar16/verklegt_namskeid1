@@ -99,31 +99,24 @@ void DbManager::getConnections()
     while (query.next())
     {
         int connectionid = query.value("ID").toInt();
-        //cout << connectionid << " : ";
         temp.setConnectionID(connectionid);
 
         int personid = query.value("PID").toInt();
-        //cout << personid << " : ";
         temp.setPersonID(personid);
 
         string Pname = query.value("PName").toString().toStdString();
-        //cout << Pname << " : ";
         temp.setPersonName(Pname);
 
         int computerid = query.value("CID").toInt();
-        //cout << computerid << " : ";
         temp.setComputerID(computerid);
 
         string Cname = query.value("CName").toString().toStdString();
-        //cout << Cname << endl;
         temp.setComputerName(Cname);
-
-
 
         _connections.push_back(temp);
     }
 }
-
+vector<Connection> DbManager::getCOVector() const {return _connections;}
 vector<Computer> DbManager::getCVector() const {return _computers;}
 
 bool DbManager::isOpen() const {return _db.isOpen();}

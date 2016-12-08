@@ -22,6 +22,7 @@ private:
     vector<int> _printStatus;
     vector<Computer> _printOutComputer;
     vector<Person> _printOutPerson;
+    vector<Connection> _printOutConnection;
     bool _print;
     bool checkModifyPerson(const string& toModify);
     bool beginningCommand();

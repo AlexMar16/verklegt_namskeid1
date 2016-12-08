@@ -14,6 +14,7 @@ public:
     bool dataFound() const;
     vector<Person> getOriginalPersons() const;
     vector<Computer> getOriginalComputers() const;
+    vector<Connection> getOriginalConnections() const;
     bool quizDuplicatedAnswer(const string& a, const string& b, const string& c, const string& d);
     bool alreadyInDatabase(const string& name);
 
@@ -22,6 +23,7 @@ private:
     bool _dataFound;
     vector<Person> _persons;
     vector<Computer> _computers;
+    vector<Connection> _connections;
     DbManager _database;
 };
 

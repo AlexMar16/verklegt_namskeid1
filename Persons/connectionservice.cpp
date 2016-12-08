@@ -2,7 +2,8 @@
 
 connectionService::connectionService()
 {
-
+    generalService getVector;
+    _listConnections = getVector.getOriginalConnections();
 }
 /*
 void connectionService::removeFromDatabase(const string &name)
@@ -14,6 +15,7 @@ void connectionService::addConnection(const Connection &input)
 
 }
 */
+vector<Connection> connectionService::getConnectionList() const {return _listConnections;}
 
 bool connectionService::personORComputer(const string& command)
 {
@@ -33,3 +35,4 @@ bool connectionService::personORComputer(const string& command)
         return false; //einhver að vinna að villuchecki eftir þetta
     }
 }
+
