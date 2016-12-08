@@ -171,6 +171,7 @@ void DbManager::removeFromComputers(const Computer &input)
 
 void DbManager::insertIntoPerson(const Person &input)
 {
+    cout << "hola" << endl;
     QString qsName = QString::fromStdString(input.getName());
     QString qsGender= QString::fromStdString(input.getGender());
     QString path = "ComputerScience.sqlite";
@@ -184,8 +185,8 @@ void DbManager::insertIntoPerson(const Person &input)
     {
         cout << "dbconnection not found" << endl;
     }*/
-    cout << "not go in";
-    //QSqlDatabase _db = QSqlDatabase::database("dbconnection");
+
+    QSqlDatabase _db = QSqlDatabase::database("dbconnection");
     QString dbName = path;
     _db.setDatabaseName(dbName);
     _db.open();
@@ -193,13 +194,12 @@ void DbManager::insertIntoPerson(const Person &input)
     {
         QSqlQuery qry(_db);
         qry.prepare("INSERT INTO Persons(Name, Gender, birthYear, deathYear)"
-                    "VALUES(:P_Name, :P_Gender, :P_birthYear, :P_deathYear)");
+                    "VALUES(:P_Name,:P_Gender,:P_BirthYear,:P_DeathYear)");
         qry.bindValue(":P_Name",qsName);
         qry.bindValue(":P_Gender",qsGender);
-        qry.bindValue(":P_birthYear", input.getBirthYear());
-        qry.bindValue(":P_deathYear", input.getDeathYear());
-        qry.exec();
-        cout << "cool beans";
+        qry.bindValue(":P_BirthYear",input.getBirthYear());
+        qry.bindValue(":P_DeathYear",input.getDeathYear());
+        //qry.exec();
         if( !qry.exec() )
         {
             //qDebug() << qry.lastError().text();
@@ -212,3 +212,4 @@ void DbManager::insertIntoPerson(const Person &input)
         cout << "not inserted" << endl;
     }
 }
+

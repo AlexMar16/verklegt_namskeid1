@@ -365,6 +365,7 @@ void PersonService::addPerson(const Person &input)        // Makes the user capa
     if(!alreadyInDatabase(input.getName()))
     {
         _listPerson.push_back(input);
+
     }
 }
 
