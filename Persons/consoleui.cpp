@@ -37,8 +37,15 @@ void consoleUI::run()
                 }
                 else
                 {
-                    commandBoxConnect();
-                    //setja foll
+                commandBoxConnect();
+                if(_turnCon.personORComputer(_command))
+                {
+                    cout << "tu komst!!!!! ASDFASDFASDF";
+                    int prump;
+                    cin >> prump;
+                    //connectionPrintList();
+                }
+                 //setja foll
                 }
             }while(_command != BACK && _command != QUIT);
             _turnG.setProgram(_command);
