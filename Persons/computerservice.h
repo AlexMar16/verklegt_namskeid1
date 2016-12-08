@@ -25,6 +25,9 @@ public:
     void reverseVector();
     //string assignSelection(string& answer, const string& a, const string& b, const string& c, const string& d);
 
+    Computer findComputerNumber(string name);
+    void changeComputer(const Computer& somecomp);
+
 private:
     bool alreadyInDatabase(const string &name);
     vector<Computer> _listComputer;
@@ -37,6 +40,8 @@ private:
     vector<Computer> sortCreationYear();
     void removeFromDatabase(const string& name);
     void swap(Computer& a, Computer& b);
+
+    int _computerIndex;
 };
 
 #endif // COMPUTERSERVICE_H
