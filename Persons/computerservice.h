@@ -10,13 +10,13 @@ public:
     bool lookForComputer(const string& name);
     bool getProgram() const;
     bool dataFound() const;
-    bool lookForDigits(const int& num);
     Computer findComputerExactly(const string& name);
     Computer generateQuestion();
-    Computer generateAnswer();
     vector<int> computerProperties();
     vector<Computer> findComputer(const string& name);
     vector<Computer> getList() const;
+    bool lookForDigits(const int& num);
+    Computer generateAnswer();
     vector<Computer> findDigits(const int& num);
     vector<Computer> getComputerList() const;
     void addComputer(const Computer& input);
@@ -35,6 +35,9 @@ public:
     string builtCheck(const Computer& c);
 
 
+    Computer findComputerNumber(string name);
+    void changeComputer(const Computer& somecomp);
+
 private:
     bool _keepGoing;
     bool _valid;
@@ -50,6 +53,8 @@ private:
     vector<Computer> sortCreationYear();
     void removeFromDatabase(const string& name);
     void swap(Computer& a, Computer& b);
+
+    int _computerIndex;
 };
 
 #endif // COMPUTERSERVICE_H

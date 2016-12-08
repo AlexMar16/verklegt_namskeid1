@@ -356,7 +356,7 @@ void PersonService::removePerson(const Person &input)         // Makes the user 
         DbManager removePerson;
         removeFromDatabase(input.getName());
         removePerson.setVector(_listPerson);
-        removePerson.changeData();
+        removePerson.removeFromPersons(input);
     }
 }
 
