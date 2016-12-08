@@ -324,29 +324,8 @@ void consoleUI::addCompCommand()
     }
     input.setType(type);
 
-
-    while(true)
-    {
-        cout << "Was the computer ever built? (y/n)" << endl;
-        cin >> wasitbuilt;
-        if(wasitbuilt == "Y" || wasitbuilt == "y" || wasitbuilt == "yes")
-        {
-            built = "yes";
-            break;
-        }
-        else if (wasitbuilt == "n" || wasitbuilt == "N" || wasitbuilt == "no")
-        {
-            built = "no";
-            break;
-        }
-        else
-        {
-            cout << "Invalid input!" << endl;
-        }
-    }
-    input.setBuilt(built);
-    if(built == "yes")
-    {
+    //if(built == "yes" || built == "no")
+    //{
         while(true)
         {
             cout << "Year (YYYY): ";
@@ -362,8 +341,28 @@ void consoleUI::addCompCommand()
             }
         }
         input.setYearbuild(birthCheck);
-    }
+    //}
 
+    while(true)
+    {
+        cout << "Was the computer ever built? (y/n)" << endl;
+        cin >> wasitbuilt;
+        if(wasitbuilt == "Y" || wasitbuilt == "y" || wasitbuilt == "Yes" || wasitbuilt == "yes")
+        {
+            built = "Yes";
+            break;
+        }
+        else if (wasitbuilt == "N" || wasitbuilt == "n" || wasitbuilt == "No" || wasitbuilt == "no")
+        {
+            built = "No";
+            break;
+        }
+        else
+        {
+            cout << "Invalid input!" << endl;
+        }
+    }
+    input.setBuilt(built);
 
     cout << endl;
 
@@ -1113,29 +1112,8 @@ void consoleUI::computerValidation(Computer& input)
     }
     input.setType(type);
 
-
-    while(true)
-    {
-        cout << "Was the computer ever built? (y/n)" << endl;
-        cin >> wasitbuilt;
-        if(wasitbuilt == "Y" || wasitbuilt == "y" || wasitbuilt == "yes")
-        {
-            built = "Yes";
-            break;
-        }
-        else if (wasitbuilt == "n" || wasitbuilt == "N" || wasitbuilt == "no")
-        {
-            built = "No";
-            break;
-        }
-        else
-        {
-            cout << "Invalid input!" << endl;
-        }
-    }
-    input.setBuilt(built);
-    if(built == "Yes")
-    {
+    //if(built == "Yes")
+    //{
         while(true)
         {
             cout << "Year (YYYY): ";
@@ -1151,7 +1129,28 @@ void consoleUI::computerValidation(Computer& input)
             }
         }
         input.setYearbuild(birthCheck);
+    //}
+
+    while(true)
+    {
+        cout << "Was the computer ever built? (y/n)" << endl;
+        cin >> wasitbuilt;
+        if(wasitbuilt == "Y" || wasitbuilt == "y" || wasitbuilt == "Yes" || wasitbuilt == "yes")
+        {
+            built = "Yes";
+            break;
+        }
+        else if (wasitbuilt == "N" || wasitbuilt == "n" || wasitbuilt == "No" || wasitbuilt == "no")
+        {
+            built = "No";
+            break;
+        }
+        else
+        {
+            cout << "Invalid input!" << endl;
+        }
     }
+    input.setBuilt(built);
 
 
     cout << endl;
