@@ -77,7 +77,7 @@ void consoleUI::firstCommandBox()
     cout << setw(ASTERISK_WIDTH) << setfill(ASTERISK) <<  ASTERISK << endl;
     cout << "Pick a database: ";
     getline(cin, _database);
-    _database = toLower(_database); //AFHHVERJU VIRKARU EKKI !
+    _database = toLower(_database);
     beginningCommand();
     _turnG.setProgram(_database);
     if(_database == "person" || _database == "p")
