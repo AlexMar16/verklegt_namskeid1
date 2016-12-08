@@ -22,6 +22,8 @@ public:
     void insertIntoComputer(const Computer &input);
     void insertIntoPerson(const Person &input);
     void removeFromComputers(const Computer &input);
+    void removeFromPersons(const Person &input);
+
     void changeData();
     void getComputers();
 
