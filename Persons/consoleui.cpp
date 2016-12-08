@@ -67,11 +67,11 @@ void consoleUI::firstCommandBox()
     getline(cin, _database);
     beginningCommand();
     _turnG.setProgram(_database);
-    if(_database == "person")
+    if(_database == "person" || _database == "p")
     {
         _theRightOne = "person";
     }
-    else if(_database == "computer")
+    else if(_database == "computer" || _database == "c")
     {
         _theRightOne = "computer";
     }
