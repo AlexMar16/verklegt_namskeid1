@@ -349,29 +349,6 @@ void PersonService::sortPersonList(const string& command)       // Sort the list
     }
 }
 
-
-void PersonService::addPerson(const Person &input)        // Makes the user capable to add people to the list, as long as they're not already on the list
-{
-    if(!alreadyInDatabase(input.getName()))
-    {
-        DbManager addNewPerson;
-        _listPerson.push_back(input);
-        addNewPerson.setVector(_listPerson);
-        addNewPerson.changeData();
-    }
-}
-void PersonService::addComputer(const Computer &input)        // Makes the user capable to add people to the list, as long as they're not already on the list
-{
-    if(true)//!alreadyInDatabase(input.getName())
-    {
-        DbManager addNewComputer;
-        addNewComputer.insertIntoComputer(input);
-        //_listPerson.push_back(input)
-        //addNew.setVector(_listPerson);
-        //addNew.changeData();
-    }
-}
-
 void PersonService::removePerson(const Person &input)         // Makes the user capable to remove people
 {
     if(alreadyInDatabase(input.getName()))      // Checks if the name is already in the database.
@@ -380,6 +357,14 @@ void PersonService::removePerson(const Person &input)         // Makes the user 
         removeFromDatabase(input.getName());
         removePerson.setVector(_listPerson);
         removePerson.changeData();
+    }
+}
+
+void PersonService::addPerson(const Person &input)        // Makes the user capable to add people to the list, as long as they're not already on the list
+{
+    if(!alreadyInDatabase(input.getName()))
+    {
+        _listPerson.push_back(input);
     }
 }
 
