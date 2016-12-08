@@ -367,7 +367,10 @@ Computer computerService::findComputerNumber(string name)
     return _listComputer[_computerIndex];
 }
 
-void computerService::changeComputer(const Computer& somecomp)
+void computerService::changeComputer(const Computer& input)
 {
-    _listComputer[_computerIndex]=somecomp;
+    DbManager modifyComputer;
+    modifyComputer.changeComputer(input, _computerIndex);
+    _listComputer[_computerIndex] = input;
+    modifyComputer.setCVector(_listComputer);
 }

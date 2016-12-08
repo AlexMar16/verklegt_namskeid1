@@ -25,7 +25,7 @@ public:
     void generateOptions(const Computer& correct, string& a, string& b, string& c, string& d);
     void reverseVector();
     void sortComputerList(const string& command);
-    void changeComputer(const Computer& somecomp);
+    void changeComputer(const Computer& input);
     string getLastName(const string& name) const;
     string toLower(const string &tolowerstring);
     string assignSelection(string& answer, const string& a, const string& b, const string& c, const string& d);
