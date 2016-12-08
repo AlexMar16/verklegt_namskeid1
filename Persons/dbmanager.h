@@ -26,11 +26,12 @@ public:
 
     void changeData();
     void getComputers();
-
+    void changePerson(const Person& input, const int personIndex);
+    void changeComputer(const Computer& input, const int computerIndex);
 
 private:
     vector<Person> _persons;
-    vector<Computer> _Computer;
+    vector<Computer> _computers;
     void getPersons();
     QSqlDatabase _db;
 };
