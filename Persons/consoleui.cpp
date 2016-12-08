@@ -44,7 +44,6 @@ void consoleUI::run()
                             commandBoxSubConnect();
                             connectSubCommand();
                             cout << "komst";
-
                         }
                     } while(_command != BACK && _command != QUIT);
                 }
@@ -243,10 +242,6 @@ void consoleUI::quizCommand()
     cin.ignore();
 }
 
-
-
-
-
 void consoleUI::addCommand()
 {
     string name, gender, deathYear, birthYear;
@@ -409,8 +404,6 @@ void consoleUI::addCompCommand()
     }
     input.setType(type);
 
-    //if(built == "yes" || built == "no")
-    //{
     while(true)
     {
         cout << "Year (YYYY): ";
@@ -426,7 +419,6 @@ void consoleUI::addCompCommand()
         }
     }
     input.setYearbuild(birthCheck);
-    //}
 
     while(true)
     {
@@ -526,8 +518,6 @@ bool consoleUI::connectSubCommand()
 void consoleUI::findCommandPerson()
 {
     string toFind;
-
-
     cout << "Search name/year: ";
 
     getline(cin, toFind);
@@ -552,7 +542,6 @@ void consoleUI::findCommandPerson()
         {
             cout << "Person not found " << endl << endl;
         }
-
     }
     else
     {
