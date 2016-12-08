@@ -31,7 +31,7 @@ DbManager::~DbManager() {_db.close();}
 
 void DbManager::getPersons()
 {
-    const QString path = "ComputerScienceBackup.sqlite";
+    const QString path = "ComputerScience.sqlite";
     QSqlDatabase _db = QSqlDatabase::database("dbconnection");
     QString dbName = path;
     _db.setDatabaseName(dbName);
@@ -58,7 +58,7 @@ void DbManager::getPersons()
 
 void DbManager::getComputers()
 {
-    const QString path = "ComputerScienceBackup.sqlite";
+    const QString path = "ComputerScience.sqlite";
     QSqlDatabase _db = QSqlDatabase::database("dbconnection");
     QString dbName = path;
     _db.setDatabaseName(dbName);
@@ -88,7 +88,7 @@ vector<Person> DbManager::getPVector() const {return _persons;}
 void DbManager::getConnections()
 {
 
-    const QString path = "ComputerScienceBackup.sqlite";
+    const QString path = "ComputerScience.sqlite";
     QSqlDatabase _db = QSqlDatabase::database("dbconnection");
     QString dbName = path;
     _db.setDatabaseName(dbName);
@@ -141,7 +141,7 @@ void DbManager::insertIntoComputer(const Computer &input)
     QString qsName = QString::fromStdString(input.getName());
     QString qsType= QString::fromStdString(input.getType());
     QString qsBuilt = QString::fromStdString(input.getBuilt());
-    QString path = "ComputerScienceBackup.sqlite";
+    QString path = "ComputerScience.sqlite";
     /* nota seinna mögulega
     if( QSqlDatabase::contains( "dbconnection" ) )
     {
@@ -183,7 +183,7 @@ void DbManager::insertIntoComputer(const Computer &input)
 void DbManager::removeFromComputers(const Computer &input)
 {
     QString qsName = QString::fromStdString(input.getName());
-    QString path = "ComputerScienceBackup.sqlite";
+    QString path = "ComputerScience.sqlite";
     QSqlDatabase _db = QSqlDatabase::database("dbconnection");
     QString dbName = path;
     _db.setDatabaseName(dbName);
@@ -212,7 +212,7 @@ void DbManager::removeFromComputers(const Computer &input)
 void DbManager::removeFromPersons(const Person &input)
 {
     QString qsName = QString::fromStdString(input.getName());
-    QString path = "ComputerScienceBackup.sqlite";
+    QString path = "ComputerScience.sqlite";
     QSqlDatabase _db = QSqlDatabase::database("dbconnection");
     QString dbName = path;
     _db.setDatabaseName(dbName);
@@ -243,7 +243,7 @@ void DbManager::insertIntoPerson(const Person &input)
 {
     QString qsName = QString::fromStdString(input.getName());
     QString qsGender= QString::fromStdString(input.getGender());
-    QString path = "ComputerScienceBackup.sqlite";
+    QString path = "ComputerScience.sqlite";
     /* nota seinna mögulega
     if( QSqlDatabase::contains( "dbconnection" ) )
     {
@@ -368,7 +368,6 @@ void DbManager::changeComputer(const Computer& input, const int computerIndex)
             qry.bindValue(":C_Type",qsType);
             qry.bindValue(":C_Built",qsBuilt);
             qry.bindValue(":C_OldName",qsOldName);
-            qDebug() << qsName;
             qry.exec();
             if( !qry.exec() )
             {

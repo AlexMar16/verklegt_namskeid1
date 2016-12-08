@@ -609,22 +609,34 @@ void consoleUI::modifyCommandPerson()
 
 bool consoleUI::checkModifyPerson( const string& toModify)
 {
-    int counter = 0;
     for(size_t i = 0; i < _printOutPerson.size(); i++)
     {
         if(_printOutPerson.size() == 1)
         {
             return true;
         }
-        /*      string check = _printOutPerson[i].getName();
-        else if(check[i] == toModify[i])
+        else if( _printOutPerson[i].getName() == toModify)
         {
-            counter++;
-            if(counter == toModify.size())
-            {
-                return true;
-            }
-        }*/
+            return true;
+        }
+        cout << _printOutPerson[i] << endl;
+    }
+    return false;
+}
+
+
+bool consoleUI::checkModifyComputer( const string& toModify)
+{
+    for(size_t i = 0; i < _printOutComputer.size(); i++)
+    {
+        if(_printOutComputer.size() == 1)
+        {
+            return true;
+        }
+        else if( _printOutComputer[i].getName() == toModify)
+        {
+            return true;
+        }
     }
     return false;
 }
@@ -1198,7 +1210,7 @@ void consoleUI::modifyCommandComputer()
         {
             cout << _printOutComputer;
         }
-        if (_printOutComputer.size()==1)
+        if (checkModifyComputer(toFind))
         {
             cout << "Hooray you found a computer to modify!" << endl;
             Computer id = _turnC.findComputerNumber(_printOutComputer[0].getName());
