@@ -239,7 +239,6 @@ void DbManager::insertIntoPerson(const Person &input)
     else
     {
         cout << "not inserted" << endl;
-<<<<<<< HEAD
     }
 }
 
@@ -341,7 +340,5 @@ void DbManager::changeComputer(const Computer& input, const int computerIndex)
     else
     {
         cout << "not inserted" << endl;
-=======
->>>>>>> e91a6cccac717818be412789f082ddb89f69cb30
     }
 }
