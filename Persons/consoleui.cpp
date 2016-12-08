@@ -76,6 +76,7 @@ void consoleUI::firstCommandBox()
     cout << setw(ASTERISK_WIDTH) << setfill(ASTERISK) <<  ASTERISK << endl;
     cout << "Pick a database: ";
     getline(cin, _database);
+    _database = toLower(_database); //AFHHVERJU VIRKARU EKKI !
     beginningCommand();
     _turnG.setProgram(_database);
     if(_database == "person" || _database == "p")
@@ -117,6 +118,7 @@ void consoleUI::commandBox()
     cout << setw(ASTERISK_WIDTH) << setfill(ASTERISK) << ASTERISK << endl;      // Command box ends.
     cout << "command: ";
     getline(cin, _command);          // Sets the private variable _command in the service class.
+    _command = toLower(_command);
 }
 
 void consoleUI::commandBoxConnect()
@@ -136,6 +138,7 @@ void consoleUI::commandBoxConnect()
     cout << setw(ASTERISK_WIDTH) << setfill(ASTERISK) << ASTERISK << endl;      // Command box ends.
     cout << "command: ";
     getline(cin, _command);
+    _command = toLower(_command);
 }
 
 void consoleUI::commandBoxSubConnect()
@@ -163,6 +166,9 @@ void consoleUI::commandBoxSubConnect()
 
 bool consoleUI::specialCommandConnect()
 {
+    string everyone;
+
+
     if(_command == ALL)
     {
         return true;
@@ -566,6 +572,7 @@ void consoleUI::modifyCommandPerson()
     while(true)
     {
         getline(cin, toModify);
+        toModify = toLower(toModify);
 
         _printOutPerson = _turnP.findPerson(toModify);
 
@@ -591,22 +598,34 @@ void consoleUI::modifyCommandPerson()
 
 bool consoleUI::checkModifyPerson( const string& toModify)
 {
-    int counter = 0;
     for(size_t i = 0; i < _printOutPerson.size(); i++)
     {
         if(_printOutPerson.size() == 1)
         {
             return true;
         }
-        /*      string check = _printOutPerson[i].getName();
-        else if(check[i] == toModify[i])
+        else if( _printOutPerson[i].getName() == toModify)
         {
-            counter++;
-            if(counter == toModify.size())
-            {
-                return true;
-            }
-        }*/
+            return true;
+        }
+        cout << _printOutPerson[i] << endl;
+    }
+    return false;
+}
+
+
+bool consoleUI::checkModifyComputer( const string& toModify)
+{
+    for(size_t i = 0; i < _printOutComputer.size(); i++)
+    {
+        if(_printOutComputer.size() == 1)
+        {
+            return true;
+        }
+        else if( _printOutComputer[i].getName() == toModify)
+        {
+            return true;
+        }
     }
     return false;
 }
@@ -639,9 +658,10 @@ void consoleUI::personValidation(Person &input)
 
     while(true)
     {
-        cout << "Gender (male/female) in lowercase: ";
+        cout << "Gender (male/female): ";
         cin >> gender;
-        if (gender == MALE || gender == FEMALE)
+        gender = toLower(gender);
+        if (_turnG.toLower(gender) == _turnG.toLower(MALE) || _turnG.toLower(gender) == _turnG.toLower(FEMALE))
         {
             break;
         }
@@ -656,6 +676,7 @@ void consoleUI::personValidation(Person &input)
     {
         cout << "Birth year (YYYY): ";
         cin >> birthYear;
+        birthYear= toLower(birthYear);
         birthCheck = atoi(birthYear.c_str());       // Removes alphanumeric values from the input.
         if (birthCheck > MINIMUM_BIRTH_YEAR && birthCheck < MAXIMUM_BIRTH_YEAR)
         {
@@ -672,6 +693,7 @@ void consoleUI::personValidation(Person &input)
     {
         cout << "Died (input any other character if still alive): ";
         cin >> deathYear;
+        deathYear = toLower(deathYear);
         deathCheck = atoi(deathYear.c_str());       // Removes alphanumeric values from the input.
         if ((deathYear >= birthYear && deathCheck > MINIMUM_DEATH_YEAR && deathCheck < MAXIMUM_DEATH_YEAR) || deathCheck == 0 )
         {
@@ -703,7 +725,10 @@ void consoleUI::statusCommandPerson()
 
 bool consoleUI::specialCommandPerson()
 {
-    if (_command == FIND)
+    string findIt = "find";
+
+
+    if (_command == findIt)
     {
         return true;
     }
@@ -783,6 +808,7 @@ void consoleUI::sortCommandPerson()
     {
         cout << "Select sorting method: ";
         getline(cin, choice);
+        choice = toLower(choice);
 
         if(sortSpecialCommandPerson(choice))
         {
@@ -803,6 +829,7 @@ void consoleUI::sortCommandPerson()
     {
         cout << "Select list representation: ";
         getline(cin, upOrDown);
+        upOrDown = toLower(upOrDown);
 
         if(upOrDown == DESC)
         {
@@ -818,6 +845,13 @@ void consoleUI::sortCommandPerson()
             break;
         }
     }
+}
+
+string consoleUI::toLower(const string& toLowerString)    // Makes everything lowercase
+{
+    string data = toLowerString;
+    transform(data.begin(), data.end(), data.begin(), ::tolower);
+    return data;
 }
 
 
@@ -885,6 +919,7 @@ void consoleUI::removeCommandComputer()
     Computer input;
     cout << "Enter the full name of the computer to remove from the database: ";
     getline(cin, fullName);
+    fullName = toLower(fullName);
     input = _turnC.findComputerExactly(fullName);
 
     if (input.getName() == EMPTY)
@@ -907,6 +942,7 @@ void consoleUI::findCommandComputer()
     cout << "Search computer: ";
 
     getline(cin, toFind);
+    toFind = toLower(toFind);
     cout << endl;
     if(toFind == "dickbutt")
     {
@@ -989,6 +1025,7 @@ void consoleUI::sortCommandComputer()
     {
         cout << "Select sorting method: ";
         getline(cin, choice);
+        choice = toLower(choice);
 
         if(specialCommandComputer(choice))
         {
@@ -1011,6 +1048,7 @@ void consoleUI::sortCommandComputer()
     {
         cout << "Select list representation: ";
         getline(cin, upOrDown);
+        upOrDown = toLower(upOrDown);
 
         if(upOrDown == DESC)
         {
@@ -1153,6 +1191,7 @@ void consoleUI::modifyCommandComputer()
     while(true)
     {
         getline(cin, toFind);
+        toFind = toLower(toFind);
         cout << endl;
 
         _printOutComputer = _turnC.findComputer(toFind);
@@ -1160,7 +1199,7 @@ void consoleUI::modifyCommandComputer()
         {
             cout << _printOutComputer;
         }
-        if (_printOutComputer.size()==1)
+        if (checkModifyComputer(toFind))
         {
             cout << "Hooray you found a computer to modify!" << endl;
             Computer id = _turnC.findComputerNumber(_printOutComputer[0].getName());
@@ -1190,6 +1229,7 @@ void consoleUI::computerValidation(Computer& input)
     {
         cout << "Name: ";
         getline(cin, name);
+
         if(name == EMPTY)
         {
             cout << "No input!" << endl;
@@ -1205,6 +1245,7 @@ void consoleUI::computerValidation(Computer& input)
     {
         cout << "Type of computer: ";
         getline(cin, type);
+        type = toLower(type);
         if(type == EMPTY)
         {
             cout << "No input!" << endl;
@@ -1255,6 +1296,7 @@ void consoleUI::computerValidation(Computer& input)
     {
         cout << "Year (YYYY): ";
         cin >> yearBuilt;
+        yearBuilt = toLower(yearBuilt);
         birthCheck = atoi(yearBuilt.c_str());       // Removes alphanumeric values from the input.
         if (birthCheck > MINIMUM_Built_YEAR && birthCheck < MAXIMUM_Built_YEAR)
         {
@@ -1272,6 +1314,7 @@ void consoleUI::computerValidation(Computer& input)
     {
         cout << "Was the computer ever built? (y/n)" << endl;
         cin >> wasitbuilt;
+        wasitbuilt = toLower(wasitbuilt);
         if(wasitbuilt == "Y" || wasitbuilt == "y" || wasitbuilt == "Yes" || wasitbuilt == "yes")
         {
             built = "Yes";

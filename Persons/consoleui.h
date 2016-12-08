@@ -24,6 +24,7 @@ private:
     vector<Person> _printOutPerson;
     bool _print;
     bool checkModifyPerson(const string& toModify);
+    bool checkModifyComputer(const string& toModify);
     bool beginningCommand();
     bool specialCommandPerson();
     bool sortSpecialCommandPerson(const string& choice);
@@ -53,6 +54,7 @@ private:
     string _theRightOne;
     string _command;
     string _database;
+    string toLower(const string& toLowerString);
     computerService _turnC;
     connectionService _turnCon;
 
