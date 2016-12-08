@@ -8,7 +8,7 @@ class connectionService
 public:
     connectionService();
 private:
-    vector<Connection>;
+    vector<Connection> _listConnections;
 };
 
 #endif // CONNECTIONSERVICE_H
