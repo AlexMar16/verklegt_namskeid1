@@ -186,11 +186,12 @@ vector<Computer> computerService::sortBuilt()
     }
     for (size_t i = 0; i < _listComputer.size() - 1; i++)
     {
-        if ( _listComputer[i].getBuilt() == "Never Built!")
+        if ( _listComputer[i].getBuilt() == "No" || _listComputer[i].getBuilt() == "no")
         {
             temp.push_back(_listComputer[i]);
         }
     }
+    _listComputer = temp;
     return _listComputer;
 }
 
