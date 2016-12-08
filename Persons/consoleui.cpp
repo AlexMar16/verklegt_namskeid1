@@ -85,6 +85,8 @@ void consoleUI::commandBox()
          << right << BARRIER << endl;
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| remove - This command allows you to remove a certain "+_theRightOne+" from the list."
          << right << BARRIER << endl;
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| modify - This command allows you to modify a certain "+_theRightOne+" in the list."
+         << right << BARRIER << endl;
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| status - This command displays info about the list "
          << right << BARRIER << endl;
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| back   - This command will allow you to choose another database. "
@@ -450,8 +452,6 @@ void consoleUI::modifyCommandPerson()
 
     cout << "Search for a person to modify: ";
 
-
-
     while(true)
     {
         getline(cin, toModify);
@@ -465,7 +465,7 @@ void consoleUI::modifyCommandPerson()
         if (_printOutPerson.size()==1) //here the magic happens
         {
             cout << "Hooray you found a person to modify! " << endl;
-            Person id = _turnP.findPersonNumber(_printOutPerson[0].getName()); //bý bara til fkn copy af kallinum sem eg vill breyta, vil breyta actual gæjanum!
+            Person id = _turnP.findPersonNumber(_printOutPerson[0].getName());
             personValidation(id);
             _turnP.changePerson(id);
             break;
@@ -976,6 +976,11 @@ void consoleUI::printListComputer()
         _print = false;
         statusCommandComputer();
     }
+    else if(_command == MODIFY)
+    {
+        _print = false;
+        modifyCommandComputer();
+    }
     else
     {
         _print = false;
@@ -1015,4 +1020,155 @@ void consoleUI::print()
     {
         cout << "Invalid command!" << endl << endl;
     }
+}
+
+void consoleUI::modifyCommandComputer()
+{
+    string toFind;
+
+    cout << "Search for a computer to modify: ";
+    while(true)
+    {
+        getline(cin, toFind);
+        cout << endl;
+
+        _printOutComputer = _turnC.findComputer(toFind);
+        if (_turnC.lookForComputer(toFind))
+        {
+            cout << _printOutComputer;
+        }
+        if (_printOutComputer.size()==1)
+        {
+            cout << "Hooray you found a computer to modify!" << endl;
+            Computer id = _turnC.findComputerNumber(_printOutComputer[0].getName());
+            computerValidation(id);
+            _turnC.changeComputer(id);
+            break;
+        }
+        else
+        {
+            cout << "Please be more specific: " << endl << endl;
+        }
+    }
+
+}
+
+void consoleUI::computerValidation(Computer& input)
+{
+    string name, type, yearBuilt, wasitbuilt, built;
+    int birthCheck = 0;
+    const int MINIMUM_Built_YEAR = 1500, MAXIMUM_Built_YEAR = 2030;
+
+    cout << "Please enter the following information about the new Computer " << endl;
+    cout << "in the following order." << endl;
+    cout << "Be aware you cannot put letters that are not in the English alphabet." << endl;
+
+    while(true)
+    {
+        cout << "Name: ";
+        getline(cin, name);
+        if(name == EMPTY)
+        {
+            cout << "No input!" << endl;
+        }
+        else
+        {
+            break;
+        }
+    }
+    input.setName(name);
+
+    while(true)
+    {
+        cout << "Type of computer: ";
+        getline(cin, type);
+        if(type == EMPTY)
+        {
+            cout << "No input!" << endl;
+        }
+        else if (_turnG.toLower(type) == "mechanical")
+        {
+            type = MECHANICAL;
+            break;
+        }
+        else if (_turnG.toLower(type) == "electronic")
+        {
+            type = ELECTRONIC;
+            break;
+        }
+        else if (_turnG.toLower(type) == "electro-mechanical")
+        {
+            type = ELECTROMECHANICAL;
+            break;
+        }
+        else if (_turnG.toLower(type) == "transistor")
+        {
+            type = TRANSISTOR;
+            break;
+        }
+        else if (_turnG.toLower(type) == "transistor/microchip")
+        {
+            type = TRANSISTORMICROCHIP;
+            break;
+        }
+        else if (_turnG.toLower(type) == "supercomputer")
+        {
+            type = SUPERCOMPUTER;
+            break;
+        }
+        else if (_turnG.toLower(type) == "quantum computer")
+        {
+            type = QUANTUMCOMPUTER;
+            break;
+        }
+        else
+        {
+            cout << "Invalid type!" << endl;
+        }
+    }
+    input.setType(type);
+
+
+    while(true)
+    {
+        cout << "Was the computer ever built? (y/n)" << endl;
+        cin >> wasitbuilt;
+        if(wasitbuilt == "Y" || wasitbuilt == "y" || wasitbuilt == "yes")
+        {
+            built = "yes";
+            break;
+        }
+        else if (wasitbuilt == "n" || wasitbuilt == "N" || wasitbuilt == "no")
+        {
+            built = "no";
+            break;
+        }
+        else
+        {
+            cout << "Invalid input!" << endl;
+        }
+    }
+    input.setBuilt(built);
+    if(built == "yes")
+    {
+        while(true)
+        {
+            cout << "Year (YYYY): ";
+            cin >> yearBuilt;
+            birthCheck = atoi(yearBuilt.c_str());       // Removes alphanumeric values from the input.
+            if (birthCheck > MINIMUM_Built_YEAR && birthCheck < MAXIMUM_Built_YEAR)
+            {
+                break;
+            }
+            else
+            {
+                cout << "Invalid input!" << endl;
+            }
+        }
+        input.setYearbuild(birthCheck);
+    }
+
+
+    cout << endl;
+    cin.ignore();
 }

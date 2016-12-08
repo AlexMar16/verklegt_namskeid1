@@ -27,6 +27,9 @@ public:
     string genderCheck(const Computer& p);
     string aliveCheck(const Computer& p);
 
+    Computer findComputerNumber(string name);
+    void changeComputer(const Computer& somecomp);
+
 private:
     bool _keepGoing;
     bool _valid;
@@ -40,6 +43,8 @@ private:
     vector<Computer> sortType();
     void removeFromDatabase(const string& name);
     void swap(Computer& a, Computer& b);
+
+    int _computerIndex;
 };
 
 #endif // COMPUTERSERVICE_H
