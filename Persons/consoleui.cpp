@@ -1135,12 +1135,12 @@ void consoleUI::computerValidation(Computer& input)
         cin >> wasitbuilt;
         if(wasitbuilt == "Y" || wasitbuilt == "y" || wasitbuilt == "yes")
         {
-            built = "yes";
+            built = "Yes";
             break;
         }
         else if (wasitbuilt == "n" || wasitbuilt == "N" || wasitbuilt == "no")
         {
-            built = "no";
+            built = "No";
             break;
         }
         else
@@ -1149,7 +1149,7 @@ void consoleUI::computerValidation(Computer& input)
         }
     }
     input.setBuilt(built);
-    if(built == "yes")
+    if(built == "Yes")
     {
         while(true)
         {
