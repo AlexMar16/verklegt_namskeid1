@@ -85,8 +85,6 @@ void consoleUI::commandBox()
          << right << BARRIER << endl;
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| remove - This command allows you to remove a certain "+_theRightOne+" from the list."
          << right << BARRIER << endl;
-    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| modify - This command allows you to modify a certain "+_theRightOne+" in the list."
-         << right << BARRIER << endl;
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| status - This command displays info about the list "
          << right << BARRIER << endl;
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| back   - This command will allow you to choose another database. "
@@ -452,6 +450,8 @@ void consoleUI::modifyCommandPerson()
 
     cout << "Search for a person to modify: ";
 
+
+
     while(true)
     {
         getline(cin, toModify);
@@ -465,7 +465,7 @@ void consoleUI::modifyCommandPerson()
         if (_printOutPerson.size()==1) //here the magic happens
         {
             cout << "Hooray you found a person to modify! " << endl;
-            Person id = _turnP.findPersonNumber(_printOutPerson[0].getName());
+            Person id = _turnP.findPersonNumber(_printOutPerson[0].getName()); //bý bara til fkn copy af kallinum sem eg vill breyta, vil breyta actual gæjanum!
             personValidation(id);
             _turnP.changePerson(id);
             break;
@@ -823,27 +823,17 @@ void consoleUI::statusCommandComputer()
     int typeSuperQuant=6;
     int typeQuantumQuant=7;
     int builtQuant=8;
-    int WIDTH= 43;
 
 
-    cout<< left<<setfill(SPACE)<<"| Total computers in list          : " << _printStatus[nameQuant]<< setw(WIDTH)
-    << right << BARRIER << endl;
-    cout<< left<<setfill(SPACE)<<"| Electronical computers           : " << _printStatus[typeElecQuant]<< setw(WIDTH)
-    << right << BARRIER << endl;
-    cout<< left<<setfill(SPACE)<<"| Mechanical computers             : " << _printStatus[typeMechQuant]<< setw(WIDTH)
-    << right << BARRIER << endl;
-    cout<< left<<setfill(SPACE)<<"| Electro-Mechanical computers     : " << _printStatus[typeElecMechQuant]<< setw(WIDTH)
-    << right << BARRIER << endl;
-    cout<< left<<setfill(SPACE)<<"| Transistor computers             : " << _printStatus[typeTransQuant]<< setw(WIDTH)
-    << right << BARRIER << endl;
-    cout<< left<<setfill(SPACE)<<"| Transistor/Microchip computers   : " << _printStatus[typeTransMicroQuant]<< setw(WIDTH)
-    << right << BARRIER << endl;
-    cout<< left<<setfill(SPACE)<<"| Super computers                  : " << _printStatus[typeSuperQuant]<< setw(WIDTH)
-    << right << BARRIER << endl;
-    cout<< left<<setfill(SPACE)<<"| Quantum computers                : " << _printStatus[typeQuantumQuant]<< setw(WIDTH)
-    << right << BARRIER << endl;
-    cout<< left<<setfill(SPACE)<<"| Computers that were built        : " << _printStatus[builtQuant]<< setw(WIDTH)
-    << right << BARRIER << endl;
+    cout<<"Total computers in list          : " << _printStatus[nameQuant]<<endl;
+    cout<<"Electronical computers           : " << _printStatus[typeElecQuant]<<endl;
+    cout<<"Mechanical computers             : " << _printStatus[typeMechQuant]<<endl;
+    cout<<"Electro-Mechanical computers     : " << _printStatus[typeElecMechQuant]<<endl;
+    cout<<"Transistor computers             : " << _printStatus[typeTransQuant]<<endl;
+    cout<<"Transistor/Microchip computers   : " << _printStatus[typeTransMicroQuant]<<endl;
+    cout<<"Super computers                  : " << _printStatus[typeSuperQuant]<<endl;
+    cout<<"Quantum computers                : " << _printStatus[typeQuantumQuant]<<endl;
+    cout<<"Computers that were built        : " << _printStatus[builtQuant]<<endl;
 
 
 
@@ -975,11 +965,6 @@ void consoleUI::printListComputer()
     {
         _print = false;
         statusCommandComputer();
-    }
-    else if(_command == MODIFY)
-    {
-        _print = false;
-        modifyCommandComputer();
     }
     else
     {
