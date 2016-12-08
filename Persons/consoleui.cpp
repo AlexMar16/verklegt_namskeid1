@@ -1043,6 +1043,11 @@ void consoleUI::printListComputer()
         _print = false;
         statusCommandComputer();
     }
+    else if(_command == MODIFY)
+    {
+        _print = false;
+        modifyCommandComputer();
+    }
     else
     {
         _print = false;
