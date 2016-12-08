@@ -33,3 +33,8 @@ bool connectionService::personORComputer(const string& command)
         return false; //einhver að vinna að villuchecki eftir þetta
     }
 }
+
+void specificConnection()
+{
+
+}
