@@ -673,9 +673,9 @@ void consoleUI::personValidation(Person &input)
 
     while(true)
     {
-        cout << "Gender (male/female) in lowercase: ";
+        cout << "Gender (male/female): ";
         cin >> gender;
-        if (gender == MALE || gender == FEMALE)
+        if (_turnG.toLower(gender) == _turnG.toLower(MALE) || _turnG.toLower(gender) == _turnG.toLower(FEMALE))
         {
             break;
         }
