@@ -98,26 +98,27 @@ void DbManager::getConnections()
     Connection temp;
     while (query.next())
     {
+        int connectionid = query.value("ID").toInt();
+        //cout << connectionid << ":";
+        temp.setConnectionID(connectionid);
+
         int personid = query.value("PID").toInt();
-        cout << personid;
-        //temp.setPersonID(personid);
+        //cout << personid << ":";
+        temp.setPersonID(personid);
 
         string Pname = query.value("PName").toString().toStdString();
+        //cout << Pname << ":";
         temp.setPersonName(Pname);
 
         int computerid = query.value("CID").toInt();
-        cout << computerid;
-        //temp.setComputerID(personid);
+        //cout << computerid;
+        temp.setComputerID(computerid);
 
-        //string Pname = query.value("PName").toString().toStdString();
-        //temp.setPersonName(Pname);
+        string Cname = query.value("PName").toString().toStdString();
+        //cout << Cname << ":";
+        temp.setComputerName(Cname);
 
 
-
-
-        //int computerid = query.value("computerID").toInt();
-        //temp.setComputerID(computerid);
-        cout << computerid << endl;
 
         _connections.push_back(temp);
     }

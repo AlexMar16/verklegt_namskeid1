@@ -11,8 +11,10 @@ public:
     Connection();
     void setComputerName(const string& input);
     void setPersonName(const string& input);
+    void setConnectionID(const int& input);
     void setComputerID(const int& input);
     void setPersonID(const int& input);
+    int getConnectionID();
     int getComputerID();
     int getPersonID();
     string getComputerName();
@@ -20,6 +22,7 @@ public:
 private:
     string _computerName;
     string _personName;
+    int _ConnectionID;
     int _ComputerID;
     int _PersonID;
 };
