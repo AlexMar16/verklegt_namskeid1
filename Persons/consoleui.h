@@ -26,6 +26,7 @@ private:
     bool specialCommandPerson();
     bool sortSpecialCommandPerson(const string& choice);
     bool specialCommandComputer(const string& command);
+    bool specialCommandConnect();
     void printListPerson();
     void printListComputer();
     void addCommand();
@@ -44,6 +45,7 @@ private:
     void commandBox();
     void printList();
     void print();
+    void commandBoxConnect();
     PersonService _turnP;      //The instance we use to communicate with the PersonService layer.
     string _theRightOne;
     string _command;

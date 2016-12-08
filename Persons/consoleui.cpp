@@ -11,6 +11,8 @@ const string FIND = "find";
 const string QUIZ = "quiz";
 const string STATUS = "status";
 const string EMPTY = "";
+const string ALL = "all";
+const string ADD = "add";
 const string BACK = "back";
 const int ASTERISK_WIDTH = 80;
 const char ASTERISK = '*';
@@ -27,9 +29,17 @@ void consoleUI::run()
         {
             do
             {
+                if(_database == "person" || _database == "computer")
+                {
                 commandBox();
                 printList();
                 print();
+                }
+                else
+                {
+                commandBoxConnect();
+                 //setja foll
+                }
             }while(_command != BACK && _command != QUIT);
             _turnG.setProgram(_command);
         }
@@ -94,6 +104,43 @@ void consoleUI::commandBox()
     cout << setw(ASTERISK_WIDTH) << setfill(ASTERISK) << ASTERISK << endl;      // Command box ends.
     cout << "command: ";
     getline(cin, _command);          // Sets the private variable _command in the service class.
+}
+
+void consoleUI::commandBoxConnect()
+{
+    cout << setw(ASTERISK_WIDTH) << setfill(ASTERISK) <<  ASTERISK << endl;     // Command box begins.
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| Please enter one of the following commands:"
+         << right << BARRIER << endl;
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << BARRIER << right << BARRIER<< endl;
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| all   - This command will print all connections"
+         << right << BARRIER << endl;
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| add        - This command allows you to add a connection"
+         << right << BARRIER << endl;
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| remove     - This command allows you to add a connection"
+         << right << BARRIER << endl;
+    cout << setw(ASTERISK_WIDTH) << setfill(ASTERISK) << ASTERISK << endl;      // Command box ends.
+    cout << "command: ";
+    getline(cin, _command);
+}
+
+bool consoleUI::specialCommandConnect()
+{
+   if(_command == ALL)
+   {
+       return true;
+   }
+   else if(_command == ADD)
+   {
+       return true;
+   }
+   else if(_command == REMOVE)
+   {
+       return true;
+   }
+   else
+   {
+       return false;
+   }
 }
 
 bool consoleUI::beginningCommand()
@@ -394,6 +441,14 @@ bool consoleUI::is_digits(const string &numbers)
 {
     return numbers.find_first_not_of("0123456789") == std::string::npos;
 }
+//connection
+
+
+
+
+
+
+
 
 //person
 
