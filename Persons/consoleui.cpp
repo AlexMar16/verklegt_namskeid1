@@ -930,7 +930,6 @@ void consoleUI::removeCommandComputer()
     Computer input;
     cout << "Enter the full name of the computer to remove from the database: ";
     getline(cin, fullName);
-    fullName = toLower(fullName);
     input = _turnC.findComputerExactly(fullName);
 
     if (input.getName() == EMPTY)
