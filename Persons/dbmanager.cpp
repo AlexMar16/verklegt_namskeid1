@@ -168,3 +168,32 @@ void DbManager::removeFromComputers(const Computer &input)
         cout << "not openajsd ajsln " << endl;
     }
 }
+
+void DbManager::removeFromPersons(const Person &input)
+{
+    QString qsName = QString::fromStdString(input.getName());
+    QString path = "ComputerScience.sqlite";
+    QSqlDatabase _db = QSqlDatabase::database("dbconnection");
+    QString dbName = path;
+    _db.setDatabaseName(dbName);
+    _db.open();
+
+    if(_db.open())
+    {
+        QSqlQuery qry(_db);
+        qry.prepare("DELETE FROM Persons WHERE Name=:C_Name");
+        qry.bindValue(":C_Name",qsName);
+        if( !qry.exec() )
+            //qDebug() << qry.lastError().text();
+            cout << "error removing from database";
+        else
+        {
+            qry.exec();
+            cout << "Removed " << input.getName() << endl;
+        }
+    }
+    else
+    {
+        cout << "not openajsd ajsln " << endl;
+    }
+}
