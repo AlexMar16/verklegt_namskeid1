@@ -644,7 +644,6 @@ void consoleUI::personValidation(Person &input)
     {
         cout << "Name: ";
         getline(cin, name);
-        name = toLower(name);
         if(name == EMPTY)
         {
             cout << "No input!" << endl;
@@ -1229,7 +1228,7 @@ void consoleUI::computerValidation(Computer& input)
     {
         cout << "Name: ";
         getline(cin, name);
-        name = toLower(name);
+
         if(name == EMPTY)
         {
             cout << "No input!" << endl;
