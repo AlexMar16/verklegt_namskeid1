@@ -5,6 +5,7 @@
 #include <QSqlQuery>
 #include "person.h"
 #include "computer.h"
+#include "connection.h"
 using namespace std;
 
 class DbManager
@@ -26,12 +27,14 @@ public:
 
     void changeData();
     void getComputers();
+    void getConnections();
     void changePerson(const Person& input, const int personIndex);
     void changeComputer(const Computer& input, const int computerIndex);
 
 private:
     vector<Person> _persons;
     vector<Computer> _computers;
+    vector<Connection> _connections;
     void getPersons();
     QSqlDatabase _db;
 };

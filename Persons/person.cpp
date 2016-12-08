@@ -51,6 +51,8 @@ int Person::getBirthYear() const {return _birthYear;}
 
 int Person::getDeathYear() const {return _deathYear;}
 
+int Person::getID() const {return _ID;}
+
 //Set functions
 void Person::setName(const string input) {_fullName = input;}
 
