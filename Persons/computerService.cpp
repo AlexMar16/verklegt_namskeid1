@@ -356,6 +356,7 @@ vector<Computer> computerService::findDigits(const int& num)
 
 Computer computerService::findComputerNumber(string name)
 {
+
     for (size_t i=0; i<_listComputer.size(); i++)
     {
         if(_listComputer[i].getName()==name)
