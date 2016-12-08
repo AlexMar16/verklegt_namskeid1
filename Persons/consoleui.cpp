@@ -114,16 +114,41 @@ void consoleUI::commandBoxConnect()
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| Please enter one of the following commands:"
          << right << BARRIER << endl;
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << BARRIER << right << BARRIER<< endl;
-    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| all        - This command will print all connections"
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| person to computer - This command will print a specific connection."
          << right << BARRIER << endl;
-    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| add        - This command allows you to add a connection"
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| computer to person - This command will print all connections."
          << right << BARRIER << endl;
-    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| remove     - This command allows you to add a connection"
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| back               - This command will allow you to choose another database."
+         << right << BARRIER << endl;
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| quit               - This command will quit the program."
          << right << BARRIER << endl;
     cout << setw(ASTERISK_WIDTH) << setfill(ASTERISK) << ASTERISK << endl;      // Command box ends.
     cout << "command: ";
     getline(cin, _command);
 }
+/*
+void consoleUI::commandBoxSubConnect()
+{
+    cout << setw(ASTERISK_WIDTH) << setfill(ASTERISK) <<  ASTERISK << endl;     // Command box begins.
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| Please enter one of the following commands:"
+         << right << BARRIER << endl;
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << BARRIER << right << BARRIER<< endl;
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| specific   - This command will print a specific connection"
+         << right << BARRIER << endl;
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| all        - This command will print all connections"
+         << right << BARRIER << endl;
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| add        - This command allows you to add a connection"
+         << right << BARRIER << endl;
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| remove     - This command allows you to remove a connection"
+         << right << BARRIER << endl;
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| back       - This command will allow you to choose another database. "
+         << right << BARRIER << endl;
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| quit       - This command will quit the program. "
+         << right << BARRIER << endl;
+    cout << setw(ASTERISK_WIDTH) << setfill(ASTERISK) << ASTERISK << endl;      // Command box ends.
+    cout << "command: ";
+    getline(cin, _command);
+}*/
 
 bool consoleUI::specialCommandConnect()
 {
@@ -442,12 +467,66 @@ bool consoleUI::is_digits(const string &numbers)
 {
     return numbers.find_first_not_of("0123456789") == std::string::npos;
 }
+
 //connection
+/*
+bool consoleUI::connectCommand()
+{
+    if(_command == "person to computer")
+    {
+        return true;
+    }
+    else if(_command == "computer to person")
+    {
+        return true;
+    }
+    else if(_command == "back")
+    {
+        return true;
+    }
+    else if(_command == "quit")
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
 
+bool consoleUI::connectSubCommand()
+{
+    if(_command == "specific")
+    {
+        return true;
+    }
+    else if(_command == "all")
+    {
+        return true;
+    }
+    else if(_command == "add")
+    {
+        return true;
+    }
+    else if(_command == "remove")
+    {
+        return true;
+    }
+    else if(_command == "back")
+    {
+        return true;
+    }
+    else if(_command == "quit")
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
 
-
-
-
+*/
 
 
 
