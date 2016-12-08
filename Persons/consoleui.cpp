@@ -245,7 +245,6 @@ void consoleUI::addCommand()
 
     cout << endl;
 
-    _turnG.addPerson(input);
     _turnP.addPerson(input);
     cin.ignore();
 }
@@ -462,7 +461,7 @@ void consoleUI::modifyCommandPerson()
         {
             cout << _printOutPerson;
         }
-        if (_printOutPerson.size()==1) //here the magic happens
+        if (checkModifyPerson(toModify)) //here the magic happens
         {
             cout << "Hooray you found a person to modify! " << endl;
             Person id = _turnP.findPersonNumber(_printOutPerson[0].getName());
@@ -476,6 +475,28 @@ void consoleUI::modifyCommandPerson()
         }
     }
 
+}
+
+bool consoleUI::checkModifyPerson( const string& toModify)
+{
+    int counter = 0;
+    for(size_t i = 0; i < _printOutPerson.size(); i++)
+    {
+        if(_printOutPerson.size() == 1)
+        {
+            return true;
+        }
+  /*      string check = _printOutPerson[i].getName();
+        else if(check[i] == toModify[i])
+        {
+            counter++;
+            if(counter == toModify.size())
+            {
+                return true;
+            }
+        }*/
+    }
+    return false;
 }
 
 void consoleUI::personValidation(Person &input)

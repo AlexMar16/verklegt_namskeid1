@@ -1,6 +1,7 @@
 #include "dbmanager.h"
 #include <QVariant>
 #include <QSqlQuery>
+#include <Qdebug>
 #include "computer.h"
 
 
@@ -78,19 +79,19 @@ void DbManager::getComputers()
 
         string Built = query.value("Built").toString().toStdString();
         temp.setBuilt(Built);
-        _Computer.push_back(temp);
+        _computers.push_back(temp);
     }
 }
 
 vector<Person> DbManager::getVector() const {return _persons;}
 
-vector<Computer> DbManager::getCVector() const {return _Computer;}
+vector<Computer> DbManager::getCVector() const {return _computers;}
 
 bool DbManager::isOpen() const {return _db.isOpen();}
 
 void DbManager::setVector(const vector<Person> &input) {_persons = input;}
 
-void DbManager::setCVector(const vector<Computer> &input){_Computer = input;}
+void DbManager::setCVector(const vector<Computer> &input){_computers = input;}
 
 void DbManager::changeData()
 {
@@ -169,7 +170,6 @@ void DbManager::removeFromComputers(const Computer &input)
     }
 }
 
-//<<<<<<< HEAD
 void DbManager::removeFromPersons(const Person &input)
 {
     QString qsName = QString::fromStdString(input.getName());
@@ -198,10 +198,9 @@ void DbManager::removeFromPersons(const Person &input)
         cout << "not openajsd ajsln " << endl;
     }
 }
-//=======
+
 void DbManager::insertIntoPerson(const Person &input)
 {
-    cout << "hola" << endl;
     QString qsName = QString::fromStdString(input.getName());
     QString qsGender= QString::fromStdString(input.getGender());
     QString path = "ComputerScience.sqlite";
@@ -240,7 +239,106 @@ void DbManager::insertIntoPerson(const Person &input)
     else
     {
         cout << "not inserted" << endl;
-//>>>>>>> ea26743472f4b25a995db197380beb40a5641246
     }
 }
 
+void DbManager::changePerson(const Person& input, const int personIndex)
+{
+    Person oldPerson = _persons[personIndex];
+    QString qsOldName = QString::fromStdString(oldPerson.getName());
+    QString qsName = QString::fromStdString(input.getName());
+    QString qsGender = QString::fromStdString(input.getGender());
+    QString path = "ComputerScience.sqlite";
+    /* nota seinna mögulega
+    if( QSqlDatabase::contains( "dbconnection" ) )
+    {
+        //cout << "dbconnection found " << endl;
+
+    }
+    else
+    {
+        cout << "dbconnection not found" << endl;
+    }*/
+
+    QSqlDatabase _db = QSqlDatabase::database("dbconnection");
+    QString dbName = path;
+    _db.setDatabaseName(dbName);
+    _db.open();
+    const QString SQLCommand = "UPDATE Persons SET Name = :P_Name, "
+                               "Gender = :P_Gender , birthYear = :P_BirthYear,  deathYear = "
+                               ":P_DeathYear WHERE Name = :P_OldName";
+    if(_db.open())
+    {
+        QSqlQuery qry(_db);
+        if(qry.prepare(SQLCommand))
+        {
+            qry.bindValue(":P_Name",qsName);
+            qry.bindValue(":P_Gender",qsGender);
+            qry.bindValue(":P_BirthYear",input.getBirthYear());
+            qry.bindValue(":P_DeathYear",input.getDeathYear());
+            qry.bindValue(":P_OldName",qsOldName);
+            qDebug() << qsName;
+            qry.exec();
+            if( !qry.exec() )
+            {
+                //cout << qry.lastError().text();
+                cout << "error updating into database";
+            }
+        }
+    }
+    else
+    {
+        cout << "not inserted" << endl;
+    }
+}
+
+void DbManager::changeComputer(const Computer& input, const int computerIndex)
+{
+    Computer oldComputer = _computers[computerIndex];
+    QString qsOldName = QString::fromStdString(oldComputer.getName());
+    QString qsName = QString::fromStdString(input.getName());
+    QString qsType = QString::fromStdString(input.getType());
+    QString qsBuilt = QString::fromStdString(input.getBuilt());
+    QString path = "ComputerScience.sqlite";
+    /* nota seinna mögulega
+    if( QSqlDatabase::contains( "dbconnection" ) )
+    {
+        //cout << "dbconnection found " << endl;
+
+    }
+    else
+    {
+        cout << "dbconnection not found" << endl;
+    }*/
+
+    QSqlDatabase _db = QSqlDatabase::database("dbconnection");
+    QString dbName = path;
+    _db.setDatabaseName(dbName);
+    _db.open();
+    const QString SQLCommand = "UPDATE Persons SET Name = :C_Name, "
+                               "yearBuilt = :C_YearBuilt ,  Type = :C_Type,  Built = "
+                               ":C_Built WHERE Name = :C_OldName";
+    if(_db.open())
+    {
+        QSqlQuery qry(_db);
+        if(qry.prepare(SQLCommand))
+        {
+            qry.bindValue(":C_Name",qsName);
+            qry.bindValue(":C_YearBuilt", input.getYearBuilt());
+            qry.bindValue(":C_Type",qsType);
+            qry.bindValue(":C_Built",qsBuilt);
+            qry.bindValue(":C_OldName",qsOldName);
+            qDebug() << qsName;
+            qry.exec();
+            if( !qry.exec() )
+            {
+                //cout << qry.lastError().text();
+                cout << "error updating into database";
+            }
+        }
+    }
+    else
+    {
+        cout << "not inserted" << endl;
+    }
+}

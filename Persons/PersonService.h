@@ -30,7 +30,7 @@ public:
     string aliveCheck(const Person& p);
 
     Person findPersonNumber(string nabn); //we will change this to ID later
-    void changePerson(const Person& someGuy);
+    void changePerson(const Person& input);
 
 private:
     bool alreadyInDatabase(const string &name);

@@ -360,12 +360,14 @@ void PersonService::removePerson(const Person &input)         // Makes the user 
     }
 }
 
-void PersonService::addPerson(const Person &input)        // Makes the user capable to add people to the list, as long as they're not already on the list
+void PersonService::addPerson(const Person& input)        // Makes the user capable to add people to the list, as long as they're not already on the list
 {
     if(!alreadyInDatabase(input.getName()))
     {
+        DbManager addNewPerson;
         _listPerson.push_back(input);
-
+        addNewPerson.setVector(_listPerson);
+        addNewPerson.insertIntoPerson(input);
     }
 }
 
@@ -429,7 +431,10 @@ Person PersonService::findPersonNumber(string nabn)
     return _listPerson[_personIndex];
 }
 
-void PersonService::changePerson(const Person& someGuy)
+void PersonService::changePerson(const Person& input)
 {
-    _listPerson[_personIndex]=someGuy;
+   DbManager modifyPerson;
+    modifyPerson.changePerson(input, _personIndex);
+    _listPerson[_personIndex] = input;
+    modifyPerson.setVector(_listPerson);
 }

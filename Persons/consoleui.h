@@ -22,6 +22,7 @@ private:
     vector<Computer> _printOutComputer;
     vector<Person> _printOutPerson;
     bool _print;
+    bool checkModifyPerson(const string& toModify);
     bool beginningCommand();
     bool specialCommandPerson();
     bool sortSpecialCommandPerson(const string& choice);
