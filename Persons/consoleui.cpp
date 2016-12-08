@@ -37,15 +37,16 @@ void consoleUI::run()
                 }
                 else
                 {
-                commandBoxConnect();
-                if(_turnCon.personORComputer(_command))
-                {
-                    cout << "tu komst!!!!! ASDFASDFASDF";
-                    int prump;
-                    cin >> prump;
-                    //connectionPrintList();
-                }
-                 //setja foll
+                    do{
+                        commandBoxConnect();
+                        if(_turnCon.personORComputer(_command))
+                        {
+                            commandBoxSubConnect();
+                            connectSubCommand();
+                            cout << "komst";
+
+                        }
+                    } while(_command != BACK && _command != QUIT);
                 }
             }while(_command != BACK && _command != QUIT);
             _turnG.setProgram(_command);
@@ -137,7 +138,7 @@ void consoleUI::commandBoxConnect()
     cout << "command: ";
     getline(cin, _command);
 }
-/*
+
 void consoleUI::commandBoxSubConnect()
 {
     cout << setw(ASTERISK_WIDTH) << setfill(ASTERISK) <<  ASTERISK << endl;     // Command box begins.
@@ -159,7 +160,7 @@ void consoleUI::commandBoxSubConnect()
     cout << setw(ASTERISK_WIDTH) << setfill(ASTERISK) << ASTERISK << endl;      // Command box ends.
     cout << "command: ";
     getline(cin, _command);
-}*/
+}
 
 bool consoleUI::specialCommandConnect()
 {
@@ -479,48 +480,31 @@ bool consoleUI::is_digits(const string &numbers)
     return numbers.find_first_not_of("0123456789") == std::string::npos;
 }
 
-//connection
-/*
-bool consoleUI::connectCommand()
-{
-    if(_command == "person to computer")
-    {
-        return true;
-    }
-    else if(_command == "computer to person")
-    {
-        return true;
-    }
-    else if(_command == "back")
-    {
-        return true;
-    }
-    else if(_command == "quit")
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
-}
-
 bool consoleUI::connectSubCommand()
 {
+    int stoppari;
     if(_command == "specific")
     {
+        cout << "Specific";
+        cin >> stoppari;
         return true;
     }
     else if(_command == "all")
     {
+        cout << "all";
+        cin >> stoppari;
         return true;
     }
     else if(_command == "add")
     {
+        cout << "add";
+        cin >> stoppari;
         return true;
     }
     else if(_command == "remove")
     {
+        cout << "remove";
+        cin >> stoppari;
         return true;
     }
     else if(_command == "back")
@@ -536,10 +520,6 @@ bool consoleUI::connectSubCommand()
         return false;
     }
 }
-
-*/
-
-
 
 //person
 
@@ -592,10 +572,7 @@ void consoleUI::findCommandPerson()
 void consoleUI::modifyCommandPerson()
 {
     string toModify;
-
     cout << "Search for a person to modify: ";
-
-
 
     while(true)
     {
@@ -1285,8 +1262,6 @@ void consoleUI::computerValidation(Computer& input)
     }
     input.setType(type);
 
-    //if(built == "Yes")
-    //{
     while(true)
     {
         cout << "Year (YYYY): ";
@@ -1302,7 +1277,7 @@ void consoleUI::computerValidation(Computer& input)
         }
     }
     input.setYearbuild(birthCheck);
-    //}
+
 
     while(true)
     {
