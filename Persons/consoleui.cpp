@@ -562,10 +562,14 @@ void consoleUI::statusCommandPerson()
     const int DIED = 1;
     const int FEMALES = 2;
     const int MALES = 3;
-    cout << "Total names in list       : " << _printStatus[NAMES] << endl;
-    cout << "Number of deceased        : " << _printStatus[DIED] << endl;
-    cout << "Total females on the list : " << _printStatus[FEMALES] << endl;
-    cout << "Total males on the list   : " << _printStatus[MALES] << endl << endl;
+    const int WIDTH = 48;
+
+    cout<< left<<setfill(SPACE)<<"| Total names in list       : " << _printStatus[NAMES]<< setw(WIDTH)
+    << right << BARRIER << endl;
+    cout<< left<<setfill(SPACE)<<"| Total names in list       : " << _printStatus[NAMES] << endl;
+    cout<< left<<setfill(SPACE)<<"| Number of deceased        : " << _printStatus[DIED] << endl;
+    cout<< left<<setfill(SPACE)<<"| Total females on the list : " << _printStatus[FEMALES] << endl;
+    cout<< left<<setfill(SPACE)<<"| Total males on the list   : " << _printStatus[MALES] << endl << endl;
 }
 
 bool consoleUI::specialCommandPerson()
