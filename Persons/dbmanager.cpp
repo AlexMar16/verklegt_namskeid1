@@ -142,17 +142,16 @@ void DbManager::insertIntoComputer(const Computer &input)
 
 void DbManager::removeFromComputers(const Computer &input)
 {
-    //cout << "name: " << input.getName() << endl; henda ut fyrir skil
     QString qsName = QString::fromStdString(input.getName());
     QString path = "ComputerScience.sqlite";
-    if( QSqlDatabase::contains( "dbconnection" ) )
+    /*if( QSqlDatabase::contains( "dbconnection" ) )
     {
         //cout << "dbconnection found " << endl;
     }
     else
     {
         //cout << "dbconnection not found" << endl;
-    }
+    }*/
     QSqlDatabase _db = QSqlDatabase::database("dbconnection");
     QString dbName = path;
     _db.setDatabaseName(dbName);
@@ -160,14 +159,16 @@ void DbManager::removeFromComputers(const Computer &input)
 
     if(_db.open())
     {
+        cout << "Hi IM HEre!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << endl;
         QSqlQuery qry(_db);
-        qry.prepare("DELETE FROM Computers WHERE Name=':C_Name'");
+        qry.prepare("DELETE FROM Computers WHERE Name=:C_Name");
         qry.bindValue(":C_Name",qsName);
         if( !qry.exec() )
             //qDebug() << qry.lastError().text();
             cout << "error removing from database";
         else
         {
+            qry.exec();
             cout << "Removed " << input.getName() << endl;
         }
     }
