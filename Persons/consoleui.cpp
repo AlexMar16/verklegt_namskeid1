@@ -29,7 +29,7 @@ void consoleUI::run()
         {
             do
             {
-                if(_database == "person" || _database == "computer")
+                if(_database == "person" || _database == "computer" || _database == "c" || _database == "p")
                 {
                 commandBox();
                 printList();
@@ -147,11 +147,11 @@ bool consoleUI::specialCommandConnect()
 
 bool consoleUI::beginningCommand()
 {
-    if(_database == "person")
+    if(_database == "person" || _database == "p")
     {
         return true;
     }
-    else if(_database == "computer")
+    else if(_database == "computer" || _database == "c")
     {
         return true;
     }
