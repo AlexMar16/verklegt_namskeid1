@@ -56,6 +56,9 @@ private:
     computerService _turnC;
     connectionService _turnCon;
 
+    bool connectSubCommand();
+    void commandBoxSubConnect();
+
 
     void modifyCommandPerson();
     void personValidation(Person &input);
