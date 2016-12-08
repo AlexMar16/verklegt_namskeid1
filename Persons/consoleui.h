@@ -53,6 +53,7 @@ private:
     string _theRightOne;
     string _command;
     string _database;
+    string toLower(const string& toLowerString);
     computerService _turnC;
     connectionService _turnCon;
 

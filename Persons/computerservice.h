@@ -39,8 +39,6 @@ public:
     vector<Computer> sortCreationYear();
 
 
-
-
 private:
     bool _keepGoing;
     bool _valid;
@@ -58,4 +56,3 @@ private:
 };
 
 #endif // COMPUTERSERVICE_H
-
