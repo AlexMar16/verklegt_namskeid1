@@ -169,7 +169,6 @@ void DbManager::removeFromComputers(const Computer &input)
     }
 }
 
-//<<<<<<< HEAD
 void DbManager::removeFromPersons(const Person &input)
 {
     QString qsName = QString::fromStdString(input.getName());
@@ -198,7 +197,7 @@ void DbManager::removeFromPersons(const Person &input)
         cout << "not openajsd ajsln " << endl;
     }
 }
-//=======
+
 void DbManager::insertIntoPerson(const Person &input)
 {
     QString qsName = QString::fromStdString(input.getName());
@@ -240,6 +239,5 @@ void DbManager::insertIntoPerson(const Person &input)
     else
     {
         cout << "not inserted" << endl;
-//>>>>>>> ea26743472f4b25a995db197380beb40a5641246
     }
 }
