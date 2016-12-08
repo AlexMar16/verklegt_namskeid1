@@ -106,7 +106,8 @@ string PersonService::assignSelection(string& answer, const string& a, const str
 
 string PersonService::genderCheck(const Person& p)
 {
-    if (p.getGender() == MALE)
+    generalService GS;
+    if (GS.toLower(p.getGender()) == MALE)
         return "He";
     else
         return "She";
