@@ -281,9 +281,44 @@ void consoleUI::addCompCommand()
         {
             cout << "No input!" << endl;
         }
+        else if (_turnG.toLower(type) == "mechanical")
+        {
+            type = MECHANICAL;
+            break;
+        }
+        else if (_turnG.toLower(type) == "electronic")
+        {
+            type = ELECTRONIC;
+            break;
+        }
+        else if (_turnG.toLower(type) == "electro-mechanical")
+        {
+            type = ELECTROMECHANICAL;
+            break;
+        }
+        else if (_turnG.toLower(type) == "transistor")
+        {
+            type = TRANSISTOR;
+            break;
+        }
+        else if (_turnG.toLower(type) == "transistor/microchip")
+        {
+            type = TRANSISTORMICROCHIP;
+            break;
+        }
+        else if (_turnG.toLower(type) == "supercomputer")
+        {
+            type = SUPERCOMPUTER;
+            break;
+        }
+        else if (_turnG.toLower(type) == "quantum computer")
+        {
+            type = QUANTUMCOMPUTER;
+            break;
+        }
         else
         {
-            break;
+            cout << "Invalid type!" << endl;
         }
     }
     input.setType(type);
@@ -313,7 +348,7 @@ void consoleUI::addCompCommand()
     {
         while(true)
         {
-            cout << "Build year (YYYY): ";
+            cout << "Year (YYYY): ";
             cin >> yearBuilt;
             birthCheck = atoi(yearBuilt.c_str());       // Removes alphanumeric values from the input.
             if (birthCheck > MINIMUM_Built_YEAR && birthCheck < MAXIMUM_Built_YEAR)
