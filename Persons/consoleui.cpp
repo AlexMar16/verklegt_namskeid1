@@ -560,16 +560,18 @@ bool consoleUI::connectSubCommand()
 void consoleUI::findCommandPerson()
 {
     string toFind;
+    bool prufa= true;
     cout << "Search name/year: ";
 
     getline(cin, toFind);
     cout << endl;
 
 
-    if(toFind == "dickbutt")
+    if(toFind == "dickbutt"  || toFind== "")
     {
         cout << "                                      PrumpPrum                                         " << endl;                                                                                         cout << "                                  pPrumpPrumpPrumpP                                     " << endl << "                              rumpPrumpPrumpPrumpPrump                                  " << endl << "                      PrumpPrumpPrump           PrumpPru                                " << endl << "                   mpPrumpPrumpP                  rumpPru                               " << endl << "                 mpPrumpPrumpPru                   mpPrum                               " << endl << "                 pPrumpPrumpPrump                   Prump" << endl << "                 PrumpPrumpP rumpPr    umpPrumpPru  mpPru" << endl << "                 mpPrumpPrumpPrumpPr umpPrumpPrumpPr umpP" << endl << "                 rumpPrumpPrumpPru  mpPrumpPrumpPrumpPrum" << endl << "                pPrum  pPrumpPrump  PrumpPrumpPrumpPrumpP" << endl << "               rumpPrumpPrumpPrumpP rumpPrumpPr umpPrumpP" << endl << "              rumpPrumpPrumpPrump   PrumpPrumpPrumpPrumpP" << endl << "             rumpPrumpPrumpPrumpPrumpPrumpPrumpPr  umpPr" << endl << "            umpPr          umpPrumpPrumpPrump     PrumpP" << endl << "           rumpP                      rumpPru     mpPrum" << endl << "          pPrump                                 PrumpP" << endl << "         rumpPr                                 umpPru" << endl << "        mpPrum                                  pPrump" << endl << "        Prump                      Prum        pPrump" << endl << "        Prum                      pPrum pPr   umpPru" << endl << "        mpPr                      umpPrumpPr  umpPr                         umpPrumpP" << endl << "       rumpP                      rumpPrump  Prump                        PrumpPrumpPr" << endl << "       umpPr                     umpPrumpPr umpPr                       umpPru    mpPr" << endl << "       umpPr                     umpPrumpP  rumpP                     rumpPru    mpPru" << endl << "       mpPru                    mpPrumpPr  umpPru                   mpPrump     Prump" << endl << "       Prump                    PrumpPru   mpPrumpPrumpPrumpPru   mpPrump     Prump" << endl << "        Prum                   pPrumpPr    umpPrumpPrumpPrumpPrumpPrump      Prump" << endl << "        Prum                   pPrumpP     rumpP   rumpP   rumpPrumpP      rumpPr" << endl << "        umpP                  rumpPrum      pPr   umpPrumpPrumpPrum      pPrump" << endl << "        Prump               Prump Prump         PrumpPrumpPrumpPru     mpPrump" << endl << "         Prum             pPrum  pPrumpP         rumpPrumpPrumpPrump   PrumpPru" << endl << "         mpPru            mpPrumpPrumpPr                     umpPrump    PrumpPrum" << endl << "          pPrum            pPrumpPrumpP              rump       PrumpP  rump Prump" << endl << "          PrumpP              rump                   Prum        pPrump  PrumpPru" << endl << "           mpPrum                                pPr              umpPr    umpP" << endl << "            rumpPrum                            pPru              mpPru     mpPr" << endl << "               umpPrum                          pPru              mpPrumpPrumpPr" << endl << "     ump        PrumpPrump                       Prum           pPrumpPrumpPrum" << endl << "    pPrumpP    rumpPrumpPrumpPru                  mpP         rumpPru    m" << endl << "   pPrumpPrumpPru mpPrumpPrumpPrumpPrum           pPru    mpPrump" << endl << "    Prum pPrumpPrumpPru    mpPrumpPrumpPru mpPrumpPrumpPrumpPrum" << endl << "     pPru  mpPrumpPru         mpPrumpPrum pPrumpPrumpPrumpPru" << endl << "      mpPr   umpPru         mpPrumpPrump Prump PrumpPrumpP" << endl << "       rumpPrumpP           rumpPrumpPr  umpP" << endl << "        rumpPru              mpPrumpP   rump" << endl << "          Pru                mpPrum    pPru" << endl << "                              mpPrum  pPru" << endl << "                               mpPrumpPru" << endl << "                                 mpPrump" << endl << "                                   Pru  " << endl;
     }
+
     else if(is_digits(toFind))
     {
         int toFindDigits= stoi(toFind);
@@ -598,6 +600,7 @@ void consoleUI::findCommandPerson()
             cout << "Person not found " << endl << endl;
         }
     }
+
 }
 
 void consoleUI::modifyCommandPerson()
@@ -608,15 +611,15 @@ void consoleUI::modifyCommandPerson()
     while(true)
     {
         getline(cin, toModify);
-        toModify = toLower(toModify);
+        //toModify = toLower(toModify);
 
         _printOutPerson = _turnP.findPerson(toModify);
-
+        checkModifyPerson(toModify);
         if (_turnP.lookForPerson(toModify))
         {
             cout << _printOutPerson;
         }
-        if (checkModifyPerson(toModify)) //here the magic happens
+        if (_printOutPerson.size() == 1) //here the magic happens
         {
             cout << "Hooray you found a person to modify! " << endl;
             Person id = _turnP.findPersonNumber(_printOutPerson[0].getName()); //bý bara til fkn copy af kallinum sem eg vill breyta, vil breyta actual gæjanum!
@@ -626,7 +629,7 @@ void consoleUI::modifyCommandPerson()
         }
         else
         {
-            cout << "please be more specific: " << endl;
+            cout << "Please be more specific: ";
         }
     }
 
@@ -636,15 +639,13 @@ bool consoleUI::checkModifyPerson( const string& toModify)
 {
     for(size_t i = 0; i < _printOutPerson.size(); i++)
     {
-        if(_printOutPerson.size() == 1)
+        if( toLower(_printOutPerson[i].getName()) == toLower(toModify))
         {
+            vector<Person> temp;
+            temp.push_back(_printOutPerson[i]);
+            _printOutPerson = temp;
             return true;
         }
-        else if( _printOutPerson[i].getName() == toModify)
-        {
-            return true;
-        }
-        cout << _printOutPerson[i] << endl;
     }
     return false;
 }
@@ -653,13 +654,12 @@ bool consoleUI::checkModifyPerson( const string& toModify)
 bool consoleUI::checkModifyComputer( const string& toModify)
 {
     for(size_t i = 0; i < _printOutComputer.size(); i++)
-    {
-        if(_printOutComputer.size() == 1)
+    {                   
+        if( _printOutComputer[i].getName() == toModify)
         {
-            return true;
-        }
-        else if( _printOutComputer[i].getName() == toModify)
-        {
+            vector<Computer> temp;
+            temp.push_back(_printOutComputer[i]);
+            _printOutComputer = temp;
             return true;
         }
     }
@@ -979,7 +979,7 @@ void consoleUI::findCommandComputer()
     getline(cin, toFind);
     toFind = toLower(toFind);
     cout << endl;
-    if(toFind == "dickbutt")
+    if(toFind == "dickbutt" || toFind== "")
     {
         cout << "                                      PrumpPrum                                         " << endl;                                                                                         cout << "                                  pPrumpPrumpPrumpP                                     " << endl << "                              rumpPrumpPrumpPrumpPrump                                  " << endl << "                      PrumpPrumpPrump           PrumpPru                                " << endl << "                   mpPrumpPrumpP                  rumpPru                               " << endl << "                 mpPrumpPrumpPru                   mpPrum                               " << endl << "                 pPrumpPrumpPrump                   Prump" << endl << "                 PrumpPrumpP rumpPr    umpPrumpPru  mpPru" << endl << "                 mpPrumpPrumpPrumpPr umpPrumpPrumpPr umpP" << endl << "                 rumpPrumpPrumpPru  mpPrumpPrumpPrumpPrum" << endl << "                pPrum  pPrumpPrump  PrumpPrumpPrumpPrumpP" << endl << "               rumpPrumpPrumpPrumpP rumpPrumpPr umpPrumpP" << endl << "              rumpPrumpPrumpPrump   PrumpPrumpPrumpPrumpP" << endl << "             rumpPrumpPrumpPrumpPrumpPrumpPrumpPr  umpPr" << endl << "            umpPr          umpPrumpPrumpPrump     PrumpP" << endl << "           rumpP                      rumpPru     mpPrum" << endl << "          pPrump                                 PrumpP" << endl << "         rumpPr                                 umpPru" << endl << "        mpPrum                                  pPrump" << endl << "        Prump                      Prum        pPrump" << endl << "        Prum                      pPrum pPr   umpPru" << endl << "        mpPr                      umpPrumpPr  umpPr                         umpPrumpP" << endl << "       rumpP                      rumpPrump  Prump                        PrumpPrumpPr" << endl << "       umpPr                     umpPrumpPr umpPr                       umpPru    mpPr" << endl << "       umpPr                     umpPrumpP  rumpP                     rumpPru    mpPru" << endl << "       mpPru                    mpPrumpPr  umpPru                   mpPrump     Prump" << endl << "       Prump                    PrumpPru   mpPrumpPrumpPrumpPru   mpPrump     Prump" << endl << "        Prum                   pPrumpPr    umpPrumpPrumpPrumpPrumpPrump      Prump" << endl << "        Prum                   pPrumpP     rumpP   rumpP   rumpPrumpP      rumpPr" << endl << "        umpP                  rumpPrum      pPr   umpPrumpPrumpPrum      pPrump" << endl << "        Prump               Prump Prump         PrumpPrumpPrumpPru     mpPrump" << endl << "         Prum             pPrum  pPrumpP         rumpPrumpPrumpPrump   PrumpPru" << endl << "         mpPru            mpPrumpPrumpPr                     umpPrump    PrumpPrum" << endl << "          pPrum            pPrumpPrumpP              rump       PrumpP  rump Prump" << endl << "          PrumpP              rump                   Prum        pPrump  PrumpPru" << endl << "           mpPrum                                pPr              umpPr    umpP" << endl << "            rumpPrum                            pPru              mpPru     mpPr" << endl << "               umpPrum                          pPru              mpPrumpPrumpPr" << endl << "     ump        PrumpPrump                       Prum           pPrumpPrumpPrum" << endl << "    pPrumpP    rumpPrumpPrumpPru                  mpP         rumpPru    m" << endl << "   pPrumpPrumpPru mpPrumpPrumpPrumpPrum           pPru    mpPrump" << endl << "    Prum pPrumpPrumpPru    mpPrumpPrumpPru mpPrumpPrumpPrumpPrum" << endl << "     pPru  mpPrumpPru         mpPrumpPrum pPrumpPrumpPrumpPru" << endl << "      mpPr   umpPru         mpPrumpPrump Prump PrumpPrumpP" << endl << "       rumpPrumpP           rumpPrumpPr  umpP" << endl << "        rumpPru              mpPrumpP   rump" << endl << "          Pru                mpPrum    pPru" << endl << "                              mpPrum  pPru" << endl << "                               mpPrumpPru" << endl << "                                 mpPrump" << endl << "                                   Pru  " << endl;
     }
@@ -1226,15 +1226,14 @@ void consoleUI::modifyCommandComputer()
     while(true)
     {
         getline(cin, toFind);
-        toFind = toLower(toFind);
-        cout << endl;
-
         _printOutComputer = _turnC.findComputer(toFind);
+        toFind = toLower(toFind);
+        checkModifyComputer(toFind);
         if (_turnC.lookForComputer(toFind))
         {
             cout << _printOutComputer;
         }
-        if (checkModifyComputer(toFind))
+        if (_printOutComputer.size() == 1)
         {
             cout << "Hooray you found a computer to modify!" << endl;
             Computer id = _turnC.findComputerNumber(_printOutComputer[0].getName());
@@ -1242,9 +1241,14 @@ void consoleUI::modifyCommandComputer()
             _turnC.changeComputer(id);
             break;
         }
+        else if (_printOutComputer.size() == 0)
+        {
+            cout << "Computer not found!" << endl;
+            cout << "Please try again: ";
+        }
         else
         {
-            cout << "Please be more specific: " << endl << endl;
+            cout << "Please be more specific: ";
         }
     }
 
@@ -1347,7 +1351,7 @@ void consoleUI::computerValidation(Computer& input)
 
     while(true)
     {
-        cout << "Was the computer ever built? (y/n)" << endl;
+        cout << "Was the computer ever built? (y/n): ";
         cin >> wasitbuilt;
         wasitbuilt = toLower(wasitbuilt);
         if(wasitbuilt == "Y" || wasitbuilt == "y" || wasitbuilt == "Yes" || wasitbuilt == "yes")
