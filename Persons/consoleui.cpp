@@ -298,7 +298,7 @@ void consoleUI::quizCommand()
 
 void consoleUI::emailCommand()
 {
-    _turnG.speakQuestion("Did you really think we could implement a email function. hehehehehe.");
+    _turnG.speakQuestion("Did you really think we would implement a email function. hehehehehe.");
 }
 
 //person
