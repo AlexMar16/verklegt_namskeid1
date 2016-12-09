@@ -45,14 +45,16 @@ void consoleUI::run()
                 }
                 else
                 {
-                    do{commandBoxConnect();
+                    do
+                    {
+                        commandBoxConnect();
                         if(_turnCon.personORComputer(_command))
                         {
                             do
                             {
                                 _turnCon.sortConnectAlphabetically();  // Makes sure the list is sorted properly
                                 commandBoxConnectptc();
-                                if(_command == "showall")
+                                if(_command == "all")
                                 {
                                     _printOutConnection = _turnCon.getConnectionList();
                                     cout << _printOutConnection;
@@ -67,7 +69,7 @@ void consoleUI::run()
                                 }
                                 else if (_command == "remove")
                                 {
-                                    //vantar
+                                    removeConnection();
                                 }
                             }while(_command != BACK && _command != QUIT);
                             if(_turnCon.getSwappedList())
@@ -684,6 +686,40 @@ void consoleUI::addConnection()
             {
                _turnCon.addNewConnection(cFrom, cTo);
                cout << "ÞAÐ VIRKAR!!!!!!!!!!!!" << endl;
+               break;
+            }
+            else
+            {
+                cout << "No match" << endl;
+            }
+        }
+    }
+}
+
+void consoleUI::removeConnection()
+{
+    string cFrom, cTo;
+
+    while(true)
+    {
+        bool second = false;
+        cout << "What " << _turnCon.getWhichIsFrom() << " do you want to remove a connection from  ";
+        getline(cin, cFrom);
+        if(_turnCon.fromInDatabase(cFrom))
+        {
+            second = true;
+        }
+        else
+        {
+            cout << "No match" << endl;
+        }
+        if(second)
+        {
+            cout << "To which " << _turnCon.getWhichIsTo() << " does the connection lead? ";
+            getline(cin, cTo);
+            if(_turnCon.toInDatabase(cTo))
+            {
+               _turnCon.removeConnection(cFrom, cTo);
                break;
             }
             else

@@ -143,6 +143,31 @@ void connectionService::addNewConnection(const string& from, const string& to)
 
 }
 
+void connectionService::removeConnection(const string& from, const string& to)
+{
+    DbManager removeConnection;
+    generalService getID;
+    Connection rmC;
+    int indexOfRemoved = 0;
+    int fromID = getID.findID(from);
+    int toID = getID.findID(to);
+    removeFromDatabase(toID, fromID);
+    rmC.setFromID(fromID);
+    rmC.setToID(toID);
+    removeConnection.removeFromConnections(rmC);
+}
+
+void connectionService::removeFromDatabase(const int& toID, const int& fromID)
+{
+    for (size_t i = 0; i < _listConnections.size(); i++)
+    {
+        if (_listConnections[i].getFromID() == fromID && _listConnections[i].getToID() == toID)
+        {
+            _listConnections.erase(_listConnections.begin() + i);
+        }
+    }
+}
+
 string connectionService::getWhichIsFrom()
 {
     if (_swappedList == false)
