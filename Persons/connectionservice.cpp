@@ -65,6 +65,24 @@ bool connectionService::lookForConnection(const string& name)         // Checks 
     return false;
 }
 
+vector<Connection> connectionService::sortConnectAlphabetically()
+{
+    bool again = true;
+    while (again)
+    {
+        again = false;
+        for (size_t i = 0; i < _listConnections.size() - 1; i++)
+        {
+            if (_listConnections[i].getPersonName() > _listConnections[i+1].getPersonName())
+            {
+                swap(_listConnections[i], _listConnections[i+1]);
+                again = true;
+            }
+        }
+    }
+    return _listConnections;
+}
+
 
 bool connectionService::getSwappedList() const {return swappedList;}
 
