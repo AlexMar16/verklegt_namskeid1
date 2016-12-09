@@ -304,7 +304,7 @@ void consoleUI::addCommand()
 
         for(size_t i=0; i< name.size(); i++)
         {
-            if(!isalpha(name[i]))
+            if(!isalpha(name[i])&& !" ")// We use the " " so the function does not complain when space is used
             {
                notAlpha=true;
             }
