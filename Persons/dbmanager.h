@@ -18,6 +18,7 @@ public:
     DbManager(const QString& path);
     vector<Person> getPVector() const;
     vector<Computer>getCVector() const;
+    vector<Connection> getCOVector() const;
 
     void setVector(const vector<Person>& input);
     void setCVector(const vector<Computer>& input);

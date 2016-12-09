@@ -10,15 +10,14 @@ public:
     bool lookForComputer(const string& name);
     bool getProgram() const;
     bool dataFound() const;
+    bool lookForDigits(const int& num);
     Computer findComputerExactly(const string& name);
     Computer generateQuestion();
+    Computer generateAnswer();
+    Computer findComputerNumber(string name);
     vector<int> computerProperties();
     vector<Computer> findComputer(const string& name);
     vector<Computer> getList() const;
-    bool lookForDigits(const int& num);
-    Computer generateAnswer();
-    vector<Computer> findDigits(const int& num);
-    vector<Computer> getComputerList() const;
     void addComputer(const Computer& input);
     void removeComputer(const Computer& input);
     void sortList(const string& command);
@@ -26,6 +25,7 @@ public:
     void generateOptions(const Computer& correct, string& a, string& b, string& c, string& d);
     void reverseVector();
     void sortComputerList(const string& command);
+    void changeComputer(const Computer& input);
     string getLastName(const string& name) const;
     string toLower(const string &tolowerstring);
     string assignSelection(string& answer, const string& a, const string& b, const string& c, const string& d);
@@ -33,10 +33,10 @@ public:
     string aliveCheck(const Computer& p);
     string typeCheck(const Computer& c);
     string builtCheck(const Computer& c);
-
-
-    Computer findComputerNumber(string name);
-    void changeComputer(const Computer& somecomp);
+    int _computerIndex;
+    vector<Computer> findDigits(const int& num);
+    vector<Computer> getComputerList()const;
+    vector<Computer> sortCreationYear();
 
 private:
     bool _keepGoing;
@@ -45,16 +45,13 @@ private:
     bool alreadyInDatabase(const string &name);
     bool _dataFound;
     vector<Computer> _listComputer;
-    vector<Computer> _listSearchedComputer;
     vector<Computer> _listSearchedDigits;
+    vector<Computer> _listSearchedComputer;
     vector<Computer> sortAlphabetically();
     vector<Computer> sortBuilt();
     vector<Computer> sortType();
-    vector<Computer> sortCreationYear();
     void removeFromDatabase(const string& name);
     void swap(Computer& a, Computer& b);
-
-    int _computerIndex;
 };
 
 #endif // COMPUTERSERVICE_H

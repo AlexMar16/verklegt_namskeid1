@@ -11,6 +11,7 @@ public:
    // void connectionService::removeFromDatabase(const string &name);
    // void connectionService::addConnection(const Connection &input);
     bool personORComputer(const string& command);
+    vector<Connection> getConnectionList() const;
 private:
     vector<Connection> _listConnections;
     string _connectFrom;

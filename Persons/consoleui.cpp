@@ -37,16 +37,16 @@ void consoleUI::run()
                 }
                 else
                 {
-                    do{
-                        commandBoxConnect();
-                        if(_turnCon.personORComputer(_command))
-                        {
-                            commandBoxSubConnect();
-                            connectSubCommand();
-                            cout << "komst";
-
-                        }
-                    } while(_command != BACK && _command != QUIT);
+                commandBoxConnect();
+                if(_turnCon.personORComputer(_command))
+                {
+                    int prump;
+                    _printOutConnection = _turnCon.getConnectionList();
+                    cout << _printOutConnection;
+                    cin >> prump;
+                    //connectionPrintList();
+                }
+                 //setja foll
                 }
             }while(_command != BACK && _command != QUIT);
             _turnG.setProgram(_command);
@@ -77,7 +77,7 @@ void consoleUI::firstCommandBox()
     cout << setw(ASTERISK_WIDTH) << setfill(ASTERISK) <<  ASTERISK << endl;
     cout << "Pick a database: ";
     getline(cin, _database);
-    _database = toLower(_database); //AFHHVERJU VIRKARU EKKI !
+    _database = toLower(_database);
     beginningCommand();
     _turnG.setProgram(_database);
     if(_database == "person" || _database == "p")
@@ -930,7 +930,6 @@ void consoleUI::removeCommandComputer()
     Computer input;
     cout << "Enter the full name of the computer to remove from the database: ";
     getline(cin, fullName);
-    fullName = toLower(fullName);
     input = _turnC.findComputerExactly(fullName);
 
     if (input.getName() == EMPTY)
