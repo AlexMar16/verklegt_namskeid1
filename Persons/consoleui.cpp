@@ -583,15 +583,15 @@ void consoleUI::modifyCommandPerson()
     while(true)
     {
         getline(cin, toModify);
-        toModify = toLower(toModify);
+        //toModify = toLower(toModify);
 
         _printOutPerson = _turnP.findPerson(toModify);
-
+        checkModifyPerson(toModify);
         if (_turnP.lookForPerson(toModify))
         {
             cout << _printOutPerson;
         }
-        if (checkModifyPerson(toModify)) //here the magic happens
+        if (_printOutPerson.size() == 1) //here the magic happens
         {
             cout << "Hooray you found a person to modify! " << endl;
             Person id = _turnP.findPersonNumber(_printOutPerson[0].getName()); //bý bara til fkn copy af kallinum sem eg vill breyta, vil breyta actual gæjanum!
@@ -601,7 +601,7 @@ void consoleUI::modifyCommandPerson()
         }
         else
         {
-            cout << "please be more specific: " << endl;
+            cout << "Please be more specific: ";
         }
     }
 
@@ -611,15 +611,13 @@ bool consoleUI::checkModifyPerson( const string& toModify)
 {
     for(size_t i = 0; i < _printOutPerson.size(); i++)
     {
-        if(_printOutPerson.size() == 1)
+        if( toLower(_printOutPerson[i].getName()) == toLower(toModify))
         {
+            vector<Person> temp;
+            temp.push_back(_printOutPerson[i]);
+            _printOutPerson = temp;
             return true;
         }
-        else if( _printOutPerson[i].getName() == toModify)
-        {
-            return true;
-        }
-        cout << _printOutPerson[i] << endl;
     }
     return false;
 }
@@ -628,13 +626,12 @@ bool consoleUI::checkModifyPerson( const string& toModify)
 bool consoleUI::checkModifyComputer( const string& toModify)
 {
     for(size_t i = 0; i < _printOutComputer.size(); i++)
-    {
-        if(_printOutComputer.size() == 1)
+    {                   
+        if( _printOutComputer[i].getName() == toModify)
         {
-            return true;
-        }
-        else if( _printOutComputer[i].getName() == toModify)
-        {
+            vector<Computer> temp;
+            temp.push_back(_printOutComputer[i]);
+            _printOutComputer = temp;
             return true;
         }
     }
@@ -1201,15 +1198,14 @@ void consoleUI::modifyCommandComputer()
     while(true)
     {
         getline(cin, toFind);
-        toFind = toLower(toFind);
-        cout << endl;
-
         _printOutComputer = _turnC.findComputer(toFind);
+        toFind = toLower(toFind);
+        checkModifyComputer(toFind);
         if (_turnC.lookForComputer(toFind))
         {
             cout << _printOutComputer;
         }
-        if (checkModifyComputer(toFind))
+        if (_printOutComputer.size() == 1)
         {
             cout << "Hooray you found a computer to modify!" << endl;
             Computer id = _turnC.findComputerNumber(_printOutComputer[0].getName());
@@ -1217,9 +1213,14 @@ void consoleUI::modifyCommandComputer()
             _turnC.changeComputer(id);
             break;
         }
+        else if (_printOutComputer.size() == 0)
+        {
+            cout << "Computer not found!" << endl;
+            cout << "Please try again: ";
+        }
         else
         {
-            cout << "Please be more specific: " << endl << endl;
+            cout << "Please be more specific: ";
         }
     }
 
@@ -1322,7 +1323,7 @@ void consoleUI::computerValidation(Computer& input)
 
     while(true)
     {
-        cout << "Was the computer ever built? (y/n)" << endl;
+        cout << "Was the computer ever built? (y/n): ";
         cin >> wasitbuilt;
         wasitbuilt = toLower(wasitbuilt);
         if(wasitbuilt == "Y" || wasitbuilt == "y" || wasitbuilt == "Yes" || wasitbuilt == "yes")
