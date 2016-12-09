@@ -1464,6 +1464,7 @@ void consoleUI::computerValidation(Computer& input)         // Finds the compute
 
 //connect
 
+/* Bjarki - commentadi ut eftir ad hafa skodad run fallid,
 void consoleUI::printListConnect()
 {
     if(_command == ALL)
@@ -1490,8 +1491,7 @@ void consoleUI::printListConnect()
         _print = false;
         //setja fall
     }
-
-}
+}*/
 
 bool consoleUI::connectSubCommand()     // Checks if input was valid
 {
