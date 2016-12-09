@@ -51,7 +51,7 @@ void consoleUI::run()
                                 }
                                 else if(_command == "find")
                                 {
-
+                                    findconnection();
                                 }
 
 
@@ -644,15 +644,18 @@ vector<Connection> consoleUI::findconnection()
     {
         getline(cin, tofind);
         //toModify = toLower(toModify);
-
-        _printOutPerson = _turnP.findPerson(tofind);
-        checkModifyPerson(tofind);
+        cout << "111";
+        _printOutConnection = _turnCon.findConnection(tofind);
+        cout << "222";
+        checkfoundPerson(tofind);
         if (_turnP.lookForPerson(tofind))
         {
-            cout << _printOutPerson;
+            cout << "333";
+            cout << _printOutConnection;
         }
         if (_printOutPerson.size() == 1) //here the magic happens
         {
+            cout << "444";
             cout << "Hooray you found a person to modify! " << endl;
             Person id = _turnP.findPersonNumber(_printOutPerson[0].getName()); //bý bara til fkn copy af kallinum sem eg vill breyta, vil breyta actual gæjanum!
             personValidation(id);
