@@ -35,19 +35,6 @@ bool PersonService::lookForPerson(const string& name)         // Checks if any p
     return false;
 }
 
-Person PersonService::findPersonExactly(const string& name)
-{
-    Person PersonFoundExactly;
-    for (size_t i = 0; i < _listPerson.size(); i++)
-    {
-        if (_listPerson[i].getName() == name)
-        {
-            PersonFoundExactly = _listPerson[i];
-        }
-    }
-    return PersonFoundExactly;
-}
-
 string PersonService::getLastName(const string& name) const
 {
     int spaceCounter = 0;
