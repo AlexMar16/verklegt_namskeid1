@@ -21,12 +21,12 @@ vector<Connection> connectionService::getConnectionList() const {return _listCon
 bool connectionService::personORComputer(const string& command)
 {
     generalService GS;
-    if (GS.toLower(command) == "person to computer" || GS.toLower(command) == "p2c")
+    if (GS.toLower(command) == "person to computer" || GS.toLower(command) == "ptc")
     {
         _swappedList = false;
         return true;
     }
-    else if (GS.toLower(command) == "computer to person" || GS.toLower(command) == "c2p")
+    else if (GS.toLower(command) == "computer to person" || GS.toLower(command) == "ctp")
     {
         _swappedList = true;
         swapToFrom();

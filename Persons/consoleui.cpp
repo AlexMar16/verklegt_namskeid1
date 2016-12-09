@@ -177,9 +177,9 @@ void consoleUI::commandBoxConnect()
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| Please enter one of the following commands:"
          << right << BARRIER << endl;
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << BARRIER << right << BARRIER<< endl;
-    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| person to computer/p2c - This command will print a specific connection."
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| person to computer/ptc - This command will print a specific connection."
          << right << BARRIER << endl;
-    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| computer to person/c2p - This command will print all connections."
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| computer to person/ctp - This command will print all connections."
          << right << BARRIER << endl;
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| back               - This command will allow you to choose another database."
          << right << BARRIER << endl;
