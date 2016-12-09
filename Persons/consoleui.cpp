@@ -267,8 +267,10 @@ void consoleUI::quizCommand()
     else
     {
         Computer questionC = _turnC.generateAnswer();
-        cout << "This " << _turnC.typeCheck(questionC) << " computer was " << _turnC.builtCheck(questionC)
-             << ", enter (a/b/c/d)" << endl;
+        string cQuestion = "This " + _turnC.typeCheck(questionC) + " computer was " + _turnC.builtCheck(questionC)
+             + ", enter (a/b/c/d)";
+        cout << cQuestion << endl;
+        _turnG.speakQuestion(cQuestion);
         _turnC.generateOptions(questionC, a, b, c, d);
         answerName = questionC.getName();
     }
@@ -286,10 +288,12 @@ void consoleUI::quizCommand()
     if (userAnswer == answerName)
     {
         cout << endl << "Correct!!!" << endl << endl;
+        _turnG.speakQuestion("Correct");
     }
     else
     {
         cout << endl << "Wrong!" << endl << endl;
+        _turnG.speakQuestion("Wrong");
     }
     cin.ignore();
 }
