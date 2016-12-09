@@ -178,14 +178,11 @@ void consoleUI::commandBoxConnect()         // The command box for connect
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| Please enter one of the following commands:"
          << right << BARRIER << endl;
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << BARRIER << right << BARRIER<< endl;
-    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| add     - This command will allow you to add a connection."
-         << right << BARRIER << endl;
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| ctp     - This command will find connections from computers to persons."
          << right << BARRIER << endl;
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| ptc     - This command will find connections from persons to computers."
          << right << BARRIER << endl;
-    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| remove  - This command will allow you to remove a connection."
-         << right << BARRIER << endl;
+
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| back    - This command will allow you to choose another database."
          << right << BARRIER << endl;
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| quit    - This command will quit the program."
@@ -204,7 +201,11 @@ void consoleUI::commandBoxConnectptc()          // The command box for person to
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << BARRIER << right << BARRIER<< endl;
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| all     - This command will show all connection."
          << right << BARRIER << endl;
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| add     - This command will allow you to add a connection."
+         << right << BARRIER << endl;
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| find    - This command will show a specific connections."
+         << right << BARRIER << endl;
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| remove  - This command will alllow you to remove a connection."
          << right << BARRIER << endl;
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| back    - This command will allow you to choose another database."
          << right << BARRIER << endl;
@@ -302,6 +303,11 @@ string consoleUI::toLower(const string& toLowerString)    // Makes everything lo
     string data = toLowerString;
     transform(data.begin(), data.end(), data.begin(), ::tolower);
     return data;
+}
+
+bool consoleUI::is_digits(const string &numbers)        // This is a function we use to check if input was digits
+{
+    return numbers.find_first_not_of("0123456789") == std::string::npos;
 }
 
 //person
@@ -431,6 +437,25 @@ void consoleUI::checkModifyPerson( const string& toModify)          // Checks if
     }
 }
 
+void consoleUI::findconnection()
+{
+    string tofind;
+    cout << "Search for a person to see his connections: ";
+
+        getline(cin, tofind);
+        //toModify = toLower(toModify);
+        _printOutConnection = _turnCon.findConnection(tofind);
+        checkfoundPerson(tofind);
+        if (_turnCon.lookForConnection(tofind))
+        {
+            cout << _printOutConnection;
+        }
+        else
+        {
+            cout << "Please be more specific: ";
+        }
+}
+
 void consoleUI::findCommandPerson()         //allowes the user to search for a name or a year
 {
     string toFind;
@@ -507,94 +532,6 @@ void consoleUI::modifyCommandPerson()       //allowes the user to modify instenc
         else
         {
             cout << "Please be more specific: ";
-        }
-    }
-}
-
-void consoleUI::findconnection()
-{
-    string tofind;
-    cout << "Search for a person to see his connections: ";
-
-        getline(cin, tofind);
-        //toModify = toLower(toModify);
-        _printOutConnection = _turnCon.findConnection(tofind);
-        checkfoundPerson(tofind);
-        if (_turnCon.lookForConnection(tofind))
-        {
-            cout << _printOutConnection;
-        }
-        else
-        {
-            cout << "Please be more specific: ";
-        }
-}
-
-void consoleUI::addConnection()
-{
-    string cFrom, cTo;
-
-    while(true)
-    {
-        bool second = false;
-        cout << "Enter " << _turnCon.getWhichIsFrom() << " to connect from ";
-        getline(cin, cFrom);
-        if(_turnCon.fromInDatabase(cFrom))
-        {
-            second = true;
-        }
-        else
-        {
-            cout << "No match" << endl;
-        }
-        if(second)
-        {
-            cout << "Enter " << _turnCon.getWhichIsTo() << " to connect to: ";
-            getline(cin, cTo);
-            if(_turnCon.toInDatabase(cTo))
-            {
-               _turnCon.addNewConnection(cFrom, cTo);
-               cout << "ÞAÐ VIRKAR!!!!!!!!!!!!" << endl;
-               break;
-            }
-            else
-            {
-                cout << "No match" << endl;
-            }
-        }
-    }
-}
-
-void consoleUI::removeConnection()
-{
-    string cFrom, cTo;
-
-    while(true)
-    {
-        bool second = false;
-        cout << "What " << _turnCon.getWhichIsFrom() << " do you want to remove a connection from  ";
-        getline(cin, cFrom);
-        if(_turnCon.fromInDatabase(cFrom))
-        {
-            second = true;
-        }
-        else
-        {
-            cout << "No match" << endl;
-        }
-        if(second)
-        {
-            cout << "To which " << _turnCon.getWhichIsTo() << " does the connection lead? ";
-            getline(cin, cTo);
-            if(_turnCon.toInDatabase(cTo))
-            {
-               _turnCon.removeConnection(cFrom, cTo);
-               break;
-            }
-            else
-            {
-                cout << "No match" << endl;
-            }
         }
     }
 }
@@ -737,6 +674,40 @@ void consoleUI::printListPerson()       // Print if appropriate.
     else
     {
         _print = false;
+    }
+}
+
+void consoleUI::removeConnection()
+{
+    string cFrom, cTo;
+
+    while(true)
+    {
+        bool second = false;
+        cout << "What " << _turnCon.getWhichIsFrom() << " do you want to remove a connection from  ";
+        getline(cin, cFrom);
+        if(_turnCon.fromInDatabase(cFrom))
+        {
+            second = true;
+        }
+        else
+        {
+            cout << "No match" << endl;
+        }
+        if(second)
+        {
+            cout << "To which " << _turnCon.getWhichIsTo() << " does the connection lead? ";
+            getline(cin, cTo);
+            if(_turnCon.toInDatabase(cTo))
+            {
+               _turnCon.removeConnection(cFrom, cTo);
+               break;
+            }
+            else
+            {
+                cout << "No match" << endl;
+            }
+        }
     }
 }
 
@@ -914,9 +885,6 @@ void consoleUI::sortCommandPerson()         // Sorts the list.
         }
     }
 }
-
-
-
 //computer
 
 void consoleUI::addCompCommand()
@@ -1036,6 +1004,126 @@ void consoleUI::addCompCommand()
     cout << endl;
 }
 
+void consoleUI::computerValidation(Computer& input)         // Finds the computer in the database, allowes the user to modify it.
+{
+    string name, type, yearBuilt, wasitbuilt, built;
+    int birthCheck = 0;
+    const int MINIMUM_Built_YEAR = 1500, MAXIMUM_Built_YEAR = 2030;
+
+    cout << "Please enter the following information about the new Computer " << endl;
+    cout << "in the following order." << endl;
+    cout << "Be aware you cannot put letters that are not in the English alphabet." << endl;
+
+    while(true)
+    {
+        cout << "Name: ";
+        getline(cin, name);
+
+        if(name == EMPTY)
+        {
+            cout << "No input!" << endl;
+        }
+        else
+        {
+            break;
+        }
+    }
+    input.setName(name);
+
+    while(true)
+    {
+        cout << "Type of computer: ";
+        getline(cin, type);
+        type = _turnG.toLower(type);
+        if(type == EMPTY)
+        {
+            cout << "No input!" << endl;
+        }
+        else if (_turnG.toLower(type) == "mechanical")
+        {
+            type = MECHANICAL;
+            break;
+        }
+        else if (_turnG.toLower(type) == "electronic")
+        {
+            type = ELECTRONIC;
+            break;
+        }
+        else if (_turnG.toLower(type) == "electro-mechanical")
+        {
+            type = ELECTROMECHANICAL;
+            break;
+        }
+        else if (_turnG.toLower(type) == "transistor")
+        {
+            type = TRANSISTOR;
+            break;
+        }
+        else if (_turnG.toLower(type) == "transistor/microchip")
+        {
+            type = TRANSISTORMICROCHIP;
+            break;
+        }
+        else if (_turnG.toLower(type) == "supercomputer")
+        {
+            type = SUPERCOMPUTER;
+            break;
+        }
+        else if (_turnG.toLower(type) == "quantum computer")
+        {
+            type = QUANTUMCOMPUTER;
+            break;
+        }
+        else
+        {
+            cout << "Invalid type!" << endl;
+        }
+    }
+    input.setType(type);
+
+    while(true)
+    {
+        cout << "Year (YYYY): ";
+        cin >> yearBuilt;
+        yearBuilt = _turnG.toLower(yearBuilt);
+        birthCheck = atoi(yearBuilt.c_str());       // Removes alphanumeric values from the input.
+        if (birthCheck > MINIMUM_Built_YEAR && birthCheck < MAXIMUM_Built_YEAR)
+        {
+            break;
+        }
+        else
+        {
+            cout << "Invalid input!" << endl;
+        }
+    }
+    input.setYearbuild(birthCheck);
+
+    while(true)
+    {
+        cout << "Was the computer ever built? (y/n): ";
+        cin >> wasitbuilt;
+        wasitbuilt = _turnG.toLower(wasitbuilt);
+        if(wasitbuilt == "Y" || wasitbuilt == "y" || wasitbuilt == "Yes" || wasitbuilt == "yes")
+        {
+            built = "Yes";
+            break;
+        }
+        else if (wasitbuilt == "N" || wasitbuilt == "n" || wasitbuilt == "No" || wasitbuilt == "no")
+        {
+            built = "No";
+            break;
+        }
+        else
+        {
+            cout << "Invalid input!" << endl;
+        }
+    }
+    input.setBuilt(built);
+
+    cout << endl;
+    cin.ignore();
+}
+
 void consoleUI::checkModifyComputer( const string& toModify)
 {
     for(size_t i = 0; i < _printOutComputer.size(); i++)
@@ -1048,7 +1136,6 @@ void consoleUI::checkModifyComputer( const string& toModify)
         }
     }
 }
-
 
 void consoleUI::findCommandComputer()       // This function finds the computer
 {
@@ -1094,9 +1181,135 @@ void consoleUI::findCommandComputer()       // This function finds the computer
     }
 }
 
-bool consoleUI::is_digits(const string &numbers)        // This is a function we use to check if input was digits
+void consoleUI::modifyCommandComputer()
 {
-    return numbers.find_first_not_of("0123456789") == std::string::npos;
+    string toFind;
+
+    cout << "Search for a computer to modify: ";
+    while(true)
+    {
+        getline(cin, toFind);
+        toFind = _turnG.toLower(toFind);
+        cout << endl;
+        _printOutComputer = _turnC.findComputer(toFind);
+        checkModifyComputer(toFind);
+        if (_turnC.lookForComputer(toFind))
+        {
+            cout << _printOutComputer;
+        }
+        if (_printOutComputer.size() == 1)
+        {
+            cout << "Hooray you found a computer to modify!" << endl;
+            Computer id = _turnC.findComputerNumber(_printOutComputer[0].getName());
+            computerValidation(id);
+            _turnC.changeComputer(id);
+            break;
+        }
+        else if (_printOutComputer.size() == 0)
+        {
+            cout << "Computer not found!" << endl;
+            cout << "Please try again: ";
+        }
+        else
+        {
+            cout << "Please be more specific: ";
+        }
+    }
+}
+
+void consoleUI::printListComputer()
+{
+    const string SORT = "sort";
+    const string ADD = "add";
+    const string LIST = "list";
+
+    if(_command == LIST)            // Print the original list.
+    {
+        _print = true;
+    }
+
+    else if(_command == ADD)
+    {
+        _print = true;
+        addCompCommand();
+    }
+    else if(_command == REMOVE)
+    {
+        _print = false;
+        removeCommandComputer();
+    }
+    else if (_command == FIND)
+    {
+        _print = false;
+        findCommandComputer();
+    }
+    else if(_command == SORT)
+    {
+        _print = true;
+        sortCommandComputer();
+    }
+    else if(_command == QUIZ)
+    {
+        _print = false;
+        quizCommand();
+    }
+    else if (_command == QUIT)
+    {
+        _print = false;
+    }
+    else if(_command == STATUS)
+    {
+        _print = false;
+        statusCommandComputer();
+    }
+    else if(_command == MODIFY)
+    {
+        _print = false;
+        modifyCommandComputer();
+    }
+    else if(_command == "email")
+    {
+        _print = false;
+        emailCommand();
+    }
+    else
+    {
+        _print = false;
+    }
+}
+
+void consoleUI::printList()
+{
+    if((_turnG.dataFound() || QUIT == _command)&& _theRightOne=="person")
+    {
+        printListPerson();         // Checks if there is a need for a printout of the list.
+    }
+    else if((_turnG.dataFound() || QUIT == _command)&& _theRightOne=="computer")
+    {
+        printListComputer();
+    }
+    else
+    {
+        cout << endl << "Database could not be accessed! " << endl << endl;
+    }
+}
+
+void consoleUI::print()
+{
+    if(_print  && (_database=="person" || _database == "p"))
+    {
+        _printOutPerson = _turnP.getPersonList();           // getList() gets the list that's supposed to be printed out.
+        cout << _printOutPerson;
+    }
+    else if(_print && (_database=="computer" || _database == "c"))
+    {
+        _printOutComputer = _turnC.getComputerList(); // todo setja inn dataFound lika
+        cout << _printOutComputer;
+    }
+    else if (!specialCommandPerson() && _turnG.dataFound())
+    {
+        cout << "Invalid command!" << endl << endl;
+    }
 }
 
 void consoleUI::removeCommandComputer()     // This function first finds out if the computer is in the list and then removes it
@@ -1244,258 +1457,42 @@ bool consoleUI::specialCommandComputer(const string &_command)      // Checks if
     }
 }
 
-void consoleUI::printListComputer()
-{
-    const string SORT = "sort";
-    const string ADD = "add";
-    const string LIST = "list";
-
-    if(_command == LIST)            // Print the original list.
-    {
-        _print = true;
-    }
-
-    else if(_command == ADD)
-    {
-        _print = true;
-        addCompCommand();
-    }
-    else if(_command == REMOVE)
-    {
-        _print = false;
-        removeCommandComputer();
-    }
-    else if (_command == FIND)
-    {
-        _print = false;
-        findCommandComputer();
-    }
-    else if(_command == SORT)
-    {
-        _print = true;
-        sortCommandComputer();
-    }
-    else if(_command == QUIZ)
-    {
-        _print = false;
-        quizCommand();
-    }
-    else if (_command == QUIT)
-    {
-        _print = false;
-    }
-    else if(_command == STATUS)
-    {
-        _print = false;
-        statusCommandComputer();
-    }
-    else if(_command == MODIFY)
-    {
-        _print = false;
-        modifyCommandComputer();
-    }
-    else if(_command == "email")
-    {
-        _print = false;
-        emailCommand();
-    }
-    else
-    {
-        _print = false;
-    }
-}
-
-void consoleUI::printList()
-{
-    if((_turnG.dataFound() || QUIT == _command)&& _theRightOne=="person")
-    {
-        printListPerson();         // Checks if there is a need for a printout of the list.
-    }
-    else if((_turnG.dataFound() || QUIT == _command)&& _theRightOne=="computer")
-    {
-        printListComputer();
-    }
-    else
-    {
-        cout << endl << "Database could not be accessed! " << endl << endl;
-    }
-}
-
-void consoleUI::print()
-{
-    if(_print  && (_database=="person" || _database == "p"))
-    {
-        _printOutPerson = _turnP.getPersonList();           // getList() gets the list that's supposed to be printed out.
-        cout << _printOutPerson;
-    }
-    else if(_print && (_database=="computer" || _database == "c"))
-    {
-        _printOutComputer = _turnC.getComputerList(); // todo setja inn dataFound lika
-        cout << _printOutComputer;
-    }
-    else if (!specialCommandPerson() && _turnG.dataFound())
-    {
-        cout << "Invalid command!" << endl << endl;
-    }
-}
-
-void consoleUI::modifyCommandComputer()
-{
-    string toFind;
-
-    cout << "Search for a computer to modify: ";
-    while(true)
-    {
-        getline(cin, toFind);
-        toFind = _turnG.toLower(toFind);
-        cout << endl;
-        _printOutComputer = _turnC.findComputer(toFind);
-        checkModifyComputer(toFind);
-        if (_turnC.lookForComputer(toFind))
-        {
-            cout << _printOutComputer;
-        }
-        if (_printOutComputer.size() == 1)
-        {
-            cout << "Hooray you found a computer to modify!" << endl;
-            Computer id = _turnC.findComputerNumber(_printOutComputer[0].getName());
-            computerValidation(id);
-            _turnC.changeComputer(id);
-            break;
-        }
-        else if (_printOutComputer.size() == 0)
-        {
-            cout << "Computer not found!" << endl;
-            cout << "Please try again: ";
-        }
-        else
-        {
-            cout << "Please be more specific: ";
-        }
-    }
-}
-
-void consoleUI::computerValidation(Computer& input)         // Finds the computer in the database, allowes the user to modify it.
-{
-    string name, type, yearBuilt, wasitbuilt, built;
-    int birthCheck = 0;
-    const int MINIMUM_Built_YEAR = 1500, MAXIMUM_Built_YEAR = 2030;
-
-    cout << "Please enter the following information about the new Computer " << endl;
-    cout << "in the following order." << endl;
-    cout << "Be aware you cannot put letters that are not in the English alphabet." << endl;
-
-    while(true)
-    {
-        cout << "Name: ";
-        getline(cin, name);
-
-        if(name == EMPTY)
-        {
-            cout << "No input!" << endl;
-        }
-        else
-        {
-            break;
-        }
-    }
-    input.setName(name);
-
-    while(true)
-    {
-        cout << "Type of computer: ";
-        getline(cin, type);
-        type = _turnG.toLower(type);
-        if(type == EMPTY)
-        {
-            cout << "No input!" << endl;
-        }
-        else if (_turnG.toLower(type) == "mechanical")
-        {
-            type = MECHANICAL;
-            break;
-        }
-        else if (_turnG.toLower(type) == "electronic")
-        {
-            type = ELECTRONIC;
-            break;
-        }
-        else if (_turnG.toLower(type) == "electro-mechanical")
-        {
-            type = ELECTROMECHANICAL;
-            break;
-        }
-        else if (_turnG.toLower(type) == "transistor")
-        {
-            type = TRANSISTOR;
-            break;
-        }
-        else if (_turnG.toLower(type) == "transistor/microchip")
-        {
-            type = TRANSISTORMICROCHIP;
-            break;
-        }
-        else if (_turnG.toLower(type) == "supercomputer")
-        {
-            type = SUPERCOMPUTER;
-            break;
-        }
-        else if (_turnG.toLower(type) == "quantum computer")
-        {
-            type = QUANTUMCOMPUTER;
-            break;
-        }
-        else
-        {
-            cout << "Invalid type!" << endl;
-        }
-    }
-    input.setType(type);
-
-    while(true)
-    {
-        cout << "Year (YYYY): ";
-        cin >> yearBuilt;
-        yearBuilt = _turnG.toLower(yearBuilt);
-        birthCheck = atoi(yearBuilt.c_str());       // Removes alphanumeric values from the input.
-        if (birthCheck > MINIMUM_Built_YEAR && birthCheck < MAXIMUM_Built_YEAR)
-        {
-            break;
-        }
-        else
-        {
-            cout << "Invalid input!" << endl;
-        }
-    }
-    input.setYearbuild(birthCheck);
-
-    while(true)
-    {
-        cout << "Was the computer ever built? (y/n): ";
-        cin >> wasitbuilt;
-        wasitbuilt = _turnG.toLower(wasitbuilt);
-        if(wasitbuilt == "Y" || wasitbuilt == "y" || wasitbuilt == "Yes" || wasitbuilt == "yes")
-        {
-            built = "Yes";
-            break;
-        }
-        else if (wasitbuilt == "N" || wasitbuilt == "n" || wasitbuilt == "No" || wasitbuilt == "no")
-        {
-            built = "No";
-            break;
-        }
-        else
-        {
-            cout << "Invalid input!" << endl;
-        }
-    }
-    input.setBuilt(built);
-
-    cout << endl;
-    cin.ignore();
-}
-
 //connect
+
+void consoleUI::addConnection()
+{
+    string cFrom, cTo;
+
+    while(true)
+    {
+        bool second = false;
+        cout << "Enter " << _turnCon.getWhichIsFrom() << " to connect from ";
+        getline(cin, cFrom);
+        if(_turnCon.fromInDatabase(cFrom))
+        {
+            second = true;
+        }
+        else
+        {
+            cout << "No match" << endl;
+        }
+        if(second)
+        {
+            cout << "Enter " << _turnCon.getWhichIsTo() << " to connect to: ";
+            getline(cin, cTo);
+            if(_turnCon.toInDatabase(cTo))
+            {
+               _turnCon.addNewConnection(cFrom, cTo);
+               cout << "ÞAÐ VIRKAR!!!!!!!!!!!!" << endl;
+               break;
+            }
+            else
+            {
+                cout << "No match" << endl;
+            }
+        }
+    }
+}
 
 bool consoleUI::connectSubCommand()     // Checks if input was valid
 {
