@@ -166,7 +166,7 @@ void consoleUI::commandBox()// the right one either sets it's value to "person" 
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| quit   - This command will quit the program. "
          << right << BARRIER << endl;
     cout << setw(ASTERISK_WIDTH) << setfill(ASTERISK) << ASTERISK << endl;      // Command box ends.
-    cout << "command: ";
+    cout << "Command: ";
     getline(cin, _command);          // Sets the private variable _command in the service class.
     _command = _turnG.toLower(_command);
 }
@@ -186,7 +186,7 @@ void consoleUI::commandBoxConnect()
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| quit               - This command will quit the program."
          << right << BARRIER << endl;
     cout << setw(ASTERISK_WIDTH) << setfill(ASTERISK) << ASTERISK << endl;      // Command box ends.
-    cout << "command: ";
+    cout << "Command: ";
     getline(cin, _command);
     _command = _turnG.toLower(_command);
 }
@@ -206,7 +206,7 @@ void consoleUI::commandBoxConnectptc()
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| quit    - This command will quit the program."
          << right << BARRIER << endl;
     cout << setw(ASTERISK_WIDTH) << setfill(ASTERISK) << ASTERISK << endl;      // Command box ends.
-    cout << "command: ";
+    cout << "Command: ";
     getline(cin, _command);
     _command = toLower(_command);
 }
@@ -230,7 +230,7 @@ void consoleUI::commandBoxSubConnect()
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| quit     - This command will quit the program. "
          << right << BARRIER << endl;
     cout << setw(ASTERISK_WIDTH) << setfill(ASTERISK) << ASTERISK << endl;      // Command box ends.
-    cout << "command: ";
+    cout << "Command: ";
     getline(cin, _command);
 }
 
