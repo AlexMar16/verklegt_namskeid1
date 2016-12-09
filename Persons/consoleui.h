@@ -56,6 +56,7 @@ private:
     void commandBoxConnect();
     void commandBoxConnectptc();
     void findconnection();
+    void removeConnection();
     PersonService _turnP;      //The instance we use to communicate with the PersonService layer.
     string _theRightOne;
     string _command;

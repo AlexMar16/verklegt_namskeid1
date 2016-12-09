@@ -23,9 +23,8 @@ public:
     void addNewConnection(const string& from, const string& to);
     string getWhichIsFrom();
     string getWhichIsTo();
-
-
-
+    void removeFromDatabase(const int &toID, const int &fromID);
+    void removeConnection(const string& from, const string& to);
 
 private:
     vector<Connection> _listConnections;

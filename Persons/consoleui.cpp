@@ -1,8 +1,5 @@
 #include "consoleui.h"
 
-
-
-
 using namespace std;
 
 const string MODIFY = "modify";
@@ -16,6 +13,7 @@ const string ADD = "add";
 const string BACK = "back";
 const string PTC = "ptc";
 const string CTP = "ctp";
+const string SORT = "sort";
 const int ASTERISK_WIDTH = 80;
 const char ASTERISK = '*';
 const char BARRIER = '|';
@@ -45,7 +43,9 @@ void consoleUI::run()       // Runs the main UI menu.
                 }
                 else
                 {
-                    do{commandBoxConnect();
+                    do
+                    {
+                        commandBoxConnect();
                         if(_turnCon.personORComputer(_command))
                         {
                             do
@@ -67,7 +67,7 @@ void consoleUI::run()       // Runs the main UI menu.
                                 }
                                 else if (_command == REMOVE)
                                 {
-                                    //vantar
+                                    removeConnection();
                                 }
                             }while(_command != BACK && _command != QUIT);
                             if(_turnCon.getSwappedList())
@@ -179,14 +179,11 @@ void consoleUI::commandBoxConnect()         // The command box for connect
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| Please enter one of the following commands:"
          << right << BARRIER << endl;
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << BARRIER << right << BARRIER<< endl;
-    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| add     - This command will allow you to add a connection."
-         << right << BARRIER << endl;
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| ctp     - This command will find connections from computers to persons."
          << right << BARRIER << endl;
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| ptc     - This command will find connections from persons to computers."
          << right << BARRIER << endl;
-    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| remove  - This command will allow you to remove a connection."
-         << right << BARRIER << endl;
+
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| back    - This command will allow you to choose another database."
          << right << BARRIER << endl;
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| quit    - This command will quit the program."
@@ -205,7 +202,11 @@ void consoleUI::commandBoxConnectptc()          // The command box for person to
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << BARRIER << right << BARRIER<< endl;
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| all     - This command will show all connection."
          << right << BARRIER << endl;
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| add     - This command will allow you to add a connection."
+         << right << BARRIER << endl;
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| find    - This command will show a specific connections."
+         << right << BARRIER << endl;
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| remove  - This command will alllow you to remove a connection."
          << right << BARRIER << endl;
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| back    - This command will allow you to choose another database."
          << right << BARRIER << endl;
@@ -293,13 +294,10 @@ void consoleUI::quizCommand()       // Asks the user a question about the scient
     }while(goOn == "y");
 }
 
-
 void consoleUI::emailCommand()
 {
     _turnG.speakQuestion("Did you really think we would implement a email function. hehehehehe.");
 }
-
-//person
 
 string consoleUI::toLower(const string& toLowerString)    // Makes everything lowercase
 {
@@ -308,7 +306,14 @@ string consoleUI::toLower(const string& toLowerString)    // Makes everything lo
     return data;
 }
 
-void consoleUI::addCommand()            // Enables the user to add a new scientist to the list.
+bool consoleUI::is_digits(const string &numbers)        // This is a function we use to check if input was digits
+{
+    return numbers.find_first_not_of("0123456789") == std::string::npos;
+}
+
+//person
+
+void consoleUI::addCommand()    // Enables the user to add a new scientist to the list.
 {
     bool notAlpha=false;
     string name, gender, deathYear, birthYear;
@@ -405,159 +410,51 @@ void consoleUI::addCommand()            // Enables the user to add a new scienti
     cin.ignore();
 }
 
-void consoleUI::addCompCommand()            // Enables the user to add a new computer to the list.
+bool consoleUI::checkfoundPerson( const string& toFind)         // Checks if the person is in the list.
 {
-    string name, type, yearBuilt, wasitbuilt, built;
-    Computer input;
-    int birthCheck = 0;
-    const int MINIMUM_Built_YEAR = 1500, MAXIMUM_Built_YEAR = 2030;
-
-    cout << "Please enter the following information about the new Computer " << endl;
-    cout << "in the following order." << endl;
-    cout << "Be aware you cannot put letters that are not in the English alphabet." << endl;
-
-    while(true)
+    for(size_t i = 0; i < _printOutConnection.size(); i++)
     {
-        cout << "Name: ";
-        getline(cin, name);
-        name[0] = toupper(name[0]);
-        if(name == EMPTY)
+        if( toLower(_printOutConnection[i].getFromName()) == toLower(toFind))
         {
-            cout << "No input!" << endl;
-        }
-        else
-        {
-            break;
+            vector<Connection> temp;
+            temp.push_back(_printOutConnection[i]);
+            _printOutConnection = temp;
+            return true;
         }
     }
-    input.setName(name);
-
-    while(true)
-    {
-        cout << "Type of computer: ";
-        getline(cin, type);
-        if(type == EMPTY)
-        {
-            cout << "No input!" << endl;
-        }
-        else if (_turnG.toLower(type) == "mechanical")
-        {
-            type = MECHANICAL;
-            break;
-        }
-        else if (_turnG.toLower(type) == "electronic")
-        {
-            type = ELECTRONIC;
-            break;
-        }
-        else if (_turnG.toLower(type) == "electro-mechanical")
-        {
-            type = ELECTROMECHANICAL;
-            break;
-        }
-        else if (_turnG.toLower(type) == "transistor")
-        {
-            type = TRANSISTOR;
-            break;
-        }
-        else if (_turnG.toLower(type) == "transistor/microchip")
-        {
-            type = TRANSISTORMICROCHIP;
-            break;
-        }
-        else if (_turnG.toLower(type) == "supercomputer")
-        {
-            type = SUPERCOMPUTER;
-            break;
-        }
-        else if (_turnG.toLower(type) == "quantum computer")
-        {
-            type = QUANTUMCOMPUTER;
-            break;
-        }
-        else
-        {
-            cout << "Invalid type!" << endl;
-        }
-    }
-    input.setType(type);
-
-    while(true)
-    {
-        cout << "Year designed (YYYY): ";
-        cin >> yearBuilt;
-        birthCheck = atoi(yearBuilt.c_str());       // Removes alphanumeric values from the input.
-        if (birthCheck > MINIMUM_Built_YEAR && birthCheck < MAXIMUM_Built_YEAR)
-        {
-            break;
-        }
-        else
-        {
-            cout << "Invalid input!" << endl;
-        }
-    }
-    input.setYearbuild(birthCheck);
-
-    while(true)
-    {
-        cout << "Was the computer ever built? (y/n)" << endl;
-        cin >> wasitbuilt;
-        if(wasitbuilt == "Y" || wasitbuilt == "y" || wasitbuilt == "Yes" || wasitbuilt == "yes")
-        {
-            built = "Yes";
-            break;
-        }
-        else if (wasitbuilt == "N" || wasitbuilt == "n" || wasitbuilt == "No" || wasitbuilt == "no")
-        {
-            built = "No";
-            break;
-        }
-        else
-        {
-            cout << "Invalid input!" << endl;
-        }
-    }
-    input.setBuilt(built);
-
-    cout << endl;
+    return false;
 }
 
-void consoleUI::removeCommandPerson()       // Enables the user to remove a scientist from the list.
+void consoleUI::checkModifyPerson( const string& toModify)          // Checks if the person is on the list.
 {
-    string fullName;
-    string sure;
-    cout << "Enter the name of the scientist to remove from the database: ";
-    while(true)
+    for(size_t i = 0; i < _printOutPerson.size(); i++)
     {
-    getline(cin, fullName);
-    fullName = _turnG.toLower(fullName);
-
-    _printOutPerson = _turnP.findPerson(fullName);
-    checkModifyPerson(fullName);
-
-    if (_printOutPerson.size() == 1)
-    {
-        cout << _printOutPerson;
-        cout << endl << "You found a person to remove!" << endl;
-        Person id = _turnP.findPersonNumber(_printOutPerson[0].getName());
-        cout << "Are you absolutely sure you want to delete this person?, type \"YES I AM\" exactly to continue:";
-        getline(cin, sure);
-        if (sure == "YES I AM")
+        if( toLower(_printOutPerson[i].getName()) == toLower(toModify))
         {
-            _turnP.removePerson(id);
-            break;
+            vector<Person> temp;
+            temp.push_back(_printOutPerson[i]);
+            _printOutPerson = temp;
+        }
+    }
+}
+
+void consoleUI::findconnection()
+{
+    string tofind;
+    cout << "Search for a person to see his connections: ";
+
+        getline(cin, tofind);
+        //toModify = toLower(toModify);
+        _printOutConnection = _turnCon.findConnection(tofind);
+        checkfoundPerson(tofind);
+        if (_turnCon.lookForConnection(tofind))
+        {
+            cout << _printOutConnection;
         }
         else
         {
-            cout << "You have cancelled the removal, good for you!" << endl;
-            break;
+            cout << "Please be more specific: ";
         }
-    }
-    else
-    {
-        cout << endl << "Please be more specific" << endl;
-    }
-    }
 }
 
 void consoleUI::findCommandPerson()         //allowes the user to search for a name or a year
@@ -640,87 +537,6 @@ void consoleUI::modifyCommandPerson()       //allowes the user to modify instenc
     }
 }
 
-void consoleUI::findconnection()
-{
-    string tofind;
-    cout << "Search for a person to see his connections: ";
-
-        getline(cin, tofind);
-        //toModify = toLower(toModify);
-        _printOutConnection = _turnCon.findConnection(tofind);
-        checkfoundPerson(tofind);
-        if (_turnCon.lookForConnection(tofind))
-        {
-            cout << _printOutConnection;
-        }
-        else
-        {
-            cout << "Please be more specific: ";
-        }
-}
-
-void consoleUI::addConnection()     // Enables the user to add a new scientist-computer connection.
-{
-    string cFrom, cTo;
-
-    while(true)
-    {
-        bool second = false;
-        cout << "Enter " << _turnCon.getWhichIsFrom() << " to connect from ";
-        getline(cin, cFrom);
-        if(_turnCon.fromInDatabase(cFrom))
-        {
-            second = true;
-        }
-        else
-        {
-            cout << "No match" << endl;
-        }
-        if(second)
-        {
-            cout << "Enter " << _turnCon.getWhichIsTo() << " to connect to: ";
-            getline(cin, cTo);
-            if(_turnCon.toInDatabase(cTo))
-            {
-               _turnCon.addNewConnection(cFrom, cTo);
-               cout << "ÞAÐ VIRKAR!!!!!!!!!!!!" << endl;
-               break;
-            }
-            else
-            {
-                cout << "No match" << endl;
-            }
-        }
-    }
-}
-
-void consoleUI::checkModifyPerson( const string& toModify)          // Checks if the person is on the list.
-{
-    for(size_t i = 0; i < _printOutPerson.size(); i++)
-    {
-        if( toLower(_printOutPerson[i].getName()) == toLower(toModify))
-        {
-            vector<Person> temp;
-            temp.push_back(_printOutPerson[i]);
-            _printOutPerson = temp;
-        }
-    }
-}
-bool consoleUI::checkfoundPerson( const string& toFind)         // Checks if the person is in the list.
-{
-    for(size_t i = 0; i < _printOutConnection.size(); i++)
-    {
-        if( toLower(_printOutConnection[i].getFromName()) == toLower(toFind))
-        {
-            vector<Connection> temp;
-            temp.push_back(_printOutConnection[i]);
-            _printOutConnection = temp;
-            return true;
-        }
-    }
-    return false;
-}
-
 void consoleUI::personValidation(Person &input)       // This function goes with the modify function and checks if the name,year and gender is valid
 {
     string name, gender, deathYear, birthYear;
@@ -745,7 +561,6 @@ void consoleUI::personValidation(Person &input)       // This function goes with
             break;
         }
     }
-    input.setName(name);
 
     while(true)
     {
@@ -799,6 +614,139 @@ void consoleUI::personValidation(Person &input)       // This function goes with
 
     cout << endl;
     cin.ignore();
+}
+
+void consoleUI::printListPerson()       // Print if appropriate.
+{
+    const string SORT = "sort";
+    const string ADD = "add";
+    const string LIST = "list";
+
+    if(_command == LIST)            // Print the original list.
+    {
+        _print = true;
+    }
+    else if(_command == ADD)        // Tells the user to enter information (names, gender, birth year, death year) about the new scientist.
+    {
+        _print = true;
+        addCommand();
+    }
+
+    else if(_command == REMOVE)     // Tells the user to enter the full name of the scientist to be removed from the list.
+    {
+        _print = false;
+        removeCommandPerson();
+    }
+    else if (_command == FIND)      // Tells the user to enter the name of the scientist to be located in the list.
+    {
+        _print = false;
+        findCommandPerson();
+    }
+    else if(_command == SORT)       // Gives you additional options to choose how you would like the list sorted
+    {
+        _print = true;
+        sortCommandPerson();
+    }
+    else if(_command == QUIZ)       // Presents the user with a quiz relating to the birth and death year of a scientist.
+    {
+        _print = false;
+        quizCommand();
+    }
+    else if (_command == QUIT)      // Quits the program.
+    {
+        _print = false;
+    }
+    else if(_command == STATUS)
+    {
+        _print = false;
+        statusCommandPerson();
+    }
+    else if(_command == MODIFY)
+    {
+        _print = false;
+        modifyCommandPerson();
+    }
+    else if(_command == "email")
+    {
+        _print = false;
+        emailCommand();
+    }
+    else
+    {
+        _print = false;
+    }
+}
+
+void consoleUI::removeConnection()
+{
+    string cFrom, cTo;
+
+    while(true)
+    {
+        bool second = false;
+        cout << "What " << _turnCon.getWhichIsFrom() << " do you want to remove a connection from  ";
+        getline(cin, cFrom);
+        if(_turnCon.fromInDatabase(cFrom))
+        {
+            second = true;
+        }
+        else
+        {
+            cout << "No match" << endl;
+        }
+        if(second)
+        {
+            cout << "To which " << _turnCon.getWhichIsTo() << " does the connection lead? ";
+            getline(cin, cTo);
+            if(_turnCon.toInDatabase(cTo))
+            {
+               _turnCon.removeConnection(cFrom, cTo);
+               break;
+            }
+            else
+            {
+                cout << "No match" << endl;
+            }
+        }
+    }
+}
+
+void consoleUI::removeCommandPerson()   // Enables the user to remove a scientist from the list.
+{
+    string fullName;
+    string sure;
+    cout << "Enter the name of the scientist to remove from the database: ";
+    while(true)
+    {
+    getline(cin, fullName);
+    fullName = _turnG.toLower(fullName);
+
+    _printOutPerson = _turnP.findPerson(fullName);
+    checkModifyPerson(fullName);
+
+    if (_printOutPerson.size() == 1)
+    {
+        cout << _printOutPerson;
+        cout << endl << "You found a person to remove!" << endl;
+        Person id = _turnP.findPersonNumber(_printOutPerson[0].getName());
+        cout << "Are you absolutely sure you want to delete this person?, type \"YES I AM\" exactly to continue:";
+        getline(cin, sure);
+        if (sure == "YES I AM")
+        {
+            _turnP.removePerson(id);
+            break;
+        }
+        else
+        {
+            cout << "You have cancelled the removal, good for you!" << endl;
+            break;
+        }
+    }
+    else
+    {
+        cout << endl << "Please be more specific" << endl;
+    }
+    }
 }
 
 void consoleUI::statusCommandPerson()           // This function displays total count of items in the list.
@@ -936,24 +884,21 @@ void consoleUI::sortCommandPerson()         // Sorts the list.
         }
     }
 }
+//computer
 
-void consoleUI::printListPerson()       // Print if appropriate.
+void consoleUI::addCompCommand()    // Enables the user to add a new computer to the list.
 {
-    const string SORT = "sort";
-    const string ADD = "add";
-    const string LIST = "list";
+    string name, type, yearBuilt, wasitbuilt, built;
+    Computer input;
+    int birthCheck = 0;
+    const int MINIMUM_Built_YEAR = 1500, MAXIMUM_Built_YEAR = 2030;
 
-    if(_command == LIST)            // Print the original list.
-    {
-        _print = true;
-    }
-    else if(_command == ADD)        // Tells the user to enter information (names, gender, birth year, death year) about the new scientist.
-    {
-        _print = true;
-        addCommand();
-    }
+    cout << "Please enter the following information about the new Computer " << endl;
+    cout << "in the following order." << endl;
+    cout << "Be aware you cannot put letters that are not in the English alphabet." << endl;
 
-    else if(_command == REMOVE)     // Tells the user to enter the full name of the scientist to be removed from the list.
+
+    if(_command == REMOVE)     // Tells the user to enter the full name of the scientist to be removed from the list.
     {
         _print = false;
         removeCommandPerson();
@@ -983,172 +928,104 @@ void consoleUI::printListPerson()       // Print if appropriate.
         statusCommandPerson();
     }
     else if(_command == MODIFY)     // Enables the user to modify a scientist.
-    {
-        _print = false;
-        modifyCommandPerson();
-    }
-    else if(_command == "email")
-    {
-        _print = false;
-        emailCommand();
-    }
-    else
-    {
-        _print = false;
-    }
-}
 
-//computer
+    while(true)
+    {
+        cout << "Name: ";
+        getline(cin, name);
+        name[0] = toupper(name[0]);
+        if(name == EMPTY)
+        {
+            cout << "No input!" << endl;
+        }
+        else
+        {
+            break;
+        }
+    }
+    input.setName(name);
 
-bool consoleUI::is_digits(const string &numbers)        // This is a function we use to check if input was digits
-{
-    return numbers.find_first_not_of("0123456789") == std::string::npos;
-}
+    while(true)
+    {
+        cout << "Type of computer: ";
+        getline(cin, type);
+        if(type == EMPTY)
+        {
+            cout << "No input!" << endl;
+        }
+        else if (_turnG.toLower(type) == "mechanical")
+        {
+            type = MECHANICAL;
+            break;
+        }
+        else if (_turnG.toLower(type) == "electronic")
+        {
+            type = ELECTRONIC;
+            break;
+        }
+        else if (_turnG.toLower(type) == "electro-mechanical")
+        {
+            type = ELECTROMECHANICAL;
+            break;
+        }
+        else if (_turnG.toLower(type) == "transistor")
+        {
+            type = TRANSISTOR;
+            break;
+        }
+        else if (_turnG.toLower(type) == "transistor/microchip")
+        {
+            type = TRANSISTORMICROCHIP;
+            break;
+        }
+        else if (_turnG.toLower(type) == "supercomputer")
+        {
+            type = SUPERCOMPUTER;
+            break;
+        }
+        else if (_turnG.toLower(type) == "quantum computer")
+        {
+            type = QUANTUMCOMPUTER;
+            break;
+        }
+        else
+        {
+            cout << "Invalid type!" << endl;
+        }
+    }
+    input.setType(type);
 
-void consoleUI::checkModifyComputer( const string& toModify)    // A function used to modify information about a computer.
+    while(true)
+    {
+        cout << "Year designed (YYYY): ";
+        cin >> yearBuilt;
+        birthCheck = atoi(yearBuilt.c_str());       // Removes alphanumeric values from the input.
+        if (birthCheck > MINIMUM_Built_YEAR && birthCheck < MAXIMUM_Built_YEAR)
+        {
+            break;
+        }
+        else
+        {
+            cout << "Invalid input!" << endl;
+        }
+    }
+    input.setYearbuild(birthCheck);
+
+void consoleUI::checkModifyComputer (const string& toModify)    // A function used to modify information about a computer.
 {
     for(size_t i = 0; i < _printOutComputer.size(); i++)
-    {
-        if( _printOutComputer[i].getName() == toModify)
-        {
-            vector<Computer> temp;
-            temp.push_back(_printOutComputer[i]);
-            _printOutComputer = temp;
-        }
-    }
-}
-
-void consoleUI::removeCommandComputer()     // This function first finds out if the computer is in the list and then removes it
-{
-    string fullName;
-    string sure;
-    cout << "Enter the name of the computer to remove from the database: ";
     while(true)
     {
-    getline(cin, fullName);
-    fullName = _turnG.toLower(fullName);
-
-    _printOutComputer = _turnC.findComputer(fullName);
-    checkModifyComputer(fullName);
-
-    if (_printOutComputer.size() == 1)
-    {
-        cout << _printOutComputer;
-        cout << endl << "You found a computer to remove!" << endl;
-        Computer id = _turnC.findComputerNumber(_printOutComputer[0].getName());
-        cout << "Are you absolutely sure you want to delete this computer?, type \"YES I AM\" exactly to continue:";
-        getline(cin, sure);
-        if (sure == "YES I AM")
+        cout << "Was the computer ever built? (y/n)" << endl;
+        cin >> wasitbuilt;
+        if(wasitbuilt == "Y" || wasitbuilt == "y" || wasitbuilt == "Yes" || wasitbuilt == "yes")
         {
-            _turnC.removeComputer(id);
+            built = "Yes";
             break;
         }
-        else
+        else if (wasitbuilt == "N" || wasitbuilt == "n" || wasitbuilt == "No" || wasitbuilt == "no")
         {
-            cout << "You have cancelled the removal, good for you!" << endl;
-            break;
-        }
-    }
-    else
-    {
-        cout << "Please be more specific" << endl;
-    }
-    }
-}
-
-void consoleUI::findCommandComputer()       // This function finds the computer
-{
-    string toFind;
-
-    cout << "Search computer: ";
-
-    getline(cin, toFind);
-    toFind = _turnG.toLower(toFind);
-    cout << endl;
-    if(toFind == "dickbutt" || toFind== "")
-    {
-        cout << "                                      PrumpPrum                                         " << endl;                                                                                         cout << "                                  pPrumpPrumpPrumpP                                     " << endl << "                              rumpPrumpPrumpPrumpPrump                                  " << endl << "                      PrumpPrumpPrump           PrumpPru                                " << endl << "                   mpPrumpPrumpP                  rumpPru                               " << endl << "                 mpPrumpPrumpPru                   mpPrum                               " << endl << "                 pPrumpPrumpPrump                   Prump" << endl << "                 PrumpPrumpP rumpPr    umpPrumpPru  mpPru" << endl << "                 mpPrumpPrumpPrumpPr umpPrumpPrumpPr umpP" << endl << "                 rumpPrumpPrumpPru  mpPrumpPrumpPrumpPrum" << endl << "                pPrum  pPrumpPrump  PrumpPrumpPrumpPrumpP" << endl << "               rumpPrumpPrumpPrumpP rumpPrumpPr umpPrumpP" << endl << "              rumpPrumpPrumpPrump   PrumpPrumpPrumpPrumpP" << endl << "             rumpPrumpPrumpPrumpPrumpPrumpPrumpPr  umpPr" << endl << "            umpPr          umpPrumpPrumpPrump     PrumpP" << endl << "           rumpP                      rumpPru     mpPrum" << endl << "          pPrump                                 PrumpP" << endl << "         rumpPr                                 umpPru" << endl << "        mpPrum                                  pPrump" << endl << "        Prump                      Prum        pPrump" << endl << "        Prum                      pPrum pPr   umpPru" << endl << "        mpPr                      umpPrumpPr  umpPr                         umpPrumpP" << endl << "       rumpP                      rumpPrump  Prump                        PrumpPrumpPr" << endl << "       umpPr                     umpPrumpPr umpPr                       umpPru    mpPr" << endl << "       umpPr                     umpPrumpP  rumpP                     rumpPru    mpPru" << endl << "       mpPru                    mpPrumpPr  umpPru                   mpPrump     Prump" << endl << "       Prump                    PrumpPru   mpPrumpPrumpPrumpPru   mpPrump     Prump" << endl << "        Prum                   pPrumpPr    umpPrumpPrumpPrumpPrumpPrump      Prump" << endl << "        Prum                   pPrumpP     rumpP   rumpP   rumpPrumpP      rumpPr" << endl << "        umpP                  rumpPrum      pPr   umpPrumpPrumpPrum      pPrump" << endl << "        Prump               Prump Prump         PrumpPrumpPrumpPru     mpPrump" << endl << "         Prum             pPrum  pPrumpP         rumpPrumpPrumpPrump   PrumpPru" << endl << "         mpPru            mpPrumpPrumpPr                     umpPrump    PrumpPrum" << endl << "          pPrum            pPrumpPrumpP              rump       PrumpP  rump Prump" << endl << "          PrumpP              rump                   Prum        pPrump  PrumpPru" << endl << "           mpPrum                                pPr              umpPr    umpP" << endl << "            rumpPrum                            pPru              mpPru     mpPr" << endl << "               umpPrum                          pPru              mpPrumpPrumpPr" << endl << "     ump        PrumpPrump                       Prum           pPrumpPrumpPrum" << endl << "    pPrumpP    rumpPrumpPrumpPru                  mpP         rumpPru    m" << endl << "   pPrumpPrumpPru mpPrumpPrumpPrumpPrum           pPru    mpPrump" << endl << "    Prum pPrumpPrumpPru    mpPrumpPrumpPru mpPrumpPrumpPrumpPrum" << endl << "     pPru  mpPrumpPru         mpPrumpPrum pPrumpPrumpPrumpPru" << endl << "      mpPr   umpPru         mpPrumpPrump Prump PrumpPrumpP" << endl << "       rumpPrumpP           rumpPrumpPr  umpP" << endl << "        rumpPru              mpPrumpP   rump" << endl << "          Pru                mpPrum    pPru" << endl << "                              mpPrum  pPru" << endl << "                               mpPrumpPru" << endl << "                                 mpPrump" << endl << "                                   Pru  " << endl;
-    }
-    else if(is_digits(toFind))
-    {
-        int toFindDigits= stoi(toFind);
-
-        _printOutComputer = _turnC.findDigits(toFindDigits);
-        if (_turnC.lookForDigits(toFindDigits))
-        {
-            cout << "Computer found! " << endl;
-            cout << _printOutComputer;
-        }
-        else
-        {
-            cout << "Computer not found " << endl << endl;
-        }
-
-    }
-    else
-    {
-        _printOutComputer = _turnC.findComputer(toFind);
-        if (_turnC.lookForComputer(toFind))
-        {
-            cout << "Computer found! " << endl;
-            cout << _printOutComputer;
-        }
-        else
-        {
-            cout << "Computer not found " << endl << endl;
-        }
-    }
-}
-
-void consoleUI::statusCommandComputer()         // This function displays the total count of items in the list.
-{
-    _printStatus = _turnC.computerProperties();
-    int nameQuant= 0;
-    int typeElecQuant=1;
-    int typeMechQuant=2;
-    int typeElecMechQuant=3;
-    int typeTransQuant=4;
-    int typeTransMicroQuant=5;
-    int typeSuperQuant=6;
-    int typeQuantumQuant=7;
-    int builtQuant=8;
-
-
-    cout<<"Total computers in list          : " << _printStatus[nameQuant]<<endl;
-    cout<<"Electronical computers           : " << _printStatus[typeElecQuant]<<endl;
-    cout<<"Mechanical computers             : " << _printStatus[typeMechQuant]<<endl;
-    cout<<"Electro-Mechanical computers     : " << _printStatus[typeElecMechQuant]<<endl;
-    cout<<"Transistor computers             : " << _printStatus[typeTransQuant]<<endl;
-    cout<<"Transistor/Microchip computers   : " << _printStatus[typeTransMicroQuant]<<endl;
-    cout<<"Super computers                  : " << _printStatus[typeSuperQuant]<<endl;
-    cout<<"Quantum computers                : " << _printStatus[typeQuantumQuant]<<endl;
-    cout<<"Computers that were built        : " << _printStatus[builtQuant]<<endl;
-}
-
-void consoleUI::sortCommandComputer()           // Sorts items in computer list
-{
-    const string ASC = "asc";
-    const string DESC = "desc";
-
-    cout << "a - Sort alphabetically. "   << endl;
-    cout << "y - Sort by year built. " << endl;
-    cout << "t - Sort by type. " << endl;
-    cout << "b - To see if the computer was built. "        << endl;
-
-    string choice;
-    string upOrDown;
-
-    while(true)
-    {
-        cout << "Select sorting method: ";
-        getline(cin, choice);
-        choice = _turnG.toLower(choice);
-
-        if(specialCommandComputer(choice))
-        {
-            _turnC.sortComputerList(choice);
-            //_turnP2.sortList(choice);
-            // þegar computerservice er up and running fara sort föllin þar inn og kallað í þau hér !
+            built = "No";
             break;
         }
         else
@@ -1156,186 +1033,9 @@ void consoleUI::sortCommandComputer()           // Sorts items in computer list
             cout << "Invalid input!" << endl;
         }
     }
+    input.setBuilt(built);
 
     cout << endl;
-    cout << "asc - Show list in ascending order." << endl;
-    cout << "desc - Show list in descending order." << endl << endl;
-
-    while(true)
-    {
-        cout << "Select list representation: ";
-        getline(cin, upOrDown);
-        upOrDown = _turnG.toLower(upOrDown);
-
-        if(upOrDown == DESC)
-        {
-            _turnC.reverseVector();
-            break;
-        }
-        else if(upOrDown != ASC)
-        {
-            cout << "Invalid input!" << endl;
-        }
-        else
-        {
-            break;
-        }
-    }
-}
-
-bool consoleUI::specialCommandComputer(const string &_command)      // Checks if input was valid
-{
-    if(_command == "a")
-    {
-        return true;
-    }
-    if(_command=="y")
-    {
-        return true;
-    }
-    if(_command=="t")
-    {
-        return true;
-    }
-    else if(_command =="b")
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
-}
-
-void consoleUI::printListComputer()
-{
-    const string SORT = "sort";
-    const string ADD = "add";
-    const string LIST = "list";
-
-    if(_command == LIST)            // Print the original list.
-    {
-        _print = true;
-    }
-
-    else if(_command == ADD)
-    {
-        _print = true;
-        addCompCommand();
-    }
-    else if(_command == REMOVE)
-    {
-        _print = false;
-        removeCommandComputer();
-    }
-    else if (_command == FIND)
-    {
-        _print = false;
-        findCommandComputer();
-    }
-    else if(_command == SORT)
-    {
-        _print = true;
-        sortCommandComputer();
-    }
-    else if(_command == QUIZ)
-    {
-        _print = false;
-        quizCommand();
-    }
-    else if (_command == QUIT)
-    {
-        _print = false;
-    }
-    else if(_command == STATUS)
-    {
-        _print = false;
-        statusCommandComputer();
-    }
-    else if(_command == MODIFY)
-    {
-        _print = false;
-        modifyCommandComputer();
-    }
-    else if(_command == "email")
-    {
-        _print = false;
-        emailCommand();
-    }
-    else
-    {
-        _print = false;
-    }
-}
-
-void consoleUI::printList()
-{
-    if((_turnG.dataFound() || QUIT == _command)&& _theRightOne=="person")
-    {
-        printListPerson();         // Checks if there is a need for a printout of the list.
-    }
-    else if((_turnG.dataFound() || QUIT == _command)&& _theRightOne=="computer")
-    {
-        printListComputer();
-    }
-    else
-    {
-        cout << endl << "Database could not be accessed! " << endl << endl;
-    }
-}
-
-void consoleUI::print()
-{
-    if(_print  && (_database=="person" || _database == "p"))
-    {
-        _printOutPerson = _turnP.getPersonList();           // getList() gets the list that's supposed to be printed out.
-        cout << _printOutPerson;
-    }
-    else if(_print && (_database=="computer" || _database == "c"))
-    {
-        _printOutComputer = _turnC.getComputerList(); // todo setja inn dataFound lika
-        cout << _printOutComputer;
-    }
-    else if (!specialCommandPerson() && _turnG.dataFound())
-    {
-        cout << "Invalid command!" << endl << endl;
-    }
-}
-
-void consoleUI::modifyCommandComputer()     // Function used to modify information about a computer.
-{
-    string toFind;
-
-    cout << "Search for a computer to modify: ";
-    while(true)
-    {
-        getline(cin, toFind);
-        toFind = _turnG.toLower(toFind);
-        cout << endl;
-        _printOutComputer = _turnC.findComputer(toFind);
-        checkModifyComputer(toFind);
-        if (_turnC.lookForComputer(toFind))
-        {
-            cout << _printOutComputer;
-        }
-        if (_printOutComputer.size() == 1)
-        {
-            cout << "Hooray you found a computer to modify!" << endl;
-            Computer id = _turnC.findComputerNumber(_printOutComputer[0].getName());
-            computerValidation(id);
-            _turnC.changeComputer(id);
-            break;
-        }
-        else if (_printOutComputer.size() == 0)
-        {
-            cout << "Computer not found!" << endl;
-            cout << "Please try again: ";
-        }
-        else
-        {
-            cout << "Please be more specific: ";
-        }
-    }
 }
 
 void consoleUI::computerValidation(Computer& input)         // Finds the computer in the database, allowes the user to modify it.
@@ -1458,7 +1158,379 @@ void consoleUI::computerValidation(Computer& input)         // Finds the compute
     cin.ignore();
 }
 
+void consoleUI::checkModifyComputer( const string& toModify)
+{
+    for(size_t i = 0; i < _printOutComputer.size(); i++)
+    {
+        if( _printOutComputer[i].getName() == toModify)
+        {
+            vector<Computer> temp;
+            temp.push_back(_printOutComputer[i]);
+            _printOutComputer = temp;
+        }
+    }
+}
+
+void consoleUI::findCommandComputer()       // This function finds the computer
+{
+    string toFind;
+
+    cout << "Search computer: ";
+
+    getline(cin, toFind);
+    toFind = _turnG.toLower(toFind);
+    cout << endl;
+    if(toFind == "dickbutt" || toFind== "")
+    {
+        cout << "                                      PrumpPrum                                         " << endl;                                                                                         cout << "                                  pPrumpPrumpPrumpP                                     " << endl << "                              rumpPrumpPrumpPrumpPrump                                  " << endl << "                      PrumpPrumpPrump           PrumpPru                                " << endl << "                   mpPrumpPrumpP                  rumpPru                               " << endl << "                 mpPrumpPrumpPru                   mpPrum                               " << endl << "                 pPrumpPrumpPrump                   Prump" << endl << "                 PrumpPrumpP rumpPr    umpPrumpPru  mpPru" << endl << "                 mpPrumpPrumpPrumpPr umpPrumpPrumpPr umpP" << endl << "                 rumpPrumpPrumpPru  mpPrumpPrumpPrumpPrum" << endl << "                pPrum  pPrumpPrump  PrumpPrumpPrumpPrumpP" << endl << "               rumpPrumpPrumpPrumpP rumpPrumpPr umpPrumpP" << endl << "              rumpPrumpPrumpPrump   PrumpPrumpPrumpPrumpP" << endl << "             rumpPrumpPrumpPrumpPrumpPrumpPrumpPr  umpPr" << endl << "            umpPr          umpPrumpPrumpPrump     PrumpP" << endl << "           rumpP                      rumpPru     mpPrum" << endl << "          pPrump                                 PrumpP" << endl << "         rumpPr                                 umpPru" << endl << "        mpPrum                                  pPrump" << endl << "        Prump                      Prum        pPrump" << endl << "        Prum                      pPrum pPr   umpPru" << endl << "        mpPr                      umpPrumpPr  umpPr                         umpPrumpP" << endl << "       rumpP                      rumpPrump  Prump                        PrumpPrumpPr" << endl << "       umpPr                     umpPrumpPr umpPr                       umpPru    mpPr" << endl << "       umpPr                     umpPrumpP  rumpP                     rumpPru    mpPru" << endl << "       mpPru                    mpPrumpPr  umpPru                   mpPrump     Prump" << endl << "       Prump                    PrumpPru   mpPrumpPrumpPrumpPru   mpPrump     Prump" << endl << "        Prum                   pPrumpPr    umpPrumpPrumpPrumpPrumpPrump      Prump" << endl << "        Prum                   pPrumpP     rumpP   rumpP   rumpPrumpP      rumpPr" << endl << "        umpP                  rumpPrum      pPr   umpPrumpPrumpPrum      pPrump" << endl << "        Prump               Prump Prump         PrumpPrumpPrumpPru     mpPrump" << endl << "         Prum             pPrum  pPrumpP         rumpPrumpPrumpPrump   PrumpPru" << endl << "         mpPru            mpPrumpPrumpPr                     umpPrump    PrumpPrum" << endl << "          pPrum            pPrumpPrumpP              rump       PrumpP  rump Prump" << endl << "          PrumpP              rump                   Prum        pPrump  PrumpPru" << endl << "           mpPrum                                pPr              umpPr    umpP" << endl << "            rumpPrum                            pPru              mpPru     mpPr" << endl << "               umpPrum                          pPru              mpPrumpPrumpPr" << endl << "     ump        PrumpPrump                       Prum           pPrumpPrumpPrum" << endl << "    pPrumpP    rumpPrumpPrumpPru                  mpP         rumpPru    m" << endl << "   pPrumpPrumpPru mpPrumpPrumpPrumpPrum           pPru    mpPrump" << endl << "    Prum pPrumpPrumpPru    mpPrumpPrumpPru mpPrumpPrumpPrumpPrum" << endl << "     pPru  mpPrumpPru         mpPrumpPrum pPrumpPrumpPrumpPru" << endl << "      mpPr   umpPru         mpPrumpPrump Prump PrumpPrumpP" << endl << "       rumpPrumpP           rumpPrumpPr  umpP" << endl << "        rumpPru              mpPrumpP   rump" << endl << "          Pru                mpPrum    pPru" << endl << "                              mpPrum  pPru" << endl << "                               mpPrumpPru" << endl << "                                 mpPrump" << endl << "                                   Pru  " << endl;
+    }
+    else if(is_digits(toFind))
+    {
+        int toFindDigits= stoi(toFind);
+
+        _printOutComputer = _turnC.findDigits(toFindDigits);
+        if (_turnC.lookForDigits(toFindDigits))
+        {
+            cout << "Computer found! " << endl;
+            cout << _printOutComputer;
+        }
+        else
+        {
+            cout << "Computer not found " << endl << endl;
+        }
+
+    }
+    else
+    {
+        _printOutComputer = _turnC.findComputer(toFind);
+        if (_turnC.lookForComputer(toFind))
+        {
+            cout << "Computer found! " << endl;
+            cout << _printOutComputer;
+        }
+        else
+        {
+            cout << "Computer not found " << endl << endl;
+        }
+    }
+}
+
+void consoleUI::modifyCommandComputer()
+{
+    string toFind;
+
+    cout << "Search for a computer to modify: ";
+    while(true)
+    {
+        getline(cin, toFind);
+        toFind = _turnG.toLower(toFind);
+        cout << endl;
+        _printOutComputer = _turnC.findComputer(toFind);
+        checkModifyComputer(toFind);
+        if (_turnC.lookForComputer(toFind))
+        {
+            cout << _printOutComputer;
+        }
+        if (_printOutComputer.size() == 1)
+        {
+            cout << "Hooray you found a computer to modify!" << endl;
+            Computer id = _turnC.findComputerNumber(_printOutComputer[0].getName());
+            computerValidation(id);
+            _turnC.changeComputer(id);
+            break;
+        }
+        else if (_printOutComputer.size() == 0)
+        {
+            cout << "Computer not found!" << endl;
+            cout << "Please try again: ";
+        }
+        else
+        {
+            cout << "Please be more specific: ";
+        }
+    }
+}
+
+void consoleUI::printListComputer()
+{
+    const string SORT = "sort";
+    const string ADD = "add";
+    const string LIST = "list";
+
+    if(_command == LIST)            // Print the original list.
+    {
+        _print = true;
+    }
+
+    else if(_command == ADD)
+    {
+        _print = true;
+        addCompCommand();
+    }
+    else if(_command == REMOVE)
+    {
+        _print = false;
+        removeCommandComputer();
+    }
+    else if (_command == FIND)
+    {
+        _print = false;
+        findCommandComputer();
+    }
+    else if(_command == SORT)
+    {
+        _print = true;
+        sortCommandComputer();
+    }
+    else if(_command == QUIZ)
+    {
+        _print = false;
+        quizCommand();
+    }
+    else if (_command == QUIT)
+    {
+        _print = false;
+    }
+    else if(_command == STATUS)
+    {
+        _print = false;
+        statusCommandComputer();
+    }
+    else if(_command == MODIFY)
+    {
+        _print = false;
+        modifyCommandComputer();
+    }
+    else if(_command == "email")
+    {
+        _print = false;
+        emailCommand();
+    }
+    else
+    {
+        _print = false;
+    }
+}
+
+void consoleUI::printList()
+{
+    if((_turnG.dataFound() || QUIT == _command)&& _theRightOne=="person")
+    {
+        printListPerson();         // Checks if there is a need for a printout of the list.
+    }
+    else if((_turnG.dataFound() || QUIT == _command)&& _theRightOne=="computer")
+    {
+        printListComputer();
+    }
+    else
+    {
+        cout << endl << "Database could not be accessed! " << endl << endl;
+    }
+}
+
+void consoleUI::print()
+{
+    if(_print  && (_database=="person" || _database == "p"))
+    {
+        _printOutPerson = _turnP.getPersonList();           // getList() gets the list that's supposed to be printed out.
+        cout << _printOutPerson;
+    }
+    else if(_print && (_database=="computer" || _database == "c"))
+    {
+        _printOutComputer = _turnC.getComputerList(); // todo setja inn dataFound lika
+        cout << _printOutComputer;
+    }
+    else if (!specialCommandPerson() && _turnG.dataFound())
+    {
+        cout << "Invalid command!" << endl << endl;
+    }
+}
+
+<<<<<<< HEAD
+void consoleUI::modifyCommandComputer()     // Function used to modify information about a computer.
+=======
+void consoleUI::removeCommandComputer()     // This function first finds out if the computer is in the list and then removes it
+>>>>>>> e3bc6c0e1be571ca534d43e6bba478f08c98219a
+{
+    string fullName;
+    string sure;
+    cout << "Enter the name of the computer to remove from the database: ";
+    while(true)
+    {
+    getline(cin, fullName);
+    fullName = _turnG.toLower(fullName);
+
+    _printOutComputer = _turnC.findComputer(fullName);
+    checkModifyComputer(fullName);
+
+    if (_printOutComputer.size() == 1)
+    {
+        cout << _printOutComputer;
+        cout << endl << "You found a computer to remove!" << endl;
+        Computer id = _turnC.findComputerNumber(_printOutComputer[0].getName());
+        cout << "Are you absolutely sure you want to delete this computer?, type \"YES I AM\" exactly to continue:";
+        getline(cin, sure);
+        if (sure == "YES I AM")
+        {
+            _turnC.removeComputer(id);
+            break;
+        }
+        else
+        {
+            cout << "You have cancelled the removal, good for you!" << endl;
+            break;
+        }
+    }
+    else
+    {
+        cout << "Please be more specific" << endl;
+    }
+    }
+}
+
+void consoleUI::statusCommandComputer()         // This function displays the total count of items in the list.
+{
+    _printStatus = _turnC.computerProperties();
+    int nameQuant= 0;
+    int typeElecQuant=1;
+    int typeMechQuant=2;
+    int typeElecMechQuant=3;
+    int typeTransQuant=4;
+    int typeTransMicroQuant=5;
+    int typeSuperQuant=6;
+    int typeQuantumQuant=7;
+    int builtQuant=8;
+
+
+    cout<<"Total computers in list          : " << _printStatus[nameQuant]<<endl;
+    cout<<"Electronical computers           : " << _printStatus[typeElecQuant]<<endl;
+    cout<<"Mechanical computers             : " << _printStatus[typeMechQuant]<<endl;
+    cout<<"Electro-Mechanical computers     : " << _printStatus[typeElecMechQuant]<<endl;
+    cout<<"Transistor computers             : " << _printStatus[typeTransQuant]<<endl;
+    cout<<"Transistor/Microchip computers   : " << _printStatus[typeTransMicroQuant]<<endl;
+    cout<<"Super computers                  : " << _printStatus[typeSuperQuant]<<endl;
+    cout<<"Quantum computers                : " << _printStatus[typeQuantumQuant]<<endl;
+    cout<<"Computers that were built        : " << _printStatus[builtQuant]<<endl;
+}
+
+void consoleUI::sortCommandComputer()           // Sorts items in computer list
+{
+    const string ASC = "asc";
+    const string DESC = "desc";
+
+    cout << "a - Sort alphabetically. "   << endl;
+    cout << "y - Sort by year built. " << endl;
+    cout << "t - Sort by type. " << endl;
+    cout << "b - To see if the computer was built. "        << endl;
+
+    string choice;
+    string upOrDown;
+
+    while(true)
+    {
+        cout << "Select sorting method: ";
+        getline(cin, choice);
+        choice = _turnG.toLower(choice);
+
+        if(specialCommandComputer(choice))
+        {
+            _turnC.sortComputerList(choice);
+            //_turnP2.sortList(choice);
+            // þegar computerservice er up and running fara sort föllin þar inn og kallað í þau hér !
+            break;
+        }
+        else
+        {
+            cout << "Invalid input!" << endl;
+        }
+    }
+
+    cout << endl;
+    cout << "asc - Show list in ascending order." << endl;
+    cout << "desc - Show list in descending order." << endl << endl;
+
+    while(true)
+    {
+        cout << "Select list representation: ";
+        getline(cin, upOrDown);
+        upOrDown = _turnG.toLower(upOrDown);
+
+        if(upOrDown == DESC)
+        {
+            _turnC.reverseVector();
+            break;
+        }
+        else if(upOrDown != ASC)
+        {
+            cout << "Invalid input!" << endl;
+        }
+        else
+        {
+            break;
+        }
+    }
+}
+
+bool consoleUI::specialCommandComputer(const string &_command)      // Checks if input was valid
+{
+    if(_command == "a")
+    {
+        return true;
+    }
+    if(_command=="y")
+    {
+        return true;
+    }
+    if(_command=="t")
+    {
+        return true;
+    }
+    else if(_command =="b")
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
 //connect
+
+void consoleUI::addConnection()     // Enables the user to add a new scientist-computer connection.
+{
+    string cFrom, cTo;
+
+    while(true)
+    {
+        bool second = false;
+        cout << "Enter " << _turnCon.getWhichIsFrom() << " to connect from ";
+        getline(cin, cFrom);
+        if(_turnCon.fromInDatabase(cFrom))
+        {
+            second = true;
+        }
+        else
+        {
+            cout << "No match" << endl;
+        }
+        if(second)
+        {
+            cout << "Enter " << _turnCon.getWhichIsTo() << " to connect to: ";
+            getline(cin, cTo);
+            if(_turnCon.toInDatabase(cTo))
+            {
+               _turnCon.addNewConnection(cFrom, cTo);
+               cout << "ÞAÐ VIRKAR!!!!!!!!!!!!" << endl;
+               break;
+            }
+            else
+            {
+                cout << "No match" << endl;
+            }
+        }
+    }
+}
 
 bool consoleUI::connectSubCommand()     // Checks if input was valid
 {
@@ -1540,4 +1612,5 @@ bool consoleUI::specialCommandConnect()
     {
         return false;
     }
+}
 }
