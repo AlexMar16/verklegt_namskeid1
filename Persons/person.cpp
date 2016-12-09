@@ -54,10 +54,12 @@ int Person::getDeathYear() const {return _deathYear;}
 int Person::getID() const {return _ID;}
 
 //Set functions
-void Person::setName(const string input) {_fullName = input;}
+void Person::setName(const string& input) {_fullName = input;}
 
-void Person::setGender(const string input){_gender = input;}
+void Person::setGender(const string& input){_gender = input;}
 
-void Person::setBirthYear(const int input){_birthYear = input;}
+void Person::setBirthYear(const int& input){_birthYear = input;}
 
-void Person::setDeathYear(const int input){_deathYear = input;}
+void Person::setDeathYear(const int& input){_deathYear = input;}
+
+void Person:: setID(const int& input) {_ID = input;}

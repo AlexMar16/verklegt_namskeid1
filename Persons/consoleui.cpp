@@ -256,8 +256,10 @@ void consoleUI::quizCommand()
     if (_database == "person")
     {
         Person questionP = _turnP.generateAnswer();
-        cout << _turnP.genderCheck(questionP) << " was born in " << questionP.getBirthYear()
-             << " and " << _turnP.aliveCheck(questionP) << ", enter (a/b/c/d)" << endl;
+        string question = _turnP.genderCheck(questionP) + " was born in " + to_string(questionP.getBirthYear())
+             + " and " + _turnP.aliveCheck(questionP) + ", enter (a/b/c/d) \n";
+        cout << question;
+        _turnG.speakQuestion(question);
         _turnP.generateOptions(questionP, a, b, c, d);
         answerName = questionP.getName();
     }

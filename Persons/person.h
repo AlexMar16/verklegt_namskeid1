@@ -32,10 +32,11 @@ public:
     int getID() const;
     int getBirthYear() const;
     int getDeathYear() const;
-    void setName(const string input);
-    void setGender(const string input);
-    void setBirthYear(const int input);
-    void setDeathYear(const int input);
+    void setName(const string &input);
+    void setGender(const string &input);
+    void setBirthYear(const int &input);
+    void setDeathYear(const int& input);
+    void setID(const int& input);
     friend ostream& operator << (ostream& out, const Person& rhs);
     friend ostream& operator << (ostream& out, vector<Person>& rhs);
 

@@ -24,6 +24,7 @@ public:
     void setCVector(const vector<Computer>& input);
     void insertIntoComputer(const Computer &input);
     void insertIntoPerson(const Person &input);
+    void insertIntoConnection(const Connection &input);
     void removeFromComputers(const Computer &input);
     void removeFromPersons(const Person &input);
 

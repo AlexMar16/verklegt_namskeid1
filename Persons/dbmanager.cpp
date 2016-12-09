@@ -52,6 +52,10 @@ void DbManager::getPersons()
 
         int deathYear = query.value("deathYear").toUInt();
         temp.setDeathYear(deathYear);
+
+        int ID = query.value("ID").toUInt();
+        temp.setID(ID);
+
         _persons.push_back(temp);
     }
 }
@@ -79,6 +83,10 @@ void DbManager::getComputers()
 
         string Built = query.value("Built").toString().toStdString();
         temp.setBuilt(Built);
+
+        int ID = query.value("ID").toUInt();
+        temp.setID(ID);
+
         _computers.push_back(temp);
     }
 }
@@ -232,6 +240,44 @@ void DbManager::removeFromPersons(const Person &input)
     }
 }
 
+void DbManager::insertIntoConnection(const Connection &input)
+{
+    QString path = "ComputerScience.sqlite";
+    /* nota seinna mögulega
+    if( QSqlDatabase::contains( "dbconnection" ) )
+    {
+        //cout << "dbconnection found " << endl;
+
+    }
+    else
+    {
+        cout << "dbconnection not found" << endl;
+    }*/
+
+    QSqlDatabase _db = QSqlDatabase::database("dbconnection");
+    QString dbName = path;
+    _db.setDatabaseName(dbName);
+    _db.open();
+    if(_db.open())
+    {
+        QSqlQuery qry(_db);
+        qry.prepare("INSERT INTO Connections (PersonID, ComputerID)  VALUES (:P_ID, :C_ID)");
+        qry.bindValue(":P_ID",input.getPersonID());
+        qry.bindValue(":C_ID",input.getComputerID());
+        //qry.exec();
+        if( !qry.exec() )
+        {
+            //qDebug() << qry.lastError().text();
+            cout << "error inserting into database";
+        }
+
+    }
+    else
+    {
+        cout << "not inserted" << endl;
+    }
+}
+
 void DbManager::insertIntoPerson(const Person &input)
 {
     QString qsName = QString::fromStdString(input.getName());
@@ -246,7 +292,7 @@ void DbManager::insertIntoPerson(const Person &input)
     else
     {
         cout << "dbconnection not found" << endl;
-    }*/
+    }
 
     QSqlDatabase _db = QSqlDatabase::database("dbconnection");
     QString dbName = path;
@@ -272,7 +318,7 @@ void DbManager::insertIntoPerson(const Person &input)
     else
     {
         cout << "not inserted" << endl;
-    }
+    }*/
 }
 
 void DbManager::changePerson(const Person& input, const int personIndex)
@@ -309,8 +355,7 @@ void DbManager::changePerson(const Person& input, const int personIndex)
             qry.bindValue(":P_Gender",qsGender);
             qry.bindValue(":P_BirthYear",input.getBirthYear());
             qry.bindValue(":P_DeathYear",input.getDeathYear());
-            qry.bindValue(":P_OldName",qsOldName);
-            qDebug() << qsName;
+            //qry.bindValue(":P_OldName",qsOldName);
             qry.exec();
             if( !qry.exec() )
             {
@@ -374,3 +419,4 @@ void DbManager::changeComputer(const Computer& input, const int computerIndex)
         cout << "not inserted" << endl;
     }
 }
+

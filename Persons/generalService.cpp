@@ -66,4 +66,18 @@ bool generalService::alreadyInDatabase(const string& name)         // Checks if 
     return false;
 }
 
+void generalService::speakQuestion(const string& input)
+{
+    string begin = "Set Sapi = Wscript.CreateObject(\"SAPI.SpVoice\")";
+    string next = "Sapi.speak ";
+    ofstream myFile;
+    myFile.open("speak.vbs");
 
+    if(myFile)
+    {
+        myFile << begin << endl << next << "\"" << input << "\"";
+    }
+    myFile.close();
+
+    system("speak.vbs");
+}

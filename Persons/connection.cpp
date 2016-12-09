@@ -23,11 +23,11 @@ string Connection::getComputerName() {return _to;}
 
 string Connection::getPersonName() {return _from;}
 
-int Connection::getConnectionID() {return _ConnectionID;}
+int Connection::getConnectionID() const {return _ConnectionID;}
 
-int Connection::getPersonID() {return _PersonID;}
+int Connection::getPersonID() const {return _PersonID;}
 
-int Connection::getComputerID() {return _ComputerID;}
+int Connection::getComputerID() const {return _ComputerID;}
 
 ostream& operator << (ostream& out, const Connection& rhs)
 {

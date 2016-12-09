@@ -80,3 +80,5 @@ void Computer::setType(const string input){_type = input;}
 void Computer::setYearbuild(const int input){_yearBuilt = input;}
 
 void Computer::setBuilt(const string input){_built = input;}
+
+void Computer::setID(const int& input){_ID = input;}

@@ -15,9 +15,9 @@ public:
     void setConnectionID(const int& input);
     void setComputerID(const int& input);
     void setPersonID(const int& input);
-    int getConnectionID();
-    int getComputerID();
-    int getPersonID();
+    int getConnectionID() const;
+    int getComputerID() const;
+    int getPersonID() const;
     string getComputerName();
     string getPersonName();
     friend ostream& operator << (ostream& out, const Connection& rhs);

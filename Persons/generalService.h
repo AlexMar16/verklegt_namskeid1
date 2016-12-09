@@ -17,6 +17,7 @@ public:
     vector<Connection> getOriginalConnections() const;
     bool quizDuplicatedAnswer(const string& a, const string& b, const string& c, const string& d);
     bool alreadyInDatabase(const string& name);
+    void speakQuestion(const string& input);
 
 private:
     bool _program;
