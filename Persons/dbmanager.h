@@ -25,7 +25,7 @@ public:
     void insertIntoComputer(const Computer &input);
     void insertIntoPerson(const Person &input);
     void removeFromConnections(Connection input);
-    void insertIntoConnection(const Connection &input);
+    void insertIntoConnection(const Connection &input, const bool &swapped);
     void removeFromComputers(const Computer &input);
     void removeFromPersons(const Person &input);
 

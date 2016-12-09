@@ -18,7 +18,7 @@ public:
     bool quizDuplicatedAnswer(const string& a, const string& b, const string& c, const string& d);
     bool alreadyInDatabase(const string& name);
     void speakQuestion(const string& input);
-    int findID(const string& name, const bool &swapped);
+    int findID(const string& name);
 
 private:
     bool _program;

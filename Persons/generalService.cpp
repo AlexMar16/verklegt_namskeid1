@@ -82,26 +82,20 @@ void generalService::speakQuestion(const string& input)
     system("speak.vbs");
 }
 
-int generalService::findID(const string& name, const bool& swapped)
+int generalService::findID(const string& name)
 {
-    if(swapped)
+    for(size_t i = 0; i < _persons.size(); i++)
     {
-        for(size_t i = 0; i < _persons.size(); i++)
+        if(toLower(_persons[i].getName()) == toLower(name))
         {
-            if(toLower(_persons[i].getName()) == toLower(name))
-            {
-                return _persons[i].getID();
-            }
+            return _persons[i].getID();
         }
     }
-    else
+    for(size_t i = 0; i < _computers.size(); i++)
     {
-        for(size_t i = 0; i < _computers.size(); i++)
+        if(toLower(_computers[i].getName()) == toLower(name))
         {
-            if(toLower(_computers[i].getName()) == toLower(name))
-            {
-                return _computers[i].getID();
-            }
+            return _computers[i].getID();
         }
     }
     return 0;
