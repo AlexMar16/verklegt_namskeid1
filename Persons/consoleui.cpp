@@ -14,6 +14,8 @@ const string EMPTY = "";
 const string ALL = "all";
 const string ADD = "add";
 const string BACK = "back";
+const string PTC = "ptc";
+const string CTP = "ctp";
 const int ASTERISK_WIDTH = 80;
 const char ASTERISK = '*';
 const char BARRIER = '|';
@@ -46,9 +48,9 @@ void consoleUI::run()
                     do{commandBoxConnect();
                         if(_turnCon.personORComputer(_command))
                         {
-                            _turnCon.sortConnectAlphabetically();  // Sort alphabetically function
                             do
                             {
+                                _turnCon.sortConnectAlphabetically();  // Makes sure the list is sorted properly
                                 commandBoxConnectptc();
                                 if(_command == "showall")
                                 {
@@ -166,7 +168,7 @@ void consoleUI::commandBox()// the right one either sets it's value to "person" 
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| quit   - This command will quit the program. "
          << right << BARRIER << endl;
     cout << setw(ASTERISK_WIDTH) << setfill(ASTERISK) << ASTERISK << endl;      // Command box ends.
-    cout << "command: ";
+    cout << "Command: ";
     getline(cin, _command);          // Sets the private variable _command in the service class.
     _command = _turnG.toLower(_command);
 }
@@ -177,16 +179,22 @@ void consoleUI::commandBoxConnect()
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| Please enter one of the following commands:"
          << right << BARRIER << endl;
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << BARRIER << right << BARRIER<< endl;
-    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| person to computer - This command will print a specific connection."
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| all            - This command will display all connections."
          << right << BARRIER << endl;
-    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| computer to person - This command will print all connections."
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| ptc            - This command will show connections from persons to computers."
          << right << BARRIER << endl;
-    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| back               - This command will allow you to choose another database."
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| ctp            - This command will show connections from computers to persons."
          << right << BARRIER << endl;
-    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| quit               - This command will quit the program."
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| add            - This command will allow you to add a connection."
+         << right << BARRIER << endl;
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| remove         - This command will allow you to remove a connection."
+         << right << BARRIER << endl;
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| back           - This command will allow you to choose another database."
+         << right << BARRIER << endl;
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| quit           - This command will quit the program."
          << right << BARRIER << endl;
     cout << setw(ASTERISK_WIDTH) << setfill(ASTERISK) << ASTERISK << endl;      // Command box ends.
-    cout << "command: ";
+    cout << "Command: ";
     getline(cin, _command);
     _command = _turnG.toLower(_command);
 }
@@ -206,7 +214,7 @@ void consoleUI::commandBoxConnectptc()
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| quit    - This command will quit the program."
          << right << BARRIER << endl;
     cout << setw(ASTERISK_WIDTH) << setfill(ASTERISK) << ASTERISK << endl;      // Command box ends.
-    cout << "command: ";
+    cout << "Command: ";
     getline(cin, _command);
     _command = toLower(_command);
 }
@@ -230,13 +238,15 @@ void consoleUI::commandBoxSubConnect()
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| quit     - This command will quit the program. "
          << right << BARRIER << endl;
     cout << setw(ASTERISK_WIDTH) << setfill(ASTERISK) << ASTERISK << endl;      // Command box ends.
-    cout << "command: ";
+    cout << "Command: ";
     getline(cin, _command);
 }
 
 void consoleUI::quizCommand()
 {
-    string a, b, c, d, answerName;
+    string a, b, c, d, answerName, goOn;
+    do
+    {
     if (_database == "person" || _database == "p")
     {
         Person questionP = _turnP.generateAnswer();
@@ -278,13 +288,17 @@ void consoleUI::quizCommand()
         cout << endl << "Wrong!" << endl << endl;
         _turnG.speakQuestion("Wrong");
     }
+
+    cout<<"Do you want to continue ? (y = yes / n = no)"<<endl;
+    cin>> goOn;
     cin.ignore();
+    }while(goOn == "y");
 }
 
 
 void consoleUI::emailCommand()
 {
-    _turnG.speakQuestion("Computer says nooooouououououououououououououououooo.");
+    _turnG.speakQuestion("Did you really think we could implement a email function. hehehehehe.");
 }
 
 //person
@@ -651,11 +665,10 @@ void consoleUI::addConnection()
 {
     string cFrom, cTo;
 
-
     while(true)
     {
         bool second = false;
-        cout << "Enter where to connect from ";
+        cout << "Enter " << _turnCon.getWhichIsFrom() << " to connect from ";
         getline(cin, cFrom);
         if(_turnCon.fromInDatabase(cFrom))
         {
@@ -667,7 +680,7 @@ void consoleUI::addConnection()
         }
         if(second)
         {
-            cout << "Enter where to connect to: ";
+            cout << "Enter " << _turnCon.getWhichIsTo() << " to connect to: ";
             getline(cin, cTo);
             if(_turnCon.toInDatabase(cTo))
             {
@@ -1450,6 +1463,35 @@ void consoleUI::computerValidation(Computer& input)         // Finds the compute
 
 //connect
 
+/* Bjarki - commentadi ut eftir ad hafa skodad run fallid,
+void consoleUI::printListConnect()
+{
+    if(_command == ALL)
+    {
+       _print = true;
+    }
+    else if(_command == PTC)
+    {
+        _print = false;
+        //setja fall
+    }
+    else if(_command == CTP)
+    {
+        _print = false;
+        //setja fall
+    }
+    else if(_command == ADD)
+    {
+        _print = false;
+        //setja fall
+    }
+    else if(_command == REMOVE)
+    {
+        _print = false;
+        //setja fall
+    }
+}*/
+
 bool consoleUI::connectSubCommand()     // Checks if input was valid
 {
     int stoppari;
@@ -1459,10 +1501,21 @@ bool consoleUI::connectSubCommand()     // Checks if input was valid
         cin >> stoppari;
         return true;
     }
+    else if(_command == "ptc")
+    {
+        cout<< "Person to computer";
+        cin >> stoppari;
+        return true;
+    }
+    else if(_command == "ctp")
+    {
+        cout<< "Computer to person";
+        cin >> stoppari;
+        return true;
+    }
     else if(_command == "all")
     {
         cout << "all";
-        cin >> stoppari;
         return true;
     }
     else if(_command == "add")
@@ -1495,8 +1548,15 @@ bool consoleUI::specialCommandConnect()
 {
     string everyone;
 
-
-    if(_command == ALL)
+    if(_command == PTC)
+    {
+        return true;
+    }
+    else if(_command == CTP)
+    {
+        return true;
+    }
+    else if(_command == ALL)
     {
         return true;
     }

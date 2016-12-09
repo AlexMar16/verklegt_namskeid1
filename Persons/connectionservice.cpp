@@ -21,12 +21,12 @@ vector<Connection> connectionService::getConnectionList() const {return _listCon
 bool connectionService::personORComputer(const string& command)
 {
     generalService GS;
-    if (GS.toLower(command) == "person to computer")
+    if (GS.toLower(command) == "person to computer" || GS.toLower(command) == "ptc")
     {
         _swappedList = false;
         return true;
     }
-    else if (GS.toLower(command) == "computer to person")
+    else if (GS.toLower(command) == "computer to person" || GS.toLower(command) == "ctp")
     {
         _swappedList = true;
         swapToFrom();
@@ -103,12 +103,10 @@ void connectionService::swapToFrom()
 
 bool connectionService::fromInDatabase(const string& name)  // Checks if the name exists in the database
 {
-    generalService GS;
     for (size_t i = 0; i < _listConnections.size(); i++)
     {
-        if (GS.toLower(_listConnections[i].getFromName()) == GS.toLower(name))
+        if (_listConnections[i].getFromName() == name)
         {
-            //name = _listConnections[i].getFromName();
             return true;
         }
     }
@@ -117,12 +115,10 @@ bool connectionService::fromInDatabase(const string& name)  // Checks if the nam
 
 bool connectionService::toInDatabase(const string& name)  // Checks if the name exists in the database
 {
-    generalService GS;
     for (size_t i = 0; i < _listConnections.size(); i++)
     {
-        if (GS.toLower(_listConnections[i].getToName()) == GS.toLower(name))
+        if (_listConnections[i].getToName() == name)
         {
-            //name = _listConnections[i].getFromName();
             return true;
         }
     }
@@ -145,4 +141,28 @@ void connectionService::addNewConnection(const string& from, const string& to)
     _listConnections.push_back(newC);
     newConnection.insertIntoConnection(newC, _swappedList);
 
+}
+
+string connectionService::getWhichIsFrom()
+{
+    if (_swappedList == false)
+    {
+        return "person";
+    }
+    else
+    {
+        return "computer";
+    }
+}
+
+string connectionService::getWhichIsTo()
+{
+    if (_swappedList == false)
+    {
+        return "computer";
+    }
+    else
+    {
+        return "person";
+    }
 }
