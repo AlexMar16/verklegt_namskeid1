@@ -6,6 +6,7 @@
 #include "computerService.h"
 #include "generalService.h"
 #include "connectionservice.h"
+#include <cctype>
 //#include "dbmanager.h"
 
 

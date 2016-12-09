@@ -1,5 +1,5 @@
 #include "consoleui.h"
-#include <cctype>
+
 
 
 
@@ -87,7 +87,7 @@ void consoleUI::run()
     }while(_turnG.getProgram());
 }
 
-void consoleUI::firstCommandBox()
+void consoleUI::firstCommandBox()           // The initial command box in the program.
 {
     cout << setw(ASTERISK_WIDTH) << setfill(ASTERISK) <<  ASTERISK << endl;
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| This is a database for famous computer scientists and historical computers!"
@@ -119,7 +119,7 @@ void consoleUI::firstCommandBox()
     }
 }
 
-bool consoleUI::beginningCommand() //checks if the command was valid
+bool consoleUI::beginningCommand()      //checks if the command was valid
 {
     if(_database == "person" || _database == "p")
     {
@@ -139,8 +139,8 @@ bool consoleUI::beginningCommand() //checks if the command was valid
     }
 }
 
-void consoleUI::commandBox()// the right one either sets it's value to "person" or "computer"
-{
+void consoleUI::commandBox()            // the command box for person and computer.
+{                                       // the right one either sets it's value to "person" or "computer".
     cout << setw(ASTERISK_WIDTH) << setfill(ASTERISK) <<  ASTERISK << endl;     // Command box begins.
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| Please enter one of the following commands:"
          << right << BARRIER << endl;
@@ -173,23 +173,23 @@ void consoleUI::commandBox()// the right one either sets it's value to "person" 
     _command = _turnG.toLower(_command);
 }
 
-void consoleUI::commandBoxConnect()
+void consoleUI::commandBoxConnect()         // The command box for connect
 {
     cout << setw(ASTERISK_WIDTH) << setfill(ASTERISK) <<  ASTERISK << endl;     // Command box begins.
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| Please enter one of the following commands:"
          << right << BARRIER << endl;
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << BARRIER << right << BARRIER<< endl;
-    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| add            - This command will allow you to add a connection."
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| add     - This command will allow you to add a connection."
          << right << BARRIER << endl;
-    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| ctp            - This command will find connections from computers to persons."
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| ctp     - This command will find connections from computers to persons."
          << right << BARRIER << endl;
-    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| ptc            - This command will find connections from persons to computers."
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| ptc     - This command will find connections from persons to computers."
          << right << BARRIER << endl;
-    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| remove         - This command will allow you to remove a connection."
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| remove  - This command will allow you to remove a connection."
          << right << BARRIER << endl;
-    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| back           - This command will allow you to choose another database."
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| back    - This command will allow you to choose another database."
          << right << BARRIER << endl;
-    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| quit           - This command will quit the program."
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| quit    - This command will quit the program."
          << right << BARRIER << endl;
     cout << setw(ASTERISK_WIDTH) << setfill(ASTERISK) << ASTERISK << endl;      // Command box ends.
     cout << "Command: ";
@@ -197,7 +197,7 @@ void consoleUI::commandBoxConnect()
     _command = _turnG.toLower(_command);
 }
 
-void consoleUI::commandBoxConnectptc()
+void consoleUI::commandBoxConnectptc()          // The command box for person to computer and computer to person in connect.
 {
     cout << setw(ASTERISK_WIDTH) << setfill(ASTERISK) <<  ASTERISK << endl;     // Command box begins.
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| Please enter one of the following commands:"
