@@ -24,9 +24,6 @@ public:
     string getWhichIsFrom();
     string getWhichIsTo();
 
-
-
-
 private:
     vector<Connection> _listConnections;
     vector<Connection> _listSearchedConnections;
