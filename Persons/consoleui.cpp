@@ -20,6 +20,12 @@ const char BARRIER = '|';
 
 consoleUI::consoleUI() {_print = true;}
 
+// TO FAST TRAVEL:
+
+    // to computer functions   = ctrl+f -> //computer
+    // to person functions     = ctrl=f -> //person
+    // to connection functions = ctrl+f -> //connect
+
 void consoleUI::run()
 {
     do
@@ -207,28 +213,7 @@ void consoleUI::commandBoxSubConnect()
     getline(cin, _command);
 }
 
-bool consoleUI::specialCommandConnect()
-{
-    string everyone;
 
-
-    if(_command == ALL)
-    {
-        return true;
-    }
-    else if(_command == ADD)
-    {
-        return true;
-    }
-    else if(_command == REMOVE)
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
-}
 
 bool consoleUI::beginningCommand()
 {
@@ -249,6 +234,8 @@ bool consoleUI::beginningCommand()
         return false;
     }
 }
+
+
 
 void consoleUI::quizCommand()
 {
@@ -295,6 +282,17 @@ void consoleUI::quizCommand()
         _turnG.speakQuestion("Wrong");
     }
     cin.ignore();
+}
+
+
+
+//person
+
+string consoleUI::toLower(const string& toLowerString)    // Makes everything lowercase
+{
+    string data = toLowerString;
+    transform(data.begin(), data.end(), data.begin(), ::tolower);
+    return data;
 }
 
 void consoleUI::addCommand()
@@ -394,125 +392,7 @@ void consoleUI::addCommand()
     cin.ignore();
 }
 
-void consoleUI::addCompCommand()
-{
-    string name, type, yearBuilt, wasitbuilt, built;
-    Computer input;
-    int birthCheck = 0;
-    const int MINIMUM_Built_YEAR = 1500, MAXIMUM_Built_YEAR = 2030;
 
-    cout << "Please enter the following information about the new Computer " << endl;
-    cout << "in the following order." << endl;
-    cout << "Be aware you cannot put letters that are not in the English alphabet." << endl;
-
-    while(true)
-    {
-        cout << "Name: ";
-        getline(cin, name);
-        name[0] = toupper(name[0]);
-        if(name == EMPTY)
-        {
-            cout << "No input!" << endl;
-        }
-        else
-        {
-            break;
-        }
-    }
-    input.setName(name);
-
-    while(true)
-    {
-        cout << "Type of computer: ";
-        getline(cin, type);
-        if(type == EMPTY)
-        {
-            cout << "No input!" << endl;
-        }
-        else if (_turnG.toLower(type) == "mechanical")
-        {
-            type = MECHANICAL;
-            break;
-        }
-        else if (_turnG.toLower(type) == "electronic")
-        {
-            type = ELECTRONIC;
-            break;
-        }
-        else if (_turnG.toLower(type) == "electro-mechanical")
-        {
-            type = ELECTROMECHANICAL;
-            break;
-        }
-        else if (_turnG.toLower(type) == "transistor")
-        {
-            type = TRANSISTOR;
-            break;
-        }
-        else if (_turnG.toLower(type) == "transistor/microchip")
-        {
-            type = TRANSISTORMICROCHIP;
-            break;
-        }
-        else if (_turnG.toLower(type) == "supercomputer")
-        {
-            type = SUPERCOMPUTER;
-            break;
-        }
-        else if (_turnG.toLower(type) == "quantum computer")
-        {
-            type = QUANTUMCOMPUTER;
-            break;
-        }
-        else
-        {
-            cout << "Invalid type!" << endl;
-        }
-    }
-    input.setType(type);
-
-    while(true)
-    {
-        cout << "Year (YYYY): ";
-        cin >> yearBuilt;
-        birthCheck = atoi(yearBuilt.c_str());       // Removes alphanumeric values from the input.
-        if (birthCheck > MINIMUM_Built_YEAR && birthCheck < MAXIMUM_Built_YEAR)
-        {
-            break;
-        }
-        else
-        {
-            cout << "Invalid input!" << endl;
-        }
-    }
-    input.setYearbuild(birthCheck);
-
-    while(true)
-    {
-        cout << "Was the computer ever built? (y/n)" << endl;
-        cin >> wasitbuilt;
-        if(wasitbuilt == "Y" || wasitbuilt == "y" || wasitbuilt == "Yes" || wasitbuilt == "yes")
-        {
-            built = "Yes";
-            break;
-        }
-        else if (wasitbuilt == "N" || wasitbuilt == "n" || wasitbuilt == "No" || wasitbuilt == "no")
-        {
-            built = "No";
-            break;
-        }
-        else
-        {
-            cout << "Invalid input!" << endl;
-        }
-    }
-    input.setBuilt(built);
-
-    cout << endl;
-
-    _turnC.addComputer(input);
-    cin.ignore();
-}
 void consoleUI::removeCommandPerson()
 {
     string fullName;
@@ -550,54 +430,6 @@ void consoleUI::removeCommandPerson()
     }
     }
 }
-
-bool consoleUI::is_digits(const string &numbers)
-{
-    return numbers.find_first_not_of("0123456789") == std::string::npos;
-}
-
-bool consoleUI::connectSubCommand()
-{
-    int stoppari;
-    if(_command == "specific")
-    {
-        cout << "Specific";
-        cin >> stoppari;
-        return true;
-    }
-    else if(_command == "all")
-    {
-        cout << "all";
-        cin >> stoppari;
-        return true;
-    }
-    else if(_command == "add")
-    {
-        cout << "add";
-        cin >> stoppari;
-        return true;
-    }
-    else if(_command == "remove")
-    {
-        cout << "remove";
-        cin >> stoppari;
-        return true;
-    }
-    else if(_command == "back")
-    {
-        return true;
-    }
-    else if(_command == "quit")
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
-}
-
-//person
 
 void consoleUI::findCommandPerson()
 {
@@ -729,18 +561,7 @@ bool consoleUI::checkfoundPerson( const string& toFind)
 }
 
 
-void consoleUI::checkModifyComputer( const string& toModify)
-{
-    for(size_t i = 0; i < _printOutComputer.size(); i++)
-    {                   
-        if( _printOutComputer[i].getName() == toModify)
-        {
-            vector<Computer> temp;
-            temp.push_back(_printOutComputer[i]);
-            _printOutComputer = temp;
-        }
-    }
-}
+
 
 void consoleUI::personValidation(Person &input)
 {
@@ -959,14 +780,6 @@ void consoleUI::sortCommandPerson()
     }
 }
 
-string consoleUI::toLower(const string& toLowerString)    // Makes everything lowercase
-{
-    string data = toLowerString;
-    transform(data.begin(), data.end(), data.begin(), ::tolower);
-    return data;
-}
-
-
 void consoleUI::printListPerson()       // Print if appropriate.
 {
     const string SORT = "sort";
@@ -1029,6 +842,144 @@ void consoleUI::printListPerson()       // Print if appropriate.
 }
 
 //computer
+
+bool consoleUI::is_digits(const string &numbers)
+{
+    return numbers.find_first_not_of("0123456789") == std::string::npos;
+}
+
+void consoleUI::checkModifyComputer( const string& toModify)
+{
+    for(size_t i = 0; i < _printOutComputer.size(); i++)
+    {
+        if( _printOutComputer[i].getName() == toModify)
+        {
+            vector<Computer> temp;
+            temp.push_back(_printOutComputer[i]);
+            _printOutComputer = temp;
+        }
+    }
+}
+
+void consoleUI::addCompCommand()
+{
+    string name, type, yearBuilt, wasitbuilt, built;
+    Computer input;
+    int birthCheck = 0;
+    const int MINIMUM_Built_YEAR = 1500, MAXIMUM_Built_YEAR = 2030;
+
+    cout << "Please enter the following information about the new Computer " << endl;
+    cout << "in the following order." << endl;
+    cout << "Be aware you cannot put letters that are not in the English alphabet." << endl;
+
+    while(true)
+    {
+        cout << "Name: ";
+        getline(cin, name);
+        name[0] = toupper(name[0]);
+        if(name == EMPTY)
+        {
+            cout << "No input!" << endl;
+        }
+        else
+        {
+            break;
+        }
+    }
+    input.setName(name);
+
+    while(true)
+    {
+        cout << "Type of computer: ";
+        getline(cin, type);
+        if(type == EMPTY)
+        {
+            cout << "No input!" << endl;
+        }
+        else if (_turnG.toLower(type) == "mechanical")
+        {
+            type = MECHANICAL;
+            break;
+        }
+        else if (_turnG.toLower(type) == "electronic")
+        {
+            type = ELECTRONIC;
+            break;
+        }
+        else if (_turnG.toLower(type) == "electro-mechanical")
+        {
+            type = ELECTROMECHANICAL;
+            break;
+        }
+        else if (_turnG.toLower(type) == "transistor")
+        {
+            type = TRANSISTOR;
+            break;
+        }
+        else if (_turnG.toLower(type) == "transistor/microchip")
+        {
+            type = TRANSISTORMICROCHIP;
+            break;
+        }
+        else if (_turnG.toLower(type) == "supercomputer")
+        {
+            type = SUPERCOMPUTER;
+            break;
+        }
+        else if (_turnG.toLower(type) == "quantum computer")
+        {
+            type = QUANTUMCOMPUTER;
+            break;
+        }
+        else
+        {
+            cout << "Invalid type!" << endl;
+        }
+    }
+    input.setType(type);
+
+    while(true)
+    {
+        cout << "Year (YYYY): ";
+        cin >> yearBuilt;
+        birthCheck = atoi(yearBuilt.c_str());       // Removes alphanumeric values from the input.
+        if (birthCheck > MINIMUM_Built_YEAR && birthCheck < MAXIMUM_Built_YEAR)
+        {
+            break;
+        }
+        else
+        {
+            cout << "Invalid input!" << endl;
+        }
+    }
+    input.setYearbuild(birthCheck);
+
+    while(true)
+    {
+        cout << "Was the computer ever built? (y/n)" << endl;
+        cin >> wasitbuilt;
+        if(wasitbuilt == "Y" || wasitbuilt == "y" || wasitbuilt == "Yes" || wasitbuilt == "yes")
+        {
+            built = "Yes";
+            break;
+        }
+        else if (wasitbuilt == "N" || wasitbuilt == "n" || wasitbuilt == "No" || wasitbuilt == "no")
+        {
+            built = "No";
+            break;
+        }
+        else
+        {
+            cout << "Invalid input!" << endl;
+        }
+    }
+    input.setBuilt(built);
+
+    cout << endl;
+
+    _turnC.addComputer(input);
+    cin.ignore();
+}
 
 void consoleUI::removeCommandComputer()
 {
@@ -1480,6 +1431,74 @@ void consoleUI::computerValidation(Computer& input)
     cout << endl;
     cin.ignore();
 }
+
+//connect
+
+bool consoleUI::connectSubCommand()
+{
+    int stoppari;
+    if(_command == "specific")
+    {
+        cout << "Specific";
+        cin >> stoppari;
+        return true;
+    }
+    else if(_command == "all")
+    {
+        cout << "all";
+        cin >> stoppari;
+        return true;
+    }
+    else if(_command == "add")
+    {
+        cout << "add";
+        cin >> stoppari;
+        return true;
+    }
+    else if(_command == "remove")
+    {
+        cout << "remove";
+        cin >> stoppari;
+        return true;
+    }
+    else if(_command == "back")
+    {
+        return true;
+    }
+    else if(_command == "quit")
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+bool consoleUI::specialCommandConnect()
+{
+    string everyone;
+
+
+    if(_command == ALL)
+    {
+        return true;
+    }
+    else if(_command == ADD)
+    {
+        return true;
+    }
+    else if(_command == REMOVE)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+
 
 void consoleUI::emailCommand()
 {
