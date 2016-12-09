@@ -551,7 +551,7 @@ void consoleUI::removeCommandPerson()
     }
 }
 
-void consoleUI::findCommandPerson()
+void consoleUI::findCommandPerson()         //allowes the user to search
 {
     string toFind;
     cout << "Search name/year: ";
@@ -560,7 +560,7 @@ void consoleUI::findCommandPerson()
     cout << endl;
 
 
-    if(toFind == "dickbutt"  || toFind== "")
+    if(toFind == "dickbutt"  || toFind== "")        //our Easteregg
     {
         cout << "                                      PrumpPrum                                         " << endl;                                                                                         cout << "                                  pPrumpPrumpPrumpP                                     " << endl << "                              rumpPrumpPrumpPrumpPrump                                  " << endl << "                      PrumpPrumpPrump           PrumpPru                                " << endl << "                   mpPrumpPrumpP                  rumpPru                               " << endl << "                 mpPrumpPrumpPru                   mpPrum                               " << endl << "                 pPrumpPrumpPrump                   Prump" << endl << "                 PrumpPrumpP rumpPr    umpPrumpPru  mpPru" << endl << "                 mpPrumpPrumpPrumpPr umpPrumpPrumpPr umpP" << endl << "                 rumpPrumpPrumpPru  mpPrumpPrumpPrumpPrum" << endl << "                pPrum  pPrumpPrump  PrumpPrumpPrumpPrumpP" << endl << "               rumpPrumpPrumpPrumpP rumpPrumpPr umpPrumpP" << endl << "              rumpPrumpPrumpPrump   PrumpPrumpPrumpPrumpP" << endl << "             rumpPrumpPrumpPrumpPrumpPrumpPrumpPr  umpPr" << endl << "            umpPr          umpPrumpPrumpPrump     PrumpP" << endl << "           rumpP                      rumpPru     mpPrum" << endl << "          pPrump                                 PrumpP" << endl << "         rumpPr                                 umpPru" << endl << "        mpPrum                                  pPrump" << endl << "        Prump                      Prum        pPrump" << endl << "        Prum                      pPrum pPr   umpPru" << endl << "        mpPr                      umpPrumpPr  umpPr                         umpPrumpP" << endl << "       rumpP                      rumpPrump  Prump                        PrumpPrumpPr" << endl << "       umpPr                     umpPrumpPr umpPr                       umpPru    mpPr" << endl << "       umpPr                     umpPrumpP  rumpP                     rumpPru    mpPru" << endl << "       mpPru                    mpPrumpPr  umpPru                   mpPrump     Prump" << endl << "       Prump                    PrumpPru   mpPrumpPrumpPrumpPru   mpPrump     Prump" << endl << "        Prum                   pPrumpPr    umpPrumpPrumpPrumpPrumpPrump      Prump" << endl << "        Prum                   pPrumpP     rumpP   rumpP   rumpPrumpP      rumpPr" << endl << "        umpP                  rumpPrum      pPr   umpPrumpPrumpPrum      pPrump" << endl << "        Prump               Prump Prump         PrumpPrumpPrumpPru     mpPrump" << endl << "         Prum             pPrum  pPrumpP         rumpPrumpPrumpPrump   PrumpPru" << endl << "         mpPru            mpPrumpPrumpPr                     umpPrump    PrumpPrum" << endl << "          pPrum            pPrumpPrumpP              rump       PrumpP  rump Prump" << endl << "          PrumpP              rump                   Prum        pPrump  PrumpPru" << endl << "           mpPrum                                pPr              umpPr    umpP" << endl << "            rumpPrum                            pPru              mpPru     mpPr" << endl << "               umpPrum                          pPru              mpPrumpPrumpPr" << endl << "     ump        PrumpPrump                       Prum           pPrumpPrumpPrum" << endl << "    pPrumpP    rumpPrumpPrumpPru                  mpP         rumpPru    m" << endl << "   pPrumpPrumpPru mpPrumpPrumpPrumpPrum           pPru    mpPrump" << endl << "    Prum pPrumpPrumpPru    mpPrumpPrumpPru mpPrumpPrumpPrumpPrum" << endl << "     pPru  mpPrumpPru         mpPrumpPrum pPrumpPrumpPrumpPru" << endl << "      mpPr   umpPru         mpPrumpPrump Prump PrumpPrumpP" << endl << "       rumpPrumpP           rumpPrumpPr  umpP" << endl << "        rumpPru              mpPrumpP   rump" << endl << "          Pru                mpPrum    pPru" << endl << "                              mpPrum  pPru" << endl << "                               mpPrumpPru" << endl << "                                 mpPrump" << endl << "                                   Pru  " << endl;
     }
@@ -596,7 +596,7 @@ void consoleUI::findCommandPerson()
 
 }
 
-void consoleUI::modifyCommandPerson()
+void consoleUI::modifyCommandPerson()       //allowes the user to modify instences that are already in the database
 {
     string toModify;
     cout << "Search for a person to modify: ";
@@ -653,7 +653,7 @@ void consoleUI::findconnection()
 }
 
 
-void consoleUI::checkModifyPerson( const string& toModify)
+void consoleUI::checkModifyPerson( const string& toModify)          // Checks if the person is on the list.
 {
     for(size_t i = 0; i < _printOutPerson.size(); i++)
     {
@@ -665,7 +665,7 @@ void consoleUI::checkModifyPerson( const string& toModify)
         }
     }
 }
-bool consoleUI::checkfoundPerson( const string& toFind)
+bool consoleUI::checkfoundPerson( const string& toFind)         // Checks if the person is in the list.
 {
     for(size_t i = 0; i < _printOutConnection.size(); i++)
     {
@@ -683,7 +683,7 @@ bool consoleUI::checkfoundPerson( const string& toFind)
 
 
 
-void consoleUI::personValidation(Person &input)
+void consoleUI::personValidation(Person &input)       // This function goes with the modify function and checks if the name,year and gender is valid
 {
     string name, gender, deathYear, birthYear;
     int birthCheck = 0, deathCheck = 0;
@@ -763,7 +763,7 @@ void consoleUI::personValidation(Person &input)
     cin.ignore();
 }
 
-void consoleUI::statusCommandPerson()
+void consoleUI::statusCommandPerson()           // This function displays total count of items in the list.
 {
     _printStatus = _turnP.properties();
     const int NAMES = 0;
@@ -776,7 +776,7 @@ void consoleUI::statusCommandPerson()
     cout << "Total males on the list   : " << _printStatus[MALES] << endl << endl;
 }
 
-bool consoleUI::specialCommandPerson()
+bool consoleUI::specialCommandPerson()      // Checks if command is valid
 {
     string findIt = "find";
 
@@ -843,7 +843,7 @@ bool consoleUI::sortSpecialCommandPerson(const string& choice)
     }
 }
 
-void consoleUI::sortCommandPerson()
+void consoleUI::sortCommandPerson()         // Sorts the list.
 {
     const string ASC = "asc";
     const string DESC = "desc";
@@ -963,7 +963,7 @@ void consoleUI::printListPerson()       // Print if appropriate.
 
 //computer
 
-bool consoleUI::is_digits(const string &numbers)
+bool consoleUI::is_digits(const string &numbers)        // This is a function we use to check if input was digits
 {
     return numbers.find_first_not_of("0123456789") == std::string::npos;
 }
@@ -982,7 +982,7 @@ void consoleUI::checkModifyComputer( const string& toModify)
 }
 
 
-void consoleUI::removeCommandComputer()
+void consoleUI::removeCommandComputer()     // This function first finds out if the computer is in the list and then removes it
 {
     string fullName;
     string sure;
@@ -1020,7 +1020,7 @@ void consoleUI::removeCommandComputer()
     }
 }
 
-void consoleUI::findCommandComputer()
+void consoleUI::findCommandComputer()       // This function finds the computer
 {
     string toFind;
 
@@ -1065,7 +1065,7 @@ void consoleUI::findCommandComputer()
 }
 
 
-void consoleUI::statusCommandComputer()
+void consoleUI::statusCommandComputer()         // This function displays the total count of items in the list.
 {
     _printStatus = _turnC.computerProperties();
     int nameQuant= 0;
@@ -1093,7 +1093,7 @@ void consoleUI::statusCommandComputer()
 
 
 }
-void consoleUI::sortCommandComputer()
+void consoleUI::sortCommandComputer()           // Sorts items in computer list
 {
     const string ASC = "asc";
     const string DESC = "desc";
@@ -1153,7 +1153,7 @@ void consoleUI::sortCommandComputer()
 }
 
 
-bool consoleUI::specialCommandComputer(const string &_command)
+bool consoleUI::specialCommandComputer(const string &_command)      // Checks if input was valid
 {
     if(_command == "a")
     {
@@ -1259,7 +1259,7 @@ void consoleUI::print()
 {
     if(_print  && (_database=="person" || _database == "p"))
     {
-        _printOutPerson = _turnP.getPersonList();// getList() gets the list that's supposed to be printed out.
+        _printOutPerson = _turnP.getPersonList();           // getList() gets the list that's supposed to be printed out.
         cout << _printOutPerson;
     }
     else if(_print && (_database=="computer" || _database == "c"))
@@ -1310,7 +1310,7 @@ void consoleUI::modifyCommandComputer()
 
 }
 
-void consoleUI::computerValidation(Computer& input)
+void consoleUI::computerValidation(Computer& input)         // Finds the computer in the database, allowes the user to modify it.
 {
     string name, type, yearBuilt, wasitbuilt, built;
     int birthCheck = 0;
@@ -1434,7 +1434,7 @@ void consoleUI::computerValidation(Computer& input)
 
 //connect
 
-bool consoleUI::connectSubCommand()
+bool consoleUI::connectSubCommand()     // Checks if input was valid
 {
     int stoppari;
     if(_command == "specific")
