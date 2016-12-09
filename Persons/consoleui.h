@@ -72,6 +72,8 @@ private:
     void modifyCommandComputer();
     void computerValidation(Computer& input);
 
+    void emailCommand();
+
 
 };
 
