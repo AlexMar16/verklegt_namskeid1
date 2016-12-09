@@ -156,7 +156,7 @@ vector<Computer> computerService::sortType()            //sort the computer by t
     return _listComputer;
 }
 
-vector<Computer> computerService::sortAlphabetically()          //sort the computer by the alphabetical
+vector<Computer> computerService::sortAlphabetically()          //sort the computer by the alphabet
 {
     bool again = true;
     while (again)
@@ -214,7 +214,7 @@ vector<Computer> computerService::sortCreationYear()//sorts computer by their ye
     return _listComputer;
 }
 
-vector<Computer> computerService::findComputer(const string &name)
+vector<Computer> computerService::findComputer(const string &name) //finds the computer if it exists in the database
 {
     generalService GS;
     _listSearchedComputer.clear();
@@ -340,7 +340,7 @@ bool computerService::lookForDigits(const int& num)
     return false;
 }
 
-vector<Computer> computerService::findDigits(const int& num)
+vector<Computer> computerService::findDigits(const int& num)        //allowes the user to search by using digits
 {
     _listSearchedDigits.clear();
 
@@ -368,7 +368,7 @@ Computer computerService::findComputerNumber(string name)
     return _listComputer[_computerIndex];
 }
 
-void computerService::changeComputer(const Computer& input)
+void computerService::changeComputer(const Computer& input)     //for our modify function
 {
     DbManager modifyComputer;
     modifyComputer.changeComputer(input, _computerIndex);
