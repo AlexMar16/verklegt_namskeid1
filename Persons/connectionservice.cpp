@@ -22,12 +22,13 @@ bool connectionService::personORComputer(const string& command)
     generalService GS;
     if (GS.toLower(command) == "person to computer")
     {
-        _connectFrom = "person";
+        swappedList = false;
         return true;
     }
     else if (GS.toLower(command) == "computer to person")
     {
-        _connectFrom = "computer";
+        swappedList = true;
+        swapToFrom();
         return true;
     }
     else
@@ -38,12 +39,8 @@ bool connectionService::personORComputer(const string& command)
 
 vector<Connection> connectionService::findConnection(const string &name)      // Finds people and adds them to the vector
 {
-    cout << "aaa";
     _listSearchedConnections.clear();
-    cout << "bbb";
     generalService GS;
-    cout << "ccc";
-    cout << _listConnections.size();
     for (size_t i = 0; i < _listConnections.size(); i++)
     {
         if (GS.toLower(_listConnections[i].getPersonName()).find(GS.toLower(name)) != string::npos)       // Puts both instances to lowercase
@@ -52,5 +49,35 @@ vector<Connection> connectionService::findConnection(const string &name)      //
         }
     }
 
-    return _listConnections;
+    return _listSearchedConnections;
+}
+
+bool connectionService::lookForConnection(const string& name)         // Checks if any part of the name is on the list
+{
+    generalService GS;
+    for (size_t i = 0; i < _listConnections.size(); i++)
+    {
+        if (GS.toLower(_listConnections[i].getPersonName()).find(GS.toLower(name)) != string::npos)       // Enables us to search in lower case letters.
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+
+bool connectionService::getSwappedList() const {return swappedList;}
+
+
+void connectionService::swapToFrom()
+{
+    string temp;
+    for (size_t i=0; i<_listConnections.size(); i++)
+    {
+
+         temp = _listConnections[i].getPersonName();
+         string name1 = _listConnections[i].getComputerName();
+        _listConnections[i].setPersonName(name1);
+        _listConnections[i].setComputerName(temp);
+    }
 }
