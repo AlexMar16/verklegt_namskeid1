@@ -1,5 +1,6 @@
 #ifndef CONNECTION_H
 #define CONNECTION_H
+#include <vector>
 
 //b#include "dbmanager.h"
 #include <string>
@@ -19,6 +20,11 @@ public:
     int getPersonID();
     string getComputerName();
     string getPersonName();
+    friend ostream& operator << (ostream& out, const Connection& rhs);
+    //friend ifstream& operator >> (ifstream& in, Connection& rhs);
+    friend ostream& operator << (ostream& out, vector<Connection>& rhs);
+
+
 private:
     string _computerName;
     string _personName;
