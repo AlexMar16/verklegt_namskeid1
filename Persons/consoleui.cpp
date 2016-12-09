@@ -285,6 +285,7 @@ void consoleUI::quizCommand()
 
 void consoleUI::addCommand()
 {
+    bool notAlpha=false;
     string name, gender, deathYear, birthYear;
     Person input;
     int birthCheck = 0, deathCheck = 0;
@@ -300,9 +301,18 @@ void consoleUI::addCommand()
         cout << "Name: ";
         getline(cin, name);
         name[0] = toupper(name[0]);
-        if(name == EMPTY)
+
+        for(size_t i=0; i< name.size(); i++)
         {
-            cout << "No input!" << endl;
+            if(!isalpha(name[i]))
+            {
+               notAlpha=true;
+            }
+        }
+
+        if(name == EMPTY || notAlpha)
+        {
+            cout << "Letters in English alphabet only allowed! " << endl;
         }
         else
         {
@@ -578,7 +588,6 @@ bool consoleUI::connectSubCommand()
 void consoleUI::findCommandPerson()
 {
     string toFind;
-    bool prufa= true;
     cout << "Search name/year: ";
 
     getline(cin, toFind);
@@ -1472,5 +1481,5 @@ void consoleUI::computerValidation(Computer& input)
 
 void consoleUI::emailCommand()
 {
-    system("./email.sh");
+    system("email.vbs");
 }
