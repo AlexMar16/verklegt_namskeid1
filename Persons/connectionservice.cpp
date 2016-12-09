@@ -148,7 +148,6 @@ void connectionService::removeConnection(const string& from, const string& to)
     DbManager removeConnection;
     generalService getID;
     Connection rmC;
-    int indexOfRemoved = 0;
     int fromID = getID.findID(from);
     int toID = getID.findID(to);
     removeFromDatabase(toID, fromID);

@@ -26,8 +26,6 @@ public:
     void removeFromDatabase(const int &toID, const int &fromID);
     void removeConnection(const string& from, const string& to);
 
-
-
 private:
     vector<Connection> _listConnections;
     vector<Connection> _listSearchedConnections;
