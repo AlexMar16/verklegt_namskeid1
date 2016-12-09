@@ -17,7 +17,6 @@ public:
 private:
     vector<Connection> _listConnections;
     bool swappedList;
-    //string _connectFrom;
 };
 
 #endif // CONNECTIONSERVICE_H
