@@ -31,22 +31,33 @@ int Connection::getComputerID() {return _ComputerID;}
 
 ostream& operator << (ostream& out, const Connection& rhs)
 {
-    const char DASH = '-';
-    out << left << setw(FIVE * COLUMN_WIDTH + FIVE) << setfill(DASH) <<  DASH << endl;
+
     out << left << setw(COLUMN_WIDTH) << setfill(SPACE) <<  rhs._personName;
     out << left << setw(COLUMN_WIDTH) << setfill(SPACE) << rhs._computerName << endl;
+    //_lastComputerName= rhs._personName;
     return out;
 }
 
 ostream& operator << (ostream& out, vector<Connection>& rhs)
 {
+    const char DASH = '-';
     out << left << setw(COLUMN_WIDTH) << setfill(SPACE) << "Computer Scientist";
     out << left << setw(COLUMN_WIDTH) << setfill(SPACE) << "Computer" << endl;
     for(size_t i = 0; i < rhs.size(); i++)
     {
-        out << rhs[i];
+        if(!(i != 0 && rhs[i]._personName == rhs[i-1]._personName))
+        {
+            out << left << setw(FIVE * COLUMN_WIDTH + FIVE) << setfill(DASH) <<  DASH << endl;
+            out << rhs[i];
+        }
+        else
+        {
+            out << left << setw(COLUMN_WIDTH) << setfill(SPACE);
+            out << left << setw(COLUMN_WIDTH) << setfill(SPACE) << ""
+                << left << rhs[i]._computerName << endl;
+        }
+
     }
     out << endl;
     return out;
 }
-
