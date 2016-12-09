@@ -12,9 +12,12 @@ public:
    // void connectionService::addConnection(const Connection &input);
     bool personORComputer(const string& command);
     vector<Connection> getConnectionList() const;
+    void swapToFrom();
+    bool getSwappedList() const;
 private:
     vector<Connection> _listConnections;
-    string _connectFrom;
+    bool swappedList;
+    //string _connectFrom;
 };
 
 #endif // CONNECTIONSERVICE_H

@@ -37,8 +37,7 @@ void consoleUI::run()
                 }
                 else
                 {
-                    do{
-                        commandBoxConnect();
+                    do{commandBoxConnect();
                         if(_turnCon.personORComputer(_command))
                         {
                             do
@@ -53,18 +52,18 @@ void consoleUI::run()
                                 {
 
                                 }
-
-
-                                //connectionPrintList();
                             }while(_command != BACK && _command != QUIT);
-
+                            if(_turnCon.getSwappedList())
+                            {
+                                _turnCon.swapToFrom();
+                            }
                         }
                     } while(_command != BACK && _command != QUIT);
                 }
             }while(_command != BACK && _command != QUIT);
             _turnG.setProgram(_command);
         }
-        else if(_database != QUIT)
+        else if(_database != QUIT && _command != QUIT)
         {
             cout << endl << "The database " << _database << " was not found" << endl;
         }
@@ -286,6 +285,7 @@ void consoleUI::quizCommand()
 
 void consoleUI::addCommand()
 {
+    bool notAlpha=false;
     string name, gender, deathYear, birthYear;
     Person input;
     int birthCheck = 0, deathCheck = 0;
@@ -301,9 +301,18 @@ void consoleUI::addCommand()
         cout << "Name: ";
         getline(cin, name);
         name[0] = toupper(name[0]);
-        if(name == EMPTY)
+
+        for(size_t i=0; i< name.size(); i++)
         {
-            cout << "No input!" << endl;
+            if(!isalpha(name[i]))
+            {
+               notAlpha=true;
+            }
+        }
+
+        if(name == EMPTY || notAlpha)
+        {
+            cout << "Letters in English alphabet only allowed! " << endl;
         }
         else
         {
@@ -579,7 +588,6 @@ bool consoleUI::connectSubCommand()
 void consoleUI::findCommandPerson()
 {
     string toFind;
-    bool prufa= true;
     cout << "Search name/year: ";
 
     getline(cin, toFind);
@@ -688,7 +696,6 @@ vector<Connection> consoleUI::findconnection()
             cout << "Please be more specific: ";
         }
     }
-
 }
 
 
