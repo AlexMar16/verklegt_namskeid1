@@ -52,7 +52,7 @@ void consoleUI::run()
             }while(_command != BACK && _command != QUIT);
             _turnG.setProgram(_command);
         }
-        else
+        else if(_database != QUIT)
         {
             cout << endl << "The database " << _database << " was not found" << endl;
         }
