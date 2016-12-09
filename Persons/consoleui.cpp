@@ -579,7 +579,7 @@ void consoleUI::modifyCommandPerson()
     while(true)
     {
         getline(cin, toModify);
-        //toModify = toLower(toModify);
+        toModify = toLower(toModify);
 
         _printOutPerson = _turnP.findPerson(toModify);
         checkModifyPerson(toModify);
@@ -603,7 +603,7 @@ void consoleUI::modifyCommandPerson()
 
 }
 
-bool consoleUI::checkModifyPerson( const string& toModify)
+void consoleUI::checkModifyPerson( const string& toModify)
 {
     for(size_t i = 0; i < _printOutPerson.size(); i++)
     {
@@ -612,14 +612,12 @@ bool consoleUI::checkModifyPerson( const string& toModify)
             vector<Person> temp;
             temp.push_back(_printOutPerson[i]);
             _printOutPerson = temp;
-            return true;
         }
     }
-    return false;
 }
 
 
-bool consoleUI::checkModifyComputer( const string& toModify)
+void consoleUI::checkModifyComputer( const string& toModify)
 {
     for(size_t i = 0; i < _printOutComputer.size(); i++)
     {                   
@@ -628,10 +626,8 @@ bool consoleUI::checkModifyComputer( const string& toModify)
             vector<Computer> temp;
             temp.push_back(_printOutComputer[i]);
             _printOutComputer = temp;
-            return true;
         }
     }
-    return false;
 }
 
 void consoleUI::personValidation(Person &input)

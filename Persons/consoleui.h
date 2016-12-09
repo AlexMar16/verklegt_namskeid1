@@ -24,8 +24,8 @@ private:
     vector<Person> _printOutPerson;
     vector<Connection> _printOutConnection;
     bool _print;
-    bool checkModifyPerson(const string& toModify);
-    bool checkModifyComputer(const string& toModify);
+    void checkModifyPerson(const string& toModify);
+    void checkModifyComputer(const string& toModify);
     bool beginningCommand();
     bool specialCommandPerson();
     bool sortSpecialCommandPerson(const string& choice);
