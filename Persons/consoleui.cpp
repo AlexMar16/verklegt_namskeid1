@@ -179,19 +179,19 @@ void consoleUI::commandBoxConnect()
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| Please enter one of the following commands:"
          << right << BARRIER << endl;
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << BARRIER << right << BARRIER<< endl;
-    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| all                    - This command will display all connections."
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| all            - This command will display all connections."
          << right << BARRIER << endl;
-    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| ptc                    - This command will show connections from persons to computers."
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| ptc            - This command will show connections from persons to computers."
          << right << BARRIER << endl;
-    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| ctp                    - This command will show connections from computers to persons."
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| ctp            - This command will show connections from computers to persons."
          << right << BARRIER << endl;
-    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| add                    - This command will allow you to add a connection."
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| add            - This command will allow you to add a connection."
          << right << BARRIER << endl;
-    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| remove                 - This command will allow you to remove a connection."
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| remove         - This command will allow you to remove a connection."
          << right << BARRIER << endl;
-    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| back                   - This command will allow you to choose another database."
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| back           - This command will allow you to choose another database."
          << right << BARRIER << endl;
-    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| quit                   - This command will quit the program."
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| quit           - This command will quit the program."
          << right << BARRIER << endl;
     cout << setw(ASTERISK_WIDTH) << setfill(ASTERISK) << ASTERISK << endl;      // Command box ends.
     cout << "Command: ";
