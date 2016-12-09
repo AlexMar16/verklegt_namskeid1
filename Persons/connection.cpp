@@ -7,6 +7,7 @@ const int TWO = 2;
 
 Connection::Connection() {}
 
+// Set functions
 void Connection::setToName(const string& input) {_to = input;}
 
 void Connection::setFromName(const string& input) {_from = input;}
@@ -18,7 +19,7 @@ void Connection::setFromID(const int& input) {_FromID = input;}
 void Connection::setToID(const int& input) {_ToID = input;}
 
 
-
+// Get functions
 string Connection::getToName() {return _to;}
 
 string Connection::getFromName() {return _from;}
@@ -29,6 +30,7 @@ int Connection::getFromID() const {return _FromID;}
 
 int Connection::getToID() const {return _ToID;}
 
+// Overload functions
 ostream& operator << (ostream& out, const Connection& rhs)
 {
     out << left << setw(COLUMN_WIDTH) << setfill(SPACE) <<  rhs._from;

@@ -1,6 +1,6 @@
 #include "connectionservice.h"
 
-connectionService::connectionService()
+connectionService::connectionService()      // Gets the vector containing the appropriate information about the computers or scientists.
 {
     generalService getVector;
     _listConnections = getVector.getOriginalConnections();
@@ -18,8 +18,8 @@ void connectionService::addConnection(const Connection &input)
 */
 vector<Connection> connectionService::getConnectionList() const {return _listConnections;}
 
-bool connectionService::personORComputer(const string& command)
-{
+bool connectionService::personORComputer(const string& command)         // Enables the user to select either a list of scientists
+{                                                                       // and their connections to computers or vice versa.
     generalService GS;
     if (GS.toLower(command) == "person to computer" || GS.toLower(command) == "ptc")
     {
@@ -66,7 +66,7 @@ bool connectionService::lookForConnection(const string& name)         // Checks 
     return false;
 }
 
-vector<Connection> connectionService::sortConnectAlphabetically()
+vector<Connection> connectionService::sortConnectAlphabetically()       // Sorts the list of scientists or computers alphabetically.
 {
     bool again = true;
     while (again)
@@ -85,10 +85,10 @@ vector<Connection> connectionService::sortConnectAlphabetically()
 }
 
 
-bool connectionService::getSwappedList() const {return _swappedList;}
+bool connectionService::getSwappedList() const {return _swappedList;}       // Checks if lists have been swapped.
 
 
-void connectionService::swapToFrom()
+void connectionService::swapToFrom()                             // Swaps the persons list for the computer list.
 {
     string temp;
     for (size_t i=0; i<_listConnections.size(); i++)
@@ -125,7 +125,7 @@ bool connectionService::toInDatabase(const string& name)  // Checks if the name 
     return false;
 }
 
-void connectionService::addNewConnection(const string& from, const string& to)
+void connectionService::addNewConnection(const string& from, const string& to)   // Function used to add a new connection.
 {
     DbManager newConnection;
     generalService getID;

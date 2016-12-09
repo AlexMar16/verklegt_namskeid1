@@ -28,7 +28,7 @@ consoleUI::consoleUI() {_print = true;}
     // to person functions     = ctrl=f -> //person
     // to connection functions = ctrl+f -> //connect
 
-void consoleUI::run()
+void consoleUI::run()       // Runs the main UI menu.
 {
     do
     {
@@ -50,7 +50,7 @@ void consoleUI::run()
                         {
                             do
                             {
-                                _turnCon.sortConnectAlphabetically();  // Makes sure the list is sorted properly
+                                _turnCon.sortConnectAlphabetically();  // Makes sure the list is sorted properly.
                                 commandBoxConnectptc();
                                 if(_command == ALL)
                                 {
@@ -240,7 +240,7 @@ void consoleUI::commandBoxSubConnect()
     getline(cin, _command);
 }
 
-void consoleUI::quizCommand()
+void consoleUI::quizCommand()       // Asks the user a question about the scientists or the computers.
 {
     string a, b, c, d, answerName, goOn;
     do
@@ -308,7 +308,7 @@ string consoleUI::toLower(const string& toLowerString)    // Makes everything lo
     return data;
 }
 
-void consoleUI::addCommand()
+void consoleUI::addCommand()            // Enables the user to add a new scientist to the list.
 {
     bool notAlpha=false;
     string name, gender, deathYear, birthYear;
@@ -405,7 +405,7 @@ void consoleUI::addCommand()
     cin.ignore();
 }
 
-void consoleUI::addCompCommand()
+void consoleUI::addCompCommand()            // Enables the user to add a new computer to the list.
 {
     string name, type, yearBuilt, wasitbuilt, built;
     Computer input;
@@ -522,7 +522,7 @@ void consoleUI::addCompCommand()
     cout << endl;
 }
 
-void consoleUI::removeCommandPerson()
+void consoleUI::removeCommandPerson()       // Enables the user to remove a scientist from the list.
 {
     string fullName;
     string sure;
@@ -659,7 +659,7 @@ void consoleUI::findconnection()
         }
 }
 
-void consoleUI::addConnection()
+void consoleUI::addConnection()     // Enables the user to add a new scientist-computer connection.
 {
     string cFrom, cTo;
 
@@ -818,7 +818,6 @@ bool consoleUI::specialCommandPerson()      // Checks if command is valid
 {
     string findIt = "find";
 
-
     if (_command == findIt)
     {
         return true;
@@ -853,7 +852,7 @@ bool consoleUI::specialCommandPerson()      // Checks if command is valid
     }
 }
 
-bool consoleUI::sortSpecialCommandPerson(const string& choice)
+bool consoleUI::sortSpecialCommandPerson(const string& choice)      // Presents the user with options to sort the list in different ways.
 {
     if(choice == A)
     {
@@ -978,12 +977,12 @@ void consoleUI::printListPerson()       // Print if appropriate.
     {
         _print = false;
     }
-    else if(_command == STATUS)
+    else if(_command == STATUS)     // Presents the user with the number of scientists, their gender and how many are still alive.
     {
         _print = false;
         statusCommandPerson();
     }
-    else if(_command == MODIFY)
+    else if(_command == MODIFY)     // Enables the user to modify a scientist.
     {
         _print = false;
         modifyCommandPerson();
@@ -1006,7 +1005,7 @@ bool consoleUI::is_digits(const string &numbers)        // This is a function we
     return numbers.find_first_not_of("0123456789") == std::string::npos;
 }
 
-void consoleUI::checkModifyComputer( const string& toModify)
+void consoleUI::checkModifyComputer( const string& toModify)    // A function used to modify information about a computer.
 {
     for(size_t i = 0; i < _printOutComputer.size(); i++)
     {
@@ -1303,7 +1302,7 @@ void consoleUI::print()
     }
 }
 
-void consoleUI::modifyCommandComputer()
+void consoleUI::modifyCommandComputer()     // Function used to modify information about a computer.
 {
     string toFind;
 
