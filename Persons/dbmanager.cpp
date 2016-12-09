@@ -110,16 +110,16 @@ void DbManager::getConnections()
         temp.setConnectionID(connectionid);
 
         int personid = query.value("PID").toInt();
-        temp.setPersonID(personid);
+        temp.setFromID(personid);
 
         string Pname = query.value("PName").toString().toStdString();
-        temp.setPersonName(Pname);
+        temp.setFromName(Pname);
 
         int computerid = query.value("CID").toInt();
-        temp.setComputerID(computerid);
+        temp.setToID(computerid);
 
         string Cname = query.value("CName").toString().toStdString();
-        temp.setComputerName(Cname);
+        temp.setToName(Cname);
 
         _connections.push_back(temp);
     }
@@ -262,8 +262,8 @@ void DbManager::insertIntoConnection(const Connection &input)
     {
         QSqlQuery qry(_db);
         qry.prepare("INSERT INTO Connections (PersonID, ComputerID)  VALUES (:P_ID, :C_ID)");
-        qry.bindValue(":P_ID",input.getPersonID());
-        qry.bindValue(":C_ID",input.getComputerID());
+        qry.bindValue(":P_ID",input.getFromID());
+        qry.bindValue(":C_ID",input.getToID());
         //qry.exec();
         if( !qry.exec() )
         {

@@ -54,7 +54,7 @@ void consoleUI::run()
                                 }
                                 else if(_command == "add")
                                 {
-
+                                    addConnection();
                                 }
                                 else if (_command == "remove")
                                 {
@@ -696,8 +696,43 @@ void consoleUI::findconnection()
         }
 }
 
+void consoleUI::addConnection()
+{
+    string cFrom, cTo;
 
-void consoleUI::checkModifyPerson( const string& toModify)
+
+    while(true)
+    {
+        bool second = false;
+        cout << "Enter where to connect from ";
+        getline(cin, cFrom);
+        if(_turnCon.fromInDatabase(cFrom))
+        {
+            second = true;
+        }
+        else
+        {
+            cout << "No match" << endl;
+        }
+        if(second)
+        {
+            cout << "Enter where to connect to: ";
+            getline(cin, cTo);
+            if(_turnCon.toInDatabase(cTo))
+            {
+               _turnCon.addNewConnection(cFrom, cTo);
+               cout << "ÞAÐ VIRKAR!!!!!!!!!!!!" << endl;
+               break;
+            }
+            else
+            {
+                cout << "No match" << endl;
+            }
+        }
+    }
+}
+
+void consoleUI::checkModifyPerson(const string& toModify)
 {
     for(size_t i = 0; i < _printOutPerson.size(); i++)
     {
@@ -709,11 +744,12 @@ void consoleUI::checkModifyPerson( const string& toModify)
         }
     }
 }
+
 bool consoleUI::checkfoundPerson( const string& toFind)
 {
     for(size_t i = 0; i < _printOutConnection.size(); i++)
     {
-        if( toLower(_printOutConnection[i].getPersonName()) == toLower(toFind))
+        if( toLower(_printOutConnection[i].getFromName()) == toLower(toFind))
         {
             vector<Connection> temp;
             temp.push_back(_printOutConnection[i]);

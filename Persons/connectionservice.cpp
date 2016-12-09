@@ -22,12 +22,12 @@ bool connectionService::personORComputer(const string& command)
     generalService GS;
     if (GS.toLower(command) == "person to computer")
     {
-        swappedList = false;
+        _swappedList = false;
         return true;
     }
     else if (GS.toLower(command) == "computer to person")
     {
-        swappedList = true;
+        _swappedList = true;
         swapToFrom();
         return true;
     }
@@ -43,7 +43,7 @@ vector<Connection> connectionService::findConnection(const string &name)      //
     generalService GS;
     for (size_t i = 0; i < _listConnections.size(); i++)
     {
-        if (GS.toLower(_listConnections[i].getPersonName()).find(GS.toLower(name)) != string::npos)       // Puts both instances to lowercase
+        if (GS.toLower(_listConnections[i].getFromName()).find(GS.toLower(name)) != string::npos)       // Puts both instances to lowercase
         {
             _listSearchedConnections.push_back(_listConnections[i]);       // Puts people in the list who apply to the input
         }
@@ -57,7 +57,7 @@ bool connectionService::lookForConnection(const string& name)         // Checks 
     generalService GS;
     for (size_t i = 0; i < _listConnections.size(); i++)
     {
-        if (GS.toLower(_listConnections[i].getPersonName()).find(GS.toLower(name)) != string::npos)       // Enables us to search in lower case letters.
+        if (GS.toLower(_listConnections[i].getFromName()).find(GS.toLower(name)) != string::npos)       // Enables us to search in lower case letters.
         {
             return true;
         }
@@ -66,7 +66,7 @@ bool connectionService::lookForConnection(const string& name)         // Checks 
 }
 
 
-bool connectionService::getSwappedList() const {return swappedList;}
+bool connectionService::getSwappedList() const {return _swappedList;}
 
 
 void connectionService::swapToFrom()
@@ -75,9 +75,53 @@ void connectionService::swapToFrom()
     for (size_t i=0; i<_listConnections.size(); i++)
     {
 
-         temp = _listConnections[i].getPersonName();
-         string name1 = _listConnections[i].getComputerName();
-        _listConnections[i].setPersonName(name1);
-        _listConnections[i].setComputerName(temp);
+         temp = _listConnections[i].getFromName();
+         string name1 = _listConnections[i].getToName();
+        _listConnections[i].setFromName(name1);
+        _listConnections[i].setToName(temp);
     }
+}
+
+bool connectionService::fromInDatabase(const string& name)  // Checks if the name exists in the database
+{
+    generalService GS;
+    for (size_t i = 0; i < _listConnections.size(); i++)
+    {
+        if (GS.toLower(_listConnections[i].getFromName()) == GS.toLower(name))
+        {
+            //name = _listConnections[i].getFromName();
+            return true;
+        }
+    }
+    return false;
+}
+
+bool connectionService::toInDatabase(const string& name)  // Checks if the name exists in the database
+{
+    generalService GS;
+    for (size_t i = 0; i < _listConnections.size(); i++)
+    {
+        if (GS.toLower(_listConnections[i].getToName()) == GS.toLower(name))
+        {
+            //name = _listConnections[i].getFromName();
+            return true;
+        }
+    }
+    return false;
+}
+
+void connectionService::addNewConnection(const string& from, const string& to)
+{
+    DbManager newConnection;
+    generalService getID;
+    Connection newC;
+    int fromID = getID.findID(from, _swappedList);
+    int toID = getID.findID(to, _swappedList);
+    newC.setFromID(fromID);
+    newC.setToID(toID);
+    newC.setFromName(from);
+    newC.setToName(to);
+    _listConnections.push_back(newC);
+    newConnection.insertIntoConnection(newC);
+
 }
