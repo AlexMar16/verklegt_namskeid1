@@ -234,7 +234,6 @@ void consoleUI::commandBoxSubConnect()
     getline(cin, _command);
 }
 
-
 void consoleUI::quizCommand()
 {
     string a, b, c, d, answerName;
@@ -288,8 +287,6 @@ void consoleUI::emailCommand()
     system("email.vbs");
 }
 
-
-
 //person
 
 string consoleUI::toLower(const string& toLowerString)    // Makes everything lowercase
@@ -316,11 +313,11 @@ void consoleUI::addCommand()
     {
         cout << "Name: ";
         getline(cin, name);
-        name[0] = toupper(name[0]);//makes the first letter of the name uppercase
+        name[0] = toupper(name[0]);         // Makes the first letter of the name uppercase
 
         for(size_t i=0; i< name.size(); i++)
         {
-            if(!isalpha(name[i])&& !" ")// We use the " " so the function does not complain when space is used
+            if(!isalpha(name[i])&& !" ")        // We use the " " so the function does not complain when space is used
             {
                notAlpha=true;
             }
@@ -526,7 +523,7 @@ void consoleUI::removeCommandPerson()
     _printOutPerson = _turnP.findPerson(fullName);
     checkModifyPerson(fullName);
 
-    if (_printOutPerson.size() == 1)// magic here
+    if (_printOutPerson.size() == 1)
     {
         cout << _printOutPerson;
         cout << endl << "You found a person to remove!" << endl;
@@ -551,7 +548,7 @@ void consoleUI::removeCommandPerson()
     }
 }
 
-void consoleUI::findCommandPerson()         //allowes the user to search
+void consoleUI::findCommandPerson()         //allowes the user to search for a name or a year
 {
     string toFind;
     cout << "Search name/year: ";
@@ -560,7 +557,7 @@ void consoleUI::findCommandPerson()         //allowes the user to search
     cout << endl;
 
 
-    if(toFind == "dickbutt"  || toFind== "")        //our Easteregg
+    if(toFind == "dickbutt"  || toFind== "")        // Our Easteregg
     {
         cout << "                                      PrumpPrum                                         " << endl;                                                                                         cout << "                                  pPrumpPrumpPrumpP                                     " << endl << "                              rumpPrumpPrumpPrumpPrump                                  " << endl << "                      PrumpPrumpPrump           PrumpPru                                " << endl << "                   mpPrumpPrumpP                  rumpPru                               " << endl << "                 mpPrumpPrumpPru                   mpPrum                               " << endl << "                 pPrumpPrumpPrump                   Prump" << endl << "                 PrumpPrumpP rumpPr    umpPrumpPru  mpPru" << endl << "                 mpPrumpPrumpPrumpPr umpPrumpPrumpPr umpP" << endl << "                 rumpPrumpPrumpPru  mpPrumpPrumpPrumpPrum" << endl << "                pPrum  pPrumpPrump  PrumpPrumpPrumpPrumpP" << endl << "               rumpPrumpPrumpPrumpP rumpPrumpPr umpPrumpP" << endl << "              rumpPrumpPrumpPrump   PrumpPrumpPrumpPrumpP" << endl << "             rumpPrumpPrumpPrumpPrumpPrumpPrumpPr  umpPr" << endl << "            umpPr          umpPrumpPrumpPrump     PrumpP" << endl << "           rumpP                      rumpPru     mpPrum" << endl << "          pPrump                                 PrumpP" << endl << "         rumpPr                                 umpPru" << endl << "        mpPrum                                  pPrump" << endl << "        Prump                      Prum        pPrump" << endl << "        Prum                      pPrum pPr   umpPru" << endl << "        mpPr                      umpPrumpPr  umpPr                         umpPrumpP" << endl << "       rumpP                      rumpPrump  Prump                        PrumpPrumpPr" << endl << "       umpPr                     umpPrumpPr umpPr                       umpPru    mpPr" << endl << "       umpPr                     umpPrumpP  rumpP                     rumpPru    mpPru" << endl << "       mpPru                    mpPrumpPr  umpPru                   mpPrump     Prump" << endl << "       Prump                    PrumpPru   mpPrumpPrumpPrumpPru   mpPrump     Prump" << endl << "        Prum                   pPrumpPr    umpPrumpPrumpPrumpPrumpPrump      Prump" << endl << "        Prum                   pPrumpP     rumpP   rumpP   rumpPrumpP      rumpPr" << endl << "        umpP                  rumpPrum      pPr   umpPrumpPrumpPrum      pPrump" << endl << "        Prump               Prump Prump         PrumpPrumpPrumpPru     mpPrump" << endl << "         Prum             pPrum  pPrumpP         rumpPrumpPrumpPrump   PrumpPru" << endl << "         mpPru            mpPrumpPrumpPr                     umpPrump    PrumpPrum" << endl << "          pPrum            pPrumpPrumpP              rump       PrumpP  rump Prump" << endl << "          PrumpP              rump                   Prum        pPrump  PrumpPru" << endl << "           mpPrum                                pPr              umpPr    umpP" << endl << "            rumpPrum                            pPru              mpPru     mpPr" << endl << "               umpPrum                          pPru              mpPrumpPrumpPr" << endl << "     ump        PrumpPrump                       Prum           pPrumpPrumpPrum" << endl << "    pPrumpP    rumpPrumpPrumpPru                  mpP         rumpPru    m" << endl << "   pPrumpPrumpPru mpPrumpPrumpPrumpPrum           pPru    mpPrump" << endl << "    Prum pPrumpPrumpPru    mpPrumpPrumpPru mpPrumpPrumpPrumpPrum" << endl << "     pPru  mpPrumpPru         mpPrumpPrum pPrumpPrumpPrumpPru" << endl << "      mpPr   umpPru         mpPrumpPrump Prump PrumpPrumpP" << endl << "       rumpPrumpP           rumpPrumpPr  umpP" << endl << "        rumpPru              mpPrumpP   rump" << endl << "          Pru                mpPrum    pPru" << endl << "                              mpPrum  pPru" << endl << "                               mpPrumpPru" << endl << "                                 mpPrump" << endl << "                                   Pru  " << endl;
     }
@@ -593,7 +590,6 @@ void consoleUI::findCommandPerson()         //allowes the user to search
             cout << "Person not found " << endl << endl;
         }
     }
-
 }
 
 void consoleUI::modifyCommandPerson()       //allowes the user to modify instences that are already in the database
@@ -630,7 +626,6 @@ void consoleUI::modifyCommandPerson()       //allowes the user to modify instenc
             cout << "Please be more specific: ";
         }
     }
-
 }
 
 void consoleUI::findconnection()
@@ -652,7 +647,6 @@ void consoleUI::findconnection()
         }
 }
 
-
 void consoleUI::checkModifyPerson( const string& toModify)          // Checks if the person is on the list.
 {
     for(size_t i = 0; i < _printOutPerson.size(); i++)
@@ -665,6 +659,7 @@ void consoleUI::checkModifyPerson( const string& toModify)          // Checks if
         }
     }
 }
+
 bool consoleUI::checkfoundPerson( const string& toFind)         // Checks if the person is in the list.
 {
     for(size_t i = 0; i < _printOutConnection.size(); i++)
@@ -679,9 +674,6 @@ bool consoleUI::checkfoundPerson( const string& toFind)         // Checks if the
     }
     return false;
 }
-
-
-
 
 void consoleUI::personValidation(Person &input)       // This function goes with the modify function and checks if the name,year and gender is valid
 {
@@ -981,7 +973,6 @@ void consoleUI::checkModifyComputer( const string& toModify)
     }
 }
 
-
 void consoleUI::removeCommandComputer()     // This function first finds out if the computer is in the list and then removes it
 {
     string fullName;
@@ -1064,7 +1055,6 @@ void consoleUI::findCommandComputer()       // This function finds the computer
     }
 }
 
-
 void consoleUI::statusCommandComputer()         // This function displays the total count of items in the list.
 {
     _printStatus = _turnC.computerProperties();
@@ -1088,11 +1078,8 @@ void consoleUI::statusCommandComputer()         // This function displays the to
     cout<<"Super computers                  : " << _printStatus[typeSuperQuant]<<endl;
     cout<<"Quantum computers                : " << _printStatus[typeQuantumQuant]<<endl;
     cout<<"Computers that were built        : " << _printStatus[builtQuant]<<endl;
-
-
-
-
 }
+
 void consoleUI::sortCommandComputer()           // Sorts items in computer list
 {
     const string ASC = "asc";
@@ -1149,9 +1136,7 @@ void consoleUI::sortCommandComputer()           // Sorts items in computer list
             break;
         }
     }
-
 }
-
 
 bool consoleUI::specialCommandComputer(const string &_command)      // Checks if input was valid
 {
@@ -1236,7 +1221,6 @@ void consoleUI::printListComputer()
     {
         _print = false;
     }
-
 }
 
 void consoleUI::printList()
@@ -1307,7 +1291,6 @@ void consoleUI::modifyCommandComputer()
             cout << "Please be more specific: ";
         }
     }
-
 }
 
 void consoleUI::computerValidation(Computer& input)         // Finds the computer in the database, allowes the user to modify it.
@@ -1404,7 +1387,6 @@ void consoleUI::computerValidation(Computer& input)         // Finds the compute
     }
     input.setYearbuild(birthCheck);
 
-
     while(true)
     {
         cout << "Was the computer ever built? (y/n): ";
@@ -1426,7 +1408,6 @@ void consoleUI::computerValidation(Computer& input)         // Finds the compute
         }
     }
     input.setBuilt(built);
-
 
     cout << endl;
     cin.ignore();
