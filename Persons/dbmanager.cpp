@@ -4,24 +4,22 @@
 #include <Qdebug>
 //b#include "computer.h"
 
-DbManager::DbManager()
+DbManager::DbManager()//constructor that gest the connection to the database
 {
-    if( QSqlDatabase::contains( "dbconnection" ) )
+    if( QSqlDatabase::contains( "dbconnection" ) )          // iI there is already an connection we dont have to connect again
     {
-        //cout << "dbconnection found " << endl;
-
-        //Do stuff...
+        const QString path = "ComputerScience.sqlite";
+        QString dbName = path;
     }
     else
-    {
-        //_db = QSqlDatabase::addDatabase("QSQLITE");
+    {           // If the connection does not exist make the connection to the database
         const QString path = "ComputerScience.sqlite";
         _db = QSqlDatabase::addDatabase("QSQLITE", "dbconnection");
         QString dbName = path;
         _db.setDatabaseName(dbName);
         _db.open();
     }
-    getPersons();
+    getPersons();//gets the persons, computers and connections in their vector
     getComputers();
     getConnections();
 }
@@ -29,7 +27,7 @@ DbManager::~DbManager() {_db.close();}
 
 
 
-void DbManager::getPersons()
+void DbManager::getPersons()            // Gets the connection and then selects all from the data base and then puts it in a Person vector
 {
     const QString path = "ComputerScience.sqlite";
     QSqlDatabase _db = QSqlDatabase::database("dbconnection");
@@ -60,7 +58,7 @@ void DbManager::getPersons()
     }
 }
 
-void DbManager::getComputers()
+void DbManager::getComputers()      // Gets the connection and then selects all from the data base and then puts it in a computer vector
 {
     const QString path = "ComputerScience.sqlite";
     QSqlDatabase _db = QSqlDatabase::database("dbconnection");
@@ -93,7 +91,7 @@ void DbManager::getComputers()
 
 vector<Person> DbManager::getPVector() const {return _persons;}
 
-void DbManager::getConnections()
+void DbManager::getConnections()        // Gets the connection and then selects all from the data base and then puts it in a connection vector
 {
 
     const QString path = "ComputerScience.sqlite";
@@ -124,36 +122,22 @@ void DbManager::getConnections()
         _connections.push_back(temp);
     }
 }
-vector<Connection> DbManager::getCOVector() const {return _connections;}
-vector<Computer> DbManager::getCVector() const {return _computers;}
+vector<Connection> DbManager::getCOVector() const {return _connections;}//returns the vector of connections
+vector<Computer> DbManager::getCVector() const {return _computers;}//returns the vector of computers
 
-bool DbManager::isOpen() const {return _db.isOpen();}
+bool DbManager::isOpen() const {return _db.isOpen();}// Checks if the connection is open
 
-void DbManager::setVector(const vector<Person> &input) {_persons = input;}
+void DbManager::setVector(const vector<Person> &input) {_persons = input;} // normal set function to set the person vector
 
-void DbManager::setCVector(const vector<Computer> &input){_computers = input;}
+void DbManager::setCVector(const vector<Computer> &input){_computers = input;} // normal set function to set the computer vector
 
-void DbManager::changeData()
+
+void DbManager::insertIntoComputer(const Computer &input)//Takes values of an computer instance in the database
 {
-
-}
-void DbManager::insertIntoComputer(const Computer &input)
-{
-    QString qsName = QString::fromStdString(input.getName());
+    QString qsName = QString::fromStdString(input.getName());//puts the valuse in an qstring
     QString qsType= QString::fromStdString(input.getType());
     QString qsBuilt = QString::fromStdString(input.getBuilt());
     QString path = "ComputerScience.sqlite";
-    /* nota seinna mögulega
-    if( QSqlDatabase::contains( "dbconnection" ) )
-    {
-        //cout << "dbconnection found " << endl;
-
-    }
-    else
-    {
-        cout << "dbconnection not found" << endl;
-    }*/
-
     QSqlDatabase _db = QSqlDatabase::database("dbconnection");
     QString dbName = path;
     _db.setDatabaseName(dbName);
@@ -161,19 +145,16 @@ void DbManager::insertIntoComputer(const Computer &input)
     if(_db.open())
     {
         QSqlQuery qry(_db);
-        qry.prepare("INSERT INTO Computers(Name, yearBuilt, Type, Built)"
+        qry.prepare("INSERT INTO Computers(Name, yearBuilt, Type, Built)"       //prepares the sql for execution
                     "VALUES(:C_Name,:C_yearBuilt,:C_Type,:C_Built)");
         qry.bindValue(":C_Name",qsName);
         qry.bindValue(":C_yearBuilt",input.getYearBuilt());
         qry.bindValue(":C_Type",qsType);
         qry.bindValue(":C_Built",qsBuilt);
-        //qry.exec();
         if( !qry.exec() )
         {
-            //qDebug() << qry.lastError().text();
             cout << "error inserting into database";
         }
-
     }
     else
     {
@@ -181,7 +162,7 @@ void DbManager::insertIntoComputer(const Computer &input)
     }
 }
 
-void DbManager::removeFromComputers(const Computer &input)
+void DbManager::removeFromComputers(const Computer &input) // removing computer from the computers table and the computer vector
 {
     QString qsName = QString::fromStdString(input.getName());
     QString path = "ComputerScience.sqlite";
@@ -196,7 +177,6 @@ void DbManager::removeFromComputers(const Computer &input)
         qry.prepare("DELETE FROM Computers WHERE Name=:C_Name");
         qry.bindValue(":C_Name",qsName);
         if( !qry.exec() )
-            //qDebug() << qry.lastError().text();
             cout << "error removing from database";
         else
         {
@@ -210,7 +190,7 @@ void DbManager::removeFromComputers(const Computer &input)
     }
 }
 
-void DbManager::removeFromPersons(const Person &input)
+void DbManager::removeFromPersons(const Person &input)    // removing person from the computers table and the person vector
 {
     QString qsName = QString::fromStdString(input.getName());
     QString path = "ComputerScience.sqlite";
@@ -226,7 +206,6 @@ void DbManager::removeFromPersons(const Person &input)
         qry.prepare("DELETE FROM Persons WHERE Name=:C_Name");
         qry.bindValue(":C_Name",qsName);
         if( !qry.exec() )
-            //qDebug() << qry.lastError().text();
             cout << "error removing from database";
         else
         {
@@ -240,7 +219,7 @@ void DbManager::removeFromPersons(const Person &input)
     }
 }
 
-void DbManager::removeFromConnections(Connection input)
+void DbManager::removeFromConnections(Connection input)// removing connection from the computers table and the connection vector
 {
     QString path = "ComputerScience.sqlite";
     QSqlDatabase _db = QSqlDatabase::database("dbconnection");
@@ -255,7 +234,6 @@ void DbManager::removeFromConnections(Connection input)
         qry.bindValue(":C_ID",input.getToID());
         qry.bindValue(":P_ID",input.getFromID());
         if( !qry.exec() )
-            //qDebug() << qry.lastError().text();
             cout << "error removing from database";
         else
         {
@@ -271,20 +249,9 @@ void DbManager::removeFromConnections(Connection input)
 }
 
 
-void DbManager::insertIntoConnection(const Connection &input)
+void DbManager::insertIntoConnection(const Connection &input)   // Inserting Conection into the connecion table and the connection vector
 {
     QString path = "ComputerScience.sqlite";
-    /* nota seinna mögulega
-    if( QSqlDatabase::contains( "dbconnection" ) )
-    {
-        //cout << "dbconnection found " << endl;
-
-    }
-    else
-    {
-        cout << "dbconnection not found" << endl;
-    }*/
-
     QSqlDatabase _db = QSqlDatabase::database("dbconnection");
     QString dbName = path;
     _db.setDatabaseName(dbName);
@@ -295,10 +262,8 @@ void DbManager::insertIntoConnection(const Connection &input)
         qry.prepare("INSERT INTO Connections (PersonID, ComputerID)  VALUES (:P_ID, :C_ID)");
         qry.bindValue(":P_ID",input.getFromID());
         qry.bindValue(":C_ID",input.getToID());
-        //qry.exec();
         if( !qry.exec() )
         {
-            //qDebug() << qry.lastError().text();
             cout << "error inserting into database";
         }
 
@@ -309,22 +274,11 @@ void DbManager::insertIntoConnection(const Connection &input)
     }
 }
 
-void DbManager::insertIntoPerson(const Person &input)
+void DbManager::insertIntoPerson(const Person &input)   // Inserting Person into the Person table and the connection vector
 {
     QString qsName = QString::fromStdString(input.getName());
     QString qsGender= QString::fromStdString(input.getGender());
     QString path = "ComputerScience.sqlite";
-    /* nota seinna mögulega
-    if( QSqlDatabase::contains( "dbconnection" ) )
-    {
-        //cout << "dbconnection found " << endl;
-
-    }
-    else
-    {
-        cout << "dbconnection not found" << endl;
-    }*/
-
     QSqlDatabase _db = QSqlDatabase::database("dbconnection");
     QString dbName = path;
     _db.setDatabaseName(dbName);
@@ -341,10 +295,8 @@ void DbManager::insertIntoPerson(const Person &input)
         //qry.exec();
         if( !qry.exec() )
         {
-            //qDebug() << qry.lastError().text();
             cout << "error inserting into database";
         }
-
     }
     else
     {
@@ -352,23 +304,13 @@ void DbManager::insertIntoPerson(const Person &input)
     }
 }
 
-void DbManager::changePerson(const Person& input, const int personIndex)
+void DbManager::changePerson(const Person& input, const int personIndex)    // Modifying/updating a person
 {
     Person oldPerson = _persons[personIndex];
     QString qsOldName = QString::fromStdString(oldPerson.getName());
     QString qsName = QString::fromStdString(input.getName());
     QString qsGender = QString::fromStdString(input.getGender());
     QString path = "ComputerScience.sqlite";
-    /* nota seinna mögulega
-    if( QSqlDatabase::contains( "dbconnection" ) )
-    {
-        //cout << "dbconnection found " << endl;
-
-    }
-    else
-    {
-        cout << "dbconnection not found" << endl;
-    }*/
 
     QSqlDatabase _db = QSqlDatabase::database("dbconnection");
     QString dbName = path;
@@ -386,11 +328,9 @@ void DbManager::changePerson(const Person& input, const int personIndex)
             qry.bindValue(":P_Gender",qsGender);
             qry.bindValue(":P_BirthYear",input.getBirthYear());
             qry.bindValue(":P_DeathYear",input.getDeathYear());
-            //qry.bindValue(":P_OldName",qsOldName);
             qry.exec();
             if( !qry.exec() )
             {
-                //cout << qry.lastError().text();
                 cout << "error updating into database";
             }
         }
@@ -401,7 +341,7 @@ void DbManager::changePerson(const Person& input, const int personIndex)
     }
 }
 
-void DbManager::changeComputer(const Computer& input, const int computerIndex)
+void DbManager::changeComputer(const Computer& input, const int computerIndex)  // Modifying/updating a Computer
 {
     Computer oldComputer = _computers[computerIndex];
     QString qsOldName = QString::fromStdString(oldComputer.getName());
@@ -409,17 +349,6 @@ void DbManager::changeComputer(const Computer& input, const int computerIndex)
     QString qsType = QString::fromStdString(input.getType());
     QString qsBuilt = QString::fromStdString(input.getBuilt());
     QString path = "ComputerScience.sqlite";
-    /* nota seinna mögulega
-    if( QSqlDatabase::contains( "dbconnection" ) )
-    {
-        //cout << "dbconnection found " << endl;
-
-    }
-    else
-    {
-        cout << "dbconnection not found" << endl;
-    }*/
-
     QSqlDatabase _db = QSqlDatabase::database("dbconnection");
     QString dbName = path;
     _db.setDatabaseName(dbName);
@@ -440,7 +369,6 @@ void DbManager::changeComputer(const Computer& input, const int computerIndex)
             qry.exec();
             if( !qry.exec() )
             {
-                //cout << qry.lastError().text();
                 cout << "error updating into database";
             }
         }
