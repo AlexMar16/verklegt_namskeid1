@@ -46,9 +46,9 @@ void consoleUI::run()
                     do{commandBoxConnect();
                         if(_turnCon.personORComputer(_command))
                         {
-                            _turnCon.sortConnectAlphabetically();  // Sort alphabetically function
                             do
                             {
+                                _turnCon.sortConnectAlphabetically();  // Makes sure the list is sorted properly
                                 commandBoxConnectptc();
                                 if(_command == "showall")
                                 {
@@ -657,11 +657,10 @@ void consoleUI::addConnection()
 {
     string cFrom, cTo;
 
-
     while(true)
     {
         bool second = false;
-        cout << "Enter where to connect from ";
+        cout << "Enter " << _turnCon.getWhichIsFrom() << " to connect from ";
         getline(cin, cFrom);
         if(_turnCon.fromInDatabase(cFrom))
         {
@@ -673,7 +672,7 @@ void consoleUI::addConnection()
         }
         if(second)
         {
-            cout << "Enter where to connect to: ";
+            cout << "Enter " << _turnCon.getWhichIsTo() << " to connect to: ";
             getline(cin, cTo);
             if(_turnCon.toInDatabase(cTo))
             {

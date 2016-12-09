@@ -140,3 +140,27 @@ void connectionService::addNewConnection(const string& from, const string& to)
     newConnection.insertIntoConnection(newC);
 
 }
+
+string connectionService::getWhichIsFrom()
+{
+    if (_swappedList == false)
+    {
+        return "person";
+    }
+    else
+    {
+        return "computer";
+    }
+}
+
+string connectionService::getWhichIsTo()
+{
+    if (_swappedList == false)
+    {
+        return "computer";
+    }
+    else
+    {
+        return "person";
+    }
+}

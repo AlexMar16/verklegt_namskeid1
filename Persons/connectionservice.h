@@ -21,6 +21,9 @@ public:
     bool fromInDatabase(const string& name);
     bool toInDatabase(const string& name);
     void addNewConnection(const string& from, const string& to);
+    string getWhichIsFrom();
+    string getWhichIsTo();
+
 
 
 
