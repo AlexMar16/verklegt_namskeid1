@@ -134,13 +134,15 @@ void connectionService::addNewConnection(const string& from, const string& to)
     DbManager newConnection;
     generalService getID;
     Connection newC;
-    int fromID = getID.findID(from, _swappedList);
-    int toID = getID.findID(to, _swappedList);
+    int fromID = getID.findID(from);
+    int toID = getID.findID(to);
+    cout << "toID" << toID << ", fromID =" << fromID;
+
     newC.setFromID(fromID);
     newC.setToID(toID);
     newC.setFromName(from);
     newC.setToName(to);
     _listConnections.push_back(newC);
-    newConnection.insertIntoConnection(newC);
+    newConnection.insertIntoConnection(newC, _swappedList);
 
 }
