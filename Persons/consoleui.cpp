@@ -635,6 +635,39 @@ void consoleUI::modifyCommandPerson()
 
 }
 
+vector<Connection> consoleUI::findconnection()
+{
+    string tofind;
+    cout << "Search for a person to see his connections: ";
+
+    while(true)
+    {
+        getline(cin, tofind);
+        //toModify = toLower(toModify);
+
+        _printOutPerson = _turnP.findPerson(tofind);
+        checkModifyPerson(tofind);
+        if (_turnP.lookForPerson(tofind))
+        {
+            cout << _printOutPerson;
+        }
+        if (_printOutPerson.size() == 1) //here the magic happens
+        {
+            cout << "Hooray you found a person to modify! " << endl;
+            Person id = _turnP.findPersonNumber(_printOutPerson[0].getName()); //bý bara til fkn copy af kallinum sem eg vill breyta, vil breyta actual gæjanum!
+            personValidation(id);
+            _turnP.changePerson(id);
+            break;
+        }
+        else
+        {
+            cout << "Please be more specific: ";
+        }
+    }
+
+}
+
+
 bool consoleUI::checkModifyPerson( const string& toModify)
 {
     for(size_t i = 0; i < _printOutPerson.size(); i++)
@@ -644,6 +677,20 @@ bool consoleUI::checkModifyPerson( const string& toModify)
             vector<Person> temp;
             temp.push_back(_printOutPerson[i]);
             _printOutPerson = temp;
+            return true;
+        }
+    }
+    return false;
+}
+bool consoleUI::checkfoundPerson( const string& toFind)
+{
+    for(size_t i = 0; i < _printOutConnection.size(); i++)
+    {
+        if( toLower(_printOutConnection[i].getPersonName()) == toLower(toFind))
+        {
+            vector<Connection> temp;
+            temp.push_back(_printOutConnection[i]);
+            _printOutConnection = temp;
             return true;
         }
     }
