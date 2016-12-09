@@ -8,7 +8,7 @@ Computer::Computer()
 {
     _yearBuilt = 0;
 }
-ifstream& operator >> (ifstream& in, Computer& rhs)
+ifstream& operator >> (ifstream& in, Computer& rhs)         // Overload for taking computer in
 {
     getline(in, rhs._name);
     getline(in, rhs._type);
@@ -19,7 +19,7 @@ ifstream& operator >> (ifstream& in, Computer& rhs)
     return in;
 }
 
-ostream& operator << (ostream& out, const Computer& rhs)
+ostream& operator << (ostream& out, const Computer& rhs)        // Outputting a single computer in a list
 {
     const char DASH = '-';
     out << left << setw(FIVE * COLUMN_WIDTH + FIVE) << setfill(DASH) <<  DASH << endl;
@@ -45,7 +45,7 @@ ostream& operator << (ostream& out, const Computer& rhs)
     return out;
 }
 
-ostream& operator << (ostream& out, vector<Computer>& rhs)
+ostream& operator << (ostream& out, vector<Computer>& rhs)          // Output a whole vector of computer, column_width for good looks
 {
     out << left << setw(COLUMN_WIDTH) << setfill(SPACE) << "Name";
     out << left << setw(COLUMN_WIDTH) << setfill(SPACE) << "Type";
@@ -69,8 +69,6 @@ int Computer::getYearBuilt() const {return _yearBuilt;}
 int Computer::getID() const {return _ID;}
 
 string Computer::getBuilt() const {return _built;}
-
-
 
 //Set functions
 void Computer::setName(const string input) {_name = input;}

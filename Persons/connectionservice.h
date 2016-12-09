@@ -13,6 +13,7 @@ public:
     bool personORComputer(const string& command);
     vector<Connection> getConnectionList() const;
     vector<Connection> findConnection(const string &name);
+    vector<Connection> sortConnectAlphabetically();
     bool lookForConnection(const string& name);
     void swapToFrom();
     bool getSwappedList() const;

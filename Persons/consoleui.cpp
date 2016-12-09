@@ -20,6 +20,12 @@ const char BARRIER = '|';
 
 consoleUI::consoleUI() {_print = true;}
 
+// TO FAST TRAVEL:
+
+    // to computer functions   = ctrl+f -> //computer
+    // to person functions     = ctrl=f -> //person
+    // to connection functions = ctrl+f -> //connect
+
 void consoleUI::run()
 {
     do
@@ -40,6 +46,7 @@ void consoleUI::run()
                     do{commandBoxConnect();
                         if(_turnCon.personORComputer(_command))
                         {
+                            _turnCon.sortConnectAlphabetically();  // Sort alphabetically function
                             do
                             {
                                 commandBoxConnectptc();
@@ -86,13 +93,13 @@ void consoleUI::firstCommandBox()
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| Please enter the following commands to examine this database!"
          << right << BARRIER << endl;
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << BARRIER << right << BARRIER<< endl;
-    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| person    - This command will gain you access to the person table."
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| person   - This command will gain you access to the person table."
          << right << BARRIER << endl;
-    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| computer  - This command will gain you access to the computer table"
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| computer - This command will gain you access to the computer table"
          << right << BARRIER << endl;
-    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| connect   - This command will gain you access to connections of both."
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| connect  - This command will gain you access to connections of both."
          << right << BARRIER << endl;
-    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| quit      - This command will quit the program. "
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| quit     - This command will quit the program. "
          << right << BARRIER << endl;
     cout << setw(ASTERISK_WIDTH) << setfill(ASTERISK) <<  ASTERISK << endl;
     cout << "Pick a database: ";
@@ -110,7 +117,27 @@ void consoleUI::firstCommandBox()
     }
 }
 
-void consoleUI::commandBox()
+bool consoleUI::beginningCommand() //checks if the command was valid
+{
+    if(_database == "person" || _database == "p")
+    {
+        return true;
+    }
+    else if(_database == "computer" || _database == "c")
+    {
+        return true;
+    }
+    else if(_database == "connect")
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+void consoleUI::commandBox()// the right one either sets it's value to "person" or "computer"
 {
     cout << setw(ASTERISK_WIDTH) << setfill(ASTERISK) <<  ASTERISK << endl;     // Command box begins.
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| Please enter one of the following commands:"
@@ -134,7 +161,7 @@ void consoleUI::commandBox()
          << right << BARRIER << endl;
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| back   - This command will allow you to choose another database. "
          << right << BARRIER << endl;
-    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| email   - This command will allow you to send email via smtp server. "
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| email  - This command will allow you to send email via smtp server. "
          << right << BARRIER << endl;
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| quit   - This command will quit the program. "
          << right << BARRIER << endl;
@@ -170,13 +197,13 @@ void consoleUI::commandBoxConnectptc()
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| Please enter one of the following commands:"
          << right << BARRIER << endl;
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << BARRIER << right << BARRIER<< endl;
-    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| Showall            - This command will show all connection."
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| showall - This command will show all connection."
          << right << BARRIER << endl;
-    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| Find               - This command will show a specific connections."
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| find    - This command will show a specific connections."
          << right << BARRIER << endl;
-    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| back               - This command will allow you to choose another database."
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| back    - This command will allow you to choose another database."
          << right << BARRIER << endl;
-    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| quit               - This command will quit the program."
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| quit    - This command will quit the program."
          << right << BARRIER << endl;
     cout << setw(ASTERISK_WIDTH) << setfill(ASTERISK) << ASTERISK << endl;      // Command box ends.
     cout << "command: ";
@@ -190,64 +217,21 @@ void consoleUI::commandBoxSubConnect()
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| Please enter one of the following commands:"
          << right << BARRIER << endl;
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << BARRIER << right << BARRIER<< endl;
-    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| specific   - This command will print a specific connection"
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| specific - This command will print a specific connection"
          << right << BARRIER << endl;
-    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| all        - This command will print all connections"
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| all      - This command will print all connections"
          << right << BARRIER << endl;
-    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| add        - This command allows you to add a connection"
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| add      - This command allows you to add a connection"
          << right << BARRIER << endl;
-    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| remove     - This command allows you to remove a connection"
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| remove   - This command allows you to remove a connection"
          << right << BARRIER << endl;
-    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| back       - This command will allow you to choose another database. "
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| back     - This command will allow you to choose another database. "
          << right << BARRIER << endl;
-    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| quit       - This command will quit the program. "
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| quit     - This command will quit the program. "
          << right << BARRIER << endl;
     cout << setw(ASTERISK_WIDTH) << setfill(ASTERISK) << ASTERISK << endl;      // Command box ends.
     cout << "command: ";
     getline(cin, _command);
-}
-
-bool consoleUI::specialCommandConnect()
-{
-    string everyone;
-
-
-    if(_command == ALL)
-    {
-        return true;
-    }
-    else if(_command == ADD)
-    {
-        return true;
-    }
-    else if(_command == REMOVE)
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
-}
-
-bool consoleUI::beginningCommand()
-{
-    if(_database == "person" || _database == "p")
-    {
-        return true;
-    }
-    else if(_database == "computer" || _database == "c")
-    {
-        return true;
-    }
-    else if(_database == "connect")
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
 }
 
 void consoleUI::quizCommand()
@@ -266,8 +250,10 @@ void consoleUI::quizCommand()
     else
     {
         Computer questionC = _turnC.generateAnswer();
-        cout << "This " << _turnC.typeCheck(questionC) << " computer was " << _turnC.builtCheck(questionC)
-             << ", enter (a/b/c/d)" << endl;
+        string cQuestion = "This " + _turnC.typeCheck(questionC) + " computer was " + _turnC.builtCheck(questionC)
+             + ", enter (a/b/c/d)";
+        cout << cQuestion << endl;
+        _turnG.speakQuestion(cQuestion);
         _turnC.generateOptions(questionC, a, b, c, d);
         answerName = questionC.getName();
     }
@@ -285,12 +271,29 @@ void consoleUI::quizCommand()
     if (userAnswer == answerName)
     {
         cout << endl << "Correct!!!" << endl << endl;
+        _turnG.speakQuestion("Correct");
     }
     else
     {
         cout << endl << "Wrong!" << endl << endl;
+        _turnG.speakQuestion("Wrong");
     }
     cin.ignore();
+}
+
+
+void consoleUI::emailCommand()
+{
+    system("email.vbs");
+}
+
+//person
+
+string consoleUI::toLower(const string& toLowerString)    // Makes everything lowercase
+{
+    string data = toLowerString;
+    transform(data.begin(), data.end(), data.begin(), ::tolower);
+    return data;
 }
 
 void consoleUI::addCommand()
@@ -310,11 +313,11 @@ void consoleUI::addCommand()
     {
         cout << "Name: ";
         getline(cin, name);
-        name[0] = toupper(name[0]);
+        name[0] = toupper(name[0]);         // Makes the first letter of the name uppercase
 
         for(size_t i=0; i< name.size(); i++)
         {
-            if(!isalpha(name[i])&& !" ")// We use the " " so the function does not complain when space is used
+            if(!isalpha(name[i])&& !" ")        // We use the " " so the function does not complain when space is used
             {
                notAlpha=true;
             }
@@ -469,7 +472,7 @@ void consoleUI::addCompCommand()
 
     while(true)
     {
-        cout << "Year (YYYY): ";
+        cout << "Year designed (YYYY): ";
         cin >> yearBuilt;
         birthCheck = atoi(yearBuilt.c_str());       // Removes alphanumeric values from the input.
         if (birthCheck > MINIMUM_Built_YEAR && birthCheck < MAXIMUM_Built_YEAR)
@@ -505,10 +508,8 @@ void consoleUI::addCompCommand()
     input.setBuilt(built);
 
     cout << endl;
-
-    _turnC.addComputer(input);
-    cin.ignore();
 }
+
 void consoleUI::removeCommandPerson()
 {
     string fullName;
@@ -522,7 +523,7 @@ void consoleUI::removeCommandPerson()
     _printOutPerson = _turnP.findPerson(fullName);
     checkModifyPerson(fullName);
 
-    if (_printOutPerson.size() == 1)// magic here
+    if (_printOutPerson.size() == 1)
     {
         cout << _printOutPerson;
         cout << endl << "You found a person to remove!" << endl;
@@ -547,55 +548,7 @@ void consoleUI::removeCommandPerson()
     }
 }
 
-bool consoleUI::is_digits(const string &numbers)
-{
-    return numbers.find_first_not_of("0123456789") == std::string::npos;
-}
-
-bool consoleUI::connectSubCommand()
-{
-    int stoppari;
-    if(_command == "specific")
-    {
-        cout << "Specific";
-        cin >> stoppari;
-        return true;
-    }
-    else if(_command == "all")
-    {
-        cout << "all";
-        cin >> stoppari;
-        return true;
-    }
-    else if(_command == "add")
-    {
-        cout << "add";
-        cin >> stoppari;
-        return true;
-    }
-    else if(_command == "remove")
-    {
-        cout << "remove";
-        cin >> stoppari;
-        return true;
-    }
-    else if(_command == "back")
-    {
-        return true;
-    }
-    else if(_command == "quit")
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
-}
-
-//person
-
-void consoleUI::findCommandPerson()
+void consoleUI::findCommandPerson()         //allowes the user to search for a name or a year
 {
     string toFind;
     cout << "Search name/year: ";
@@ -604,7 +557,7 @@ void consoleUI::findCommandPerson()
     cout << endl;
 
 
-    if(toFind == "dickbutt"  || toFind== "")
+    if(toFind == "dickbutt"  || toFind== "")        // Our Easteregg
     {
         cout << "                                      PrumpPrum                                         " << endl;                                                                                         cout << "                                  pPrumpPrumpPrumpP                                     " << endl << "                              rumpPrumpPrumpPrumpPrump                                  " << endl << "                      PrumpPrumpPrump           PrumpPru                                " << endl << "                   mpPrumpPrumpP                  rumpPru                               " << endl << "                 mpPrumpPrumpPru                   mpPrum                               " << endl << "                 pPrumpPrumpPrump                   Prump" << endl << "                 PrumpPrumpP rumpPr    umpPrumpPru  mpPru" << endl << "                 mpPrumpPrumpPrumpPr umpPrumpPrumpPr umpP" << endl << "                 rumpPrumpPrumpPru  mpPrumpPrumpPrumpPrum" << endl << "                pPrum  pPrumpPrump  PrumpPrumpPrumpPrumpP" << endl << "               rumpPrumpPrumpPrumpP rumpPrumpPr umpPrumpP" << endl << "              rumpPrumpPrumpPrump   PrumpPrumpPrumpPrumpP" << endl << "             rumpPrumpPrumpPrumpPrumpPrumpPrumpPr  umpPr" << endl << "            umpPr          umpPrumpPrumpPrump     PrumpP" << endl << "           rumpP                      rumpPru     mpPrum" << endl << "          pPrump                                 PrumpP" << endl << "         rumpPr                                 umpPru" << endl << "        mpPrum                                  pPrump" << endl << "        Prump                      Prum        pPrump" << endl << "        Prum                      pPrum pPr   umpPru" << endl << "        mpPr                      umpPrumpPr  umpPr                         umpPrumpP" << endl << "       rumpP                      rumpPrump  Prump                        PrumpPrumpPr" << endl << "       umpPr                     umpPrumpPr umpPr                       umpPru    mpPr" << endl << "       umpPr                     umpPrumpP  rumpP                     rumpPru    mpPru" << endl << "       mpPru                    mpPrumpPr  umpPru                   mpPrump     Prump" << endl << "       Prump                    PrumpPru   mpPrumpPrumpPrumpPru   mpPrump     Prump" << endl << "        Prum                   pPrumpPr    umpPrumpPrumpPrumpPrumpPrump      Prump" << endl << "        Prum                   pPrumpP     rumpP   rumpP   rumpPrumpP      rumpPr" << endl << "        umpP                  rumpPrum      pPr   umpPrumpPrumpPrum      pPrump" << endl << "        Prump               Prump Prump         PrumpPrumpPrumpPru     mpPrump" << endl << "         Prum             pPrum  pPrumpP         rumpPrumpPrumpPrump   PrumpPru" << endl << "         mpPru            mpPrumpPrumpPr                     umpPrump    PrumpPrum" << endl << "          pPrum            pPrumpPrumpP              rump       PrumpP  rump Prump" << endl << "          PrumpP              rump                   Prum        pPrump  PrumpPru" << endl << "           mpPrum                                pPr              umpPr    umpP" << endl << "            rumpPrum                            pPru              mpPru     mpPr" << endl << "               umpPrum                          pPru              mpPrumpPrumpPr" << endl << "     ump        PrumpPrump                       Prum           pPrumpPrumpPrum" << endl << "    pPrumpP    rumpPrumpPrumpPru                  mpP         rumpPru    m" << endl << "   pPrumpPrumpPru mpPrumpPrumpPrumpPrum           pPru    mpPrump" << endl << "    Prum pPrumpPrumpPru    mpPrumpPrumpPru mpPrumpPrumpPrumpPrum" << endl << "     pPru  mpPrumpPru         mpPrumpPrum pPrumpPrumpPrumpPru" << endl << "      mpPr   umpPru         mpPrumpPrump Prump PrumpPrumpP" << endl << "       rumpPrumpP           rumpPrumpPr  umpP" << endl << "        rumpPru              mpPrumpP   rump" << endl << "          Pru                mpPrum    pPru" << endl << "                              mpPrum  pPru" << endl << "                               mpPrumpPru" << endl << "                                 mpPrump" << endl << "                                   Pru  " << endl;
     }
@@ -637,10 +590,9 @@ void consoleUI::findCommandPerson()
             cout << "Person not found " << endl << endl;
         }
     }
-
 }
 
-void consoleUI::modifyCommandPerson()
+void consoleUI::modifyCommandPerson()       //allowes the user to modify instences that are already in the database
 {
     string toModify;
     cout << "Search for a person to modify: ";
@@ -659,7 +611,7 @@ void consoleUI::modifyCommandPerson()
         if (_printOutPerson.size() == 1) //here the magic happens
         {
             cout << "Hooray you found a person to modify! " << endl;
-            Person id = _turnP.findPersonNumber(_printOutPerson[0].getName()); //bý bara til fkn copy af kallinum sem eg vill breyta, vil breyta actual gæjanum!
+            Person id = _turnP.findPersonNumber(_printOutPerson[0].getName());
             personValidation(id);
             _turnP.changePerson(id);
             break;
@@ -674,7 +626,6 @@ void consoleUI::modifyCommandPerson()
             cout << "Please be more specific: ";
         }
     }
-
 }
 
 void consoleUI::findconnection()
@@ -732,7 +683,7 @@ void consoleUI::addConnection()
     }
 }
 
-void consoleUI::checkModifyPerson(const string& toModify)
+void consoleUI::checkModifyPerson( const string& toModify)          // Checks if the person is on the list.
 {
     for(size_t i = 0; i < _printOutPerson.size(); i++)
     {
@@ -744,8 +695,7 @@ void consoleUI::checkModifyPerson(const string& toModify)
         }
     }
 }
-
-bool consoleUI::checkfoundPerson( const string& toFind)
+bool consoleUI::checkfoundPerson( const string& toFind)         // Checks if the person is in the list.
 {
     for(size_t i = 0; i < _printOutConnection.size(); i++)
     {
@@ -760,21 +710,7 @@ bool consoleUI::checkfoundPerson( const string& toFind)
     return false;
 }
 
-
-void consoleUI::checkModifyComputer( const string& toModify)
-{
-    for(size_t i = 0; i < _printOutComputer.size(); i++)
-    {                   
-        if( _printOutComputer[i].getName() == toModify)
-        {
-            vector<Computer> temp;
-            temp.push_back(_printOutComputer[i]);
-            _printOutComputer = temp;
-        }
-    }
-}
-
-void consoleUI::personValidation(Person &input)
+void consoleUI::personValidation(Person &input)       // This function goes with the modify function and checks if the name,year and gender is valid
 {
     string name, gender, deathYear, birthYear;
     int birthCheck = 0, deathCheck = 0;
@@ -854,7 +790,7 @@ void consoleUI::personValidation(Person &input)
     cin.ignore();
 }
 
-void consoleUI::statusCommandPerson()
+void consoleUI::statusCommandPerson()           // This function displays total count of items in the list.
 {
     _printStatus = _turnP.properties();
     const int NAMES = 0;
@@ -867,7 +803,7 @@ void consoleUI::statusCommandPerson()
     cout << "Total males on the list   : " << _printStatus[MALES] << endl << endl;
 }
 
-bool consoleUI::specialCommandPerson()
+bool consoleUI::specialCommandPerson()      // Checks if command is valid
 {
     string findIt = "find";
 
@@ -934,7 +870,7 @@ bool consoleUI::sortSpecialCommandPerson(const string& choice)
     }
 }
 
-void consoleUI::sortCommandPerson()
+void consoleUI::sortCommandPerson()         // Sorts the list.
 {
     const string ASC = "asc";
     const string DESC = "desc";
@@ -990,14 +926,6 @@ void consoleUI::sortCommandPerson()
         }
     }
 }
-
-string consoleUI::toLower(const string& toLowerString)    // Makes everything lowercase
-{
-    string data = toLowerString;
-    transform(data.begin(), data.end(), data.begin(), ::tolower);
-    return data;
-}
-
 
 void consoleUI::printListPerson()       // Print if appropriate.
 {
@@ -1062,7 +990,25 @@ void consoleUI::printListPerson()       // Print if appropriate.
 
 //computer
 
-void consoleUI::removeCommandComputer()
+bool consoleUI::is_digits(const string &numbers)        // This is a function we use to check if input was digits
+{
+    return numbers.find_first_not_of("0123456789") == std::string::npos;
+}
+
+void consoleUI::checkModifyComputer( const string& toModify)
+{
+    for(size_t i = 0; i < _printOutComputer.size(); i++)
+    {
+        if( _printOutComputer[i].getName() == toModify)
+        {
+            vector<Computer> temp;
+            temp.push_back(_printOutComputer[i]);
+            _printOutComputer = temp;
+        }
+    }
+}
+
+void consoleUI::removeCommandComputer()     // This function first finds out if the computer is in the list and then removes it
 {
     string fullName;
     string sure;
@@ -1074,7 +1020,6 @@ void consoleUI::removeCommandComputer()
 
     _printOutComputer = _turnC.findComputer(fullName);
     checkModifyComputer(fullName);
-    //input = _turnC.findComputerExactly(fullName);
 
     if (_printOutComputer.size() == 1)
     {
@@ -1101,7 +1046,7 @@ void consoleUI::removeCommandComputer()
     }
 }
 
-void consoleUI::findCommandComputer()
+void consoleUI::findCommandComputer()       // This function finds the computer
 {
     string toFind;
 
@@ -1145,8 +1090,7 @@ void consoleUI::findCommandComputer()
     }
 }
 
-
-void consoleUI::statusCommandComputer()
+void consoleUI::statusCommandComputer()         // This function displays the total count of items in the list.
 {
     _printStatus = _turnC.computerProperties();
     int nameQuant= 0;
@@ -1169,12 +1113,9 @@ void consoleUI::statusCommandComputer()
     cout<<"Super computers                  : " << _printStatus[typeSuperQuant]<<endl;
     cout<<"Quantum computers                : " << _printStatus[typeQuantumQuant]<<endl;
     cout<<"Computers that were built        : " << _printStatus[builtQuant]<<endl;
-
-
-
-
 }
-void consoleUI::sortCommandComputer()
+
+void consoleUI::sortCommandComputer()           // Sorts items in computer list
 {
     const string ASC = "asc";
     const string DESC = "desc";
@@ -1230,11 +1171,9 @@ void consoleUI::sortCommandComputer()
             break;
         }
     }
-
 }
 
-
-bool consoleUI::specialCommandComputer(const string &_command)
+bool consoleUI::specialCommandComputer(const string &_command)      // Checks if input was valid
 {
     if(_command == "a")
     {
@@ -1317,7 +1256,6 @@ void consoleUI::printListComputer()
     {
         _print = false;
     }
-
 }
 
 void consoleUI::printList()
@@ -1340,7 +1278,7 @@ void consoleUI::print()
 {
     if(_print  && (_database=="person" || _database == "p"))
     {
-        _printOutPerson = _turnP.getPersonList();// getList() gets the list that's supposed to be printed out.
+        _printOutPerson = _turnP.getPersonList();           // getList() gets the list that's supposed to be printed out.
         cout << _printOutPerson;
     }
     else if(_print && (_database=="computer" || _database == "c"))
@@ -1388,10 +1326,9 @@ void consoleUI::modifyCommandComputer()
             cout << "Please be more specific: ";
         }
     }
-
 }
 
-void consoleUI::computerValidation(Computer& input)
+void consoleUI::computerValidation(Computer& input)         // Finds the computer in the database, allowes the user to modify it.
 {
     string name, type, yearBuilt, wasitbuilt, built;
     int birthCheck = 0;
@@ -1485,7 +1422,6 @@ void consoleUI::computerValidation(Computer& input)
     }
     input.setYearbuild(birthCheck);
 
-
     while(true)
     {
         cout << "Was the computer ever built? (y/n): ";
@@ -1508,12 +1444,72 @@ void consoleUI::computerValidation(Computer& input)
     }
     input.setBuilt(built);
 
-
     cout << endl;
     cin.ignore();
 }
 
-void consoleUI::emailCommand()
+//connect
+
+bool consoleUI::connectSubCommand()     // Checks if input was valid
 {
-    system("email.vbs");
+    int stoppari;
+    if(_command == "specific")
+    {
+        cout << "Specific";
+        cin >> stoppari;
+        return true;
+    }
+    else if(_command == "all")
+    {
+        cout << "all";
+        cin >> stoppari;
+        return true;
+    }
+    else if(_command == "add")
+    {
+        cout << "add";
+        cin >> stoppari;
+        return true;
+    }
+    else if(_command == "remove")
+    {
+        cout << "remove";
+        cin >> stoppari;
+        return true;
+    }
+    else if(_command == "back")
+    {
+        return true;
+    }
+    else if(_command == "quit")
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+bool consoleUI::specialCommandConnect()
+{
+    string everyone;
+
+
+    if(_command == ALL)
+    {
+        return true;
+    }
+    else if(_command == ADD)
+    {
+        return true;
+    }
+    else if(_command == REMOVE)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }

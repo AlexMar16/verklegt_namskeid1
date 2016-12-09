@@ -240,6 +240,37 @@ void DbManager::removeFromPersons(const Person &input)
     }
 }
 
+void DbManager::removeFromConnections(Connection input)
+{
+    QString path = "ComputerScience.sqlite";
+    QSqlDatabase _db = QSqlDatabase::database("dbconnection");
+    QString dbName = path;
+    _db.setDatabaseName(dbName);
+    _db.open();
+    if(_db.open())
+    {
+        QSqlQuery qry(_db);
+
+        qry.prepare("DELETE FROM Connections WHERE PersonID = :P_ID AND ComputerID = :C_ID");
+        qry.bindValue(":C_ID",input.getToID());
+        qry.bindValue(":P_ID",input.getFromID());
+        if( !qry.exec() )
+            //qDebug() << qry.lastError().text();
+            cout << "error removing from database";
+        else
+        {
+            qry.exec();
+            cout << "The connection between " << input.getFromName() << " and "
+                 << input.getToName() << " has been removed."<<  endl;
+        }
+    }
+    else
+    {
+        cout << "not openajsd ajsln " << endl;
+    }
+}
+
+
 void DbManager::insertIntoConnection(const Connection &input)
 {
     QString path = "ComputerScience.sqlite";
@@ -292,7 +323,7 @@ void DbManager::insertIntoPerson(const Person &input)
     else
     {
         cout << "dbconnection not found" << endl;
-    }
+    }*/
 
     QSqlDatabase _db = QSqlDatabase::database("dbconnection");
     QString dbName = path;
@@ -318,7 +349,7 @@ void DbManager::insertIntoPerson(const Person &input)
     else
     {
         cout << "not inserted" << endl;
-    }*/
+    }
 }
 
 void DbManager::changePerson(const Person& input, const int personIndex)

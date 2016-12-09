@@ -9,6 +9,7 @@ connectionService::connectionService()
 void connectionService::removeFromDatabase(const string &name)
 {
 
+
 }
 void connectionService::addConnection(const Connection &input)
 {
@@ -63,6 +64,24 @@ bool connectionService::lookForConnection(const string& name)         // Checks 
         }
     }
     return false;
+}
+
+vector<Connection> connectionService::sortConnectAlphabetically()
+{
+    bool again = true;
+    while (again)
+    {
+        again = false;
+        for (size_t i = 0; i < _listConnections.size() - 1; i++)
+        {
+            if (_listConnections[i].getFromName() > _listConnections[i+1].getFromName())
+            {
+                swap(_listConnections[i], _listConnections[i+1]);
+                again = true;
+            }
+        }
+    }
+    return _listConnections;
 }
 
 
