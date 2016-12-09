@@ -179,13 +179,11 @@ void consoleUI::commandBoxConnect()
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| Please enter one of the following commands:"
          << right << BARRIER << endl;
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << BARRIER << right << BARRIER<< endl;
-    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| all            - This command will display all connections."
-         << right << BARRIER << endl;
-    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| ptc            - This command will show connections from persons to computers."
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| add            - This command will allow you to add a connection."
          << right << BARRIER << endl;
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| ctp            - This command will show connections from computers to persons."
          << right << BARRIER << endl;
-    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| add            - This command will allow you to add a connection."
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| ptc            - This command will show connections from persons to computers."
          << right << BARRIER << endl;
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| remove         - This command will allow you to remove a connection."
          << right << BARRIER << endl;
@@ -205,7 +203,7 @@ void consoleUI::commandBoxConnectptc()
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| Please enter one of the following commands:"
          << right << BARRIER << endl;
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << BARRIER << right << BARRIER<< endl;
-    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| showall - This command will show all connection."
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| all - This command will show all connection."
          << right << BARRIER << endl;
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| find    - This command will show a specific connections."
          << right << BARRIER << endl;
