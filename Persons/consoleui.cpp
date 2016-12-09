@@ -285,7 +285,7 @@ void consoleUI::quizCommand()
 
 void consoleUI::emailCommand()
 {
-    system("email.vbs");
+    _turnG.speakQuestion("Computer says nooooouououououououououououououououooo.");
 }
 
 
