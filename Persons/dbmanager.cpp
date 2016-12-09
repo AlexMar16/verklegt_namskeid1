@@ -292,7 +292,7 @@ void DbManager::insertIntoPerson(const Person &input)
     else
     {
         cout << "dbconnection not found" << endl;
-    }
+    }*/
 
     QSqlDatabase _db = QSqlDatabase::database("dbconnection");
     QString dbName = path;
@@ -318,7 +318,7 @@ void DbManager::insertIntoPerson(const Person &input)
     else
     {
         cout << "not inserted" << endl;
-    }*/
+    }
 }
 
 void DbManager::changePerson(const Person& input, const int personIndex)
