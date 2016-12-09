@@ -23,7 +23,9 @@ private:
     vector<Computer> _printOutComputer;
     vector<Person> _printOutPerson;
     vector<Connection> _printOutConnection;
+
     bool _print;
+    bool checkfoundPerson( const string& toFind);
     void checkModifyPerson(const string& toModify);
     void checkModifyComputer(const string& toModify);
     bool beginningCommand();
@@ -52,6 +54,7 @@ private:
     void print();
     void commandBoxConnect();
     void commandBoxConnectptc();
+    vector<Connection> findconnection();
     PersonService _turnP;      //The instance we use to communicate with the PersonService layer.
     string _theRightOne;
     string _command;
