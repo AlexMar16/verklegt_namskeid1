@@ -7,27 +7,27 @@ const int TWO = 2;
 
 Connection::Connection() {}
 
-void Connection::setComputerName(const string& input) {_to = input;}
+void Connection::setToName(const string& input) {_to = input;}
 
-void Connection::setPersonName(const string& input) {_from = input;}
+void Connection::setFromName(const string& input) {_from = input;}
 
 void Connection::setConnectionID(const int& input) {_ConnectionID = input;}
 
-void Connection::setPersonID(const int& input) {_PersonID = input;}
+void Connection::setFromID(const int& input) {_FromID = input;}
 
-void Connection::setComputerID(const int& input) {_ComputerID = input;}
+void Connection::setToID(const int& input) {_ToID = input;}
 
 
 
-string Connection::getComputerName() {return _to;}
+string Connection::getToName() {return _to;}
 
-string Connection::getPersonName() {return _from;}
+string Connection::getFromName() {return _from;}
 
 int Connection::getConnectionID() const {return _ConnectionID;}
 
-int Connection::getPersonID() const {return _PersonID;}
+int Connection::getFromID() const {return _FromID;}
 
-int Connection::getComputerID() const {return _ComputerID;}
+int Connection::getToID() const {return _ToID;}
 
 ostream& operator << (ostream& out, const Connection& rhs)
 {

@@ -108,16 +108,16 @@ void DbManager::getConnections()        // Gets the connection and then selects 
         temp.setConnectionID(connectionid);
 
         int personid = query.value("PID").toInt();
-        temp.setPersonID(personid);
+        temp.setFromID(personid);
 
         string Pname = query.value("PName").toString().toStdString();
-        temp.setPersonName(Pname);
+        temp.setFromName(Pname);
 
         int computerid = query.value("CID").toInt();
-        temp.setComputerID(computerid);
+        temp.setToID(computerid);
 
         string Cname = query.value("CName").toString().toStdString();
-        temp.setComputerName(Cname);
+        temp.setToName(Cname);
 
         _connections.push_back(temp);
     }
@@ -231,15 +231,15 @@ void DbManager::removeFromConnections(Connection input)// removing connection fr
         QSqlQuery qry(_db);
 
         qry.prepare("DELETE FROM Connections WHERE PersonID = :P_ID AND ComputerID = :C_ID");
-        qry.bindValue(":C_ID",input.getComputerID());
-        qry.bindValue(":P_ID",input.getPersonID());
+        qry.bindValue(":C_ID",input.getToID());
+        qry.bindValue(":P_ID",input.getFromID());
         if( !qry.exec() )
             cout << "error removing from database";
         else
         {
             qry.exec();
-            cout << "The connection between " << input.getPersonName() << " and "
-                 << input.getComputerName() << " has been removed."<<  endl;
+            cout << "The connection between " << input.getFromName() << " and "
+                 << input.getToName() << " has been removed."<<  endl;
         }
     }
     else
@@ -260,8 +260,8 @@ void DbManager::insertIntoConnection(const Connection &input)   // Inserting Con
     {
         QSqlQuery qry(_db);
         qry.prepare("INSERT INTO Connections (PersonID, ComputerID)  VALUES (:P_ID, :C_ID)");
-        qry.bindValue(":P_ID",input.getPersonID());
-        qry.bindValue(":C_ID",input.getComputerID());
+        qry.bindValue(":P_ID",input.getFromID());
+        qry.bindValue(":C_ID",input.getToID());
         if( !qry.exec() )
         {
             cout << "error inserting into database";

@@ -68,10 +68,10 @@ bool generalService::alreadyInDatabase(const string& name)         // Checks if 
 
 void generalService::speakQuestion(const string& input)
 {
-    string begin = "#!/bin/bash";
-    string next = "say ";
+    string begin = "Set Sapi = Wscript.CreateObject(\"SAPI.SpVoice\")";
+    string next = "Sapi.speak ";
     ofstream myFile;
-    myFile.open("speak.sh");
+    myFile.open("speak.vbs");
 
     if(myFile)
     {
@@ -79,6 +79,31 @@ void generalService::speakQuestion(const string& input)
     }
     myFile.close();
 
-    system("chmod +x speak.sh");
-    system("./speak.sh");
+    system("speak.vbs");
 }
+
+int generalService::findID(const string& name, const bool& swapped)
+{
+    if(swapped)
+    {
+        for(size_t i = 0; i < _persons.size(); i++)
+        {
+            if(toLower(_persons[i].getName()) == toLower(name))
+            {
+                return _persons[i].getID();
+            }
+        }
+    }
+    else
+    {
+        for(size_t i = 0; i < _computers.size(); i++)
+        {
+            if(toLower(_computers[i].getName()) == toLower(name))
+            {
+                return _computers[i].getID();
+            }
+        }
+    }
+    return 0;
+}
+

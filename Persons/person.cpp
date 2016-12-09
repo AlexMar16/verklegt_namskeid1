@@ -9,6 +9,7 @@ Person::Person()
     _deathYear = 0;
 }
 
+//Overload functions
 ostream& operator << (ostream& out, const Person& rhs)
 {
     const char DASH = '-';

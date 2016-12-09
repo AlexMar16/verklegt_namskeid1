@@ -17,11 +17,18 @@ public:
     bool lookForConnection(const string& name);
     void swapToFrom();
     bool getSwappedList() const;
+    int countConnectionNames();
+    bool fromInDatabase(const string& name);
+    bool toInDatabase(const string& name);
+    void addNewConnection(const string& from, const string& to);
+
+
+
 private:
     vector<Connection> _listConnections;
     vector<Connection> _listSearchedConnections;
     //string _connectFrom;
-    bool swappedList;
+    bool _swappedList;
 };
 
 #endif // CONNECTIONSERVICE_H

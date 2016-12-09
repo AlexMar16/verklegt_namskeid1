@@ -71,6 +71,7 @@ private:
     void personValidation(Person &input);
     void modifyCommandComputer();
     void computerValidation(Computer& input);
+    void addConnection();
 
     void emailCommand();
 

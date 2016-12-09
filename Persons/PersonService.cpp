@@ -22,7 +22,7 @@ bool PersonService::alreadyInDatabase(const string& name)         // Checks if t
     return false;
 }
 
-bool PersonService::lookForPerson(const string& name)         // Checks if any part of the name is on the list
+bool PersonService::lookForPerson(const string& name)         // Checks if any part of the name is on the list.
 {
     generalService GS;
     for (size_t i = 0; i < _listPerson.size(); i++)
@@ -35,7 +35,7 @@ bool PersonService::lookForPerson(const string& name)         // Checks if any p
     return false;
 }
 
-string PersonService::getLastName(const string& name) const
+string PersonService::getLastName(const string& name) const         // Finds the last name of persons with more than 1 name.
 {
     int spaceCounter = 0;
     string LastName;
@@ -67,7 +67,7 @@ string PersonService::assignSelection(string& answer, const string& a, const str
     const string C = "c";
     const string D = "d";
 
-    if (answer == A)
+    if (answer == A)                // Sets the correct letter as the correct answer.
     {
         answer = a;
     }
@@ -91,7 +91,7 @@ string PersonService::assignSelection(string& answer, const string& a, const str
     return answer;
 }
 
-string PersonService::genderCheck(const Person& p)
+string PersonService::genderCheck(const Person& p)          // Returns the correct gender.
 {
     generalService GS;
     if (GS.toLower(p.getGender()) == GS.toLower(MALE))
@@ -108,7 +108,7 @@ string PersonService::aliveCheck(const Person& p)
         return "is still alive";
 }
 
-vector<int> PersonService::properties()
+vector<int> PersonService::properties()         // Creates an vector of stats.
 {
     int nameQuant = 0;
     int deathQuant = 0;
@@ -116,7 +116,7 @@ vector<int> PersonService::properties()
     int FgenderQuant = 0;
     vector<int> statusVec;
 
-    for(size_t i = 0; i < _listPerson.size(); i++)
+    for(size_t i = 0; i < _listPerson.size(); i++)      // Counts alive and dead persons.
     {
         nameQuant++;
 
@@ -125,14 +125,14 @@ vector<int> PersonService::properties()
             deathQuant++;
         }
     }
-    for(size_t k = 0; k < _listPerson.size(); k++)
+    for(size_t k = 0; k < _listPerson.size(); k++)         // Counts females.
     {
         if(_listPerson[k].getGender() == FEMALE)
         {
             FgenderQuant++;
         }
     }
-    for(size_t z = 0; z < _listPerson.size(); z++)
+    for(size_t z = 0; z < _listPerson.size(); z++)          // Counts males.
     {
         if(_listPerson[z].getGender() == MALE)
         {
@@ -164,7 +164,7 @@ vector<Person> PersonService::sortGender()        // Sorts the list by gender, b
     return _listPerson;
 }
 
-vector<Person> PersonService::sortAlphabetically()
+vector<Person> PersonService::sortAlphabetically()      // Sorts the list alphabetically.
 {
     bool again = true;
     while (again)
@@ -182,7 +182,7 @@ vector<Person> PersonService::sortAlphabetically()
     return _listPerson;
 }
 
-vector<Person> PersonService::sortAlphabeticallyLastName()
+vector<Person> PersonService::sortAlphabeticallyLastName()      // Sorts the list alphabetically by last name.
 {
     string name1;
     string name2;
@@ -205,7 +205,7 @@ vector<Person> PersonService::sortAlphabeticallyLastName()
     return _listPerson;
 }
 
-vector<Person> PersonService::sortBirthYear()
+vector<Person> PersonService::sortBirthYear()       // Sorts the list by birth year.
 {
     bool again = true;
     while(again)
@@ -237,7 +237,7 @@ vector<Person> PersonService::findPerson(const string &name)      // Finds peopl
     return _listSearchedPerson;
 }
 
-bool PersonService::lookForDigits(const int& num)
+bool PersonService::lookForDigits(const int& num)       // Returns true if the searched birth/death year is found
 {
     for (size_t i = 0; i < _listPerson.size(); i++)
     {
@@ -303,7 +303,7 @@ vector<Person> PersonService::sortDeath()
     return temp;
 }
 
-void PersonService::swap(Person& a, Person& b)
+void PersonService::swap(Person& a, Person& b)          // Swaps persons
 {
     Person temp = a;
     a = b;
@@ -378,7 +378,7 @@ void PersonService::generateOptions(const Person& correct, string& a, string& b,
     generalService GS;
     do
     {
-        a = _listPerson[rand() % _listPerson.size()].getName();       // Generating random answers
+        a = _listPerson[rand() % _listPerson.size()].getName();       // Generating random answers.
         b = _listPerson[rand() % _listPerson.size()].getName();
         c = _listPerson[rand() % _listPerson.size()].getName();
         d = _listPerson[rand() % _listPerson.size()].getName();
@@ -386,7 +386,7 @@ void PersonService::generateOptions(const Person& correct, string& a, string& b,
         int random = rand() % 4;
         if(random == CASE_0)
         {
-            a = correct.getName();      // Assigning the correct answer to one of the answers
+            a = correct.getName();      // Assigning the correct answer to one of the answers.
         }
         else if(random == CASE_1)
         {
@@ -404,13 +404,13 @@ void PersonService::generateOptions(const Person& correct, string& a, string& b,
 }
 
 
-void PersonService::reverseVector() {reverse(_listPerson.begin(), _listPerson.end());}
+void PersonService::reverseVector() {reverse(_listPerson.begin(), _listPerson.end());}          // Reverses the list.
 
-Person PersonService::findPersonNumber(string nabn)
+Person PersonService::findPersonNumber(string name)         // Finds the location of a person in the vector
 {
     for (size_t i=0; i<_listPerson.size(); i++)
     {
-        if(_listPerson[i].getName()==nabn)
+        if(_listPerson[i].getName()==name)
         {
             _personIndex = i;
         }
@@ -418,7 +418,7 @@ Person PersonService::findPersonNumber(string nabn)
     return _listPerson[_personIndex];
 }
 
-void PersonService::changePerson(const Person& input)
+void PersonService::changePerson(const Person& input)       // Modifies the person in the database
 {
    DbManager modifyPerson;
     modifyPerson.changePerson(input, _personIndex);
