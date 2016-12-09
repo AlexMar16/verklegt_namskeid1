@@ -50,7 +50,7 @@ private:
     void firstCommandBox();
     void commandBox();
     void printList();
-    void connectionPrintList();
+    void printListConnect();
     void print();
     void commandBoxConnect();
     void commandBoxConnectptc();
