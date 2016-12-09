@@ -236,7 +236,9 @@ void consoleUI::commandBoxSubConnect()
 
 void consoleUI::quizCommand()
 {
-    string a, b, c, d, answerName;
+    string a, b, c, d, answerName, goOn;
+    do
+    {
     if (_database == "person" || _database == "p")
     {
         Person questionP = _turnP.generateAnswer();
@@ -278,7 +280,11 @@ void consoleUI::quizCommand()
         cout << endl << "Wrong!" << endl << endl;
         _turnG.speakQuestion("Wrong");
     }
+
+    cout<<"Do you want to continue ? (y = yes / n = no)"<<endl;
+    cin>> goOn;
     cin.ignore();
+    }while(goOn == "y");
 }
 
 
