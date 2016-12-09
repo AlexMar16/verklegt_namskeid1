@@ -248,8 +248,7 @@ void DbManager::removeFromConnections(Connection input)// removing connection fr
     }
 }
 
-
-void DbManager::insertIntoConnection(const Connection &input)   // Inserting Conection into the connecion table and the connection vector
+void DbManager::insertIntoConnection(const Connection &input, const bool& swapped)   // Inserting Conection into the connecion table and the connection vector
 {
     QString path = "ComputerScience.sqlite";
     QSqlDatabase _db = QSqlDatabase::database("dbconnection");
@@ -258,16 +257,30 @@ void DbManager::insertIntoConnection(const Connection &input)   // Inserting Con
     _db.open();
     if(_db.open())
     {
+        // QString SQLCommand = "INSERT INTO Connections (PersonID, ComputerID)  VALUES(28,32)";
         QSqlQuery qry(_db);
-        qry.prepare("INSERT INTO Connections (PersonID, ComputerID)  VALUES (:P_ID, :C_ID)");
-        qry.bindValue(":P_ID",input.getFromID());
-        qry.bindValue(":C_ID",input.getToID());
+        qry.prepare("INSERT INTO Connections (PersonID, ComputerID) VALUES(:F_ID,:S_ID)");
+        if(swapped)
+        {
+            qry.bindValue(":S_ID",input.getFromID());
+            qry.bindValue(":F_ID",input.getToID());
+        }
+        else
+        {
+            qry.bindValue(":F_ID",input.getFromID());
+            qry.bindValue(":S_ID",input.getToID());
+        }
+        //qry.exec(SQLCommand);
         if( !qry.exec() )
         {
             cout << "error inserting into database";
         }
-
+        else
+        {
+            cout << "inserted";
+        }
     }
+
     else
     {
         cout << "not inserted" << endl;
