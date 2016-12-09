@@ -52,20 +52,20 @@ void consoleUI::run()
                             {
                                 _turnCon.sortConnectAlphabetically();  // Makes sure the list is sorted properly
                                 commandBoxConnectptc();
-                                if(_command == "showall")
+                                if(_command == ALL)
                                 {
                                     _printOutConnection = _turnCon.getConnectionList();
                                     cout << _printOutConnection;
                                 }
-                                else if(_command == "find")
+                                else if(_command == FIND)
                                 {
                                     findconnection();
                                 }
-                                else if(_command == "add")
+                                else if(_command == ADD)
                                 {
                                     addConnection();
                                 }
-                                else if (_command == "remove")
+                                else if (_command == REMOVE)
                                 {
                                     //vantar
                                 }
@@ -1460,35 +1460,6 @@ void consoleUI::computerValidation(Computer& input)         // Finds the compute
 }
 
 //connect
-
-/* Bjarki - commentadi ut eftir ad hafa skodad run fallid,
-void consoleUI::printListConnect()
-{
-    if(_command == ALL)
-    {
-       _print = true;
-    }
-    else if(_command == PTC)
-    {
-        _print = false;
-        //setja fall
-    }
-    else if(_command == CTP)
-    {
-        _print = false;
-        //setja fall
-    }
-    else if(_command == ADD)
-    {
-        _print = false;
-        //setja fall
-    }
-    else if(_command == REMOVE)
-    {
-        _print = false;
-        //setja fall
-    }
-}*/
 
 bool consoleUI::connectSubCommand()     // Checks if input was valid
 {
