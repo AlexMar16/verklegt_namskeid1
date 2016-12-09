@@ -269,6 +269,7 @@ void consoleUI::addCommand()
     {
         cout << "Name: ";
         getline(cin, name);
+        name[0] = toupper(name[0]);
         if(name == EMPTY)
         {
             cout << "No input!" << endl;
@@ -354,6 +355,7 @@ void consoleUI::addCompCommand()
     {
         cout << "Name: ";
         getline(cin, name);
+        name[0] = toupper(name[0]);
         if(name == EMPTY)
         {
             cout << "No input!" << endl;
