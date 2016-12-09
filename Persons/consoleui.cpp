@@ -40,18 +40,23 @@ void consoleUI::run()
                     do{commandBoxConnect();
                         if(_turnCon.personORComputer(_command))
                         {
-                            if (_command == "person to computer")
+                            do
                             {
-                                _printOutConnection = _turnCon.getConnectionList();
-                                cout << _printOutConnection;
-                            }
-                            else if (_command == "computer to person")
+                                commandBoxConnectptc();
+                                if(_command == "showall")
+                                {
+                                    _printOutConnection = _turnCon.getConnectionList();
+                                    cout << _printOutConnection;
+                                }
+                                else if(_command == "find")
+                                {
+
+                                }
+                            }while(_command != BACK && _command != QUIT);
+                            if(_turnCon.getSwappedList())
                             {
-                                _printOutConnection = _turnCon.getConnectionList();
-                                cout << _printOutConnection;
+                                _turnCon.swapToFrom();
                             }
-                            cin >> _command;
-                            //connectionPrintList();
                         }
                     } while(_command != BACK && _command != QUIT);
                 }
@@ -138,6 +143,26 @@ void consoleUI::commandBoxConnect()
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| person to computer - This command will print a specific connection."
          << right << BARRIER << endl;
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| computer to person - This command will print all connections."
+         << right << BARRIER << endl;
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| back               - This command will allow you to choose another database."
+         << right << BARRIER << endl;
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| quit               - This command will quit the program."
+         << right << BARRIER << endl;
+    cout << setw(ASTERISK_WIDTH) << setfill(ASTERISK) << ASTERISK << endl;      // Command box ends.
+    cout << "command: ";
+    getline(cin, _command);
+    _command = toLower(_command);
+}
+
+void consoleUI::commandBoxConnectptc()
+{
+    cout << setw(ASTERISK_WIDTH) << setfill(ASTERISK) <<  ASTERISK << endl;     // Command box begins.
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| Please enter one of the following commands:"
+         << right << BARRIER << endl;
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << BARRIER << right << BARRIER<< endl;
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| Showall            - This command will show all connection."
+         << right << BARRIER << endl;
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| Find               - This command will show a specific connections."
          << right << BARRIER << endl;
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| back               - This command will allow you to choose another database."
          << right << BARRIER << endl;
@@ -588,12 +613,12 @@ void consoleUI::modifyCommandPerson()
         toModify = toLower(toModify);
 
         _printOutPerson = _turnP.findPerson(toModify);
-
+        checkModifyPerson(toModify);
         if (_turnP.lookForPerson(toModify))
         {
             cout << _printOutPerson;
         }
-        if (checkModifyPerson(toModify)) //here the magic happens
+        if (_printOutPerson.size() == 1) //here the magic happens
         {
             cout << "Hooray you found a person to modify! " << endl;
             Person id = _turnP.findPersonNumber(_printOutPerson[0].getName()); //bý bara til fkn copy af kallinum sem eg vill breyta, vil breyta actual gæjanum!
@@ -603,44 +628,83 @@ void consoleUI::modifyCommandPerson()
         }
         else
         {
-            cout << "please be more specific: " << endl;
+            cout << "Please be more specific: ";
         }
     }
 
 }
 
-bool consoleUI::checkModifyPerson( const string& toModify)
+vector<Connection> consoleUI::findconnection()
+{
+    string tofind;
+    cout << "Search for a person to see his connections: ";
+
+    while(true)
+    {
+        getline(cin, tofind);
+        //toModify = toLower(toModify);
+
+        _printOutPerson = _turnP.findPerson(tofind);
+        checkModifyPerson(tofind);
+        if (_turnP.lookForPerson(tofind))
+        {
+            cout << _printOutPerson;
+        }
+        if (_printOutPerson.size() == 1) //here the magic happens
+        {
+            cout << "Hooray you found a person to modify! " << endl;
+            Person id = _turnP.findPersonNumber(_printOutPerson[0].getName()); //bý bara til fkn copy af kallinum sem eg vill breyta, vil breyta actual gæjanum!
+            personValidation(id);
+            _turnP.changePerson(id);
+            break;
+        }
+        else
+        {
+            cout << "Please be more specific: ";
+        }
+    }
+}
+
+
+void consoleUI::checkModifyPerson( const string& toModify)
 {
     for(size_t i = 0; i < _printOutPerson.size(); i++)
     {
-        if(_printOutPerson.size() == 1)
+        if( toLower(_printOutPerson[i].getName()) == toLower(toModify))
         {
+            vector<Person> temp;
+            temp.push_back(_printOutPerson[i]);
+            _printOutPerson = temp;
+        }
+    }
+}
+bool consoleUI::checkfoundPerson( const string& toFind)
+{
+    for(size_t i = 0; i < _printOutConnection.size(); i++)
+    {
+        if( toLower(_printOutConnection[i].getPersonName()) == toLower(toFind))
+        {
+            vector<Connection> temp;
+            temp.push_back(_printOutConnection[i]);
+            _printOutConnection = temp;
             return true;
         }
-        else if( _printOutPerson[i].getName() == toModify)
-        {
-            return true;
-        }
-        cout << _printOutPerson[i] << endl;
     }
     return false;
 }
 
 
-bool consoleUI::checkModifyComputer( const string& toModify)
+void consoleUI::checkModifyComputer( const string& toModify)
 {
     for(size_t i = 0; i < _printOutComputer.size(); i++)
-    {
-        if(_printOutComputer.size() == 1)
+    {                   
+        if( _printOutComputer[i].getName() == toModify)
         {
-            return true;
-        }
-        else if( _printOutComputer[i].getName() == toModify)
-        {
-            return true;
+            vector<Computer> temp;
+            temp.push_back(_printOutComputer[i]);
+            _printOutComputer = temp;
         }
     }
-    return false;
 }
 
 void consoleUI::personValidation(Person &input)
@@ -1203,15 +1267,14 @@ void consoleUI::modifyCommandComputer()
     while(true)
     {
         getline(cin, toFind);
-        toFind = toLower(toFind);
-        cout << endl;
-
         _printOutComputer = _turnC.findComputer(toFind);
+        toFind = toLower(toFind);
+        checkModifyComputer(toFind);
         if (_turnC.lookForComputer(toFind))
         {
             cout << _printOutComputer;
         }
-        if (checkModifyComputer(toFind))
+        if (_printOutComputer.size() == 1)
         {
             cout << "Hooray you found a computer to modify!" << endl;
             Computer id = _turnC.findComputerNumber(_printOutComputer[0].getName());
@@ -1219,9 +1282,14 @@ void consoleUI::modifyCommandComputer()
             _turnC.changeComputer(id);
             break;
         }
+        else if (_printOutComputer.size() == 0)
+        {
+            cout << "Computer not found!" << endl;
+            cout << "Please try again: ";
+        }
         else
         {
-            cout << "Please be more specific: " << endl << endl;
+            cout << "Please be more specific: ";
         }
     }
 
@@ -1324,7 +1392,7 @@ void consoleUI::computerValidation(Computer& input)
 
     while(true)
     {
-        cout << "Was the computer ever built? (y/n)" << endl;
+        cout << "Was the computer ever built? (y/n): ";
         cin >> wasitbuilt;
         wasitbuilt = toLower(wasitbuilt);
         if(wasitbuilt == "Y" || wasitbuilt == "y" || wasitbuilt == "Yes" || wasitbuilt == "yes")

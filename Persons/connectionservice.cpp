@@ -22,10 +22,12 @@ bool connectionService::personORComputer(const string& command)
     generalService GS;
     if (GS.toLower(command) == "person to computer")
     {
+        swappedList = false;
         return true;
     }
     else if (GS.toLower(command) == "computer to person")
     {
+        swappedList = true;
         swapToFrom();
         return true;
     }
@@ -34,6 +36,9 @@ bool connectionService::personORComputer(const string& command)
         return false; //einhver að vinna að villuchecki eftir þetta
     }
 }
+
+bool connectionService::getSwappedList() const {return swappedList;}
+
 
 void connectionService::swapToFrom()
 {

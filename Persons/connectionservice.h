@@ -13,8 +13,10 @@ public:
     bool personORComputer(const string& command);
     vector<Connection> getConnectionList() const;
     void swapToFrom();
+    bool getSwappedList() const;
 private:
     vector<Connection> _listConnections;
+    bool swappedList;
     //string _connectFrom;
 };
 
