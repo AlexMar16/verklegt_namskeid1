@@ -11,7 +11,7 @@ const string FIND = "find";
 const string QUIZ = "quiz";
 const string STATUS = "status";
 const string EMPTY = "";
-const string ALL = "all";
+const string ALL = "showall";
 const string ADD = "add";
 const string BACK = "back";
 const string PTC = "ptc";
@@ -179,6 +179,8 @@ void consoleUI::commandBoxConnect()
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| Please enter one of the following commands:"
          << right << BARRIER << endl;
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << BARRIER << right << BARRIER<< endl;
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| showall                - This command will display all connections."
+         << right << BARRIER << endl;
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| person to computer/ptc - This command will print a specific connection."
          << right << BARRIER << endl;
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| computer to person/ctp - This command will print all connections."
