@@ -1259,7 +1259,7 @@ void consoleUI::print()
 {
     if(_print  && (_database=="person" || _database == "p"))
     {
-        _printOutPerson = _turnP.getPersonList();// getList() gets the list that's supposed to be printed out.
+        _printOutPerson = _turnP.getPersonList();           // getList() gets the list that's supposed to be printed out.
         cout << _printOutPerson;
     }
     else if(_print && (_database=="computer" || _database == "c"))
