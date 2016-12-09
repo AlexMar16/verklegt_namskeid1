@@ -1474,5 +1474,5 @@ void consoleUI::computerValidation(Computer& input)
 
 void consoleUI::emailCommand()
 {
-    system("./email.sh");
+    system("email.vbs");
 }
