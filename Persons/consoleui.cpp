@@ -52,6 +52,14 @@ void consoleUI::run()
                                 {
 
                                 }
+                                else if(_command == "add")
+                                {
+
+                                }
+                                else if (_command == "remove")
+                                {
+                                    //vantar
+                                }
                             }while(_command != BACK && _command != QUIT);
                             if(_turnCon.getSwappedList())
                             {
