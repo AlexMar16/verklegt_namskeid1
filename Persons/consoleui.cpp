@@ -14,6 +14,8 @@ const string EMPTY = "";
 const string ALL = "all";
 const string ADD = "add";
 const string BACK = "back";
+const string PTC = "ptc";
+const string CTP = "ctp";
 const int ASTERISK_WIDTH = 80;
 const char ASTERISK = '*';
 const char BARRIER = '|';
@@ -181,9 +183,13 @@ void consoleUI::commandBoxConnect()
          << right << BARRIER << endl;
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| computer to person/ctp - This command will print all connections."
          << right << BARRIER << endl;
-    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| back               - This command will allow you to choose another database."
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| add                    - This command will allow you to add a connection."
          << right << BARRIER << endl;
-    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| quit               - This command will quit the program."
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| remove                 - This command will allow you to remove a connection."
+         << right << BARRIER << endl;
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| back                   - This command will allow you to choose another database."
+         << right << BARRIER << endl;
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| quit                   - This command will quit the program."
          << right << BARRIER << endl;
     cout << setw(ASTERISK_WIDTH) << setfill(ASTERISK) << ASTERISK << endl;      // Command box ends.
     cout << "Command: ";
@@ -1456,6 +1462,35 @@ void consoleUI::computerValidation(Computer& input)         // Finds the compute
 
 //connect
 
+void consoleUI::printListConnect()
+{
+    if(_command == ALL)
+    {
+       _print = true;
+    }
+    else if(_command == PTC)
+    {
+        _print = false;
+        //setja fall
+    }
+    else if(_command == CTP)
+    {
+        _print = false;
+        //setja fall
+    }
+    else if(_command == ADD)
+    {
+        _print = false;
+        //setja fall
+    }
+    else if(_command == REMOVE)
+    {
+        _print = false;
+        //setja fall
+    }
+
+}
+
 bool consoleUI::connectSubCommand()     // Checks if input was valid
 {
     int stoppari;
@@ -1465,10 +1500,21 @@ bool consoleUI::connectSubCommand()     // Checks if input was valid
         cin >> stoppari;
         return true;
     }
+    else if(_command == "ptc")
+    {
+        cout<< "Person to computer";
+        cin >> stoppari;
+        return true;
+    }
+    else if(_command == "ctp")
+    {
+        cout<< "Computer to person";
+        cin >> stoppari;
+        return true;
+    }
     else if(_command == "all")
     {
         cout << "all";
-        cin >> stoppari;
         return true;
     }
     else if(_command == "add")
@@ -1501,8 +1547,15 @@ bool consoleUI::specialCommandConnect()
 {
     string everyone;
 
-
-    if(_command == ALL)
+    if(_command == PTC)
+    {
+        return true;
+    }
+    else if(_command == CTP)
+    {
+        return true;
+    }
+    else if(_command == ALL)
     {
         return true;
     }
