@@ -664,7 +664,7 @@ void consoleUI::modifyCommandPerson()
         if (_printOutPerson.size() == 1) //here the magic happens
         {
             cout << "Hooray you found a person to modify! " << endl;
-            Person id = _turnP.findPersonNumber(_printOutPerson[0].getName()); //bý bara til fkn copy af kallinum sem eg vill breyta, vil breyta actual gæjanum!
+            Person id = _turnP.findPersonNumber(_printOutPerson[0].getName());
             personValidation(id);
             _turnP.changePerson(id);
             break;
@@ -1043,7 +1043,6 @@ void consoleUI::removeCommandComputer()
 
     _printOutComputer = _turnC.findComputer(fullName);
     checkModifyComputer(fullName);
-    //input = _turnC.findComputerExactly(fullName);
 
     if (_printOutComputer.size() == 1)
     {

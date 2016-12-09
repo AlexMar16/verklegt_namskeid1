@@ -34,19 +34,6 @@ bool computerService::lookForComputer(const string& name)         // Checks if a
     return false;
 }
 
-Computer computerService::findComputerExactly(const string& name)
-{
-    Computer ComputerFoundExactly;
-    for (size_t i = 0; i < _listComputer.size(); i++)
-    {
-        if (_listComputer[i].getName() == name)
-        {
-            ComputerFoundExactly = _listComputer[i];
-        }
-    }
-    return ComputerFoundExactly;
-}
-
 Computer computerService::generateAnswer()
 {
     srand(time(0));
