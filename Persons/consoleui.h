@@ -51,6 +51,7 @@ private:
     void connectionPrintList();
     void print();
     void commandBoxConnect();
+    void commandBoxConnectptc();
     PersonService _turnP;      //The instance we use to communicate with the PersonService layer.
     string _theRightOne;
     string _command;
