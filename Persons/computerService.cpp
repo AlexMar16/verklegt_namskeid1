@@ -4,7 +4,7 @@
 
 using namespace std;
 
-computerService::computerService(){         //constructor taking vector of computer from general service
+computerService::computerService(){         // Constructor taking vector of computer from general service
     generalService getVector;
     _listComputer = getVector.getOriginalComputers();
 }
@@ -13,7 +13,7 @@ bool computerService::alreadyInDatabase(const string& name)         // Checks if
 {
     for (size_t i = 0; i < _listComputer.size(); i++)
     {
-        if (_listComputer[i].getName() == name)         //if input = name in database
+        if (_listComputer[i].getName() == name)         // If input = name in database
         {
             return true;
         }
@@ -34,7 +34,7 @@ bool computerService::lookForComputer(const string& name)         // Checks if a
     return false;
 }
 
-Computer computerService::findComputerExactly(const string& name)       //used if only one computer is found exactly
+Computer computerService::findComputerExactly(const string& name)       // Used if only one computer is found exactly
 {
     Computer ComputerFoundExactly;
     for (size_t i = 0; i < _listComputer.size(); i++)
@@ -61,12 +61,12 @@ string computerService::builtCheck(const Computer& c)
         return "designed in " + to_string(c.getYearBuilt());
 }
 
-string computerService::typeCheck(const Computer& c)            //gets the type from the computer
+string computerService::typeCheck(const Computer& c)            // Gets the type from the computer
 {
     return c.getType();
 }
 
-vector<int> computerService::computerProperties()           //status of computer, counts how many types of certain computers exist
+vector<int> computerService::computerProperties()           // Status of computer, counts how many types of certain computers exist
 {
     int nameQuant = 0;
 
@@ -115,7 +115,7 @@ vector<int> computerService::computerProperties()           //status of computer
         }
     }
 
-    for(size_t z = 0; z < _listComputer.size(); z++)            //counts how many where build
+    for(size_t z = 0; z < _listComputer.size(); z++)            // Counts how many where build
     {
         if(_listComputer[z].getBuilt() == "Yes")
         {
@@ -138,7 +138,7 @@ vector<int> computerService::computerProperties()           //status of computer
 
 vector<Computer> computerService::getComputerList() const {return _listComputer;}
 
-vector<Computer> computerService::sortType()            //sort the computer by their type
+vector<Computer> computerService::sortType()            // Sort the computer by their type
 {
     bool again = true;
     while (again)
@@ -156,7 +156,7 @@ vector<Computer> computerService::sortType()            //sort the computer by t
     return _listComputer;
 }
 
-vector<Computer> computerService::sortAlphabetically()          //sort the computer by the alphabet
+vector<Computer> computerService::sortAlphabetically()          // Sort the computer by the alphabet
 {
     bool again = true;
     while (again)
@@ -174,7 +174,7 @@ vector<Computer> computerService::sortAlphabetically()          //sort the compu
     return _listComputer;
 }
 
-vector<Computer> computerService::sortBuilt()           //sorts computer if they were built or not
+vector<Computer> computerService::sortBuilt()           // Sorts computer if they were built or not
 {
     vector<Computer> temp;
     for (size_t i = 0; i < _listComputer.size() - 1; i++)
@@ -196,7 +196,7 @@ vector<Computer> computerService::sortBuilt()           //sorts computer if they
 }
 
 
-vector<Computer> computerService::sortCreationYear()//sorts computer by their year of creation
+vector<Computer> computerService::sortCreationYear()        // Sorts computer by their year of creation
 {
     bool again = true;
     while(again)
@@ -214,7 +214,7 @@ vector<Computer> computerService::sortCreationYear()//sorts computer by their ye
     return _listComputer;
 }
 
-vector<Computer> computerService::findComputer(const string &name) //finds the computer if it exists in the database
+vector<Computer> computerService::findComputer(const string &name)       // Finds the computer if it exists in the database
 {
     generalService GS;
     _listSearchedComputer.clear();
@@ -323,9 +323,9 @@ void computerService::generateOptions(const Computer& correct, string& a, string
     } while(GS.quizDuplicatedAnswer(a, b, c, d));
 }
 
-void computerService::reverseVector() {reverse(_listComputer.begin(), _listComputer.end());}
+void computerService::reverseVector() {reverse(_listComputer.begin(), _listComputer.end());}        // If the user wants to sort in descending order
 
-bool computerService::lookForDigits(const int& num)
+bool computerService::lookForDigits(const int& num)         // Allowes the user to find digits in database
 {
 
     for (size_t i = 0; i < _listComputer.size(); i++)
@@ -340,7 +340,7 @@ bool computerService::lookForDigits(const int& num)
     return false;
 }
 
-vector<Computer> computerService::findDigits(const int& num)        //allowes the user to search by using digits
+vector<Computer> computerService::findDigits(const int& num)        // Allowes the user to search by using digits
 {
     _listSearchedDigits.clear();
 
@@ -368,7 +368,7 @@ Computer computerService::findComputerNumber(string name)
     return _listComputer[_computerIndex];
 }
 
-void computerService::changeComputer(const Computer& input)     //for our modify function
+void computerService::changeComputer(const Computer& input)         // For our modify function
 {
     DbManager modifyComputer;
     modifyComputer.changeComputer(input, _computerIndex);
