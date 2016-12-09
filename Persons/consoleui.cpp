@@ -41,11 +41,23 @@ void consoleUI::run()
                         commandBoxConnect();
                         if(_turnCon.personORComputer(_command))
                         {
-                            int prump;
-                            _printOutConnection = _turnCon.getConnectionList();
-                            cout << _printOutConnection;
-                            cin >> prump;
-                            //connectionPrintList();
+                            do
+                            {
+                                commandBoxConnectptc();
+                                if(_command == "showall")
+                                {
+                                    _printOutConnection = _turnCon.getConnectionList();
+                                    cout << _printOutConnection;
+                                }
+                                else if(_command == "find")
+                                {
+
+                                }
+
+
+                                //connectionPrintList();
+                            }while(_command != BACK && _command != QUIT);
+
                         }
                     } while(_command != BACK && _command != QUIT);
                 }
@@ -132,6 +144,26 @@ void consoleUI::commandBoxConnect()
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| person to computer - This command will print a specific connection."
          << right << BARRIER << endl;
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| computer to person - This command will print all connections."
+         << right << BARRIER << endl;
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| back               - This command will allow you to choose another database."
+         << right << BARRIER << endl;
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| quit               - This command will quit the program."
+         << right << BARRIER << endl;
+    cout << setw(ASTERISK_WIDTH) << setfill(ASTERISK) << ASTERISK << endl;      // Command box ends.
+    cout << "command: ";
+    getline(cin, _command);
+    _command = toLower(_command);
+}
+
+void consoleUI::commandBoxConnectptc()
+{
+    cout << setw(ASTERISK_WIDTH) << setfill(ASTERISK) <<  ASTERISK << endl;     // Command box begins.
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| Please enter one of the following commands:"
+         << right << BARRIER << endl;
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << BARRIER << right << BARRIER<< endl;
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| Showall            - This command will show all connection."
+         << right << BARRIER << endl;
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| Find               - This command will show a specific connections."
          << right << BARRIER << endl;
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| back               - This command will allow you to choose another database."
          << right << BARRIER << endl;
