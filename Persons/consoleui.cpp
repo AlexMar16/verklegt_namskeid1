@@ -37,16 +37,17 @@ void consoleUI::run()
                 }
                 else
                 {
-                commandBoxConnect();
-                if(_turnCon.personORComputer(_command))
-                {
-                    int prump;
-                    _printOutConnection = _turnCon.getConnectionList();
-                    cout << _printOutConnection;
-                    cin >> prump;
-                    //connectionPrintList();
-                }
-                 //setja foll
+                    do{
+                        commandBoxConnect();
+                        if(_turnCon.personORComputer(_command))
+                        {
+                            int prump;
+                            _printOutConnection = _turnCon.getConnectionList();
+                            cout << _printOutConnection;
+                            cin >> prump;
+                            //connectionPrintList();
+                        }
+                    } while(_command != BACK && _command != QUIT);
                 }
             }while(_command != BACK && _command != QUIT);
             _turnG.setProgram(_command);
@@ -249,10 +250,6 @@ void consoleUI::quizCommand()
     cin.ignore();
 }
 
-
-
-
-
 void consoleUI::addCommand()
 {
     string name, gender, deathYear, birthYear;
@@ -417,8 +414,6 @@ void consoleUI::addCompCommand()
     }
     input.setType(type);
 
-    //if(built == "yes" || built == "no")
-    //{
     while(true)
     {
         cout << "Year (YYYY): ";
@@ -434,7 +429,6 @@ void consoleUI::addCompCommand()
         }
     }
     input.setYearbuild(birthCheck);
-    //}
 
     while(true)
     {
@@ -534,8 +528,6 @@ bool consoleUI::connectSubCommand()
 void consoleUI::findCommandPerson()
 {
     string toFind;
-
-
     cout << "Search name/year: ";
 
     getline(cin, toFind);
@@ -560,7 +552,6 @@ void consoleUI::findCommandPerson()
         {
             cout << "Person not found " << endl << endl;
         }
-
     }
     else
     {
