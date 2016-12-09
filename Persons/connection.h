@@ -2,7 +2,7 @@
 #define CONNECTION_H
 #include <vector>
 
-//b#include "dbmanager.h"
+//#include "dbmanager.h"
 #include <string>
 
 using namespace std;
@@ -26,8 +26,8 @@ public:
 
 
 private:
-    string _computerName;
-    string _personName;
+    string _from;
+    string _to;
     int _ConnectionID;
     int _ComputerID;
     int _PersonID;

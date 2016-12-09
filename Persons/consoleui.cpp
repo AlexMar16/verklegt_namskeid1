@@ -37,14 +37,20 @@ void consoleUI::run()
                 }
                 else
                 {
-                    do{
-                        commandBoxConnect();
+                    do{commandBoxConnect();
                         if(_turnCon.personORComputer(_command))
                         {
-                            int prump;
-                            _printOutConnection = _turnCon.getConnectionList();
-                            cout << _printOutConnection;
-                            cin >> prump;
+                            if (_command == "person to computer")
+                            {
+                                _printOutConnection = _turnCon.getConnectionList();
+                                cout << _printOutConnection;
+                            }
+                            else if (_command == "computer to person")
+                            {
+                                _printOutConnection = _turnCon.getConnectionList();
+                                cout << _printOutConnection;
+                            }
+                            cin >> _command;
                             //connectionPrintList();
                         }
                     } while(_command != BACK && _command != QUIT);
@@ -52,7 +58,7 @@ void consoleUI::run()
             }while(_command != BACK && _command != QUIT);
             _turnG.setProgram(_command);
         }
-        else if(_database != QUIT)
+        else if(_database != QUIT && _command != QUIT)
         {
             cout << endl << "The database " << _database << " was not found" << endl;
         }
