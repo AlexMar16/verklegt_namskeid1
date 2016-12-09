@@ -54,7 +54,7 @@ private:
     void print();
     void commandBoxConnect();
     void commandBoxConnectptc();
-    vector<Connection> findconnection();
+    void findconnection();
     PersonService _turnP;      //The instance we use to communicate with the PersonService layer.
     string _theRightOne;
     string _command;

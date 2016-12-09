@@ -50,7 +50,7 @@ void consoleUI::run()
                                 }
                                 else if(_command == "find")
                                 {
-
+                                    findconnection();
                                 }
                                 else if(_command == "add")
                                 {
@@ -314,7 +314,7 @@ void consoleUI::addCommand()
 
         for(size_t i=0; i< name.size(); i++)
         {
-            if(!isalpha(name[i]))
+            if(!isalpha(name[i])&& !" ")// We use the " " so the function does not complain when space is used
             {
                notAlpha=true;
             }
@@ -677,35 +677,23 @@ void consoleUI::modifyCommandPerson()
 
 }
 
-vector<Connection> consoleUI::findconnection()
+void consoleUI::findconnection()
 {
     string tofind;
     cout << "Search for a person to see his connections: ";
 
-    while(true)
-    {
         getline(cin, tofind);
         //toModify = toLower(toModify);
-
-        _printOutPerson = _turnP.findPerson(tofind);
-        checkModifyPerson(tofind);
-        if (_turnP.lookForPerson(tofind))
+        _printOutConnection = _turnCon.findConnection(tofind);
+        checkfoundPerson(tofind);
+        if (_turnCon.lookForConnection(tofind))
         {
-            cout << _printOutPerson;
-        }
-        if (_printOutPerson.size() == 1) //here the magic happens
-        {
-            cout << "Hooray you found a person to modify! " << endl;
-            Person id = _turnP.findPersonNumber(_printOutPerson[0].getName()); //bý bara til fkn copy af kallinum sem eg vill breyta, vil breyta actual gæjanum!
-            personValidation(id);
-            _turnP.changePerson(id);
-            break;
+            cout << _printOutConnection;
         }
         else
         {
             cout << "Please be more specific: ";
         }
-    }
 }
 
 

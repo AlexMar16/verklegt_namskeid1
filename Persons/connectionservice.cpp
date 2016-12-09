@@ -37,6 +37,35 @@ bool connectionService::personORComputer(const string& command)
     }
 }
 
+vector<Connection> connectionService::findConnection(const string &name)      // Finds people and adds them to the vector
+{
+    _listSearchedConnections.clear();
+    generalService GS;
+    for (size_t i = 0; i < _listConnections.size(); i++)
+    {
+        if (GS.toLower(_listConnections[i].getPersonName()).find(GS.toLower(name)) != string::npos)       // Puts both instances to lowercase
+        {
+            _listSearchedConnections.push_back(_listConnections[i]);       // Puts people in the list who apply to the input
+        }
+    }
+
+    return _listSearchedConnections;
+}
+
+bool connectionService::lookForConnection(const string& name)         // Checks if any part of the name is on the list
+{
+    generalService GS;
+    for (size_t i = 0; i < _listConnections.size(); i++)
+    {
+        if (GS.toLower(_listConnections[i].getPersonName()).find(GS.toLower(name)) != string::npos)       // Enables us to search in lower case letters.
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+
 bool connectionService::getSwappedList() const {return swappedList;}
 
 
