@@ -70,8 +70,6 @@ int Computer::getID() const {return _ID;}
 
 string Computer::getBuilt() const {return _built;}
 
-
-
 //Set functions
 void Computer::setName(const string input) {_name = input;}
 

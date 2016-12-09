@@ -195,7 +195,6 @@ vector<Computer> computerService::sortBuilt()           // Sorts computer if the
     return _listComputer;
 }
 
-
 vector<Computer> computerService::sortCreationYear()        // Sorts computer by their year of creation
 {
     bool again = true;
@@ -375,4 +374,3 @@ void computerService::changeComputer(const Computer& input)         // For our m
     _listComputer[_computerIndex] = input;
     modifyComputer.setCVector(_listComputer);
 }
-

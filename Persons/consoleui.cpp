@@ -1478,6 +1478,3 @@ bool consoleUI::specialCommandConnect()
         return false;
     }
 }
-
-
-
