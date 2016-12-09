@@ -4,7 +4,7 @@
 
 using namespace std;
 
-computerService::computerService(){
+computerService::computerService(){         //constructor taking vector of computer from general service
     generalService getVector;
     _listComputer = getVector.getOriginalComputers();
 }
@@ -13,7 +13,7 @@ bool computerService::alreadyInDatabase(const string& name)         // Checks if
 {
     for (size_t i = 0; i < _listComputer.size(); i++)
     {
-        if (_listComputer[i].getName() == name)
+        if (_listComputer[i].getName() == name)         //if input = name in database
         {
             return true;
         }
@@ -34,7 +34,7 @@ bool computerService::lookForComputer(const string& name)         // Checks if a
     return false;
 }
 
-Computer computerService::findComputerExactly(const string& name)
+Computer computerService::findComputerExactly(const string& name)       //used if only one computer is found exactly
 {
     Computer ComputerFoundExactly;
     for (size_t i = 0; i < _listComputer.size(); i++)
@@ -61,12 +61,12 @@ string computerService::builtCheck(const Computer& c)
         return "designed in " + to_string(c.getYearBuilt());
 }
 
-string computerService::typeCheck(const Computer& c)
+string computerService::typeCheck(const Computer& c)            //gets the type from the computer
 {
     return c.getType();
 }
 
-vector<int> computerService::computerProperties()
+vector<int> computerService::computerProperties()           //status of computer, counts how many types of certain computers exist
 {
     int nameQuant = 0;
 
@@ -115,7 +115,7 @@ vector<int> computerService::computerProperties()
         }
     }
 
-    for(size_t z = 0; z < _listComputer.size(); z++)
+    for(size_t z = 0; z < _listComputer.size(); z++)            //counts how many where build
     {
         if(_listComputer[z].getBuilt() == "Yes")
         {
@@ -138,7 +138,7 @@ vector<int> computerService::computerProperties()
 
 vector<Computer> computerService::getComputerList() const {return _listComputer;}
 
-vector<Computer> computerService::sortType()
+vector<Computer> computerService::sortType()            //sort the computer by their type
 {
     bool again = true;
     while (again)
@@ -156,7 +156,7 @@ vector<Computer> computerService::sortType()
     return _listComputer;
 }
 
-vector<Computer> computerService::sortAlphabetically()
+vector<Computer> computerService::sortAlphabetically()          //sort the computer by the alphabetical
 {
     bool again = true;
     while (again)
@@ -174,7 +174,7 @@ vector<Computer> computerService::sortAlphabetically()
     return _listComputer;
 }
 
-vector<Computer> computerService::sortBuilt()
+vector<Computer> computerService::sortBuilt()           //sorts computer if they were built or not
 {
     vector<Computer> temp;
     for (size_t i = 0; i < _listComputer.size() - 1; i++)
@@ -196,7 +196,7 @@ vector<Computer> computerService::sortBuilt()
 }
 
 
-vector<Computer> computerService::sortCreationYear()
+vector<Computer> computerService::sortCreationYear()//sorts computer by their year of creation
 {
     bool again = true;
     while(again)

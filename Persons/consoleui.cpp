@@ -474,7 +474,7 @@ void consoleUI::addCompCommand()
 
     while(true)
     {
-        cout << "Year (YYYY): ";
+        cout << "Year designed (YYYY): ";
         cin >> yearBuilt;
         birthCheck = atoi(yearBuilt.c_str());       // Removes alphanumeric values from the input.
         if (birthCheck > MINIMUM_Built_YEAR && birthCheck < MAXIMUM_Built_YEAR)
