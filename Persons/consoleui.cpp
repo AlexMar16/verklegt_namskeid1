@@ -117,6 +117,26 @@ void consoleUI::firstCommandBox()
     }
 }
 
+bool consoleUI::beginningCommand()
+{
+    if(_database == "person" || _database == "p")
+    {
+        return true;
+    }
+    else if(_database == "computer" || _database == "c")
+    {
+        return true;
+    }
+    else if(_database == "connect")
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
 void consoleUI::commandBox()
 {
     cout << setw(ASTERISK_WIDTH) << setfill(ASTERISK) <<  ASTERISK << endl;     // Command box begins.
@@ -215,29 +235,6 @@ void consoleUI::commandBoxSubConnect()
 }
 
 
-
-bool consoleUI::beginningCommand()
-{
-    if(_database == "person" || _database == "p")
-    {
-        return true;
-    }
-    else if(_database == "computer" || _database == "c")
-    {
-        return true;
-    }
-    else if(_database == "connect")
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
-}
-
-
-
 void consoleUI::quizCommand()
 {
     string a, b, c, d, answerName;
@@ -283,6 +280,12 @@ void consoleUI::quizCommand()
         _turnG.speakQuestion("Wrong");
     }
     cin.ignore();
+}
+
+
+void consoleUI::emailCommand()
+{
+    system("email.vbs");
 }
 
 
@@ -1500,7 +1503,3 @@ bool consoleUI::specialCommandConnect()
 
 
 
-void consoleUI::emailCommand()
-{
-    system("email.vbs");
-}
