@@ -396,6 +396,122 @@ void consoleUI::addCommand()
     cin.ignore();
 }
 
+void consoleUI::addCompCommand()
+{
+    string name, type, yearBuilt, wasitbuilt, built;
+    Computer input;
+    int birthCheck = 0;
+    const int MINIMUM_Built_YEAR = 1500, MAXIMUM_Built_YEAR = 2030;
+
+    cout << "Please enter the following information about the new Computer " << endl;
+    cout << "in the following order." << endl;
+    cout << "Be aware you cannot put letters that are not in the English alphabet." << endl;
+
+    while(true)
+    {
+        cout << "Name: ";
+        getline(cin, name);
+        name[0] = toupper(name[0]);
+        if(name == EMPTY)
+        {
+            cout << "No input!" << endl;
+        }
+        else
+        {
+            break;
+        }
+    }
+    input.setName(name);
+
+    while(true)
+    {
+        cout << "Type of computer: ";
+        getline(cin, type);
+        if(type == EMPTY)
+        {
+            cout << "No input!" << endl;
+        }
+        else if (_turnG.toLower(type) == "mechanical")
+        {
+            type = MECHANICAL;
+            break;
+        }
+        else if (_turnG.toLower(type) == "electronic")
+        {
+            type = ELECTRONIC;
+            break;
+        }
+        else if (_turnG.toLower(type) == "electro-mechanical")
+        {
+            type = ELECTROMECHANICAL;
+            break;
+        }
+        else if (_turnG.toLower(type) == "transistor")
+        {
+            type = TRANSISTOR;
+            break;
+        }
+        else if (_turnG.toLower(type) == "transistor/microchip")
+        {
+            type = TRANSISTORMICROCHIP;
+            break;
+        }
+        else if (_turnG.toLower(type) == "supercomputer")
+        {
+            type = SUPERCOMPUTER;
+            break;
+        }
+        else if (_turnG.toLower(type) == "quantum computer")
+        {
+            type = QUANTUMCOMPUTER;
+            break;
+        }
+        else
+        {
+            cout << "Invalid type!" << endl;
+        }
+    }
+    input.setType(type);
+
+    while(true)
+    {
+        cout << "Year designed (YYYY): ";
+        cin >> yearBuilt;
+        birthCheck = atoi(yearBuilt.c_str());       // Removes alphanumeric values from the input.
+        if (birthCheck > MINIMUM_Built_YEAR && birthCheck < MAXIMUM_Built_YEAR)
+        {
+            break;
+        }
+        else
+        {
+            cout << "Invalid input!" << endl;
+        }
+    }
+    input.setYearbuild(birthCheck);
+
+    while(true)
+    {
+        cout << "Was the computer ever built? (y/n)" << endl;
+        cin >> wasitbuilt;
+        if(wasitbuilt == "Y" || wasitbuilt == "y" || wasitbuilt == "Yes" || wasitbuilt == "yes")
+        {
+            built = "Yes";
+            break;
+        }
+        else if (wasitbuilt == "N" || wasitbuilt == "n" || wasitbuilt == "No" || wasitbuilt == "no")
+        {
+            built = "No";
+            break;
+        }
+        else
+        {
+            cout << "Invalid input!" << endl;
+        }
+    }
+    input.setBuilt(built);
+
+    cout << endl;
+}
 
 void consoleUI::removeCommandPerson()
 {
@@ -865,125 +981,6 @@ void consoleUI::checkModifyComputer( const string& toModify)
     }
 }
 
-void consoleUI::addCompCommand()
-{
-    string name, type, yearBuilt, wasitbuilt, built;
-    Computer input;
-    int birthCheck = 0;
-    const int MINIMUM_Built_YEAR = 1500, MAXIMUM_Built_YEAR = 2030;
-
-    cout << "Please enter the following information about the new Computer " << endl;
-    cout << "in the following order." << endl;
-    cout << "Be aware you cannot put letters that are not in the English alphabet." << endl;
-
-    while(true)
-    {
-        cout << "Name: ";
-        getline(cin, name);
-        name[0] = toupper(name[0]);
-        if(name == EMPTY)
-        {
-            cout << "No input!" << endl;
-        }
-        else
-        {
-            break;
-        }
-    }
-    input.setName(name);
-
-    while(true)
-    {
-        cout << "Type of computer: ";
-        getline(cin, type);
-        if(type == EMPTY)
-        {
-            cout << "No input!" << endl;
-        }
-        else if (_turnG.toLower(type) == "mechanical")
-        {
-            type = MECHANICAL;
-            break;
-        }
-        else if (_turnG.toLower(type) == "electronic")
-        {
-            type = ELECTRONIC;
-            break;
-        }
-        else if (_turnG.toLower(type) == "electro-mechanical")
-        {
-            type = ELECTROMECHANICAL;
-            break;
-        }
-        else if (_turnG.toLower(type) == "transistor")
-        {
-            type = TRANSISTOR;
-            break;
-        }
-        else if (_turnG.toLower(type) == "transistor/microchip")
-        {
-            type = TRANSISTORMICROCHIP;
-            break;
-        }
-        else if (_turnG.toLower(type) == "supercomputer")
-        {
-            type = SUPERCOMPUTER;
-            break;
-        }
-        else if (_turnG.toLower(type) == "quantum computer")
-        {
-            type = QUANTUMCOMPUTER;
-            break;
-        }
-        else
-        {
-            cout << "Invalid type!" << endl;
-        }
-    }
-    input.setType(type);
-
-    while(true)
-    {
-        cout << "Year (YYYY): ";
-        cin >> yearBuilt;
-        birthCheck = atoi(yearBuilt.c_str());       // Removes alphanumeric values from the input.
-        if (birthCheck > MINIMUM_Built_YEAR && birthCheck < MAXIMUM_Built_YEAR)
-        {
-            break;
-        }
-        else
-        {
-            cout << "Invalid input!" << endl;
-        }
-    }
-    input.setYearbuild(birthCheck);
-
-    while(true)
-    {
-        cout << "Was the computer ever built? (y/n)" << endl;
-        cin >> wasitbuilt;
-        if(wasitbuilt == "Y" || wasitbuilt == "y" || wasitbuilt == "Yes" || wasitbuilt == "yes")
-        {
-            built = "Yes";
-            break;
-        }
-        else if (wasitbuilt == "N" || wasitbuilt == "n" || wasitbuilt == "No" || wasitbuilt == "no")
-        {
-            built = "No";
-            break;
-        }
-        else
-        {
-            cout << "Invalid input!" << endl;
-        }
-    }
-    input.setBuilt(built);
-
-    cout << endl;
-
-    _turnC.addComputer(input);
-    cin.ignore();
-}
 
 void consoleUI::removeCommandComputer()
 {
