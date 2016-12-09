@@ -117,7 +117,7 @@ void consoleUI::firstCommandBox()
     }
 }
 
-bool consoleUI::beginningCommand()
+bool consoleUI::beginningCommand() //checks if the command was valid
 {
     if(_database == "person" || _database == "p")
     {
@@ -137,7 +137,7 @@ bool consoleUI::beginningCommand()
     }
 }
 
-void consoleUI::commandBox()
+void consoleUI::commandBox()// the right one either sets it's value to "person" or "computer"
 {
     cout << setw(ASTERISK_WIDTH) << setfill(ASTERISK) <<  ASTERISK << endl;     // Command box begins.
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| Please enter one of the following commands:"
@@ -316,7 +316,7 @@ void consoleUI::addCommand()
     {
         cout << "Name: ";
         getline(cin, name);
-        name[0] = toupper(name[0]);
+        name[0] = toupper(name[0]);//makes the first letter of the name uppercase
 
         for(size_t i=0; i< name.size(); i++)
         {
