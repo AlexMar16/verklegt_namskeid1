@@ -52,7 +52,15 @@ void consoleUI::run()
                                 {
                                     findconnection();
                                 }
-                            }while((_command != BACK && _command != QUIT) || _command == "find");
+                                else if(_command == "add")
+                                {
+
+                                }
+                                else if (_command == "remove")
+                                {
+                                    //vantar
+                                }
+                            }while(_command != BACK && _command != QUIT);
                             if(_turnCon.getSwappedList())
                             {
                                 _turnCon.swapToFrom();
@@ -304,7 +312,7 @@ void consoleUI::addCommand()
 
         for(size_t i=0; i< name.size(); i++)
         {
-            if(!isalpha(name[i]))
+            if(!isalpha(name[i])&& !" ")// We use the " " so the function does not complain when space is used
             {
                notAlpha=true;
             }
@@ -1469,5 +1477,5 @@ void consoleUI::computerValidation(Computer& input)
 
 void consoleUI::emailCommand()
 {
-    system("./email.sh");
+    system("email.vbs");
 }
