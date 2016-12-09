@@ -24,6 +24,7 @@ public:
     void setCVector(const vector<Computer>& input);
     void insertIntoComputer(const Computer &input);
     void insertIntoPerson(const Person &input);
+    void removeFromConnections(Connection input);
     void insertIntoConnection(const Connection &input);
     void removeFromComputers(const Computer &input);
     void removeFromPersons(const Person &input);
@@ -37,7 +38,6 @@ public:
 private:
     vector<Person> _persons;
     vector<Computer> _computers;  
-    Connection goFuckYourself;
     vector<Connection> _connections;
     void getPersons();
     QSqlDatabase _db;
