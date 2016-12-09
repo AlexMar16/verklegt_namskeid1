@@ -127,6 +127,8 @@ void consoleUI::commandBox()
          << right << BARRIER << endl;
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| back   - This command will allow you to choose another database. "
          << right << BARRIER << endl;
+    cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| email   - This command will allow you to send email via smtp server. "
+         << right << BARRIER << endl;
     cout << left  << setw(ASTERISK_WIDTH) << setfill(SPACE) << "| quit   - This command will quit the program. "
          << right << BARRIER << endl;
     cout << setw(ASTERISK_WIDTH) << setfill(ASTERISK) << ASTERISK << endl;      // Command box ends.
@@ -627,6 +629,11 @@ void consoleUI::modifyCommandPerson()
             _turnP.changePerson(id);
             break;
         }
+        else if (_printOutPerson.size() == 0)
+        {
+            cout << "Person not found!" << endl;
+            cout << "Please try again: ";
+        }
         else
         {
             cout << "Please be more specific: ";
@@ -937,6 +944,11 @@ void consoleUI::printListPerson()       // Print if appropriate.
         _print = false;
         modifyCommandPerson();
     }
+    else if(_command == "email")
+    {
+        _print = false;
+        emailCommand();
+    }
     else
     {
         _print = false;
@@ -1173,6 +1185,11 @@ void consoleUI::printListComputer()
         _print = false;
         modifyCommandComputer();
     }
+    else if(_command == "email")
+    {
+        _print = false;
+        emailCommand();
+    }
     else
     {
         _print = false;
@@ -1370,4 +1387,9 @@ void consoleUI::computerValidation(Computer& input)
 
     cout << endl;
     cin.ignore();
+}
+
+void consoleUI::emailCommand()
+{
+    system("./email.sh");
 }
